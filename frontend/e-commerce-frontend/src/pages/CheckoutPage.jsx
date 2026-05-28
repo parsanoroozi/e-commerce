@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { cartApi } from '../api/cart';
 import { ordersApi } from '../api/orders';
+import DevPaymentForm from '../components/DevPaymentForm';
 import StripePaymentForm from '../components/StripePaymentForm';
 
 export default function CheckoutPage() {
@@ -32,7 +33,9 @@ export default function CheckoutPage() {
     try {
       const init = await ordersApi.initiateCheckout(form);
       setCheckout(init);
-      setStripePromise(loadStripe(init.publishableKey));
+      if (!init.devMode && init.publishableKey) {
+        setStripePromise(loadStripe(init.publishableKey));
+      }
       setStep('payment');
     } catch (err) {
       setError(err.message);
@@ -108,18 +111,35 @@ export default function CheckoutPage() {
             </form>
           )}
 
-          {step === 'payment' && checkout && stripePromise && (
+          {step === 'payment' && checkout && (
             <div className="checkout-payment">
               <h2>Payment</h2>
-              <p className="muted">
-                Order #{checkout.orderId} — ${Number(checkout.totalAmount).toFixed(2)}
-              </p>
-              <Elements
-                stripe={stripePromise}
-                options={{ clientSecret: checkout.clientSecret, appearance: { theme: 'night' } }}
-              >
-                <StripePaymentForm onSuccess={handlePaymentSuccess} />
-              </Elements>
+              {checkout.devMode ? (
+                <DevPaymentForm
+                  orderId={checkout.orderId}
+                  totalAmount={checkout.totalAmount}
+                  onSuccess={handlePaymentSuccess}
+                />
+              ) : (
+                stripePromise &&
+                checkout.clientSecret && (
+                  <>
+                    <p className="muted">
+                      Order #{checkout.orderId} — $
+                      {Number(checkout.totalAmount).toFixed(2)}
+                    </p>
+                    <Elements
+                      stripe={stripePromise}
+                      options={{
+                        clientSecret: checkout.clientSecret,
+                        appearance: { theme: 'night' },
+                      }}
+                    >
+                      <StripePaymentForm onSuccess={handlePaymentSuccess} />
+                    </Elements>
+                  </>
+                )
+              )}
               <button
                 type="button"
                 className="btn btn-ghost"
@@ -136,7 +156,9 @@ export default function CheckoutPage() {
           <ul className="checkout-summary-list">
             {cart.items.map((item) => (
               <li key={item.productId}>
-                <span>{item.productName} × {item.quantity}</span>
+                <span>
+                  {item.productName} × {item.quantity}
+                </span>
                 <span>${Number(item.lineTotal).toFixed(2)}</span>
               </li>
             ))}

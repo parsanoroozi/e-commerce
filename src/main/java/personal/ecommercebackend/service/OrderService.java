@@ -34,16 +34,21 @@ public class OrderService {
     private final UserRepository userRepository;
     private final ProductService productService;
     private final StripePaymentService stripePaymentService;
+    private final PaymentModeService paymentModeService;
     private final EmailService emailService;
 
     public PaymentConfigResponse paymentConfig() {
-        return new PaymentConfigResponse(stripePaymentService.publishableKey());
+        return new PaymentConfigResponse(
+                stripePaymentService.isConfigured() ? stripePaymentService.publishableKey() : null,
+                paymentModeService.isStripeEnabled(),
+                paymentModeService.isDevModeActive());
     }
 
     @Transactional
     public CheckoutInitResponse initiateCheckout(CheckoutRequest request) {
-        if (!stripePaymentService.isConfigured()) {
-            throw new ApiException(HttpStatus.SERVICE_UNAVAILABLE, "Payment system is not configured");
+        if (!paymentModeService.isStripeEnabled() && !paymentModeService.isDevModeActive()) {
+            throw new ApiException(HttpStatus.SERVICE_UNAVAILABLE,
+                    "Payment system is not configured. Add Stripe keys or enable app.payment.dev-mode.");
         }
 
         Long userId = SecurityUtils.currentUserId();
@@ -94,6 +99,17 @@ public class OrderService {
 
         Order saved = orderRepository.save(order);
 
+        if (paymentModeService.isDevModeActive()) {
+            saved.setStripePaymentIntentId(paymentModeService.devPaymentIntentId(saved.getId()));
+            orderRepository.save(saved);
+            return new CheckoutInitResponse(
+                    saved.getId(),
+                    null,
+                    null,
+                    saved.getTotalAmount(),
+                    true);
+        }
+
         PaymentIntent intent = stripePaymentService.createPaymentIntent(saved, user);
         saved.setStripePaymentIntentId(intent.getId());
         orderRepository.save(saved);
@@ -102,7 +118,8 @@ public class OrderService {
                 saved.getId(),
                 intent.getClientSecret(),
                 stripePaymentService.publishableKey(),
-                saved.getTotalAmount());
+                saved.getTotalAmount(),
+                false);
     }
 
     @Transactional
@@ -118,6 +135,10 @@ public class OrderService {
             throw new ApiException(HttpStatus.BAD_REQUEST, "Order has no payment associated");
         }
 
+        if (paymentModeService.isDevPaymentIntent(order.getStripePaymentIntentId())) {
+            return EntityMapper.toOrderResponse(fulfillPaidOrder(order), false);
+        }
+
         PaymentIntent intent = stripePaymentService.retrievePaymentIntent(order.getStripePaymentIntentId());
         if (!stripePaymentService.isPaymentSucceeded(intent)) {
             throw new ApiException(HttpStatus.BAD_REQUEST, "Payment has not been completed yet");
@@ -128,6 +149,9 @@ public class OrderService {
 
     @Transactional
     public void fulfillByPaymentIntentId(String paymentIntentId) {
+        if (paymentModeService.isDevPaymentIntent(paymentIntentId)) {
+            return;
+        }
         Order order = orderRepository.findWithDetailsByStripePaymentIntentId(paymentIntentId)
                 .orElse(null);
         if (order == null || order.getStatus() == OrderStatus.CONFIRMED) {

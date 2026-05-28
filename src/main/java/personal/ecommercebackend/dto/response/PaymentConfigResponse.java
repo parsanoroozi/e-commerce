@@ -1,3 +1,3 @@
 package personal.ecommercebackend.dto.response;
 
-public record PaymentConfigResponse(String publishableKey) {}
+public record PaymentConfigResponse(String publishableKey, boolean stripeEnabled, boolean devMode) {}

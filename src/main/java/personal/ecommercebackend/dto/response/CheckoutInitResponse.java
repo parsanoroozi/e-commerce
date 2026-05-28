@@ -6,5 +6,6 @@ public record CheckoutInitResponse(
         Long orderId,
         String clientSecret,
         String publishableKey,
-        BigDecimal totalAmount
+        BigDecimal totalAmount,
+        boolean devMode
 ) {}

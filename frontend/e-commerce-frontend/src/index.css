@@ -407,7 +407,8 @@ a:hover {
   font-size: 0.9rem;
 }
 
-.stripe-form {
+.stripe-form,
+.dev-payment {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
