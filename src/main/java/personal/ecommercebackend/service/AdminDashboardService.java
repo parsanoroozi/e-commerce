@@ -68,7 +68,7 @@ public class AdminDashboardService {
         return new AdminDashboardResponse(
                 all.size(),
                 pending,
-                productRepository.findByActiveTrueAndStockQuantityLessThanEqual(LOW_STOCK_THRESHOLD).size(),
+                productRepository.countByActiveTrueAndStockQuantityLessThanEqual(LOW_STOCK_THRESHOLD),
                 revenueToday,
                 revenueTotal,
                 lowStockResponses,
