@@ -18,4 +18,5 @@ export const ordersApi = {
       method: 'PATCH',
       body: JSON.stringify({ status }),
     }),
+  cancel: (id) => apiRequest(`/api/orders/${id}/cancel`, { method: 'POST' }),
 };

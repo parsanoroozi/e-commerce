@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import StarRating from './StarRating';
 import { resolveImageUrl } from '../utils/imageUrl';
 
 export default function ProductCard({ product }) {
@@ -16,6 +17,9 @@ export default function ProductCard({ product }) {
         <Link to={`/products/${product.id}`}>
           <h3>{product.name}</h3>
         </Link>
+        {product.reviewCount > 0 && (
+          <StarRating value={product.averageRating} count={product.reviewCount} />
+        )}
         <p className="product-price">${Number(product.price).toFixed(2)}</p>
         <Link to={`/products/${product.id}`} className="btn btn-secondary btn-sm">
           View details

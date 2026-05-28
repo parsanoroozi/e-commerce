@@ -3,10 +3,11 @@ import { apiRequest } from './client';
 export const productsApi = {
   adminList: (page = 0, size = 100) =>
     apiRequest(`/api/products/admin/all?page=${page}&size=${size}`),
-  list: ({ categoryId, search, page = 0, size = 12 } = {}) => {
+  list: ({ categoryId, search, page = 0, size = 12, sort } = {}) => {
     const params = new URLSearchParams({ page, size });
     if (categoryId) params.set('categoryId', categoryId);
     if (search) params.set('search', search);
+    if (sort) params.set('sort', sort);
     return apiRequest(`/api/products?${params}`);
   },
   get: (id) => apiRequest(`/api/products/${id}`),
@@ -15,4 +16,5 @@ export const productsApi = {
   update: (id, data) =>
     apiRequest(`/api/products/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
   remove: (id) => apiRequest(`/api/products/${id}`, { method: 'DELETE' }),
+  related: (id) => apiRequest(`/api/products/${id}/related?size=4`),
 };

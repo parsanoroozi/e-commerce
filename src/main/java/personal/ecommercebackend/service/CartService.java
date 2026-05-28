@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import personal.ecommercebackend.dto.request.CartItemRequest;
 import personal.ecommercebackend.dto.response.CartResponse;
+import personal.ecommercebackend.dto.response.CartSummaryResponse;
 import personal.ecommercebackend.entity.Cart;
 import personal.ecommercebackend.entity.CartItem;
 import personal.ecommercebackend.entity.Product;
@@ -27,6 +28,13 @@ public class CartService {
     @Transactional(readOnly = true)
     public CartResponse getCart() {
         return EntityMapper.toCartResponse(getOrCreateCart());
+    }
+
+    @Transactional(readOnly = true)
+    public CartSummaryResponse getSummary() {
+        Cart cart = getOrCreateCart();
+        int count = cart.getItems().stream().mapToInt(CartItem::getQuantity).sum();
+        return new CartSummaryResponse(count);
     }
 
     @Transactional

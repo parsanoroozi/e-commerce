@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import personal.ecommercebackend.dto.request.CartItemRequest;
 import personal.ecommercebackend.dto.response.CartResponse;
+import personal.ecommercebackend.dto.response.CartSummaryResponse;
 import personal.ecommercebackend.service.CartService;
 
 @RestController
@@ -17,6 +18,11 @@ public class CartController {
     @GetMapping
     public CartResponse getCart() {
         return cartService.getCart();
+    }
+
+    @GetMapping("/summary")
+    public CartSummaryResponse getSummary() {
+        return cartService.getSummary();
     }
 
     @PostMapping("/items")

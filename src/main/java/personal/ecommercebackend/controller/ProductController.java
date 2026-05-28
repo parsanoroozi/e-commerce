@@ -13,6 +13,8 @@ import personal.ecommercebackend.dto.response.PageResponse;
 import personal.ecommercebackend.dto.response.ProductResponse;
 import personal.ecommercebackend.service.ProductService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/products")
 @RequiredArgsConstructor
@@ -38,6 +40,13 @@ public class ProductController {
     @GetMapping("/{id}")
     public ProductResponse findById(@PathVariable Long id) {
         return productService.findById(id);
+    }
+
+    @GetMapping("/{id}/related")
+    public List<ProductResponse> related(
+            @PathVariable Long id,
+            @PageableDefault(size = 4) Pageable pageable) {
+        return productService.findRelated(id, pageable);
     }
 
     @PostMapping

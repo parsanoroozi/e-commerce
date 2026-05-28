@@ -1,12 +1,16 @@
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { cartApi } from '../api/cart';
+import { couponsApi } from '../api/coupons';
 import { ordersApi } from '../api/orders';
 import { shippingAddressesApi } from '../api/shippingAddresses';
 import DevPaymentForm from '../components/DevPaymentForm';
+import PricingSummary from '../components/PricingSummary';
 import StripePaymentForm from '../components/StripePaymentForm';
+import { estimateCheckout, SHIPPING_OPTIONS } from '../utils/checkoutPricing';
+import { showError, showSuccess } from '../utils/toast';
 
 const emptyForm = {
   label: '',
@@ -28,7 +32,12 @@ export default function CheckoutPage() {
   const [addressMode, setAddressMode] = useState('saved');
   const [selectedAddressId, setSelectedAddressId] = useState(null);
   const [form, setForm] = useState(emptyForm);
+  const [couponCode, setCouponCode] = useState('');
+  const [appliedDiscount, setAppliedDiscount] = useState(0);
+  const [couponMessage, setCouponMessage] = useState('');
+  const [shippingMethod, setShippingMethod] = useState('STANDARD');
   const [checkout, setCheckout] = useState(null);
+  const [orderBreakdown, setOrderBreakdown] = useState(null);
   const [stripePromise, setStripePromise] = useState(null);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -50,17 +59,46 @@ export default function CheckoutPage() {
       .catch((err) => setError(err.message));
   }, []);
 
+  const estimate = useMemo(() => {
+    if (!cart) return null;
+    return estimateCheckout(cart.totalAmount, appliedDiscount, shippingMethod);
+  }, [cart, appliedDiscount, shippingMethod]);
+
   const buildCheckoutPayload = () => {
-    if (addressMode === 'saved' && selectedAddressId) {
-      return { shippingAddressId: selectedAddressId };
-    }
+    const base =
+      addressMode === 'saved' && selectedAddressId
+        ? { shippingAddressId: selectedAddressId }
+        : {
+            label: form.label || null,
+            shippingStreet: form.shippingStreet,
+            shippingCity: form.shippingCity,
+            shippingZipCode: form.shippingZipCode,
+            shippingCountry: form.shippingCountry,
+          };
     return {
-      label: form.label || null,
-      shippingStreet: form.shippingStreet,
-      shippingCity: form.shippingCity,
-      shippingZipCode: form.shippingZipCode,
-      shippingCountry: form.shippingCountry,
+      ...base,
+      couponCode: couponCode.trim() || null,
+      shippingMethod,
     };
+  };
+
+  const applyCoupon = async () => {
+    if (!couponCode.trim() || !cart) return;
+    try {
+      const res = await couponsApi.validate(couponCode.trim(), cart.totalAmount);
+      if (res.valid) {
+        setAppliedDiscount(res.discountAmount);
+        setCouponMessage(res.message);
+        showSuccess('Coupon applied');
+      } else {
+        setAppliedDiscount(0);
+        setCouponMessage(res.message);
+        showError(res.message);
+      }
+    } catch (err) {
+      setAppliedDiscount(0);
+      showError(err.message);
+    }
   };
 
   const handleShippingSubmit = async (e) => {
@@ -70,6 +108,8 @@ export default function CheckoutPage() {
     try {
       const init = await ordersApi.initiateCheckout(buildCheckoutPayload());
       setCheckout(init);
+      const order = await ordersApi.get(init.orderId);
+      setOrderBreakdown(order);
       if (!init.devMode && init.publishableKey) {
         setStripePromise(loadStripe(init.publishableKey));
       }
@@ -92,7 +132,7 @@ export default function CheckoutPage() {
 
   if (!cart.items?.length) {
     return (
-      <div className="container page empty-state">
+      <div className="container page empty-state card-panel">
         <p>Your cart is empty.</p>
         <Link to="/" className="btn btn-primary">
           Continue shopping
@@ -102,14 +142,19 @@ export default function CheckoutPage() {
   }
 
   const selectedAddress = savedAddresses.find((a) => a.id === selectedAddressId);
+  const summary = orderBreakdown || estimate;
 
   return (
     <div className="container page">
       <h1>Checkout</h1>
+      <div className="step-indicator">
+        <span className={step === 'shipping' ? 'active' : ''}>1. Shipping</span>
+        <span className={step === 'payment' ? 'active' : ''}>2. Payment</span>
+      </div>
       <div className="checkout-layout">
         <div className="checkout-main">
           {step === 'shipping' && (
-            <form className="checkout-form checkout-form-wide" onSubmit={handleShippingSubmit}>
+            <form className="checkout-form checkout-form-wide card-panel" onSubmit={handleShippingSubmit}>
               <h2>Shipping address</h2>
               {error && <p className="alert alert-error">{error}</p>}
 
@@ -146,9 +191,7 @@ export default function CheckoutPage() {
                         <div>
                           <strong>
                             {addr.label || 'Address'}
-                            {addr.isDefault && (
-                              <span className="address-badge">Default</span>
-                            )}
+                            {addr.isDefault && <span className="address-badge">Default</span>}
                           </strong>
                           <p className="muted">{formatAddress(addr)}</p>
                         </div>
@@ -160,9 +203,7 @@ export default function CheckoutPage() {
 
               {addressMode === 'new' && (
                 <>
-                  <p className="muted">
-                    This address will be saved automatically for your next orders.
-                  </p>
+                  <p className="muted">Saved automatically for your next orders.</p>
                   <label>
                     Label (optional)
                     <input
@@ -212,6 +253,37 @@ export default function CheckoutPage() {
                 </p>
               )}
 
+              <h3 className="section-title">Shipping method</h3>
+              <div className="shipping-options">
+                {Object.entries(SHIPPING_OPTIONS).map(([key, opt]) => (
+                  <label key={key} className="shipping-option">
+                    <input
+                      type="radio"
+                      name="shippingMethod"
+                      value={key}
+                      checked={shippingMethod === key}
+                      onChange={() => setShippingMethod(key)}
+                    />
+                    <span>
+                      {opt.label} — ${opt.price.toFixed(2)}
+                    </span>
+                  </label>
+                ))}
+              </div>
+
+              <h3 className="section-title">Coupon</h3>
+              <div className="coupon-row">
+                <input
+                  placeholder="e.g. SAVE10 or WELCOME5"
+                  value={couponCode}
+                  onChange={(e) => setCouponCode(e.target.value)}
+                />
+                <button type="button" className="btn btn-secondary" onClick={applyCoupon}>
+                  Apply
+                </button>
+              </div>
+              {couponMessage && <p className="muted">{couponMessage}</p>}
+
               <button type="submit" className="btn btn-primary" disabled={loading}>
                 {loading ? 'Preparing payment...' : 'Continue to payment'}
               </button>
@@ -222,7 +294,7 @@ export default function CheckoutPage() {
           )}
 
           {step === 'payment' && checkout && (
-            <div className="checkout-payment">
+            <div className="checkout-payment card-panel">
               <h2>Payment</h2>
               {checkout.devMode ? (
                 <DevPaymentForm
@@ -235,8 +307,7 @@ export default function CheckoutPage() {
                 checkout.clientSecret && (
                   <>
                     <p className="muted">
-                      Order #{checkout.orderId} — $
-                      {Number(checkout.totalAmount).toFixed(2)}
+                      Order #{checkout.orderId} — ${Number(checkout.totalAmount).toFixed(2)}
                     </p>
                     <Elements
                       stripe={stripePromise}
@@ -250,11 +321,7 @@ export default function CheckoutPage() {
                   </>
                 )
               )}
-              <button
-                type="button"
-                className="btn btn-ghost"
-                onClick={() => setStep('shipping')}
-              >
+              <button type="button" className="btn btn-ghost" onClick={() => setStep('shipping')}>
                 Back to shipping
               </button>
             </div>
@@ -273,9 +340,17 @@ export default function CheckoutPage() {
               </li>
             ))}
           </ul>
-          <p className="product-price large">
-            Total: ${Number(cart.totalAmount).toFixed(2)}
-          </p>
+          {summary && (
+            <PricingSummary
+              subtotal={summary.subtotalAmount ?? summary.subtotal}
+              discount={summary.discountAmount ?? summary.discount}
+              shipping={summary.shippingCost ?? summary.shipping}
+              tax={summary.taxAmount ?? summary.tax}
+              total={summary.totalAmount ?? summary.total}
+              couponCode={summary.couponCode || (appliedDiscount > 0 ? couponCode : null)}
+              shippingMethod={summary.shippingMethod || shippingMethod}
+            />
+          )}
         </aside>
       </div>
     </div>

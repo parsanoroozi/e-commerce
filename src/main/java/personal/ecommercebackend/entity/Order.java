@@ -33,6 +33,26 @@ public class Order {
     @Column(nullable = false, precision = 12, scale = 2)
     private BigDecimal totalAmount;
 
+    @Column(nullable = false, precision = 12, scale = 2)
+    private BigDecimal subtotalAmount;
+
+    @Column(nullable = false, precision = 12, scale = 2)
+    @Builder.Default
+    private BigDecimal shippingCost = BigDecimal.ZERO;
+
+    @Column(nullable = false, precision = 12, scale = 2)
+    @Builder.Default
+    private BigDecimal taxAmount = BigDecimal.ZERO;
+
+    @Column(nullable = false, precision = 12, scale = 2)
+    @Builder.Default
+    private BigDecimal discountAmount = BigDecimal.ZERO;
+
+    private String couponCode;
+
+    @Enumerated(EnumType.STRING)
+    private ShippingMethod shippingMethod;
+
     @Column(nullable = false)
     private String shippingStreet;
 

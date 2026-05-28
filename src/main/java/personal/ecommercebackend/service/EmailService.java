@@ -104,6 +104,30 @@ public class EmailService {
                 order.getTotalAmount());
     }
 
+    public void sendOrderShipped(Order order, User user) {
+        String subject = "Your order has shipped — ShopVerse #" + order.getId();
+        String body = "<p>Hi " + escape(user.getFirstName()) + ",</p>"
+                + "<p>Great news! Order <strong>#" + order.getId() + "</strong> has been shipped.</p>"
+                + "<p>Shipping to: " + escape(order.getShippingStreet()) + ", "
+                + escape(order.getShippingCity()) + "</p>";
+
+        if (!mailEnabled) {
+            log.info("Mail disabled — shipped notification for order #{}", order.getId());
+            return;
+        }
+        try {
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+            helper.setFrom(fromAddress, fromName);
+            helper.setTo(user.getEmail());
+            helper.setSubject(subject);
+            helper.setText(body, true);
+            mailSender.send(message);
+        } catch (Exception e) {
+            log.error("Failed to send shipped email", e);
+        }
+    }
+
     private String escape(String value) {
         if (value == null) return "";
         return value.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");

@@ -38,6 +38,8 @@ public class OrderService {
     private final PaymentModeService paymentModeService;
     private final EmailService emailService;
     private final ShippingAddressService shippingAddressService;
+    private final CheckoutPricingService checkoutPricingService;
+    private final NotificationService notificationService;
 
     public PaymentConfigResponse paymentConfig() {
         return new PaymentConfigResponse(
@@ -65,9 +67,10 @@ public class OrderService {
         }
 
         ResolvedShipping shipping = shippingAddressService.resolveForCheckout(request);
+        ShippingMethod shippingMethod = resolveShippingMethod(request.shippingMethod());
 
         List<OrderItem> orderItems = new ArrayList<>();
-        BigDecimal total = BigDecimal.ZERO;
+        BigDecimal subtotal = BigDecimal.ZERO;
 
         for (CartItem cartItem : cart.getItems()) {
             Product product = productService.getProduct(cartItem.getProduct().getId());
@@ -81,13 +84,21 @@ public class OrderService {
                     .build();
 
             orderItems.add(orderItem);
-            total = total.add(product.getPrice().multiply(BigDecimal.valueOf(cartItem.getQuantity())));
+            subtotal = subtotal.add(product.getPrice().multiply(BigDecimal.valueOf(cartItem.getQuantity())));
         }
+
+        var totals = checkoutPricingService.calculate(subtotal, request.couponCode(), shippingMethod);
 
         Order order = Order.builder()
                 .user(user)
                 .status(OrderStatus.AWAITING_PAYMENT)
-                .totalAmount(total)
+                .subtotalAmount(totals.subtotal())
+                .discountAmount(totals.discount())
+                .shippingCost(totals.shipping())
+                .taxAmount(totals.tax())
+                .totalAmount(totals.total())
+                .couponCode(totals.couponCode())
+                .shippingMethod(shippingMethod)
                 .shippingStreet(shipping.street())
                 .shippingCity(shipping.city())
                 .shippingZipCode(shipping.zipCode())
@@ -191,12 +202,39 @@ public class OrderService {
                 emailService.sendOrderConfirmation(saved, saved.getUser());
                 saved.setConfirmationEmailSent(true);
                 orderRepository.save(saved);
-            } catch (RuntimeException e) {
-                // Order is paid; email failure should not roll back payment fulfillment
+            } catch (RuntimeException ignored) {
             }
         }
 
+        notificationService.notifyUser(saved.getUser(), "Order confirmed",
+                "Your order #" + saved.getId() + " has been confirmed.", saved.getId());
+
         return saved;
+    }
+
+    @Transactional
+    public OrderResponse cancelOrder(Long orderId) {
+        Order order = orderRepository.findWithDetailsByIdAndUserId(orderId, SecurityUtils.currentUserId())
+                .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, "Order not found"));
+        if (order.getStatus() != OrderStatus.CONFIRMED && order.getStatus() != OrderStatus.PENDING) {
+            throw new ApiException(HttpStatus.BAD_REQUEST, "Order cannot be cancelled at this stage");
+        }
+        order.setStatus(OrderStatus.CANCELLED);
+        Order saved = orderRepository.save(order);
+        notificationService.notifyUser(saved.getUser(), "Order cancelled",
+                "Your order #" + saved.getId() + " was cancelled.", saved.getId());
+        return EntityMapper.toOrderResponse(saved, false);
+    }
+
+    private ShippingMethod resolveShippingMethod(String value) {
+        if (value == null || value.isBlank()) {
+            return ShippingMethod.STANDARD;
+        }
+        try {
+            return ShippingMethod.valueOf(value.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new ApiException(HttpStatus.BAD_REQUEST, "Invalid shipping method");
+        }
     }
 
     @Transactional(readOnly = true)
@@ -231,8 +269,17 @@ public class OrderService {
         if (order.getStatus() == OrderStatus.AWAITING_PAYMENT) {
             throw new ApiException(HttpStatus.BAD_REQUEST, "Cannot update status until payment is completed");
         }
+        OrderStatus previous = order.getStatus();
         order.setStatus(request.status());
-        return EntityMapper.toOrderResponse(orderRepository.save(order), true);
+        Order saved = orderRepository.save(order);
+
+        if (request.status() == OrderStatus.SHIPPED && previous != OrderStatus.SHIPPED) {
+            emailService.sendOrderShipped(saved, saved.getUser());
+            notificationService.notifyUser(saved.getUser(), "Order shipped",
+                    "Your order #" + saved.getId() + " is on the way!", saved.getId());
+        }
+
+        return EntityMapper.toOrderResponse(saved, true);
     }
 
     private void validateProductAvailability(Product product, int quantity) {

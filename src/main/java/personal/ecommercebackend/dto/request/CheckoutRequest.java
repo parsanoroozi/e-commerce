@@ -8,5 +8,7 @@ public record CheckoutRequest(
         @Size(max = 200) String shippingStreet,
         @Size(max = 100) String shippingCity,
         @Size(max = 20) String shippingZipCode,
-        @Size(max = 100) String shippingCountry
+        @Size(max = 100) String shippingCountry,
+        @Size(max = 50) String couponCode,
+        String shippingMethod
 ) {}

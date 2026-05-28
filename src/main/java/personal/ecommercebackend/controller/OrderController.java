@@ -39,6 +39,11 @@ public class OrderController {
         return orderService.confirmPayment(id);
     }
 
+    @PostMapping("/{id}/cancel")
+    public OrderResponse cancel(@PathVariable Long id) {
+        return orderService.cancelOrder(id);
+    }
+
     @GetMapping
     public PageResponse<OrderResponse> myOrders(
             @PageableDefault(size = 10, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {

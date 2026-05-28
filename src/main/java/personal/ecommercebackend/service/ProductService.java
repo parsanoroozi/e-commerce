@@ -14,7 +14,10 @@ import personal.ecommercebackend.entity.Product;
 import personal.ecommercebackend.exception.ApiException;
 import personal.ecommercebackend.mapper.EntityMapper;
 import personal.ecommercebackend.repository.ProductRepository;
+import personal.ecommercebackend.repository.ProductReviewRepository;
 import personal.ecommercebackend.security.SecurityUtils;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +25,7 @@ public class ProductService {
 
     private final ProductRepository productRepository;
     private final CategoryService categoryService;
+    private final ProductReviewRepository productReviewRepository;
 
     @Transactional(readOnly = true)
     public PageResponse<ProductResponse> findAllForAdmin(Pageable pageable) {
@@ -33,7 +37,13 @@ public class ProductService {
     public PageResponse<ProductResponse> search(Long categoryId, String search, Pageable pageable) {
         String normalizedSearch = (search == null || search.isBlank()) ? null : search.trim();
         Page<Product> page = resolveSearchPage(categoryId, normalizedSearch, pageable);
-        return PageResponse.from(page.map(EntityMapper::toProductResponse));
+        return PageResponse.from(page.map(this::toProductResponseWithReviews));
+    }
+
+    private ProductResponse toProductResponseWithReviews(Product product) {
+        return EntityMapper.toProductResponse(product,
+                productReviewRepository.averageRatingByProductId(product.getId()),
+                productReviewRepository.countByProductId(product.getId()));
     }
 
     private Page<Product> resolveSearchPage(Long categoryId, String search, Pageable pageable) {
@@ -55,7 +65,16 @@ public class ProductService {
         if (!product.isActive() && !SecurityUtils.isAdmin()) {
             throw new ApiException(HttpStatus.NOT_FOUND, "Product not found");
         }
-        return EntityMapper.toProductResponse(product);
+        return toProductResponseWithReviews(product);
+    }
+
+    @Transactional(readOnly = true)
+    public List<ProductResponse> findRelated(Long id, Pageable pageable) {
+        Product product = getProduct(id);
+        return productRepository
+                .findByActiveTrueAndCategoryIdAndIdNot(product.getCategory().getId(), id, pageable)
+                .map(this::toProductResponseWithReviews)
+                .getContent();
     }
 
     @Transactional

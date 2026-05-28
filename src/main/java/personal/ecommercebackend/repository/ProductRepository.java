@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import personal.ecommercebackend.entity.Product;
 
+import java.util.List;
+
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
     Page<Product> findByActiveTrue(Pageable pageable);
@@ -34,4 +36,11 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             Pageable pageable);
 
     Page<Product> findAllByOrderByNameAsc(Pageable pageable);
+
+    Page<Product> findByActiveTrueAndCategoryIdAndIdNot(Long categoryId, Long id, Pageable pageable);
+
+    List<Product> findByActiveTrueAndStockQuantityLessThanEqualOrderByStockQuantityAsc(
+            int stockQuantity, Pageable pageable);
+
+    long countByActiveTrueAndStockQuantityLessThanEqual(int stockQuantity);
 }

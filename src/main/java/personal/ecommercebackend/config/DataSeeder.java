@@ -6,6 +6,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import personal.ecommercebackend.entity.*;
 import personal.ecommercebackend.repository.CategoryRepository;
+import personal.ecommercebackend.repository.CouponRepository;
 import personal.ecommercebackend.repository.ProductRepository;
 import personal.ecommercebackend.repository.UserRepository;
 
@@ -19,6 +20,7 @@ public class DataSeeder implements CommandLineRunner {
     private final UserRepository userRepository;
     private final CategoryRepository categoryRepository;
     private final ProductRepository productRepository;
+    private final CouponRepository couponRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Override
@@ -27,6 +29,17 @@ public class DataSeeder implements CommandLineRunner {
         if (categoryRepository.count() == 0) {
             seedCatalog();
         }
+        seedCoupons();
+    }
+
+    private void seedCoupons() {
+        if (couponRepository.count() > 0) {
+            return;
+        }
+        couponRepository.save(Coupon.builder().code("SAVE10").discountPercent(new BigDecimal("10"))
+                .minOrderAmount(new BigDecimal("50")).active(true).build());
+        couponRepository.save(Coupon.builder().code("WELCOME5").discountAmount(new BigDecimal("5"))
+                .minOrderAmount(new BigDecimal("25")).active(true).build());
     }
 
     private void seedAdmin() {
