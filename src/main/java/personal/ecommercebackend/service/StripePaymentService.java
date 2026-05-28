@@ -1,0 +1,80 @@
+package personal.ecommercebackend.service;
+
+import com.stripe.exception.StripeException;
+import com.stripe.model.PaymentIntent;
+import com.stripe.param.PaymentIntentCreateParams;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
+import personal.ecommercebackend.config.StripeProperties;
+import personal.ecommercebackend.entity.Order;
+import personal.ecommercebackend.entity.User;
+import personal.ecommercebackend.exception.ApiException;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
+@Service
+@RequiredArgsConstructor
+public class StripePaymentService {
+
+    private final StripeProperties stripeProperties;
+
+    public PaymentIntent createPaymentIntent(Order order, User user) {
+        ensureConfigured();
+        long amountCents = toCents(order.getTotalAmount());
+        try {
+            PaymentIntentCreateParams params = PaymentIntentCreateParams.builder()
+                    .setAmount(amountCents)
+                    .setCurrency(stripeProperties.currency())
+                    .setAutomaticPaymentMethods(
+                            PaymentIntentCreateParams.AutomaticPaymentMethods.builder()
+                                    .setEnabled(true)
+                                    .build())
+                    .putMetadata("orderId", order.getId().toString())
+                    .setReceiptEmail(user.getEmail())
+                    .setDescription("ShopVerse order #" + order.getId())
+                    .build();
+            return PaymentIntent.create(params);
+        } catch (StripeException e) {
+            throw new ApiException(HttpStatus.BAD_GATEWAY, "Payment provider error: " + e.getMessage());
+        }
+    }
+
+    public PaymentIntent retrievePaymentIntent(String paymentIntentId) {
+        ensureConfigured();
+        try {
+            return PaymentIntent.retrieve(paymentIntentId);
+        } catch (StripeException e) {
+            throw new ApiException(HttpStatus.BAD_GATEWAY, "Payment provider error: " + e.getMessage());
+        }
+    }
+
+    public boolean isPaymentSucceeded(PaymentIntent intent) {
+        return "succeeded".equals(intent.getStatus());
+    }
+
+    public String publishableKey() {
+        return stripeProperties.publishableKey();
+    }
+
+    public boolean isConfigured() {
+        return stripeProperties.apiKey() != null
+                && !stripeProperties.apiKey().isBlank()
+                && stripeProperties.publishableKey() != null
+                && !stripeProperties.publishableKey().isBlank();
+    }
+
+    private void ensureConfigured() {
+        if (!isConfigured()) {
+            throw new ApiException(HttpStatus.SERVICE_UNAVAILABLE,
+                    "Stripe is not configured. Set STRIPE_SECRET_KEY and STRIPE_PUBLISHABLE_KEY.");
+        }
+    }
+
+    private long toCents(BigDecimal amount) {
+        return amount.multiply(BigDecimal.valueOf(100))
+                .setScale(0, RoundingMode.HALF_UP)
+                .longValueExact();
+    }
+}

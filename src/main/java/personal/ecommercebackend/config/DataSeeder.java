@@ -1,0 +1,105 @@
+package personal.ecommercebackend.config;
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
+import personal.ecommercebackend.entity.*;
+import personal.ecommercebackend.repository.CategoryRepository;
+import personal.ecommercebackend.repository.ProductRepository;
+import personal.ecommercebackend.repository.UserRepository;
+
+import java.math.BigDecimal;
+import java.util.List;
+
+@Component
+@RequiredArgsConstructor
+public class DataSeeder implements CommandLineRunner {
+
+    private final UserRepository userRepository;
+    private final CategoryRepository categoryRepository;
+    private final ProductRepository productRepository;
+    private final PasswordEncoder passwordEncoder;
+
+    @Override
+    public void run(String... args) {
+        seedAdmin();
+        if (categoryRepository.count() == 0) {
+            seedCatalog();
+        }
+    }
+
+    private void seedAdmin() {
+        if (userRepository.existsByEmail("admin@shop.com")) {
+            return;
+        }
+        User admin = User.builder()
+                .email("admin@shop.com")
+                .password(passwordEncoder.encode("admin12345"))
+                .firstName("Store")
+                .lastName("Admin")
+                .role(Role.ADMIN)
+                .build();
+        admin.setCart(Cart.builder().user(admin).build());
+        userRepository.save(admin);
+    }
+
+    private void seedCatalog() {
+        Category electronics = categoryRepository.save(Category.builder()
+                .name("Electronics")
+                .description("Gadgets and devices")
+                .build());
+        Category clothing = categoryRepository.save(Category.builder()
+                .name("Clothing")
+                .description("Apparel and accessories")
+                .build());
+        Category home = categoryRepository.save(Category.builder()
+                .name("Home")
+                .description("Home and kitchen essentials")
+                .build());
+
+        List<Product> products = List.of(
+                product("Wireless Headphones", "Noise-cancelling over-ear headphones with 30h battery.",
+                        "129.99", 50, electronics,
+                        "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400"),
+                product("Smart Watch", "Fitness tracking, heart rate monitor, and notifications.",
+                        "199.99", 35, electronics,
+                        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400"),
+                product("Laptop Stand", "Ergonomic aluminum stand for better posture.",
+                        "49.99", 80, electronics,
+                        "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=400"),
+                product("Classic T-Shirt", "100% cotton crew neck tee in multiple colors.",
+                        "24.99", 120, clothing,
+                        "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400"),
+                product("Denim Jacket", "Medium-wash denim jacket with modern fit.",
+                        "79.99", 40, clothing,
+                        "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400"),
+                product("Running Shoes", "Lightweight running shoes with cushioned sole.",
+                        "89.99", 60, clothing,
+                        "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400"),
+                product("Ceramic Mug Set", "Set of 4 handcrafted ceramic mugs.",
+                        "34.99", 90, home,
+                        "https://images.unsplash.com/photo-1514228742587-6b1558fcca13?w=400"),
+                product("Desk Lamp", "LED desk lamp with adjustable brightness.",
+                        "39.99", 55, home,
+                        "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=400"),
+                product("Throw Blanket", "Soft fleece throw blanket for cozy evenings.",
+                        "29.99", 70, home,
+                        "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400")
+        );
+        productRepository.saveAll(products);
+    }
+
+    private Product product(String name, String description, String price,
+                            int stock, Category category, String imageUrl) {
+        return Product.builder()
+                .name(name)
+                .description(description)
+                .price(new BigDecimal(price))
+                .stockQuantity(stock)
+                .category(category)
+                .imageUrl(imageUrl)
+                .active(true)
+                .build();
+    }
+}
