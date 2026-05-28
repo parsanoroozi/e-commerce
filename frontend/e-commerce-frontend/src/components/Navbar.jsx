@@ -18,6 +18,7 @@ export default function Navbar() {
             <>
               <NavLink to="/cart">Cart</NavLink>
               <NavLink to="/orders">Orders</NavLink>
+              <NavLink to="/addresses">Addresses</NavLink>
             </>
           )}
           {isAdmin && <NavLink to="/admin">Admin</NavLink>}

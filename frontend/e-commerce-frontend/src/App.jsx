@@ -11,6 +11,7 @@ import OrderDetailPage from './pages/OrderDetailPage';
 import OrdersPage from './pages/OrdersPage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import RegisterPage from './pages/RegisterPage';
+import AddressesPage from './pages/AddressesPage';
 import AdminLayout from './pages/admin/AdminLayout';
 import AdminCategoriesPage from './pages/admin/AdminCategoriesPage';
 import AdminOrdersPage from './pages/admin/AdminOrdersPage';
@@ -40,6 +41,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <CheckoutPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/addresses"
+              element={
+                <ProtectedRoute>
+                  <AddressesPage />
                 </ProtectedRoute>
               }
             />

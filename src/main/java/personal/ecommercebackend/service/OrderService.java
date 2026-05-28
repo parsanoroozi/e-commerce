@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import personal.ecommercebackend.dto.ResolvedShipping;
 import personal.ecommercebackend.dto.request.CheckoutRequest;
 import personal.ecommercebackend.dto.request.OrderStatusUpdateRequest;
 import personal.ecommercebackend.dto.response.CheckoutInitResponse;
@@ -36,6 +37,7 @@ public class OrderService {
     private final StripePaymentService stripePaymentService;
     private final PaymentModeService paymentModeService;
     private final EmailService emailService;
+    private final ShippingAddressService shippingAddressService;
 
     public PaymentConfigResponse paymentConfig() {
         return new PaymentConfigResponse(
@@ -62,6 +64,8 @@ public class OrderService {
             throw new ApiException(HttpStatus.BAD_REQUEST, "Cart is empty");
         }
 
+        ResolvedShipping shipping = shippingAddressService.resolveForCheckout(request);
+
         List<OrderItem> orderItems = new ArrayList<>();
         BigDecimal total = BigDecimal.ZERO;
 
@@ -84,10 +88,10 @@ public class OrderService {
                 .user(user)
                 .status(OrderStatus.AWAITING_PAYMENT)
                 .totalAmount(total)
-                .shippingStreet(request.shippingStreet().trim())
-                .shippingCity(request.shippingCity().trim())
-                .shippingZipCode(request.shippingZipCode().trim())
-                .shippingCountry(request.shippingCountry().trim())
+                .shippingStreet(shipping.street())
+                .shippingCity(shipping.city())
+                .shippingZipCode(shipping.zipCode())
+                .shippingCountry(shipping.country())
                 .items(new ArrayList<>())
                 .confirmationEmailSent(false)
                 .build();
