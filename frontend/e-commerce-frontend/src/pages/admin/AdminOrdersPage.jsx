@@ -1,5 +1,20 @@
+import {
+  Alert,
+  Box,
+  FormControl,
+  Link,
+  MenuItem,
+  Select,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+} from '@mui/material';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import { ordersApi } from '../../api/orders';
 
 const STATUSES = ['AWAITING_PAYMENT', 'PENDING', 'CONFIRMED', 'SHIPPED', 'DELIVERED', 'CANCELLED'];
@@ -25,50 +40,49 @@ export default function AdminOrdersPage() {
   };
 
   return (
-    <div>
-      <h2>All orders</h2>
-      {error && <p className="alert alert-error">{error}</p>}
-      <table className="data-table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Customer</th>
-            <th>Date</th>
-            <th>Total</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {orders.map((order) => (
-            <tr key={order.id}>
-              <td>
-                <Link to={`/orders/${order.id}`}>#{order.id}</Link>
-              </td>
-              <td>
-                {order.customer
-                  ? `${order.customer.firstName} ${order.customer.lastName}`
-                  : '-'}
-              </td>
-              <td>{new Date(order.createdAt).toLocaleString()}</td>
-              <td>${Number(order.totalAmount).toFixed(2)}</td>
-              <td>{order.status}</td>
-              <td>
-                <select
-                  value={order.status}
-                  onChange={(e) => updateStatus(order.id, e.target.value)}
-                >
-                  {STATUSES.map((s) => (
-                    <option key={s} value={s}>
-                      {s}
-                    </option>
-                  ))}
-                </select>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    <Box>
+      <Typography variant="h5" gutterBottom>All orders</Typography>
+      {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
+      <TableContainer sx={{ overflowX: 'auto' }}>
+        <Table size="small">
+          <TableHead>
+            <TableRow>
+              <TableCell>ID</TableCell>
+              <TableCell>Customer</TableCell>
+              <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' } }}>Date</TableCell>
+              <TableCell>Total</TableCell>
+              <TableCell>Status</TableCell>
+              <TableCell>Actions</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {orders.map((order) => (
+              <TableRow key={order.id}>
+                <TableCell>
+                  <Link component={RouterLink} to={`/orders/${order.id}`}>#{order.id}</Link>
+                </TableCell>
+                <TableCell>
+                  {order.customer ? `${order.customer.firstName} ${order.customer.lastName}` : '-'}
+                </TableCell>
+                <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' } }}>
+                  {new Date(order.createdAt).toLocaleString()}
+                </TableCell>
+                <TableCell>${Number(order.totalAmount).toFixed(2)}</TableCell>
+                <TableCell>{order.status}</TableCell>
+                <TableCell>
+                  <FormControl size="small" sx={{ minWidth: 140 }}>
+                    <Select value={order.status} onChange={(e) => updateStatus(order.id, e.target.value)}>
+                      {STATUSES.map((s) => (
+                        <MenuItem key={s} value={s}>{s}</MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Box>
   );
 }

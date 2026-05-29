@@ -1,6 +1,8 @@
+import { Button, Card, Grid, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import { wishlistApi } from '../api/wishlist';
+import PageContainer from '../components/layout/PageContainer';
 import ProductCard from '../components/ProductCard';
 import { ProductGridSkeleton } from '../components/Skeleton';
 import { showError, showSuccess } from '../utils/toast';
@@ -27,27 +29,27 @@ export default function WishlistPage() {
   };
 
   return (
-    <div className="container page">
-      <h1>Wishlist</h1>
+    <PageContainer>
+      <Typography variant="h4" gutterBottom>Wishlist</Typography>
       {loading ? (
         <ProductGridSkeleton />
       ) : items.length === 0 ? (
-        <div className="empty-state card-panel">
-          <p>Your wishlist is empty.</p>
-          <Link to="/" className="btn btn-primary">Browse products</Link>
-        </div>
+        <Card sx={{ p: 4, textAlign: 'center' }}>
+          <Typography color="text.secondary" gutterBottom>Your wishlist is empty.</Typography>
+          <Button component={RouterLink} to="/" variant="contained" sx={{ mt: 2 }}>Browse products</Button>
+        </Card>
       ) : (
-        <div className="product-grid">
+        <Grid container spacing={2}>
           {items.map((p) => (
-            <div key={p.id} className="wishlist-item-wrap">
+            <Grid key={p.id} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
               <ProductCard product={p} />
-              <button type="button" className="btn btn-ghost btn-sm" onClick={() => remove(p.id)}>
+              <Button size="small" color="inherit" onClick={() => remove(p.id)} sx={{ mt: 1 }}>
                 Remove
-              </button>
-            </div>
+              </Button>
+            </Grid>
           ))}
-        </div>
+        </Grid>
       )}
-    </div>
+    </PageContainer>
   );
 }

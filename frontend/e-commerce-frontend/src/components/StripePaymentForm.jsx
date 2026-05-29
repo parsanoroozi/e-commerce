@@ -1,4 +1,5 @@
 import { PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js';
+import { Alert, Box, Button, Stack } from '@mui/material';
 import { useState } from 'react';
 
 export default function StripePaymentForm({ onSuccess }) {
@@ -34,12 +35,14 @@ export default function StripePaymentForm({ onSuccess }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="stripe-form">
-      <PaymentElement />
-      {error && <p className="alert alert-error">{error}</p>}
-      <button type="submit" className="btn btn-primary full-width" disabled={!stripe || processing}>
-        {processing ? 'Processing payment...' : 'Pay now'}
-      </button>
-    </form>
+    <Box component="form" onSubmit={handleSubmit}>
+      <Stack spacing={2}>
+        <PaymentElement />
+        {error && <Alert severity="error">{error}</Alert>}
+        <Button type="submit" variant="contained" size="large" fullWidth disabled={!stripe || processing}>
+          {processing ? 'Processing payment...' : 'Pay now'}
+        </Button>
+      </Stack>
+    </Box>
   );
 }

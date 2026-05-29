@@ -1,3 +1,19 @@
+import {
+  Alert,
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Stack,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TextField,
+  Typography,
+} from '@mui/material';
 import { useEffect, useState } from 'react';
 import { categoriesApi } from '../../api/categories';
 
@@ -19,11 +35,8 @@ export default function AdminCategoriesPage() {
     setError('');
     try {
       const data = { name, description };
-      if (editingId) {
-        await categoriesApi.update(editingId, data);
-      } else {
-        await categoriesApi.create(data);
-      }
+      if (editingId) await categoriesApi.update(editingId, data);
+      else await categoriesApi.create(data);
       setName('');
       setDescription('');
       setEditingId(null);
@@ -40,7 +53,7 @@ export default function AdminCategoriesPage() {
   };
 
   const remove = async (id) => {
-    if (!confirm('Delete this category?')) return;
+    if (!window.confirm('Delete this category?')) return;
     try {
       await categoriesApi.remove(id);
       await load();
@@ -50,48 +63,48 @@ export default function AdminCategoriesPage() {
   };
 
   return (
-    <div>
-      <h2>Manage categories</h2>
-      {error && <p className="alert alert-error">{error}</p>}
-      <form className="admin-form" onSubmit={handleSubmit}>
-        <label>
-          Name
-          <input required value={name} onChange={(e) => setName(e.target.value)} />
-        </label>
-        <label>
-          Description
-          <input value={description} onChange={(e) => setDescription(e.target.value)} />
-        </label>
-        <button type="submit" className="btn btn-primary">
-          {editingId ? 'Update' : 'Create'}
-        </button>
-        {editingId && (
-          <button type="button" className="btn btn-ghost" onClick={() => { setEditingId(null); setName(''); setDescription(''); }}>
-            Cancel
-          </button>
-        )}
-      </form>
-      <table className="data-table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {categories.map((c) => (
-            <tr key={c.id}>
-              <td>{c.name}</td>
-              <td>{c.description}</td>
-              <td>
-                <button type="button" className="btn btn-ghost btn-sm" onClick={() => startEdit(c)}>Edit</button>
-                <button type="button" className="btn btn-ghost btn-sm" onClick={() => remove(c.id)}>Delete</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    <Box>
+      <Typography variant="h5" gutterBottom>Manage categories</Typography>
+      {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
+      <Card component="form" onSubmit={handleSubmit} sx={{ mb: 3 }}>
+        <CardContent>
+          <Stack spacing={2} direction={{ xs: 'column', sm: 'row' }} flexWrap="wrap">
+            <TextField label="Name" required value={name} onChange={(e) => setName(e.target.value)} sx={{ flex: 1, minWidth: 160 }} />
+            <TextField label="Description" value={description} onChange={(e) => setDescription(e.target.value)} sx={{ flex: 2, minWidth: 200 }} />
+            <Stack direction="row" spacing={1} alignItems="center">
+              <Button type="submit" variant="contained">{editingId ? 'Update' : 'Create'}</Button>
+              {editingId && (
+                <Button type="button" variant="outlined" onClick={() => { setEditingId(null); setName(''); setDescription(''); }}>
+                  Cancel
+                </Button>
+              )}
+            </Stack>
+          </Stack>
+        </CardContent>
+      </Card>
+      <TableContainer component={Card}>
+        <Table size="small">
+          <TableHead>
+            <TableRow>
+              <TableCell>Name</TableCell>
+              <TableCell>Description</TableCell>
+              <TableCell align="right">Actions</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {categories.map((c) => (
+              <TableRow key={c.id}>
+                <TableCell>{c.name}</TableCell>
+                <TableCell>{c.description}</TableCell>
+                <TableCell align="right">
+                  <Button size="small" onClick={() => startEdit(c)}>Edit</Button>
+                  <Button size="small" color="error" onClick={() => remove(c.id)}>Delete</Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Box>
   );
 }

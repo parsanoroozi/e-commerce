@@ -1,6 +1,8 @@
+import { Box, Button, Card, CardContent, Grid, Stack, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
-import { useAuth } from '../context/AuthContext';
 import { authApi } from '../api/auth';
+import PageContainer from '../components/layout/PageContainer';
+import { useAuth } from '../context/AuthContext';
 import { showError, showSuccess } from '../utils/toast';
 
 export default function ProfilePage() {
@@ -33,35 +35,35 @@ export default function ProfilePage() {
   };
 
   return (
-    <div className="container page">
-      <h1>My profile</h1>
-      <p className="muted">{user?.email}</p>
-      <div className="profile-grid">
-        <form className="card-panel" onSubmit={saveProfile}>
-          <h2>Personal info</h2>
-          <label>
-            First name
-            <input value={profile.firstName} onChange={(e) => setProfile({ ...profile, firstName: e.target.value })} />
-          </label>
-          <label>
-            Last name
-            <input value={profile.lastName} onChange={(e) => setProfile({ ...profile, lastName: e.target.value })} />
-          </label>
-          <button type="submit" className="btn btn-primary">Save</button>
-        </form>
-        <form className="card-panel" onSubmit={changePassword}>
-          <h2>Change password</h2>
-          <label>
-            Current password
-            <input type="password" value={passwords.currentPassword} onChange={(e) => setPasswords({ ...passwords, currentPassword: e.target.value })} />
-          </label>
-          <label>
-            New password
-            <input type="password" minLength={8} value={passwords.newPassword} onChange={(e) => setPasswords({ ...passwords, newPassword: e.target.value })} />
-          </label>
-          <button type="submit" className="btn btn-secondary">Update password</button>
-        </form>
-      </div>
-    </div>
+    <PageContainer>
+      <Typography variant="h4" gutterBottom>My profile</Typography>
+      <Typography color="text.secondary" sx={{ mb: 3 }}>{user?.email}</Typography>
+      <Grid container spacing={3}>
+        <Grid size={{ xs: 12, md: 6 }}>
+          <Card component="form" onSubmit={saveProfile}>
+            <CardContent>
+              <Typography variant="h6" gutterBottom>Personal info</Typography>
+              <Stack spacing={2}>
+                <TextField label="First name" fullWidth value={profile.firstName} onChange={(e) => setProfile({ ...profile, firstName: e.target.value })} />
+                <TextField label="Last name" fullWidth value={profile.lastName} onChange={(e) => setProfile({ ...profile, lastName: e.target.value })} />
+                <Button type="submit" variant="contained" sx={{ alignSelf: 'flex-start' }}>Save</Button>
+              </Stack>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid size={{ xs: 12, md: 6 }}>
+          <Card component="form" onSubmit={changePassword}>
+            <CardContent>
+              <Typography variant="h6" gutterBottom>Change password</Typography>
+              <Stack spacing={2}>
+                <TextField label="Current password" type="password" fullWidth value={passwords.currentPassword} onChange={(e) => setPasswords({ ...passwords, currentPassword: e.target.value })} />
+                <TextField label="New password" type="password" fullWidth inputProps={{ minLength: 8 }} value={passwords.newPassword} onChange={(e) => setPasswords({ ...passwords, newPassword: e.target.value })} />
+                <Button type="submit" variant="outlined" sx={{ alignSelf: 'flex-start' }}>Update password</Button>
+              </Stack>
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
+    </PageContainer>
   );
 }

@@ -1,5 +1,17 @@
+import {
+  Box,
+  Card,
+  CardContent,
+  CircularProgress,
+  Grid,
+  Link,
+  List,
+  ListItem,
+  ListItemText,
+  Typography,
+} from '@mui/material';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import { adminApi } from '../../api/admin';
 
 export default function AdminDashboardPage() {
@@ -9,49 +21,64 @@ export default function AdminDashboardPage() {
     adminApi.dashboard().then(setData);
   }, []);
 
-  if (!data) return <p className="page-center">Loading dashboard...</p>;
+  if (!data) {
+    return (
+      <Grid container justifyContent="center" sx={{ py: 6 }}>
+        <CircularProgress />
+      </Grid>
+    );
+  }
+
+  const stats = [
+    { label: 'Total orders', value: data.totalOrders },
+    { label: 'Pending', value: data.pendingOrders },
+    { label: 'Low stock', value: data.lowStockProducts },
+    { label: 'Revenue today', value: `$${Number(data.revenueToday).toFixed(2)}` },
+    { label: 'Total revenue', value: `$${Number(data.revenueTotal).toFixed(2)}` },
+  ];
 
   return (
-    <div>
-      <h2>Dashboard</h2>
-      <div className="stats-grid">
-        <div className="stat-card">
-          <span className="stat-label">Total orders</span>
-          <strong>{data.totalOrders}</strong>
-        </div>
-        <div className="stat-card">
-          <span className="stat-label">Pending</span>
-          <strong>{data.pendingOrders}</strong>
-        </div>
-        <div className="stat-card">
-          <span className="stat-label">Low stock</span>
-          <strong>{data.lowStockProducts}</strong>
-        </div>
-        <div className="stat-card">
-          <span className="stat-label">Revenue today</span>
-          <strong>${Number(data.revenueToday).toFixed(2)}</strong>
-        </div>
-        <div className="stat-card">
-          <span className="stat-label">Total revenue</span>
-          <strong>${Number(data.revenueTotal).toFixed(2)}</strong>
-        </div>
-      </div>
-      <h3>Low stock</h3>
-      <ul className="simple-list">
-        {data.lowStockItems.map((p) => (
-          <li key={p.id}>
-            {p.name} — <strong>{p.stockQuantity}</strong> left
-          </li>
+    <Box>
+      <Typography variant="h5" gutterBottom>Dashboard</Typography>
+      <Grid container spacing={2} sx={{ mb: 3 }}>
+        {stats.map((s) => (
+          <Grid key={s.label} size={{ xs: 6, sm: 4, md: 2.4 }}>
+            <Card>
+              <CardContent>
+                <Typography variant="caption" color="text.secondary">{s.label}</Typography>
+                <Typography variant="h5" color="primary">{s.value}</Typography>
+              </CardContent>
+            </Card>
+          </Grid>
         ))}
-      </ul>
-      <h3>Recent orders</h3>
-      <ul className="simple-list">
-        {data.recentOrders.map((o) => (
-          <li key={o.id}>
-            <Link to={`/orders/${o.id}`}>#{o.id}</Link> — {o.status} — ${Number(o.totalAmount).toFixed(2)}
-          </li>
-        ))}
-      </ul>
-    </div>
+      </Grid>
+      <Grid container spacing={3}>
+        <Grid size={{ xs: 12, md: 6 }}>
+          <Typography variant="h6" gutterBottom>Low stock</Typography>
+          <List dense>
+            {data.lowStockItems.map((p) => (
+              <ListItem key={p.id} divider>
+                <ListItemText primary={p.name} secondary={`${p.stockQuantity} left`} />
+              </ListItem>
+            ))}
+          </List>
+        </Grid>
+        <Grid size={{ xs: 12, md: 6 }}>
+          <Typography variant="h6" gutterBottom>Recent orders</Typography>
+          <List dense>
+            {data.recentOrders.map((o) => (
+              <ListItem key={o.id} divider>
+                <ListItemText
+                  primary={
+                    <Link component={RouterLink} to={`/orders/${o.id}`}>#{o.id}</Link>
+                  }
+                  secondary={`${o.status} — $${Number(o.totalAmount).toFixed(2)}`}
+                />
+              </ListItem>
+            ))}
+          </List>
+        </Grid>
+      </Grid>
+    </Box>
   );
 }

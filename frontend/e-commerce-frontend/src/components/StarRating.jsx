@@ -1,10 +1,14 @@
-export default function StarRating({ value = 0, count }) {
-  const rounded = Math.round((value || 0) * 10) / 10;
+import { Rating, Stack, Typography } from '@mui/material';
+
+export default function StarRating({ value = 0, count, size = 'small' }) {
   return (
-    <span className="star-rating" title={count != null ? `${rounded} (${count} reviews)` : undefined}>
-      {'★'.repeat(Math.round(value || 0))}
-      {'☆'.repeat(5 - Math.round(value || 0))}
-      {count != null && <span className="review-count">({count})</span>}
-    </span>
+    <Stack direction="row" alignItems="center" spacing={0.5}>
+      <Rating value={value || 0} precision={0.5} readOnly size={size} />
+      {count != null && (
+        <Typography variant="caption" color="text.secondary">
+          ({count})
+        </Typography>
+      )}
+    </Stack>
   );
 }

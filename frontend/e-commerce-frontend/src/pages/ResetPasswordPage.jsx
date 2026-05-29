@@ -1,6 +1,8 @@
+import { Box, Button, Card, CardContent, Link, Stack, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
-import { Link, useSearchParams, useNavigate } from 'react-router-dom';
+import { Link as RouterLink, useNavigate, useSearchParams } from 'react-router-dom';
 import { authApi } from '../api/auth';
+import PageContainer from '../components/layout/PageContainer';
 import { showError, showSuccess } from '../utils/toast';
 
 export default function ResetPasswordPage() {
@@ -25,16 +27,21 @@ export default function ResetPasswordPage() {
   };
 
   return (
-    <div className="container page auth-page">
-      <form className="auth-card card-panel" onSubmit={handleSubmit}>
-        <h1>Set new password</h1>
-        <label>
-          New password
-          <input type="password" minLength={8} required value={password} onChange={(e) => setPassword(e.target.value)} />
-        </label>
-        <button type="submit" className="btn btn-primary full-width">Reset password</button>
-        <Link to="/login">Login</Link>
-      </form>
-    </div>
+    <PageContainer maxWidth="sm">
+      <Box sx={{ display: 'flex', justifyContent: 'center', py: 4 }}>
+        <Card sx={{ width: '100%', maxWidth: 420 }}>
+          <CardContent>
+            <Typography variant="h4" gutterBottom>Set new password</Typography>
+            <Box component="form" onSubmit={handleSubmit}>
+              <Stack spacing={2}>
+                <TextField label="New password" type="password" required fullWidth inputProps={{ minLength: 8 }} value={password} onChange={(e) => setPassword(e.target.value)} />
+                <Button type="submit" variant="contained" fullWidth>Reset password</Button>
+                <Link component={RouterLink} to="/login">Login</Link>
+              </Stack>
+            </Box>
+          </CardContent>
+        </Card>
+      </Box>
+    </PageContainer>
   );
 }

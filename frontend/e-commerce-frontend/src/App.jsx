@@ -1,8 +1,9 @@
+import { Box } from '@mui/material';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import AdminRoute from './components/AdminRoute';
+import AppNavbar from './components/layout/AppNavbar';
 import Layout from './components/Layout';
-import Navbar from './components/Navbar';
 import ProtectedRoute from './components/ProtectedRoute';
 import { AuthProvider } from './context/AuthContext';
 import AddressesPage from './pages/AddressesPage';
@@ -20,8 +21,8 @@ import ResetPasswordPage from './pages/ResetPasswordPage';
 import WishlistPage from './pages/WishlistPage';
 import AdminLayout from './pages/admin/AdminLayout';
 import AdminCategoriesPage from './pages/admin/AdminCategoriesPage';
-import AdminDashboardPage from './pages/admin/AdminDashboardPage';
 import AdminCouponsPage from './pages/admin/AdminCouponsPage';
+import AdminDashboardPage from './pages/admin/AdminDashboardPage';
 import AdminOrdersPage from './pages/admin/AdminOrdersPage';
 import AdminProductsPage from './pages/admin/AdminProductsPage';
 
@@ -30,9 +31,9 @@ function App() {
     <AuthProvider>
       <BrowserRouter>
         <Toaster position="top-right" toastOptions={{ duration: 3000 }} />
-        <Navbar />
         <Layout>
-          <main className="main-content">
+          <AppNavbar />
+          <Box component="main" sx={{ flex: 1 }}>
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/products/:id" element={<ProductDetailPage />} />
@@ -57,7 +58,7 @@ function App() {
               </Route>
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
-          </main>
+          </Box>
         </Layout>
       </BrowserRouter>
     </AuthProvider>

@@ -1,14 +1,17 @@
+import { Box, Card, Chip, CircularProgress, Stack, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import { ordersApi } from '../api/orders';
+import PageContainer from '../components/layout/PageContainer';
 
-const STATUS_COLORS = {
-  AWAITING_PAYMENT: 'status-pending',
-  PENDING: 'status-pending',
-  CONFIRMED: 'status-confirmed',
-  SHIPPED: 'status-shipped',
-  DELIVERED: 'status-delivered',
-  CANCELLED: 'status-cancelled',
+const STATUS_COLOR = {
+  AWAITING_PAYMENT: 'warning',
+  PENDING: 'warning',
+  CONFIRMED: 'info',
+  SHIPPED: 'primary',
+  DELIVERED: 'success',
+  CANCELLED: 'error',
+  REFUNDED: 'default',
 };
 
 export default function OrdersPage() {
@@ -24,30 +27,59 @@ export default function OrdersPage() {
       .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <p className="page-center">Loading orders...</p>;
+  if (loading) {
+    return (
+      <PageContainer>
+        <Box sx={{ display: 'flex', justifyContent: 'center', py: 8 }}>
+          <CircularProgress />
+        </Box>
+      </PageContainer>
+    );
+  }
 
   return (
-    <div className="container page">
-      <h1>My orders</h1>
-      {error && <p className="alert alert-error">{error}</p>}
+    <PageContainer>
+      <Typography variant="h4" gutterBottom>My orders</Typography>
+      {error && <Typography color="error" sx={{ mb: 2 }}>{error}</Typography>}
       {orders.length === 0 ? (
-        <p className="empty-state">You have no orders yet.</p>
+        <Card sx={{ p: 4, textAlign: 'center' }}>
+          <Typography color="text.secondary">You have no orders yet.</Typography>
+        </Card>
       ) : (
-        <div className="order-list">
+        <Stack spacing={1.5}>
           {orders.map((order) => (
-            <Link key={order.id} to={`/orders/${order.id}`} className="order-card">
-              <div>
-                <strong>Order #{order.id}</strong>
-                <p className="muted">{new Date(order.createdAt).toLocaleString()}</p>
-              </div>
-              <span className={`status-badge ${STATUS_COLORS[order.status]}`}>
-                {order.status}
-              </span>
-              <p className="product-price">${Number(order.totalAmount).toFixed(2)}</p>
-            </Link>
+            <Card
+              key={order.id}
+              component={RouterLink}
+              to={`/orders/${order.id}`}
+              sx={{
+                p: 2,
+                textDecoration: 'none',
+                color: 'inherit',
+                display: 'flex',
+                flexDirection: { xs: 'column', sm: 'row' },
+                alignItems: { sm: 'center' },
+                justifyContent: 'space-between',
+                gap: 1,
+                '&:hover': { borderColor: 'primary.main' },
+              }}
+            >
+              <Box>
+                <Typography fontWeight={600}>Order #{order.id}</Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {new Date(order.createdAt).toLocaleString()}
+                </Typography>
+              </Box>
+              <Stack direction="row" alignItems="center" spacing={2}>
+                <Chip label={order.status} size="small" color={STATUS_COLOR[order.status] || 'default'} />
+                <Typography variant="h6" color="primary">
+                  ${Number(order.totalAmount).toFixed(2)}
+                </Typography>
+              </Stack>
+            </Card>
           ))}
-        </div>
+        </Stack>
       )}
-    </div>
+    </PageContainer>
   );
 }

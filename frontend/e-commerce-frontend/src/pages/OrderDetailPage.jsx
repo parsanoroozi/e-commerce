@@ -1,7 +1,27 @@
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import {
+  Alert,
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Chip,
+  CircularProgress,
+  Grid,
+  Stack,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+} from '@mui/material';
 import { useEffect, useState } from 'react';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { Link as RouterLink, useLocation, useParams } from 'react-router-dom';
 import { ordersApi } from '../api/orders';
-import OrderTimeline from '../components/OrderTimeline';
+import OrderTimeline, { OrderTimelineMobile } from '../components/OrderTimeline';
+import PageContainer from '../components/layout/PageContainer';
 import PricingSummary from '../components/PricingSummary';
 import { showError, showSuccess } from '../utils/toast';
 
@@ -13,15 +33,12 @@ export default function OrderDetailPage() {
   const [error, setError] = useState('');
   const [cancelling, setCancelling] = useState(false);
 
-  const load = () =>
+  useEffect(() => {
     ordersApi
       .get(id)
       .then(setOrder)
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
-
-  useEffect(() => {
-    load();
   }, [id]);
 
   const canCancel = order && (order.status === 'CONFIRMED' || order.status === 'PENDING');
@@ -30,8 +47,7 @@ export default function OrderDetailPage() {
     if (!window.confirm('Cancel this order?')) return;
     setCancelling(true);
     try {
-      const updated = await ordersApi.cancel(id);
-      setOrder(updated);
+      setOrder(await ordersApi.cancel(id));
       showSuccess('Order cancelled');
     } catch (err) {
       showError(err.message);
@@ -40,75 +56,104 @@ export default function OrderDetailPage() {
     }
   };
 
-  if (loading) return <p className="page-center">Loading...</p>;
-  if (error) return <p className="alert alert-error container">{error}</p>;
+  if (loading) {
+    return (
+      <PageContainer>
+        <Box sx={{ display: 'flex', justifyContent: 'center', py: 8 }}>
+          <CircularProgress />
+        </Box>
+      </PageContainer>
+    );
+  }
+
+  if (error) {
+    return (
+      <PageContainer>
+        <Alert severity="error">{error}</Alert>
+      </PageContainer>
+    );
+  }
+
   if (!order) return null;
 
   return (
-    <div className="container page">
-      <Link to="/orders" className="back-link">
-        ← Back to orders
-      </Link>
-      <div className="order-detail-header">
-        <h1>Order #{order.id}</h1>
-        <span className={`status-badge status-${order.status?.toLowerCase()}`}>{order.status}</span>
-      </div>
+    <PageContainer>
+      <Button component={RouterLink} to="/orders" startIcon={<ArrowBackIcon />} sx={{ mb: 2 }}>
+        Back to orders
+      </Button>
+      <Stack direction="row" alignItems="center" spacing={2} flexWrap="wrap" sx={{ mb: 1 }}>
+        <Typography variant="h4">Order #{order.id}</Typography>
+        <Chip label={order.status} size="small" />
+      </Stack>
       {location.state?.paymentSuccess && (
-        <p className="alert alert-success">
+        <Alert severity="success" sx={{ mb: 2 }}>
           Payment successful! A confirmation email has been sent to your inbox.
-        </p>
+        </Alert>
       )}
       <OrderTimeline status={order.status} />
-      <p className="muted">Placed: {new Date(order.createdAt).toLocaleString()}</p>
-
+      <OrderTimelineMobile status={order.status} />
+      <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+        Placed: {new Date(order.createdAt).toLocaleString()}
+      </Typography>
       {canCancel && (
-        <button type="button" className="btn btn-ghost" disabled={cancelling} onClick={handleCancel}>
+        <Button variant="outlined" color="error" disabled={cancelling} onClick={handleCancel} sx={{ mb: 3 }}>
           {cancelling ? 'Cancelling...' : 'Cancel order'}
-        </button>
+        </Button>
       )}
-
-      <div className="order-detail-grid">
-        <div className="card-panel">
-          <h2>Shipping</h2>
-          <p>
-            {order.shippingStreet}, {order.shippingCity}, {order.shippingZipCode}, {order.shippingCountry}
-          </p>
-          {order.shippingMethod && <p className="muted">Method: {order.shippingMethod}</p>}
-          <h2>Items</h2>
-          <table className="data-table">
-            <thead>
-              <tr>
-                <th>Product</th>
-                <th>Qty</th>
-                <th>Unit</th>
-                <th>Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              {order.items.map((item) => (
-                <tr key={item.productId}>
-                  <td>{item.productName}</td>
-                  <td>{item.quantity}</td>
-                  <td>${Number(item.unitPrice).toFixed(2)}</td>
-                  <td>${Number(item.lineTotal).toFixed(2)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <aside className="cart-summary">
-          <h2>Payment summary</h2>
-          <PricingSummary
-            subtotal={order.subtotalAmount}
-            discount={order.discountAmount}
-            shipping={order.shippingCost}
-            tax={order.taxAmount}
-            total={order.totalAmount}
-            couponCode={order.couponCode}
-            shippingMethod={order.shippingMethod}
-          />
-        </aside>
-      </div>
-    </div>
+      <Grid container spacing={3}>
+        <Grid size={{ xs: 12, md: 8 }}>
+          <Card>
+            <CardContent>
+              <Typography variant="h6" gutterBottom>Shipping</Typography>
+              <Typography variant="body2" paragraph>
+                {order.shippingStreet}, {order.shippingCity}, {order.shippingZipCode}, {order.shippingCountry}
+              </Typography>
+              {order.shippingMethod && (
+                <Typography variant="body2" color="text.secondary" gutterBottom>
+                  Method: {order.shippingMethod}
+                </Typography>
+              )}
+              <Typography variant="h6" sx={{ mt: 2, mb: 1 }}>Items</Typography>
+              <TableContainer sx={{ overflowX: 'auto' }}>
+                <Table size="small">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Product</TableCell>
+                      <TableCell align="right">Qty</TableCell>
+                      <TableCell align="right">Unit</TableCell>
+                      <TableCell align="right">Total</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {order.items.map((item) => (
+                      <TableRow key={item.productId}>
+                        <TableCell>{item.productName}</TableCell>
+                        <TableCell align="right">{item.quantity}</TableCell>
+                        <TableCell align="right">${Number(item.unitPrice).toFixed(2)}</TableCell>
+                        <TableCell align="right">${Number(item.lineTotal).toFixed(2)}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid size={{ xs: 12, md: 4 }}>
+          <Card sx={{ p: 2.5, position: { md: 'sticky' }, top: { md: 88 } }}>
+            <Typography variant="h6" gutterBottom>Payment summary</Typography>
+            <PricingSummary
+              subtotal={order.subtotalAmount}
+              discount={order.discountAmount}
+              shipping={order.shippingCost}
+              tax={order.taxAmount}
+              total={order.totalAmount}
+              couponCode={order.couponCode}
+              shippingMethod={order.shippingMethod}
+            />
+          </Card>
+        </Grid>
+      </Grid>
+    </PageContainer>
   );
 }

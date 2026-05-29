@@ -1,6 +1,21 @@
+import {
+  Box,
+  Button,
+  Card,
+  FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Pagination,
+  Select,
+  Stack,
+  TextField,
+  Typography,
+} from '@mui/material';
 import { useCallback, useEffect, useState } from 'react';
 import { categoriesApi } from '../api/categories';
 import { productsApi } from '../api/products';
+import PageContainer from '../components/layout/PageContainer';
 import ProductCard from '../components/ProductCard';
 import { ProductGridSkeleton } from '../components/Skeleton';
 import { showError } from '../utils/toast';
@@ -57,60 +72,89 @@ export default function HomePage() {
   }, [loadProducts]);
 
   return (
-    <div className="container page">
-      <section className="hero-banner">
-        <div>
-          <p className="hero-eyebrow">New season collection</p>
-          <h1>Discover products you&apos;ll love</h1>
-          <p className="hero-sub">Curated quality with fast checkout and secure payments.</p>
-        </div>
-      </section>
+    <PageContainer>
+      <Card
+        sx={{
+          mb: 3,
+          p: { xs: 2, md: 4 },
+          background: (t) =>
+            t.palette.mode === 'dark'
+              ? 'linear-gradient(135deg, rgba(91,108,255,0.15), rgba(201,162,39,0.08))'
+              : 'linear-gradient(135deg, rgba(91,108,255,0.1), rgba(201,162,39,0.06))',
+        }}
+      >
+        <Typography variant="overline" color="secondary.main" fontWeight={600}>
+          New season collection
+        </Typography>
+        <Typography variant="h3" component="h1" sx={{ mt: 0.5, mb: 1 }}>
+          Discover products you&apos;ll love
+        </Typography>
+        <Typography color="text.secondary" maxWidth={520}>
+          Curated quality with fast checkout and secure payments.
+        </Typography>
+      </Card>
 
-      <div className="filters-bar card-panel">
-        <input
-          type="search"
-          placeholder="Search products..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="search-input"
-        />
-        <select value={categoryId} onChange={(e) => setCategoryId(e.target.value)}>
-          <option value="">All categories</option>
-          {categories.map((c) => (
-            <option key={c.id} value={c.id}>{c.name}</option>
-          ))}
-        </select>
-        <select value={sort} onChange={(e) => setSort(e.target.value)}>
-          <option value="name,asc">Name A–Z</option>
-          <option value="price,asc">Price: Low to high</option>
-          <option value="price,desc">Price: High to low</option>
-          <option value="createdAt,desc">Newest</option>
-        </select>
-      </div>
+      <Card sx={{ mb: 3, p: { xs: 2, sm: 2.5 } }}>
+        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+          <TextField
+            fullWidth
+            size="small"
+            placeholder="Search products..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <FormControl size="small" sx={{ minWidth: { sm: 180 }, width: { xs: '100%', sm: 'auto' } }}>
+            <InputLabel>Category</InputLabel>
+            <Select value={categoryId} label="Category" onChange={(e) => setCategoryId(e.target.value)}>
+              <MenuItem value="">All categories</MenuItem>
+              {categories.map((c) => (
+                <MenuItem key={c.id} value={c.id}>{c.name}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <FormControl size="small" sx={{ minWidth: { sm: 200 }, width: { xs: '100%', sm: 'auto' } }}>
+            <InputLabel>Sort</InputLabel>
+            <Select value={sort} label="Sort" onChange={(e) => setSort(e.target.value)}>
+              <MenuItem value="name,asc">Name A–Z</MenuItem>
+              <MenuItem value="price,asc">Price: Low to high</MenuItem>
+              <MenuItem value="price,desc">Price: High to low</MenuItem>
+              <MenuItem value="createdAt,desc">Newest</MenuItem>
+            </Select>
+          </FormControl>
+        </Stack>
+      </Card>
 
       {loading ? (
         <ProductGridSkeleton />
       ) : products.length === 0 ? (
-        <div className="empty-state card-panel">
-          <h2>No products found</h2>
-          <p className="muted">Try a different search or category.</p>
-        </div>
+        <Card sx={{ p: 4, textAlign: 'center' }}>
+          <Typography variant="h6" gutterBottom>No products found</Typography>
+          <Typography color="text.secondary">Try a different search or category.</Typography>
+        </Card>
       ) : (
         <>
-          <div className="product-grid">
+          <Grid container spacing={2}>
             {products.map((p) => (
-              <ProductCard key={p.id} product={p} />
+              <Grid key={p.id} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+                <ProductCard product={p} />
+              </Grid>
             ))}
-          </div>
+          </Grid>
           {totalPages > 1 && (
-            <div className="pagination">
-              <button type="button" className="btn btn-ghost" disabled={page === 0} onClick={() => setPage((p) => p - 1)}>Previous</button>
-              <span>Page {page + 1} of {totalPages}</span>
-              <button type="button" className="btn btn-ghost" disabled={page >= totalPages - 1} onClick={() => setPage((p) => p + 1)}>Next</button>
-            </div>
+            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
+              <Pagination
+                count={totalPages}
+                page={page + 1}
+                onChange={(_, p) => setPage(p - 1)}
+                color="primary"
+                size="medium"
+                siblingCount={0}
+                boundaryCount={1}
+              />
+            </Box>
           )}
         </>
       )}
-    </div>
+    </PageContainer>
   );
 }

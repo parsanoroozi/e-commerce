@@ -1,3 +1,26 @@
+import {
+  Alert,
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Checkbox,
+  FormControl,
+  FormControlLabel,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+  Stack,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TextField,
+  Typography,
+} from '@mui/material';
 import { useEffect, useState } from 'react';
 import { categoriesApi } from '../../api/categories';
 import { productsApi } from '../../api/products';
@@ -100,104 +123,103 @@ export default function AdminProductsPage() {
   };
 
   const deactivate = async (id) => {
-    if (!confirm('Deactivate this product?')) return;
+    if (!window.confirm('Deactivate this product?')) return;
     await productsApi.remove(id);
     await load();
   };
 
   return (
-    <div>
-      <h2>Manage products</h2>
-      {message && <p className="alert alert-success">{message}</p>}
-      {error && <p className="alert alert-error">{error}</p>}
+    <Box>
+      <Typography variant="h5" gutterBottom>Manage products</Typography>
+      {message && <Alert severity="success" sx={{ mb: 2 }}>{message}</Alert>}
+      {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
 
-      <form className="admin-form" onSubmit={handleSubmit}>
-        <h3>{editingId ? 'Edit product' : 'Add product'}</h3>
-        <div className="form-grid">
-          <label>
-            Name
-            <input required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
-          </label>
-          <label>
-            Price
-            <input required type="number" step="0.01" min="0.01" value={form.price} onChange={(e) => setForm({ ...form, price: e.target.value })} />
-          </label>
-          <label>
-            Stock
-            <input required type="number" min="0" value={form.stockQuantity} onChange={(e) => setForm({ ...form, stockQuantity: e.target.value })} />
-          </label>
-          <label>
-            Category
-            <select required value={form.categoryId} onChange={(e) => setForm({ ...form, categoryId: e.target.value })}>
-              {categories.map((c) => (
-                <option key={c.id} value={c.id}>{c.name}</option>
-              ))}
-            </select>
-          </label>
-          <label className="full-width">
-            Product image
-            <div className="image-upload-row">
-              <input type="file" accept="image/jpeg,image/png,image/webp,image/gif" onChange={handleImageUpload} disabled={uploading} />
-              {uploading && <span className="muted">Uploading...</span>}
-              {form.imageUrl && (
-                <img src={resolveImageUrl(form.imageUrl)} alt="Preview" className="image-preview" />
-              )}
-            </div>
-            <input
-              className="image-url-fallback"
-              placeholder="Or paste image URL"
-              value={form.imageUrl}
-              onChange={(e) => setForm({ ...form, imageUrl: e.target.value })}
-            />
-          </label>
-          <label className="full-width">
-            Description
-            <textarea value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} rows={3} />
-          </label>
-          <label>
-            <input type="checkbox" checked={form.active} onChange={(e) => setForm({ ...form, active: e.target.checked })} />
-            Active
-          </label>
-        </div>
-        <div className="form-actions">
-          <button type="submit" className="btn btn-primary">
-            {editingId ? 'Update' : 'Create'}
-          </button>
-          {editingId && (
-            <button type="button" className="btn btn-ghost" onClick={() => { setEditingId(null); setForm(emptyProduct); }}>
-              Cancel
-            </button>
-          )}
-        </div>
-      </form>
+      <Card component="form" onSubmit={handleSubmit} sx={{ mb: 3 }}>
+        <CardContent>
+          <Typography variant="h6" gutterBottom>{editingId ? 'Edit product' : 'Add product'}</Typography>
+          <Grid container spacing={2}>
+            <Grid size={{ xs: 12, sm: 6 }}>
+              <TextField label="Name" required fullWidth value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
+            </Grid>
+            <Grid size={{ xs: 12, sm: 3 }}>
+              <TextField label="Price" required fullWidth type="number" inputProps={{ step: 0.01, min: 0.01 }} value={form.price} onChange={(e) => setForm({ ...form, price: e.target.value })} />
+            </Grid>
+            <Grid size={{ xs: 12, sm: 3 }}>
+              <TextField label="Stock" required fullWidth type="number" inputProps={{ min: 0 }} value={form.stockQuantity} onChange={(e) => setForm({ ...form, stockQuantity: e.target.value })} />
+            </Grid>
+            <Grid size={{ xs: 12, sm: 6 }}>
+              <FormControl fullWidth size="small">
+                <InputLabel>Category</InputLabel>
+                <Select required value={form.categoryId} label="Category" onChange={(e) => setForm({ ...form, categoryId: e.target.value })}>
+                  {categories.map((c) => (
+                    <MenuItem key={c.id} value={String(c.id)}>{c.name}</MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid size={12}>
+              <Stack spacing={1}>
+                <Typography variant="subtitle2">Product image</Typography>
+                <Button variant="outlined" component="label" disabled={uploading}>
+                  {uploading ? 'Uploading...' : 'Upload image'}
+                  <input type="file" hidden accept="image/jpeg,image/png,image/webp,image/gif" onChange={handleImageUpload} />
+                </Button>
+                {form.imageUrl && (
+                  <Box component="img" src={resolveImageUrl(form.imageUrl)} alt="Preview" sx={{ width: 120, height: 90, objectFit: 'cover', borderRadius: 2 }} />
+                )}
+                <TextField label="Or paste image URL" fullWidth size="small" value={form.imageUrl} onChange={(e) => setForm({ ...form, imageUrl: e.target.value })} />
+              </Stack>
+            </Grid>
+            <Grid size={12}>
+              <TextField label="Description" fullWidth multiline rows={3} value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} />
+            </Grid>
+            <Grid size={12}>
+              <FormControlLabel
+                control={<Checkbox checked={form.active} onChange={(e) => setForm({ ...form, active: e.target.checked })} />}
+                label="Active"
+              />
+            </Grid>
+          </Grid>
+          <Stack direction="row" spacing={1} sx={{ mt: 2 }}>
+            <Button type="submit" variant="contained">{editingId ? 'Update' : 'Create'}</Button>
+            {editingId && (
+              <Button type="button" variant="outlined" onClick={() => { setEditingId(null); setForm(emptyProduct); }}>
+                Cancel
+              </Button>
+            )}
+          </Stack>
+        </CardContent>
+      </Card>
 
-      <table className="data-table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Price</th>
-            <th>Stock</th>
-            <th>Active</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {products.map((p) => (
-            <tr key={p.id}>
-              <td>{p.name}</td>
-              <td>{p.categoryName}</td>
-              <td>${Number(p.price).toFixed(2)}</td>
-              <td>{p.stockQuantity}</td>
-              <td>{p.active ? 'Yes' : 'No'}</td>
-              <td>
-                <button type="button" className="btn btn-ghost btn-sm" onClick={() => startEdit(p)}>Edit</button>
-                <button type="button" className="btn btn-ghost btn-sm" onClick={() => deactivate(p.id)}>Deactivate</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+      <TableContainer component={Card} sx={{ overflowX: 'auto' }}>
+        <Table size="small">
+          <TableHead>
+            <TableRow>
+              <TableCell>Name</TableCell>
+              <TableCell sx={{ display: { xs: 'none', md: 'table-cell' } }}>Category</TableCell>
+              <TableCell>Price</TableCell>
+              <TableCell>Stock</TableCell>
+              <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' } }}>Active</TableCell>
+              <TableCell align="right">Actions</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {products.map((p) => (
+              <TableRow key={p.id}>
+                <TableCell>{p.name}</TableCell>
+                <TableCell sx={{ display: { xs: 'none', md: 'table-cell' } }}>{p.categoryName}</TableCell>
+                <TableCell>${Number(p.price).toFixed(2)}</TableCell>
+                <TableCell>{p.stockQuantity}</TableCell>
+                <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' } }}>{p.active ? 'Yes' : 'No'}</TableCell>
+                <TableCell align="right">
+                  <Button size="small" onClick={() => startEdit(p)}>Edit</Button>
+                  <Button size="small" color="warning" onClick={() => deactivate(p.id)}>Deactivate</Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Box>
   );
 }

@@ -1,6 +1,8 @@
+import { Alert, Box, Button, Card, CardContent, Link, Stack, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import { authApi } from '../api/auth';
+import PageContainer from '../components/layout/PageContainer';
 import { showError, showSuccess } from '../utils/toast';
 
 export default function ForgotPasswordPage() {
@@ -19,22 +21,25 @@ export default function ForgotPasswordPage() {
   };
 
   return (
-    <div className="container page auth-page">
-      <form className="auth-card card-panel" onSubmit={handleSubmit}>
-        <h1>Forgot password</h1>
-        {sent ? (
-          <p className="muted">Check your email or backend console for the reset link.</p>
-        ) : (
-          <>
-            <label>
-              Email
-              <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
-            </label>
-            <button type="submit" className="btn btn-primary full-width">Send reset link</button>
-          </>
-        )}
-        <Link to="/login">Back to login</Link>
-      </form>
-    </div>
+    <PageContainer maxWidth="sm">
+      <Box sx={{ display: 'flex', justifyContent: 'center', py: 4 }}>
+        <Card sx={{ width: '100%', maxWidth: 420 }}>
+          <CardContent>
+            <Typography variant="h4" gutterBottom>Forgot password</Typography>
+            {sent ? (
+              <Alert severity="info">Check your email or backend console for the reset link.</Alert>
+            ) : (
+              <Box component="form" onSubmit={handleSubmit}>
+                <Stack spacing={2}>
+                  <TextField label="Email" type="email" required fullWidth value={email} onChange={(e) => setEmail(e.target.value)} />
+                  <Button type="submit" variant="contained" fullWidth>Send reset link</Button>
+                </Stack>
+              </Box>
+            )}
+            <Button component={RouterLink} to="/login" sx={{ mt: 2 }}>Back to login</Button>
+          </CardContent>
+        </Card>
+      </Box>
+    </PageContainer>
   );
 }

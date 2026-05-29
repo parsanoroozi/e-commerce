@@ -1,5 +1,17 @@
+import {
+  Alert,
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Link,
+  Stack,
+  TextField,
+  Typography,
+} from '@mui/material';
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import PageContainer from '../components/layout/PageContainer';
 import { useAuth } from '../context/AuthContext';
 
 export default function RegisterPage() {
@@ -29,52 +41,31 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="container page auth-page">
-      <form className="auth-card" onSubmit={handleSubmit}>
-        <h1>Create account</h1>
-        {error && <p className="alert alert-error">{error}</p>}
-        <label>
-          First name
-          <input
-            required
-            value={form.firstName}
-            onChange={(e) => setForm({ ...form, firstName: e.target.value })}
-          />
-        </label>
-        <label>
-          Last name
-          <input
-            required
-            value={form.lastName}
-            onChange={(e) => setForm({ ...form, lastName: e.target.value })}
-          />
-        </label>
-        <label>
-          Email
-          <input
-            type="email"
-            required
-            value={form.email}
-            onChange={(e) => setForm({ ...form, email: e.target.value })}
-          />
-        </label>
-        <label>
-          Password (min 8 characters)
-          <input
-            type="password"
-            required
-            minLength={8}
-            value={form.password}
-            onChange={(e) => setForm({ ...form, password: e.target.value })}
-          />
-        </label>
-        <button type="submit" className="btn btn-primary" disabled={loading}>
-          {loading ? 'Creating...' : 'Register'}
-        </button>
-        <p>
-          Already have an account? <Link to="/login">Login</Link>
-        </p>
-      </form>
-    </div>
+    <PageContainer maxWidth="sm">
+      <Box sx={{ display: 'flex', justifyContent: 'center', py: { xs: 2, md: 4 } }}>
+        <Card sx={{ width: '100%', maxWidth: 420 }}>
+          <CardContent sx={{ p: { xs: 2.5, sm: 3 } }}>
+            <Typography variant="h4" component="h1" gutterBottom>
+              Create account
+            </Typography>
+            {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
+            <Box component="form" onSubmit={handleSubmit}>
+              <Stack spacing={2}>
+                <TextField label="First name" required fullWidth value={form.firstName} onChange={(e) => setForm({ ...form, firstName: e.target.value })} />
+                <TextField label="Last name" required fullWidth value={form.lastName} onChange={(e) => setForm({ ...form, lastName: e.target.value })} />
+                <TextField label="Email" type="email" required fullWidth value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
+                <TextField label="Password (min 8 characters)" type="password" required fullWidth inputProps={{ minLength: 8 }} value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} />
+                <Button type="submit" variant="contained" size="large" disabled={loading} fullWidth>
+                  {loading ? 'Creating...' : 'Register'}
+                </Button>
+                <Typography variant="body2" textAlign="center">
+                  Already have an account? <Link component={RouterLink} to="/login">Login</Link>
+                </Typography>
+              </Stack>
+            </Box>
+          </CardContent>
+        </Card>
+      </Box>
+    </PageContainer>
   );
 }

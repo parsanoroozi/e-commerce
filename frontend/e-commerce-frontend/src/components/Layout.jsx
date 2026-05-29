@@ -1,10 +1,11 @@
-import Footer from './Footer';
+import { Box } from '@mui/material';
+import AppFooter from './layout/AppFooter';
 
 export default function Layout({ children }) {
   return (
-    <div className="app-shell">
+    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       {children}
-      <Footer />
-    </div>
+      <AppFooter />
+    </Box>
   );
 }

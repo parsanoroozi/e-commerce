@@ -1,13 +1,19 @@
+import { Card, CardContent, Grid, Skeleton } from '@mui/material';
+
 export function ProductGridSkeleton({ count = 8 }) {
   return (
-    <div className="product-grid">
+    <Grid container spacing={2}>
       {Array.from({ length: count }).map((_, i) => (
-        <div key={i} className="skeleton-card">
-          <div className="skeleton skeleton-img" />
-          <div className="skeleton skeleton-line w-80" />
-          <div className="skeleton skeleton-line w-40" />
-        </div>
+        <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+          <Card>
+            <Skeleton variant="rectangular" height={160} />
+            <CardContent>
+              <Skeleton width="80%" />
+              <Skeleton width="40%" />
+            </CardContent>
+          </Card>
+        </Grid>
       ))}
-    </div>
+    </Grid>
   );
 }

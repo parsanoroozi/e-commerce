@@ -1,9 +1,27 @@
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import {
+  Alert,
+  Box,
+  Button,
+  Card,
+  FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+  Stack,
+  TextField,
+  Typography,
+} from '@mui/material';
 import { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link as RouterLink, useNavigate, useParams } from 'react-router-dom';
 import { cartApi } from '../api/cart';
 import { productsApi } from '../api/products';
 import { reviewsApi } from '../api/reviews';
 import { wishlistApi } from '../api/wishlist';
+import PageContainer from '../components/layout/PageContainer';
 import ProductCard from '../components/ProductCard';
 import StarRating from '../components/StarRating';
 import { ProductGridSkeleton } from '../components/Skeleton';
@@ -11,14 +29,12 @@ import { useAuth } from '../context/AuthContext';
 import { resolveImageUrl } from '../utils/imageUrl';
 import { showError, showSuccess } from '../utils/toast';
 
-const RECENT_KEY = 'shopverse_recent';
-
 function trackRecent(id) {
   try {
-    const raw = localStorage.getItem(RECENT_KEY);
+    const raw = localStorage.getItem('shopverse_recent');
     const ids = raw ? JSON.parse(raw) : [];
     const next = [Number(id), ...ids.filter((x) => x !== Number(id))].slice(0, 6);
-    localStorage.setItem(RECENT_KEY, JSON.stringify(next));
+    localStorage.setItem('shopverse_recent', JSON.stringify(next));
   } catch {
     /* ignore */
   }
@@ -115,129 +131,167 @@ export default function ProductDetailPage() {
       setReviews((prev) => [created, ...prev]);
       setReviewForm({ rating: 5, comment: '' });
       showSuccess('Review submitted');
-      const updated = await productsApi.get(id);
-      setProduct(updated);
+      setProduct(await productsApi.get(id));
     } catch (err) {
       showError(err.message);
     }
   };
 
-  if (loading) return <div className="container page"><ProductGridSkeleton count={1} /></div>;
-  if (error && !product) return <p className="alert alert-error container">{error}</p>;
+  if (loading) {
+    return (
+      <PageContainer>
+        <ProductGridSkeleton count={1} />
+      </PageContainer>
+    );
+  }
+  if (error && !product) {
+    return (
+      <PageContainer>
+        <Alert severity="error">{error}</Alert>
+      </PageContainer>
+    );
+  }
   if (!product) return null;
 
   return (
-    <div className="container page product-detail">
-      <Link to="/" className="back-link">
-        ← Back to shop
-      </Link>
-      <div className="product-detail-grid">
-        <div className="gallery">
-          <img src={resolveImageUrl(activeImage || product.imageUrl)} alt={product.name} className="gallery-main" />
-          {gallery.length > 1 && (
-            <div className="gallery-thumbs">
-              {gallery.map((url) => (
-                <button
-                  key={url}
-                  type="button"
-                  className={activeImage === url ? 'active' : ''}
-                  onClick={() => setActiveImage(url)}
-                >
-                  <img src={resolveImageUrl(url)} alt="" />
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-        <div>
-          <span className="product-category">{product.categoryName}</span>
-          <h1>{product.name}</h1>
-          {product.reviewCount > 0 && (
-            <StarRating value={product.averageRating} count={product.reviewCount} />
-          )}
-          <p className="product-price large">${Number(product.price).toFixed(2)}</p>
-          <p className="product-description">{product.description}</p>
-          <p className="stock">In stock: {product.stockQuantity}</p>
-          <div className="quantity-row">
-            <label htmlFor="qty">Quantity</label>
-            <input
-              id="qty"
-              type="number"
-              min="1"
-              max={product.stockQuantity}
-              value={quantity}
-              onChange={(e) => setQuantity(Number(e.target.value))}
-            />
-          </div>
-          <div className="product-actions">
-            <button
-              type="button"
-              className="btn btn-primary"
-              disabled={product.stockQuantity < 1}
-              onClick={addToCart}
-            >
-              Add to cart
-            </button>
-            <button type="button" className="btn btn-secondary" onClick={toggleWishlist}>
-              {inWishlist ? '♥ In wishlist' : '♡ Add to wishlist'}
-            </button>
-          </div>
-        </div>
-      </div>
+    <PageContainer>
+      <Button component={RouterLink} to="/" startIcon={<ArrowBackIcon />} sx={{ mb: 2 }}>
+        Back to shop
+      </Button>
 
-      <section className="reviews-section card-panel">
-        <h2>Customer reviews</h2>
+      <Grid container spacing={3}>
+        <Grid size={{ xs: 12, md: 6 }}>
+          <Box
+            component="img"
+            src={resolveImageUrl(activeImage || product.imageUrl)}
+            alt={product.name}
+            sx={{ width: '100%', borderRadius: 3, maxHeight: 440, objectFit: 'cover' }}
+          />
+          {gallery.length > 1 && (
+            <Stack direction="row" spacing={1} sx={{ mt: 1, flexWrap: 'wrap' }}>
+              {gallery.map((url) => (
+                <Box
+                  key={url}
+                  component="button"
+                  onClick={() => setActiveImage(url)}
+                  sx={{
+                    p: 0,
+                    border: 2,
+                    borderColor: activeImage === url ? 'primary.main' : 'divider',
+                    borderRadius: 2,
+                    overflow: 'hidden',
+                    cursor: 'pointer',
+                    bgcolor: 'transparent',
+                  }}
+                >
+                  <Box component="img" src={resolveImageUrl(url)} alt="" sx={{ width: 72, height: 72, objectFit: 'cover', display: 'block' }} />
+                </Box>
+              ))}
+            </Stack>
+          )}
+        </Grid>
+        <Grid size={{ xs: 12, md: 6 }}>
+          <Typography variant="overline" color="text.secondary">{product.categoryName}</Typography>
+          <Typography variant="h4" component="h1">{product.name}</Typography>
+          {product.reviewCount > 0 && (
+            <Box sx={{ my: 1 }}>
+              <StarRating value={product.averageRating} count={product.reviewCount} />
+            </Box>
+          )}
+          <Typography variant="h4" color="primary" sx={{ my: 1 }}>
+            ${Number(product.price).toFixed(2)}
+          </Typography>
+          <Typography color="text.secondary" paragraph>{product.description}</Typography>
+          <Typography variant="body2" color="text.secondary" gutterBottom>
+            In stock: {product.stockQuantity}
+          </Typography>
+          <TextField
+            label="Quantity"
+            type="number"
+            size="small"
+            sx={{ width: 100, my: 2 }}
+            inputProps={{ min: 1, max: product.stockQuantity }}
+            value={quantity}
+            onChange={(e) => setQuantity(Number(e.target.value))}
+          />
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1}>
+            <Button variant="contained" disabled={product.stockQuantity < 1} onClick={addToCart}>
+              Add to cart
+            </Button>
+            <Button
+              variant="outlined"
+              startIcon={inWishlist ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+              onClick={toggleWishlist}
+            >
+              {inWishlist ? 'In wishlist' : 'Add to wishlist'}
+            </Button>
+          </Stack>
+        </Grid>
+      </Grid>
+
+      <Card sx={{ mt: 4, p: { xs: 2, sm: 3 } }}>
+        <Typography variant="h5" gutterBottom>Customer reviews</Typography>
         {isAuthenticated && (
-          <form className="review-form" onSubmit={submitReview}>
-            <label>
-              Rating
-              <select
-                value={reviewForm.rating}
-                onChange={(e) => setReviewForm({ ...reviewForm, rating: Number(e.target.value) })}
-              >
-                {[5, 4, 3, 2, 1].map((n) => (
-                  <option key={n} value={n}>{n} stars</option>
-                ))}
-              </select>
-            </label>
-            <label>
-              Comment
-              <textarea
+          <Box component="form" onSubmit={submitReview} sx={{ mb: 3, maxWidth: 480 }}>
+            <Stack spacing={2}>
+              <FormControl size="small" fullWidth>
+                <InputLabel>Rating</InputLabel>
+                <Select
+                  value={reviewForm.rating}
+                  label="Rating"
+                  onChange={(e) => setReviewForm({ ...reviewForm, rating: Number(e.target.value) })}
+                >
+                  {[5, 4, 3, 2, 1].map((n) => (
+                    <MenuItem key={n} value={n}>{n} stars</MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              <TextField
+                label="Comment"
+                multiline
                 rows={3}
                 value={reviewForm.comment}
                 onChange={(e) => setReviewForm({ ...reviewForm, comment: e.target.value })}
                 placeholder="Share your experience..."
               />
-            </label>
-            <button type="submit" className="btn btn-primary btn-sm">Post review</button>
-          </form>
+              <Button type="submit" variant="contained" size="small" sx={{ alignSelf: 'flex-start' }}>
+                Post review
+              </Button>
+            </Stack>
+          </Box>
         )}
         {reviews.length === 0 ? (
-          <p className="muted">No reviews yet. Be the first!</p>
+          <Typography color="text.secondary">No reviews yet. Be the first!</Typography>
         ) : (
-          <ul className="review-list">
+          <Stack spacing={2} divider={<Box sx={{ borderBottom: 1, borderColor: 'divider' }} />}>
             {reviews.map((r) => (
-              <li key={r.id}>
+              <Box key={r.id}>
                 <StarRating value={r.rating} />
-                <strong>{r.userName}</strong>
-                <span className="muted"> · {new Date(r.createdAt).toLocaleDateString()}</span>
-                {r.comment && <p>{r.comment}</p>}
-              </li>
+                <Typography variant="subtitle2" component="span" sx={{ ml: 1 }}>
+                  {r.userName}
+                </Typography>
+                <Typography variant="caption" color="text.secondary" sx={{ ml: 1 }}>
+                  {new Date(r.createdAt).toLocaleDateString()}
+                </Typography>
+                {r.comment && <Typography sx={{ mt: 1 }}>{r.comment}</Typography>}
+              </Box>
             ))}
-          </ul>
+          </Stack>
         )}
-      </section>
+      </Card>
 
       {related.length > 0 && (
-        <section className="related-section">
-          <h2>You may also like</h2>
-          <div className="product-grid">
+        <Box sx={{ mt: 4 }}>
+          <Typography variant="h5" gutterBottom>You may also like</Typography>
+          <Grid container spacing={2}>
             {related.map((p) => (
-              <ProductCard key={p.id} product={p} />
+              <Grid key={p.id} size={{ xs: 12, sm: 6, md: 3 }}>
+                <ProductCard product={p} />
+              </Grid>
             ))}
-          </div>
-        </section>
+          </Grid>
+        </Box>
       )}
-    </div>
+    </PageContainer>
   );
 }

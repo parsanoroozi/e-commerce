@@ -1,3 +1,23 @@
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+  Stack,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TextField,
+  Typography,
+} from '@mui/material';
 import { useEffect, useState } from 'react';
 import { couponsApi } from '../../api/coupons';
 import { showError, showSuccess } from '../../utils/toast';
@@ -15,10 +35,7 @@ export default function AdminCouponsPage() {
   const [form, setForm] = useState(empty);
 
   const load = () =>
-    couponsApi
-      .adminList()
-      .then(setCoupons)
-      .catch((err) => showError(err.message));
+    couponsApi.adminList().then(setCoupons).catch((err) => showError(err.message));
 
   useEffect(() => {
     load();
@@ -61,76 +78,62 @@ export default function AdminCouponsPage() {
   };
 
   return (
-    <div>
-      <h2>Coupons</h2>
-      <p className="muted">Demo: SAVE10 (10% off, min $50), WELCOME5 ($5 off, min $25)</p>
-      <form className="admin-form card-panel" onSubmit={handleSubmit}>
-        <div className="form-grid">
-          <label>
-            Code
-            <input
-              required
-              value={form.code}
-              onChange={(e) => setForm({ ...form, code: e.target.value })}
-            />
-          </label>
-          <label>
-            Type
-            <select value={form.type} onChange={(e) => setForm({ ...form, type: e.target.value })}>
-              <option value="percent">Percentage</option>
-              <option value="fixed">Fixed amount</option>
-            </select>
-          </label>
-          <label>
-            Value
-            <input
-              type="number"
-              min="0"
-              step="0.01"
-              required
-              value={form.value}
-              onChange={(e) => setForm({ ...form, value: e.target.value })}
-            />
-          </label>
-          <label>
-            Min order ($)
-            <input
-              type="number"
-              min="0"
-              step="0.01"
-              value={form.minOrderAmount}
-              onChange={(e) => setForm({ ...form, minOrderAmount: e.target.value })}
-            />
-          </label>
-        </div>
-        <button type="submit" className="btn btn-primary">Create coupon</button>
-      </form>
-      <table className="data-table">
-        <thead>
-          <tr>
-            <th>Code</th>
-            <th>Discount</th>
-            <th>Min order</th>
-            <th>Active</th>
-            <th />
-          </tr>
-        </thead>
-        <tbody>
-          {coupons.map((c) => (
-            <tr key={c.id}>
-              <td><strong>{c.code}</strong></td>
-              <td>{formatDiscount(c)}</td>
-              <td>${Number(c.minOrderAmount || 0).toFixed(2)}</td>
-              <td>{c.active ? 'Yes' : 'No'}</td>
-              <td>
-                <button type="button" className="btn btn-ghost btn-sm" onClick={() => remove(c.id)}>
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    <Box>
+      <Typography variant="h5" gutterBottom>Coupons</Typography>
+      <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+        Demo: SAVE10 (10% off, min $50), WELCOME5 ($5 off, min $25)
+      </Typography>
+      <Card component="form" onSubmit={handleSubmit} sx={{ mb: 3 }}>
+        <CardContent>
+          <Grid container spacing={2}>
+            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+              <TextField label="Code" required fullWidth value={form.code} onChange={(e) => setForm({ ...form, code: e.target.value })} />
+            </Grid>
+            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+              <FormControl fullWidth size="small">
+                <InputLabel>Type</InputLabel>
+                <Select value={form.type} label="Type" onChange={(e) => setForm({ ...form, type: e.target.value })}>
+                  <MenuItem value="percent">Percentage</MenuItem>
+                  <MenuItem value="fixed">Fixed amount</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+              <TextField label="Value" type="number" required fullWidth value={form.value} onChange={(e) => setForm({ ...form, value: e.target.value })} />
+            </Grid>
+            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+              <TextField label="Min order ($)" type="number" fullWidth value={form.minOrderAmount} onChange={(e) => setForm({ ...form, minOrderAmount: e.target.value })} />
+            </Grid>
+          </Grid>
+          <Button type="submit" variant="contained" sx={{ mt: 2 }}>Create coupon</Button>
+        </CardContent>
+      </Card>
+      <TableContainer component={Card}>
+        <Table size="small">
+          <TableHead>
+            <TableRow>
+              <TableCell>Code</TableCell>
+              <TableCell>Discount</TableCell>
+              <TableCell>Min order</TableCell>
+              <TableCell>Active</TableCell>
+              <TableCell align="right" />
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {coupons.map((c) => (
+              <TableRow key={c.id}>
+                <TableCell><strong>{c.code}</strong></TableCell>
+                <TableCell>{formatDiscount(c)}</TableCell>
+                <TableCell>${Number(c.minOrderAmount || 0).toFixed(2)}</TableCell>
+                <TableCell>{c.active ? 'Yes' : 'No'}</TableCell>
+                <TableCell align="right">
+                  <Button size="small" color="error" onClick={() => remove(c.id)}>Delete</Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Box>
   );
 }

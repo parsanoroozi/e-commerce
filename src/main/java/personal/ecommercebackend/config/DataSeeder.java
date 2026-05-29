@@ -1,6 +1,7 @@
 package personal.ecommercebackend.config;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -13,6 +14,7 @@ import personal.ecommercebackend.repository.UserRepository;
 import java.math.BigDecimal;
 import java.util.List;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class DataSeeder implements CommandLineRunner {
@@ -25,6 +27,7 @@ public class DataSeeder implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
+        log.info("Running database seed checks...");
         seedAdmin();
         if (categoryRepository.count() == 0) {
             seedCatalog();
