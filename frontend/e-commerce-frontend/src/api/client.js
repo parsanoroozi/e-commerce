@@ -44,7 +44,7 @@ export async function apiRequest(path, options = {}) {
     const message = await parseError(response);
     throw new ApiError(response.status, message);
   }
-  
+
   return response.json();
 }
 
