@@ -1,4 +1,0 @@
-// todo 1) stripe dev key
-// todo 2) email sending
-// todo 3) customer inventory threshold
-// todo 4) Orders icon
