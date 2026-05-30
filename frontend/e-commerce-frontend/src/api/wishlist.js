@@ -1,8 +1,17 @@
 import { apiRequest } from './client';
+import { emitAppAction } from '../utils/appEvents';
 
 export const wishlistApi = {
   list: () => apiRequest('/api/wishlist'),
   count: () => apiRequest('/api/wishlist/count', { cache: false }),
-  add: (productId) => apiRequest(`/api/wishlist/${productId}`, { method: 'POST' }),
-  remove: (productId) => apiRequest(`/api/wishlist/${productId}`, { method: 'DELETE' }),
+  add: async (productId) => {
+    const result = await apiRequest(`/api/wishlist/${productId}`, { method: 'POST' });
+    emitAppAction('wishlist:item-added', { productId: Number(productId) });
+    return result;
+  },
+  remove: async (productId) => {
+    const result = await apiRequest(`/api/wishlist/${productId}`, { method: 'DELETE' });
+    emitAppAction('wishlist:item-removed', { productId: Number(productId) });
+    return result;
+  },
 };

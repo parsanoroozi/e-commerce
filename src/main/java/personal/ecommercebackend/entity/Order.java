@@ -27,7 +27,9 @@ public class Order {
     private Long id;
 
     @Version
-    private Long version;
+    @Column(nullable = false)
+    @Builder.Default
+    private Long version = 0L;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)

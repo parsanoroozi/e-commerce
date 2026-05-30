@@ -3,6 +3,7 @@ package personal.ecommercebackend.config;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import personal.ecommercebackend.entity.*;
@@ -26,16 +27,26 @@ public class DataSeeder implements CommandLineRunner {
     private final CouponRepository couponRepository;
     private final ShopSettingRepository shopSettingRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JdbcTemplate jdbcTemplate;
 
     @Override
     public void run(String... args) {
         log.info("Running database seed checks...");
+        backfillVersionColumns();
         seedAdmin();
         seedShopSettings();
         if (categoryRepository.count() == 0) {
             seedCatalog();
         }
         seedCoupons();
+    }
+
+    private void backfillVersionColumns() {
+        int productsUpdated = jdbcTemplate.update("UPDATE products SET version = 0 WHERE version IS NULL");
+        int ordersUpdated = jdbcTemplate.update("UPDATE orders SET version = 0 WHERE version IS NULL");
+        if (productsUpdated > 0 || ordersUpdated > 0) {
+            log.info("Backfilled optimistic lock versions productsUpdated={} ordersUpdated={}", productsUpdated, ordersUpdated);
+        }
     }
 
     private void seedShopSettings() {

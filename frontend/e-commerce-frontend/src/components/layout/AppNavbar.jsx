@@ -25,13 +25,14 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 import { subscribeToApiChanges } from '../../api/client';
 import { cartApi } from '../../api/cart';
 import { notificationsApi } from '../../api/notifications';
 import { wishlistApi } from '../../api/wishlist';
 import { useAuth } from '../../context/AuthContext';
+import { subscribeToAppActions } from '../../utils/appEvents';
 import ThemeToggle from '../common/ThemeToggle';
 
 const navItems = [
@@ -41,6 +42,8 @@ const navItems = [
   { to: '/orders', label: 'Orders', icon: <ReceiptLongOutlinedIcon />, auth: true },
   { to: '/admin/dashboard', label: 'Admin', icon: <AdminPanelSettingsOutlinedIcon />, admin: true },
 ];
+
+const INITIAL_VISIBLE_NOTIFICATIONS = 5;
 
 export default function AppNavbar() {
   const theme = useTheme();
@@ -53,6 +56,8 @@ export default function AppNavbar() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [notifAnchor, setNotifAnchor] = useState(null);
   const [notifications, setNotifications] = useState([]);
+  const [visibleNotifications, setVisibleNotifications] = useState(INITIAL_VISIBLE_NOTIFICATIONS);
+  const notificationClearStartedAt = useRef(0);
 
   const refreshCounts = useCallback(async () => {
     if (!isAuthenticated) {
@@ -77,20 +82,11 @@ export default function AppNavbar() {
   useEffect(() => {
     const unsubscribe = subscribeToApiChanges((change) => {
       const resources = change?.resources || [];
-      if (change?.mutation === 'wishlist:add') {
-        setWishCount((count) => count + 1);
-      }
-      if (change?.mutation === 'wishlist:remove') {
-        setWishCount((count) => Math.max(0, count - 1));
-      }
-      if (change?.mutation === 'cart:add') {
-        setCartCount((count) => count + 1);
-      }
-      if (change?.mutation === 'cart:remove' || change?.mutation === 'cart:clear') {
-        setCartCount((count) => Math.max(0, count - 1));
-      }
-      if (change?.mutation === 'notifications:read') {
-        setUnread((count) => Math.max(0, count - 1));
+      const recentlyClearedNotifications = resources.includes('notifications')
+        && resources.length === 1
+        && Date.now() - notificationClearStartedAt.current < 2000;
+      if (recentlyClearedNotifications) {
+        return;
       }
       if (
         resources.includes('cart')
@@ -99,11 +95,49 @@ export default function AppNavbar() {
         || resources.includes('orders')
         || resources.includes('auth')
       ) {
-        refreshCounts();
+        window.setTimeout(refreshCounts, 500);
       }
     });
     return unsubscribe;
   }, [refreshCounts]);
+
+  useEffect(() => {
+    if (!isAuthenticated) return undefined;
+    const unsubscribe = subscribeToAppActions(({ type, payload = {} }) => {
+      switch (type) {
+        case 'wishlist:item-added':
+          setWishCount((count) => count + 1);
+          break;
+        case 'wishlist:item-removed':
+          setWishCount((count) => Math.max(0, count - 1));
+          break;
+        case 'cart:item-added':
+          setCartCount((count) => Number.isFinite(payload.totalItems)
+            ? payload.totalItems
+            : count + Number(payload.quantity || 1));
+          break;
+        case 'cart:item-updated':
+        case 'cart:item-removed':
+        case 'cart:cleared':
+          if (Number.isFinite(payload.totalItems)) {
+            setCartCount(payload.totalItems);
+          } else {
+            refreshCounts();
+          }
+          break;
+        case 'notifications:item-read':
+          setUnread((count) => Math.max(0, count - 1));
+          break;
+        case 'notifications:all-read':
+          setUnread(0);
+          setNotifications((items) => items.map((item) => ({ ...item, read: true })));
+          break;
+        default:
+          break;
+      }
+    });
+    return unsubscribe;
+  }, [isAuthenticated, refreshCounts]);
 
   useEffect(() => {
     if (!isAuthenticated) return undefined;
@@ -128,15 +162,22 @@ export default function AppNavbar() {
 
   const openNotifications = async (e) => {
     setNotifAnchor(e.currentTarget);
+    setVisibleNotifications(INITIAL_VISIBLE_NOTIFICATIONS);
     const list = await notificationsApi.list();
     setNotifications(list);
   };
 
   const markAllRead = async () => {
+    notificationClearStartedAt.current = Date.now();
+    setUnread(0);
+    setNotifications((items) => items.map((item) => ({ ...item, read: true })));
     await notificationsApi.markAllRead();
-    await refreshCounts();
-    setNotifications(await notificationsApi.list());
+    setUnread(0);
+    setNotifications((await notificationsApi.list()).map((item) => ({ ...item, read: true })));
   };
+
+  const visibleNotificationItems = notifications.slice(0, visibleNotifications);
+  const hasMoreNotifications = visibleNotifications < notifications.length;
 
   const badgeFor = (to) => {
     if (to === '/cart') return cartCount;
@@ -269,8 +310,22 @@ export default function AppNavbar() {
                     <NotificationsOutlinedIcon />
                   </Badge>
                 </IconButton>
-                <Menu anchorEl={notifAnchor} open={Boolean(notifAnchor)} onClose={() => setNotifAnchor(null)}>
-                  <Box sx={{ px: 2, py: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center', minWidth: 280 }}>
+                <Menu
+                  anchorEl={notifAnchor}
+                  open={Boolean(notifAnchor)}
+                  onClose={() => setNotifAnchor(null)}
+                  slotProps={{
+                    paper: {
+                      sx: {
+                        width: 360,
+                        maxWidth: 'calc(100vw - 24px)',
+                        maxHeight: 480,
+                        overflow: 'hidden',
+                      },
+                    },
+                  }}
+                >
+                  <Box sx={{ px: 2, py: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <Typography variant="subtitle2">Notifications</Typography>
                     {unread > 0 && (
                       <Button size="small" onClick={markAllRead}>Mark all read</Button>
@@ -279,12 +334,26 @@ export default function AppNavbar() {
                   {notifications.length === 0 ? (
                     <MenuItem disabled>No notifications</MenuItem>
                   ) : (
-                    notifications.slice(0, 8).map((n) => (
-                      <MenuItem key={n.id} onClick={() => setNotifAnchor(null)} sx={{ flexDirection: 'column', alignItems: 'flex-start' }}>
-                        <Typography variant="body2" fontWeight={n.read ? 400 : 700}>{n.title}</Typography>
-                        <Typography variant="caption" color="text.secondary">{n.message}</Typography>
-                      </MenuItem>
-                    ))
+                    <Box sx={{ maxHeight: 360, overflowY: 'auto' }}>
+                      {visibleNotificationItems.map((n) => (
+                        <MenuItem key={n.id} onClick={() => setNotifAnchor(null)} sx={{ flexDirection: 'column', alignItems: 'flex-start', whiteSpace: 'normal' }}>
+                          <Typography variant="body2" fontWeight={n.read ? 400 : 700}>{n.title}</Typography>
+                          <Typography variant="caption" color="text.secondary">{n.message}</Typography>
+                        </MenuItem>
+                      ))}
+                      {hasMoreNotifications && (
+                        <Box sx={{ px: 1, py: 1 }}>
+                          <Button
+                            size="small"
+                            variant="text"
+                            fullWidth
+                            onClick={() => setVisibleNotifications((count) => count + INITIAL_VISIBLE_NOTIFICATIONS)}
+                          >
+                            Show more
+                          </Button>
+                        </Box>
+                      )}
+                    </Box>
                   )}
                 </Menu>
                 {!isMobile && (

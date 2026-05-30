@@ -25356,3 +25356,348 @@ java.lang.NullPointerException: Cannot invoke "java.lang.Long.longValue()" becau
 2026-05-30 20:45:06.135 INFO  [http-nio-0.0.0.0-8080-exec-1] [a3832aa6-37c7-41fe-98e0-dfeb801f8143] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (1080 ms) user=admin@shop.com
 2026-05-30 20:45:06.260 INFO  [http-nio-0.0.0.0-8080-exec-2] [6331cbb3-1c90-4dc4-b93a-7838631e6883] p.e.config.RequestLoggingFilter - HTTP GET /api/cart -> 200 (815 ms) user=admin@shop.com
 2026-05-30 20:45:06.467 INFO  [http-nio-0.0.0.0-8080-exec-8] [e917b4ba-8257-4012-a85f-00fadb15e4e2] p.e.config.RequestLoggingFilter - HTTP GET /api/cart -> 200 (48 ms) user=admin@shop.com
+2026-05-30 20:45:21.758 INFO  [http-nio-0.0.0.0-8080-exec-9] [b0468dbc-da04-4cc7-bf22-5f796e0fab5e] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (10 ms) user=admin@shop.com
+2026-05-30 20:45:21.805 INFO  [http-nio-0.0.0.0-8080-exec-7] [b416e190-271d-44b3-a2d8-565a16300692] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (7 ms) user=admin@shop.com
+2026-05-30 20:45:21.805 INFO  [http-nio-0.0.0.0-8080-exec-3] [7bdd8bf5-0cbc-441d-a743-2be6dbf1a686] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (7 ms) user=admin@shop.com
+2026-05-30 20:45:21.807 INFO  [http-nio-0.0.0.0-8080-exec-10] [a06195bf-e76d-4a1b-ae52-6f4224832843] p.e.config.RequestLoggingFilter - HTTP GET /api/shipping-addresses -> 200 (9 ms) user=admin@shop.com
+2026-05-30 20:45:21.811 INFO  [http-nio-0.0.0.0-8080-exec-6] [1d297af0-f89a-4c4e-954b-26cbe7222ead] p.e.config.RequestLoggingFilter - HTTP GET /api/cart -> 200 (13 ms) user=admin@shop.com
+2026-05-30 20:45:21.829 INFO  [http-nio-0.0.0.0-8080-exec-4] [4f082074-cb30-460f-8fec-a3d36638b53d] p.e.config.RequestLoggingFilter - HTTP GET /api/shipping-addresses -> 200 (8 ms) user=admin@shop.com
+2026-05-30 20:45:22.139 INFO  [http-nio-0.0.0.0-8080-exec-1] [9a766999-3ed5-4615-b9de-5caf8fb55585] p.e.config.RequestLoggingFilter - HTTP GET /api/cart -> 200 (7 ms) user=admin@shop.com
+2026-05-30 20:45:33.727 INFO  [http-nio-0.0.0.0-8080-exec-2] [7756753b-c698-4fb8-a46c-2bd205c0f0d9] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=15 userId=1 subtotal=4.00 total=10.79 devMode=true
+2026-05-30 20:45:33.738 INFO  [http-nio-0.0.0.0-8080-exec-2] [7756753b-c698-4fb8-a46c-2bd205c0f0d9] p.e.config.RequestLoggingFilter - HTTP POST /api/orders/checkout/initiate -> 201 (43 ms) user=admin@shop.com
+2026-05-30 20:45:33.963 INFO  [http-nio-0.0.0.0-8080-exec-5] [ac4aeea7-8755-458d-a249-c257b3fb061e] p.e.config.RequestLoggingFilter - HTTP GET /api/orders/15 -> 200 (8 ms) user=admin@shop.com
+2026-05-30 20:45:36.184 WARN  [http-nio-0.0.0.0-8080-exec-8] [300e6447-d437-466a-b6b4-ecdd584a3f49] p.e.config.LoggingAspect - SERVICE OrderServiceImpl.confirmPayment - failed (19 ms): Cannot invoke "java.lang.Long.longValue()" because "current" is null
+2026-05-30 20:45:36.187 WARN  [http-nio-0.0.0.0-8080-exec-8] [300e6447-d437-466a-b6b4-ecdd584a3f49] p.e.config.LoggingAspect - CONTROLLER OrderController.confirmPayment - failed (22 ms): Cannot invoke "java.lang.Long.longValue()" because "current" is null
+2026-05-30 20:45:36.188 ERROR [http-nio-0.0.0.0-8080-exec-8] [300e6447-d437-466a-b6b4-ecdd584a3f49] p.e.exception.GlobalExceptionHandler - Unhandled exception: Cannot invoke "java.lang.Long.longValue()" because "current" is null
+java.lang.NullPointerException: Cannot invoke "java.lang.Long.longValue()" because "current" is null
+	at org.hibernate.type.descriptor.java.LongJavaType.next(LongJavaType.java:216)
+	at org.hibernate.type.descriptor.java.LongJavaType.next(LongJavaType.java:22)
+	at org.hibernate.engine.internal.Versioning.increment(Versioning.java:130)
+	at org.hibernate.generator.internal.VersionGeneration.generate(VersionGeneration.java:49)
+	at org.hibernate.engine.internal.Versioning.incrementVersion(Versioning.java:113)
+	at org.hibernate.event.internal.DefaultFlushEntityEventListener.getNextVersion(DefaultFlushEntityEventListener.java:385)
+	at org.hibernate.event.internal.DefaultFlushEntityEventListener.scheduleUpdate(DefaultFlushEntityEventListener.java:244)
+	at org.hibernate.event.internal.DefaultFlushEntityEventListener.onFlushEntity(DefaultFlushEntityEventListener.java:140)
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:138)
+	at org.hibernate.event.internal.AbstractFlushingEventListener.flushEntities(AbstractFlushingEventListener.java:229)
+	at org.hibernate.event.internal.AbstractFlushingEventListener.flushEverythingToExecutions(AbstractFlushingEventListener.java:69)
+	at org.hibernate.event.internal.DefaultAutoFlushEventListener.onAutoFlush(DefaultAutoFlushEventListener.java:47)
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:138)
+	at org.hibernate.internal.SessionImpl.autoFlushIfRequired(SessionImpl.java:1435)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.lambda$new$1(ConcreteSqmSelectQueryPlan.java:132)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.withCacheableSqmInterpretation(ConcreteSqmSelectQueryPlan.java:464)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.performList(ConcreteSqmSelectQueryPlan.java:392)
+	at org.hibernate.query.sqm.internal.SqmQueryImpl.doList(SqmQueryImpl.java:374)
+	at org.hibernate.query.spi.AbstractSelectionQuery.list(AbstractSelectionQuery.java:153)
+	at org.hibernate.query.spi.AbstractSelectionQuery.getSingleResultOrNull(AbstractSelectionQuery.java:330)
+	at org.springframework.data.jpa.repository.query.JpaQueryExecution$SingleEntityExecution.doExecute(JpaQueryExecution.java:328)
+	at org.springframework.data.jpa.repository.query.JpaQueryExecution.execute(JpaQueryExecution.java:99)
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.doExecute(AbstractJpaQuery.java:164)
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.execute(AbstractJpaQuery.java:154)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:169)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:167)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:146)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:69)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:133)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:371)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:130)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:135)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:137)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:222)
+	at jdk.proxy2/jdk.proxy2.$Proxy183.findByUserId(Unknown Source)
+	at personal.ecommercebackend.service.impl.OrderServiceImpl.fulfillPaidOrder(OrderServiceImpl.java:207)
+	at personal.ecommercebackend.service.impl.OrderServiceImpl.confirmPayment(OrderServiceImpl.java:165)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158)
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:82)
+	at personal.ecommercebackend.config.LoggingAspect.logExecution(LoggingAspect.java:37)
+	at personal.ecommercebackend.config.LoggingAspect.logService(LoggingAspect.java:20)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:648)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:630)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:70)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:133)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:371)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:130)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:96)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:719)
+	at personal.ecommercebackend.service.impl.OrderServiceImpl$$SpringCGLIB$$0.confirmPayment(<generated>)
+	at personal.ecommercebackend.controller.OrderController.confirmPayment(OrderController.java:39)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158)
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:82)
+	at personal.ecommercebackend.config.LoggingAspect.logExecution(LoggingAspect.java:37)
+	at personal.ecommercebackend.config.LoggingAspect.logController(LoggingAspect.java:25)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:648)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:630)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:70)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:96)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:719)
+	at personal.ecommercebackend.controller.OrderController$$SpringCGLIB$$0.confirmPayment(<generated>)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:649)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at personal.ecommercebackend.config.RequestLoggingFilter.doFilterInternal(RequestLoggingFilter.java:38)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at personal.ecommercebackend.config.AuthRateLimitFilter.doFilterInternal(AuthRateLimitFilter.java:36)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:235)
+	at org.springframework.security.web.ObservationFilterChainDecorator$FilterObservation$SimpleFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:493)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:354)
+	at org.springframework.security.web.ObservationFilterChainDecorator.lambda$wrapSecured$0(ObservationFilterChainDecorator.java:86)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:132)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:101)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:132)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:86)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:181)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at personal.ecommercebackend.security.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:53)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:110)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:96)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$0(ObservationFilterChainDecorator.java:337)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:237)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:195)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.ServletRequestPathFilter.doFilter(ServletRequestPathFilter.java:52)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebSecurityConfiguration.java:317)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:355)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:272)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:110)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1801)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+2026-05-30 20:45:36.190 INFO  [http-nio-0.0.0.0-8080-exec-8] [300e6447-d437-466a-b6b4-ecdd584a3f49] p.e.config.RequestLoggingFilter - HTTP POST /api/orders/15/confirm-payment -> 500 (25 ms) user=admin@shop.com
+2026-05-30 20:48:05.914 INFO  [main] [no-request] p.e.ECommerceBackendApplicationTests - Starting ECommerceBackendApplicationTests using Java 17.0.8 with PID 10820 (started by God -01.11 in C:\Users\God -01.11\Desktop\e-commerce-backend - codex)
+2026-05-30 20:48:05.919 INFO  [main] [no-request] p.e.ECommerceBackendApplicationTests - The following 1 profile is active: "test"
+2026-05-30 20:48:20.581 INFO  [main] [no-request] o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-05-30 20:48:20.582 WARN  [main] [no-request] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-05-30 20:48:23.799 INFO  [main] [no-request] p.e.ECommerceBackendApplicationTests - Started ECommerceBackendApplicationTests in 18.878 seconds (process running for 21.634)
+2026-05-30 20:48:23.946 INFO  [main] [no-request] p.ecommercebackend.config.DataSeeder - Running database seed checks...
+2026-05-30 20:48:24.804 INFO  [main] [no-request] p.ecommercebackend.config.DataSeeder - Default shop settings seeded (low stock threshold: 10)
+2026-05-30 20:48:24.884 WARN  [main] [no-request] p.ecommercebackend.config.MailConfig - Email delivery DISABLED — set MAIL_ENABLED=true and run MailHog (docker compose up -d mailhog)
+2026-05-30 20:48:26.148 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=1 userId=2 subtotal=50.00 total=60.47 devMode=true
+2026-05-30 20:48:26.215 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=1 userId=2 total=60.47 itemCount=1
+2026-05-30 20:48:26.228 INFO  [main] [no-request] p.e.service.impl.EmailServiceImpl - Mail disabled - order confirmation for customer@example.com (order #1):
+<html><body style="font-family:Segoe UI,sans-serif;color:#1a2332;">
+<h2>Thank you for your order, Test!</h2>
+<p>Your payment was received. Order <strong>#1</strong> is confirmed.</p>
+<p><strong>Placed:</strong> May 30, 2026 20:48</p>
+<h3>Shipping to</h3>
+<p>123 Test Street<br>Test City, 12345<br>USA</p>
+<h3>Items</h3>
+<table border="1" cellpadding="8" cellspacing="0" style="border-collapse:collapse;">
+<tr><th>Product</th><th>Qty</th><th>Total</th></tr>
+<tr><td>Limited Product</td><td>2</td><td>$50.00</td></tr>
+</table>
+<p style="margin-top:16px;"><strong>Order total: $60.47</strong></p>
+<p style="color:#64748b;font-size:14px;">ShopVerse - happy shopping!</p>
+</body></html>
+
+2026-05-30 20:48:26.252 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Payment confirmation ignored for already confirmed orderId=1
+2026-05-30 20:53:48.067 INFO  [SpringApplicationShutdownHook] [no-request] o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-05-30 20:53:50.388 INFO  [tomcat-shutdown] [no-request] o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-05-30 20:53:50.449 INFO  [SpringApplicationShutdownHook] [no-request] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-30 20:53:50.463 INFO  [SpringApplicationShutdownHook] [no-request] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-05-30 20:53:50.484 INFO  [SpringApplicationShutdownHook] [no-request] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-05-30 20:54:02.829 INFO  [main] [no-request] p.e.ECommerceBackendApplication - Starting ECommerceBackendApplication using Java 19.0.2 with PID 29896 (C:\Users\God -01.11\Desktop\e-commerce-backend - codex\target\classes started by God -01.11 in C:\Users\God -01.11\Desktop\e-commerce-backend - codex)
+2026-05-30 20:54:02.841 INFO  [main] [no-request] p.e.ECommerceBackendApplication - No active profile set, falling back to 1 default profile: "default"
+2026-05-30 20:54:05.923 INFO  [main] [no-request] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-30 20:54:06.062 INFO  [main] [no-request] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 126 ms. Found 14 JPA repository interfaces.
+2026-05-30 20:54:07.962 INFO  [main] [no-request] o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-05-30 20:54:07.987 INFO  [main] [no-request] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-05-30 20:54:07.988 INFO  [main] [no-request] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.21]
+2026-05-30 20:54:08.112 INFO  [main] [no-request] o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 5150 ms
+2026-05-30 20:54:08.787 INFO  [main] [no-request] org.hibernate.orm.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-05-30 20:54:08.934 INFO  [main] [no-request] org.hibernate.orm.core - HHH000001: Hibernate ORM core version 7.2.12.Final
+2026-05-30 20:54:10.007 INFO  [main] [no-request] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-30 20:54:10.101 INFO  [main] [no-request] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-05-30 20:54:10.680 INFO  [main] [no-request] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@367fbb28
+2026-05-30 20:54:10.686 INFO  [main] [no-request] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-05-30 20:54:10.925 INFO  [main] [no-request] o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/ecommerce]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.2
+	Default catalog/schema: ecommerce/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-30 20:54:15.020 INFO  [main] [no-request] org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-30 20:54:15.309 INFO  [main] [no-request] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-30 20:54:15.529 INFO  [main] [no-request] o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-05-30 20:54:19.088 INFO  [main] [no-request] o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-05-30 20:54:19.089 WARN  [main] [no-request] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-05-30 20:54:21.380 INFO  [main] [no-request] o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2026-05-30 20:54:21.624 INFO  [main] [no-request] o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-05-30 20:54:21.643 INFO  [main] [no-request] p.e.ECommerceBackendApplication - Started ECommerceBackendApplication in 20.442 seconds (process running for 22.532)
+2026-05-30 20:54:21.660 INFO  [main] [no-request] p.ecommercebackend.config.MailConfig - Email delivery ENABLED — SMTP localhost:1025 (view MailHog UI at http://localhost:8025)
+2026-05-30 20:54:21.661 INFO  [main] [no-request] p.ecommercebackend.config.DataSeeder - Running database seed checks...
+2026-05-30 20:54:21.686 INFO  [main] [no-request] p.ecommercebackend.config.DataSeeder - Backfilled optimistic lock versions productsUpdated=11 ordersUpdated=13
+2026-05-30 20:54:22.731 INFO  [RMI TCP Connection(17)-172.23.0.1] [no-request] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-30 20:54:22.731 INFO  [RMI TCP Connection(17)-172.23.0.1] [no-request] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-05-30 20:54:22.738 INFO  [RMI TCP Connection(17)-172.23.0.1] [no-request] o.s.web.servlet.DispatcherServlet - Completed initialization in 7 ms
+2026-05-30 20:55:20.051 INFO  [http-nio-0.0.0.0-8080-exec-1] [58c75086-5d63-4bd0-b0d1-4fe29d9e0f67] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=15 userId=1 total=10.79 itemCount=1
+2026-05-30 20:55:20.133 INFO  [http-nio-0.0.0.0-8080-exec-1] [58c75086-5d63-4bd0-b0d1-4fe29d9e0f67] p.e.service.impl.EmailServiceImpl - Email sent to admin@shop.com (order confirmation #15)
+2026-05-30 20:55:20.243 INFO  [http-nio-0.0.0.0-8080-exec-1] [58c75086-5d63-4bd0-b0d1-4fe29d9e0f67] p.e.config.RequestLoggingFilter - HTTP POST /api/orders/15/confirm-payment -> 200 (375 ms) user=admin@shop.com
+2026-05-30 20:55:20.370 INFO  [http-nio-0.0.0.0-8080-exec-2] [59626de6-fca2-48bd-9dee-7547461c92e3] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (25 ms) user=admin@shop.com
+2026-05-30 20:55:20.669 INFO  [http-nio-0.0.0.0-8080-exec-3] [ad2b3173-3902-4f4d-8088-a6f6bb5397cf] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (18 ms) user=admin@shop.com
+2026-05-30 20:55:20.669 INFO  [http-nio-0.0.0.0-8080-exec-4] [578cd20f-ffeb-4d6e-97fd-b6978a573e55] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (22 ms) user=admin@shop.com
+2026-05-30 20:55:20.682 INFO  [http-nio-0.0.0.0-8080-exec-5] [574f5d09-a6be-4c63-bb6d-2bd5a21880dc] p.e.config.RequestLoggingFilter - HTTP GET /api/orders/15 -> 200 (31 ms) user=admin@shop.com
+2026-05-30 20:55:21.031 INFO  [http-nio-0.0.0.0-8080-exec-6] [fd410ae7-26d4-4d1c-a325-f091103bf27a] p.e.config.RequestLoggingFilter - HTTP GET /api/orders/15 -> 200 (15 ms) user=admin@shop.com
+2026-05-30 20:55:28.708 INFO  [http-nio-0.0.0.0-8080-exec-7] [5fbc87ae-6bff-4686-9171-b371c82244ca] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications -> 200 (25 ms) user=admin@shop.com
+2026-05-30 20:55:30.648 INFO  [http-nio-0.0.0.0-8080-exec-8] [973a3caf-1622-4fff-885d-2e8aebd7cd54] p.e.config.RequestLoggingFilter - HTTP PATCH /api/notifications/read-all -> 200 (15 ms) user=admin@shop.com
+2026-05-30 21:01:52.783 INFO  [http-nio-0.0.0.0-8080-exec-9] [1b4c8021-1cc4-4558-8695-964fa3f8f154] p.e.config.RequestLoggingFilter - HTTP GET /api/auth/me -> 200 (24 ms) user=admin@shop.com
+2026-05-30 21:01:52.826 INFO  [http-nio-0.0.0.0-8080-exec-10] [581eccd6-7e0f-47ca-92da-ce1f88fea37e] p.e.config.RequestLoggingFilter - HTTP GET /api/auth/me -> 200 (12 ms) user=admin@shop.com
+2026-05-30 21:01:53.070 INFO  [http-nio-0.0.0.0-8080-exec-2] [7085d35e-66a6-45a7-bfdc-65d5ba2ed765] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (12 ms) user=admin@shop.com
+2026-05-30 21:01:53.084 INFO  [http-nio-0.0.0.0-8080-exec-3] [417b5374-3bdf-4a7c-b0f2-5ad5bffcd7a7] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (22 ms) user=admin@shop.com
+2026-05-30 21:01:53.086 INFO  [http-nio-0.0.0.0-8080-exec-1] [f60e2a6e-1597-4e5d-8196-61fd8d274a5c] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (25 ms) user=admin@shop.com
+2026-05-30 21:01:53.112 INFO  [http-nio-0.0.0.0-8080-exec-4] [6243b5c9-ce25-4f5b-8cfe-182a4277b240] p.e.config.RequestLoggingFilter - HTTP GET /api/orders/15 -> 200 (46 ms) user=admin@shop.com
+2026-05-30 21:01:53.471 INFO  [http-nio-0.0.0.0-8080-exec-5] [ae50f097-ad9d-4dcd-b48a-e2405faa447a] p.e.config.RequestLoggingFilter - HTTP GET /api/orders/15 -> 200 (19 ms) user=admin@shop.com
+2026-05-30 21:01:55.920 INFO  [http-nio-0.0.0.0-8080-exec-7] [13ae30dc-1820-40af-ab26-3c645950c234] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (14 ms) user=admin@shop.com
+2026-05-30 21:01:55.924 INFO  [http-nio-0.0.0.0-8080-exec-6] [c0adad46-1751-4b63-8cb3-d2c9a214201f] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (18 ms) user=admin@shop.com
+2026-05-30 21:01:56.176 INFO  [http-nio-0.0.0.0-8080-exec-8] [fa3af9fe-267b-4f35-a32c-5cbd90bf8e94] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (44 ms) user=admin@shop.com
+2026-05-30 21:01:56.209 INFO  [http-nio-0.0.0.0-8080-exec-9] [508a6f51-249b-4b5d-aa33-36a733eaf8ee] p.e.config.RequestLoggingFilter - HTTP GET /api/categories -> 200 (68 ms) user=admin@shop.com
+2026-05-30 21:01:56.504 INFO  [http-nio-0.0.0.0-8080-exec-10] [6eefb5a6-aef2-463c-b722-6fbc4b53c3bd] p.e.config.RequestLoggingFilter - HTTP GET /api/products?page=0&size=12&sort=name%2Casc -> 200 (371 ms) user=admin@shop.com
+2026-05-30 21:01:56.546 INFO  [http-nio-0.0.0.0-8080-exec-2] [2cdcb5d2-009f-47e3-bff0-f5609f1877c9] p.e.config.RequestLoggingFilter - HTTP GET /api/categories -> 200 (10 ms) user=admin@shop.com
+2026-05-30 21:01:56.965 INFO  [http-nio-0.0.0.0-8080-exec-3] [b1558e45-064d-4aa2-96ed-614f0ad7c5cb] p.e.config.RequestLoggingFilter - HTTP GET /api/products?page=0&size=12&sort=name%2Casc -> 200 (129 ms) user=admin@shop.com
+2026-05-30 21:02:00.382 INFO  [http-nio-0.0.0.0-8080-exec-5] [20e544b2-8418-4cdf-ae04-d85d3b072607] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (15 ms) user=admin@shop.com
+2026-05-30 21:02:00.397 INFO  [http-nio-0.0.0.0-8080-exec-1] [454b3f21-da0d-4abd-9afc-8fdf17efcc1f] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (9 ms) user=admin@shop.com
+2026-05-30 21:02:00.398 INFO  [http-nio-0.0.0.0-8080-exec-4] [9b4e4800-ddf2-4750-9eaa-43fa2cac47d9] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (9 ms) user=admin@shop.com
+2026-05-30 21:02:00.418 INFO  [http-nio-0.0.0.0-8080-exec-9] [f7b83df3-8561-4a55-b306-352eb8b4131b] p.e.config.RequestLoggingFilter - HTTP GET /api/products/6/reviews?page=0&size=10 -> 200 (22 ms) user=admin@shop.com
+2026-05-30 21:02:00.425 INFO  [http-nio-0.0.0.0-8080-exec-7] [357479ed-dd5f-4650-afd0-8d05ee98bef3] p.e.config.RequestLoggingFilter - HTTP GET /api/products/6 -> 200 (37 ms) user=admin@shop.com
+2026-05-30 21:02:00.448 INFO  [http-nio-0.0.0.0-8080-exec-8] [b79fd069-42e9-426c-8be7-e644398076d9] p.e.config.RequestLoggingFilter - HTTP GET /api/products/6/related?size=4 -> 200 (54 ms) user=admin@shop.com
+2026-05-30 21:02:00.878 INFO  [http-nio-0.0.0.0-8080-exec-10] [c83d7817-4d72-41fe-a206-602ea56f9f55] p.e.config.RequestLoggingFilter - HTTP GET /api/products/6/reviews?page=0&size=10 -> 200 (48 ms) user=admin@shop.com
+2026-05-30 21:02:00.895 INFO  [http-nio-0.0.0.0-8080-exec-2] [8f208c22-8f75-48fa-a1b8-67ca5269a07e] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist -> 200 (135 ms) user=admin@shop.com
+2026-05-30 21:02:00.907 INFO  [http-nio-0.0.0.0-8080-exec-3] [bcd159f6-027b-46b4-aae3-8e6085ae94ee] p.e.config.RequestLoggingFilter - HTTP GET /api/products/6 -> 200 (45 ms) user=admin@shop.com
+2026-05-30 21:02:00.930 INFO  [http-nio-0.0.0.0-8080-exec-6] [b5cb386d-9e1a-49e9-97cb-09eb22ac8b32] p.e.config.RequestLoggingFilter - HTTP GET /api/products/6/related?size=4 -> 200 (64 ms) user=admin@shop.com
+2026-05-30 21:02:01.253 INFO  [http-nio-0.0.0.0-8080-exec-5] [0c5f9830-d843-4496-8a00-ad56c24cc910] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist -> 200 (23 ms) user=admin@shop.com
+2026-05-30 21:02:02.450 INFO  [http-nio-0.0.0.0-8080-exec-1] [04f13961-332b-41b7-bbbc-b87da44db6ba] p.e.config.RequestLoggingFilter - HTTP POST /api/wishlist/6 -> 201 (273 ms) user=admin@shop.com
+2026-05-30 21:02:05.591 INFO  [http-nio-0.0.0.0-8080-exec-4] [f2fe1646-f05c-42c2-9fef-4e7683003b5d] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (12 ms) user=admin@shop.com
+2026-05-30 21:02:05.899 INFO  [http-nio-0.0.0.0-8080-exec-7] [2a953467-0945-4805-a6a2-a77a3e1c09ba] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (9 ms) user=admin@shop.com
+2026-05-30 21:02:05.899 INFO  [http-nio-0.0.0.0-8080-exec-9] [3f13a83a-dad2-406e-89dd-77127a10c0fd] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (8 ms) user=admin@shop.com
+2026-05-30 21:02:05.912 INFO  [http-nio-0.0.0.0-8080-exec-8] [657d7eab-9c26-43b3-980f-ce0b7fd20a28] p.e.config.RequestLoggingFilter - HTTP GET /api/cart -> 200 (22 ms) user=admin@shop.com
+2026-05-30 21:02:06.249 INFO  [http-nio-0.0.0.0-8080-exec-10] [40e6ffb8-e371-48dc-8975-79a6472a43e0] p.e.config.RequestLoggingFilter - HTTP GET /api/cart -> 200 (8 ms) user=admin@shop.com
+2026-05-30 21:02:06.831 INFO  [http-nio-0.0.0.0-8080-exec-2] [5aa25e1d-b225-461d-b7d2-17369ccd8500] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (11 ms) user=admin@shop.com
+2026-05-30 21:02:06.877 INFO  [http-nio-0.0.0.0-8080-exec-3] [46ccea7c-7bcf-42d8-89ec-6e1abf50d344] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (9 ms) user=admin@shop.com
+2026-05-30 21:02:06.884 INFO  [http-nio-0.0.0.0-8080-exec-6] [9982c419-9a8f-4f3b-84c0-e4568037d64f] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (13 ms) user=admin@shop.com
+2026-05-30 21:02:06.908 INFO  [http-nio-0.0.0.0-8080-exec-5] [786c5b6e-f241-47cd-819d-485c7c22022f] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist -> 200 (37 ms) user=admin@shop.com
+2026-05-30 21:02:06.961 INFO  [http-nio-0.0.0.0-8080-exec-1] [7f73c048-1a04-4410-bb09-b611793f0126] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist -> 200 (35 ms) user=admin@shop.com
