@@ -2,6 +2,7 @@ import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettin
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import MenuIcon from '@mui/icons-material/Menu';
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
+import ReceiptLongOutlinedIcon from '@mui/icons-material/ReceiptLongOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import StorefrontOutlinedIcon from '@mui/icons-material/StorefrontOutlined';
 import {
@@ -36,7 +37,7 @@ const navItems = [
   { to: '/', label: 'Shop', icon: <StorefrontOutlinedIcon />, end: true },
   { to: '/wishlist', label: 'Wishlist', icon: <FavoriteBorderOutlinedIcon />, auth: true },
   { to: '/cart', label: 'Cart', icon: <ShoppingCartOutlinedIcon />, auth: true },
-  { to: '/orders', label: 'Orders', icon: null, auth: true },
+  { to: '/orders', label: 'Orders', icon: <ReceiptLongOutlinedIcon />, auth: true },
   { to: '/admin/dashboard', label: 'Admin', icon: <AdminPanelSettingsOutlinedIcon />, admin: true },
 ];
 

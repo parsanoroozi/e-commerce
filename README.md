@@ -65,7 +65,13 @@ npm run dev
 
 Open `http://localhost:5173` — Vite proxies `/api` and `/uploads` to the backend.
 
-## Stripe test cards
+## Documentation
+
+- **Customer / user guide:** [docs/CUSTOMER_GUIDE.md](docs/CUSTOMER_GUIDE.md)
+- **Project valuation & cost estimate:** [docs/VALUATION.md](docs/VALUATION.md)
+- **API (Swagger):** http://localhost:8080/swagger-ui/index.html
+
+## Email (local dev)
 
 | Card                  | Result   |
 | --------------------- | -------- |

@@ -1,5 +1,6 @@
 package personal.ecommercebackend.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -10,13 +11,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
+import personal.ecommercebackend.dto.request.UpdateLowStockThresholdRequest;
 import personal.ecommercebackend.dto.response.AdminDashboardResponse;
+import personal.ecommercebackend.dto.response.AdminSettingsResponse;
 import personal.ecommercebackend.dto.response.AuditLogResponse;
 import personal.ecommercebackend.dto.response.OrderResponse;
 import personal.ecommercebackend.dto.response.PageResponse;
 import personal.ecommercebackend.service.AdminDashboardService;
 import personal.ecommercebackend.service.AuditService;
 import personal.ecommercebackend.service.OrderService;
+import personal.ecommercebackend.service.ShopSettingsService;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -27,10 +31,21 @@ public class AdminController {
     private final AdminDashboardService dashboardService;
     private final AuditService auditService;
     private final OrderService orderService;
+    private final ShopSettingsService shopSettingsService;
 
     @GetMapping("/dashboard")
     public AdminDashboardResponse dashboard() {
         return dashboardService.getDashboard();
+    }
+
+    @GetMapping("/settings")
+    public AdminSettingsResponse settings() {
+        return shopSettingsService.getSettings();
+    }
+
+    @PatchMapping("/settings/low-stock-threshold")
+    public AdminSettingsResponse updateLowStockThreshold(@Valid @RequestBody UpdateLowStockThresholdRequest request) {
+        return shopSettingsService.updateLowStockThreshold(request);
     }
 
     @GetMapping("/audit-logs")

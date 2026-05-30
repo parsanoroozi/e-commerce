@@ -7,6 +7,7 @@ public record AdminDashboardResponse(
         long totalOrders,
         long pendingOrders,
         long lowStockProducts,
+        int lowStockThreshold,
         BigDecimal revenueToday,
         BigDecimal revenueTotal,
         List<ProductResponse> lowStockItems,

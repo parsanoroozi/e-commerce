@@ -299,7 +299,11 @@ export default function CheckoutPage() {
                           appearance: { theme: mode === 'dark' ? 'night' : 'stripe' },
                         }}
                       >
-                        <StripePaymentForm onSuccess={handlePaymentSuccess} />
+                        <StripePaymentForm
+                        orderId={checkout.orderId}
+                        totalAmount={checkout.totalAmount}
+                        onSuccess={handlePaymentSuccess}
+                      />
                       </Elements>
                     </>
                   )

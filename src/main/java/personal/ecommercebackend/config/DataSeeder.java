@@ -9,6 +9,7 @@ import personal.ecommercebackend.entity.*;
 import personal.ecommercebackend.repository.CategoryRepository;
 import personal.ecommercebackend.repository.CouponRepository;
 import personal.ecommercebackend.repository.ProductRepository;
+import personal.ecommercebackend.repository.ShopSettingRepository;
 import personal.ecommercebackend.repository.UserRepository;
 
 import java.math.BigDecimal;
@@ -23,16 +24,29 @@ public class DataSeeder implements CommandLineRunner {
     private final CategoryRepository categoryRepository;
     private final ProductRepository productRepository;
     private final CouponRepository couponRepository;
+    private final ShopSettingRepository shopSettingRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Override
     public void run(String... args) {
         log.info("Running database seed checks...");
         seedAdmin();
+        seedShopSettings();
         if (categoryRepository.count() == 0) {
             seedCatalog();
         }
         seedCoupons();
+    }
+
+    private void seedShopSettings() {
+        if (shopSettingRepository.existsById(ShopSetting.SINGLETON_ID)) {
+            return;
+        }
+        shopSettingRepository.save(ShopSetting.builder()
+                .id(ShopSetting.SINGLETON_ID)
+                .lowStockThreshold(10)
+                .build());
+        log.info("Default shop settings seeded (low stock threshold: 10)");
     }
 
     private void seedCoupons() {

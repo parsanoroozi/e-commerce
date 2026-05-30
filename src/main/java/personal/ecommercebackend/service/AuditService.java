@@ -1,36 +1,16 @@
 package personal.ecommercebackend.service;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import personal.ecommercebackend.dto.response.AuditLogResponse;
-import personal.ecommercebackend.dto.response.PageResponse;
-import personal.ecommercebackend.entity.AuditLog;
-import personal.ecommercebackend.repository.AuditLogRepository;
-import personal.ecommercebackend.security.SecurityUtils;
+import personal.ecommercebackend.dto.request.*;
+import personal.ecommercebackend.dto.response.*;
+import personal.ecommercebackend.dto.*;
+import personal.ecommercebackend.entity.*;
+import java.math.BigDecimal;
+import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
+import com.stripe.model.PaymentIntent;
 
-@Service
-@RequiredArgsConstructor
-public class AuditService {
-
-    private final AuditLogRepository auditLogRepository;
-
-    @Transactional
-    public void log(String action, String entityType, String entityId, String details) {
-        auditLogRepository.save(AuditLog.builder()
-                .adminEmail(SecurityUtils.currentUser().getEmail())
-                .action(action)
-                .entityType(entityType)
-                .entityId(entityId)
-                .details(details)
-                .build());
-    }
-
-    @Transactional(readOnly = true)
-    public PageResponse<AuditLogResponse> list(Pageable pageable) {
-        return PageResponse.from(auditLogRepository.findAllByOrderByCreatedAtDesc(pageable)
-                .map(a -> new AuditLogResponse(a.getId(), a.getAdminEmail(), a.getAction(),
-                        a.getEntityType(), a.getEntityId(), a.getDetails(), a.getCreatedAt())));
-    }
+public interface AuditService {
+    void log(String action, String entityType, String entityId, String details);
+    PageResponse<AuditLogResponse> list(Pageable pageable);
 }

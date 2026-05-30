@@ -1,8 +1,9 @@
 import { PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js';
-import { Alert, Box, Button, Stack } from '@mui/material';
+import { Alert, Box, Button, Stack, Typography } from '@mui/material';
 import { useState } from 'react';
+import PaymentCard from './PaymentCard';
 
-export default function StripePaymentForm({ onSuccess }) {
+export default function StripePaymentForm({ orderId, totalAmount, onSuccess }) {
   const stripe = useStripe();
   const elements = useElements();
   const [error, setError] = useState('');
@@ -35,14 +36,25 @@ export default function StripePaymentForm({ onSuccess }) {
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit}>
-      <Stack spacing={2}>
-        <PaymentElement />
-        {error && <Alert severity="error">{error}</Alert>}
-        <Button type="submit" variant="contained" size="large" fullWidth disabled={!stripe || processing}>
-          {processing ? 'Processing payment...' : 'Pay now'}
-        </Button>
-      </Stack>
-    </Box>
+    <PaymentCard
+      title="Pay with card"
+      subtitle="Powered by Stripe — test card 4242 4242 4242 4242"
+      orderId={orderId}
+      totalAmount={totalAmount}
+      mode="stripe"
+    >
+      <Box component="form" onSubmit={handleSubmit}>
+        <Stack spacing={2}>
+          <PaymentElement options={{ layout: 'tabs' }} />
+          <Typography variant="caption" color="text.secondary">
+            We accept Visa, Mastercard, Amex, and more. Use any future expiry and CVC in test mode.
+          </Typography>
+          {error && <Alert severity="error">{error}</Alert>}
+          <Button type="submit" variant="contained" size="large" fullWidth disabled={!stripe || processing}>
+            {processing ? 'Processing payment...' : 'Pay now'}
+          </Button>
+        </Stack>
+      </Box>
+    </PaymentCard>
   );
 }

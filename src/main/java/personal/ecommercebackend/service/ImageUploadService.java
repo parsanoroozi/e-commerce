@@ -1,19 +1,15 @@
 package personal.ecommercebackend.service;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Pageable;
+import personal.ecommercebackend.dto.request.*;
+import personal.ecommercebackend.dto.response.*;
+import personal.ecommercebackend.dto.*;
+import personal.ecommercebackend.entity.*;
+import java.math.BigDecimal;
+import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
-import personal.ecommercebackend.dto.response.ImageUploadResponse;
-import personal.ecommercebackend.storage.FileStorageService;
+import com.stripe.model.PaymentIntent;
 
-@Service
-@RequiredArgsConstructor
-public class ImageUploadService {
-
-    private final FileStorageService fileStorageService;
-
-    public ImageUploadResponse upload(MultipartFile file) {
-        String url = fileStorageService.store(file);
-        return new ImageUploadResponse(url);
-    }
+public interface ImageUploadService {
+    ImageUploadResponse upload(MultipartFile file);
 }

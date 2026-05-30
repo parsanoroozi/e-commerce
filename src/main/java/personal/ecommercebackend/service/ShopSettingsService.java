@@ -10,8 +10,11 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 import com.stripe.model.PaymentIntent;
 
-public interface EmailService {
-    void sendOrderConfirmation(Order order, User user);
-    void sendOrderShipped(Order order, User user);
-    void sendPasswordReset(User user, String resetLink);
+public interface ShopSettingsService {
+
+    int getLowStockThreshold();
+
+    AdminSettingsResponse getSettings();
+
+    AdminSettingsResponse updateLowStockThreshold(UpdateLowStockThresholdRequest request);
 }

@@ -1,78 +1,15 @@
 package personal.ecommercebackend.service;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import personal.ecommercebackend.dto.response.AdminDashboardResponse;
-import personal.ecommercebackend.dto.response.OrderResponse;
-import personal.ecommercebackend.dto.response.ProductResponse;
-import personal.ecommercebackend.entity.Order;
-import personal.ecommercebackend.entity.OrderStatus;
-import personal.ecommercebackend.entity.Product;
-import personal.ecommercebackend.mapper.EntityMapper;
-import personal.ecommercebackend.repository.OrderRepository;
-import personal.ecommercebackend.repository.ProductRepository;
-
+import org.springframework.data.domain.Pageable;
+import personal.ecommercebackend.dto.request.*;
+import personal.ecommercebackend.dto.response.*;
+import personal.ecommercebackend.dto.*;
+import personal.ecommercebackend.entity.*;
 import java.math.BigDecimal;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneOffset;
 import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
+import com.stripe.model.PaymentIntent;
 
-@Service
-@RequiredArgsConstructor
-public class AdminDashboardService {
-
-    private static final int LOW_STOCK_THRESHOLD = 10;
-
-    private final OrderRepository orderRepository;
-    private final ProductRepository productRepository;
-
-    @Transactional(readOnly = true)
-    public AdminDashboardResponse getDashboard() {
-        List<Order> all = orderRepository.findAll();
-        Instant startOfDay = LocalDate.now().atStartOfDay().toInstant(ZoneOffset.UTC);
-
-        long pending = all.stream().filter(o -> o.getStatus() == OrderStatus.AWAITING_PAYMENT
-                || o.getStatus() == OrderStatus.PENDING).count();
-
-        BigDecimal revenueTotal = all.stream()
-                .filter(o -> o.getStatus() == OrderStatus.CONFIRMED
-                        || o.getStatus() == OrderStatus.SHIPPED
-                        || o.getStatus() == OrderStatus.DELIVERED)
-                .map(Order::getTotalAmount)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
-
-        BigDecimal revenueToday = all.stream()
-                .filter(o -> o.getCreatedAt() != null && o.getCreatedAt().isAfter(startOfDay))
-                .filter(o -> o.getStatus() == OrderStatus.CONFIRMED
-                        || o.getStatus() == OrderStatus.SHIPPED
-                        || o.getStatus() == OrderStatus.DELIVERED)
-                .map(Order::getTotalAmount)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
-
-        List<Product> lowStock = productRepository
-                .findByActiveTrueAndStockQuantityLessThanEqualOrderByStockQuantityAsc(
-                        LOW_STOCK_THRESHOLD, PageRequest.of(0, 5));
-
-        List<OrderResponse> recent = orderRepository
-                .findAllByOrderByCreatedAtDesc(PageRequest.of(0, 5))
-                .map(o -> EntityMapper.toOrderResponse(o, true))
-                .getContent();
-
-        List<ProductResponse> lowStockResponses = lowStock.stream()
-                .map(EntityMapper::toProductResponse)
-                .toList();
-
-        return new AdminDashboardResponse(
-                all.size(),
-                pending,
-                productRepository.countByActiveTrueAndStockQuantityLessThanEqual(LOW_STOCK_THRESHOLD),
-                revenueToday,
-                revenueTotal,
-                lowStockResponses,
-                recent
-        );
-    }
+public interface AdminDashboardService {
+    AdminDashboardResponse getDashboard();
 }
