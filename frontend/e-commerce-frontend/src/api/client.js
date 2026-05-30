@@ -36,11 +36,15 @@ export async function apiRequest(path, options = {}) {
     return null;
   }
 
+  if (response.status === 201 && response.url.includes("wishlist")){
+    return null;
+  }
+
   if (!response.ok) {
     const message = await parseError(response);
     throw new ApiError(response.status, message);
   }
-
+console.log(response)
   return response.json();
 }
 
