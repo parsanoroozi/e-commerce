@@ -3,10 +3,10 @@
     <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
 
     <property name="LOG_PATTERN"
-              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) [%thread] %cyan(%logger{36}) - %msg%n"/>
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) [%thread] [%X{requestId:-no-request}] %cyan(%logger{36}) - %msg%n"/>
 
     <property name="FILE_PATTERN"
-              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{36} - %msg%n"/>
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] [%X{requestId:-no-request}] %logger{36} - %msg%n"/>
 
     <springProperty scope="context" name="APP_NAME" source="spring.application.name" defaultValue="e-commerce-backend"/>
 
@@ -33,8 +33,8 @@
 
     <logger name="personal.ecommercebackend" level="DEBUG"/>
     <logger name="org.springframework.web" level="INFO"/>
-    <logger name="org.hibernate.SQL" level="DEBUG"/>
-    <logger name="org.hibernate.orm.jdbc.bind" level="TRACE"/>
+    <logger name="org.hibernate.SQL" level="${LOG_SQL_LEVEL:-INFO}"/>
+    <logger name="org.hibernate.orm.jdbc.bind" level="${LOG_SQL_BIND_LEVEL:-INFO}"/>
     <logger name="org.springframework.security" level="INFO"/>
 
     <root level="INFO">

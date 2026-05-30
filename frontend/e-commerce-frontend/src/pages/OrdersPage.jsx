@@ -1,6 +1,7 @@
 import { Box, Card, Chip, CircularProgress, Stack, Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
+import { subscribeToApiChanges } from '../api/client';
 import { ordersApi } from '../api/orders';
 import PageContainer from '../components/layout/PageContainer';
 
@@ -19,13 +20,26 @@ export default function OrdersPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  useEffect(() => {
+  const loadOrders = useCallback(() => {
+    setLoading(true);
     ordersApi
       .myOrders()
       .then((data) => setOrders(data.content))
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
   }, []);
+
+  useEffect(() => {
+    loadOrders();
+  }, [loadOrders]);
+
+  useEffect(() => {
+    return subscribeToApiChanges((change) => {
+      if (change?.resources?.includes('orders')) {
+        loadOrders();
+      }
+    });
+  }, [loadOrders]);
 
   if (loading) {
     return (

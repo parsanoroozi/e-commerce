@@ -27,7 +27,11 @@ import personal.ecommercebackend.security.UserPrincipal;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
+import java.util.HexFormat;
 import java.util.UUID;
 
 @Service
@@ -42,7 +46,7 @@ public class AuthServiceImpl implements AuthService {
     private final AuthenticationManager authenticationManager;
     private final EmailService emailService;
 
-    @Value("${app.frontend.url:http://localhost:5173}")
+    @Value("${app.frontend.url:http://localhost:5176}")
     private String frontendUrl;
 
     @Transactional
@@ -65,6 +69,7 @@ public class AuthServiceImpl implements AuthService {
         user = userRepository.save(user);
         UserPrincipal principal = new UserPrincipal(user);
         String token = jwtService.generateToken(principal);
+        log.info("User registered userId={} email={}", user.getId(), user.getEmail());
         return new AuthResponse(token, EntityMapper.toUserResponse(user));
     }
 
@@ -79,6 +84,7 @@ public class AuthServiceImpl implements AuthService {
 
         UserPrincipal principal = new UserPrincipal(user);
         String token = jwtService.generateToken(principal);
+        log.info("User logged in userId={} email={}", user.getId(), user.getEmail());
         return new AuthResponse(token, EntityMapper.toUserResponse(user));
     }
 
@@ -95,6 +101,7 @@ public class AuthServiceImpl implements AuthService {
                 .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, "User not found"));
         user.setFirstName(request.firstName().trim());
         user.setLastName(request.lastName().trim());
+        log.info("User profile updated userId={}", user.getId());
         return EntityMapper.toUserResponse(userRepository.save(user));
     }
 
@@ -107,6 +114,7 @@ public class AuthServiceImpl implements AuthService {
         }
         user.setPassword(passwordEncoder.encode(request.newPassword()));
         userRepository.save(user);
+        log.info("Password changed userId={}", user.getId());
     }
 
     @Transactional
@@ -115,20 +123,20 @@ public class AuthServiceImpl implements AuthService {
             String token = UUID.randomUUID().toString();
             passwordResetTokenRepository.save(PasswordResetToken.builder()
                     .user(user)
-                    .token(token)
+                    .token(hashToken(token))
                     .expiresAt(Instant.now().plusSeconds(3600))
                     .used(false)
                     .build());
             String baseUrl = frontendUrl.split(",")[0].trim();
             String resetLink = baseUrl + "/reset-password?token=" + token;
             emailService.sendPasswordReset(user, resetLink);
-            log.info("Password reset link: {}", resetLink);
+            log.info("Password reset requested userId={} email={}", user.getId(), user.getEmail());
         });
     }
 
     @Transactional
     public void resetPassword(ResetPasswordRequest request) {
-        PasswordResetToken token = passwordResetTokenRepository.findByToken(request.token())
+        PasswordResetToken token = passwordResetTokenRepository.findByToken(hashToken(request.token()))
                 .orElseThrow(() -> new ApiException(HttpStatus.BAD_REQUEST, "Invalid or expired token"));
         if (token.isUsed() || token.getExpiresAt().isBefore(Instant.now())) {
             throw new ApiException(HttpStatus.BAD_REQUEST, "Invalid or expired token");
@@ -138,5 +146,16 @@ public class AuthServiceImpl implements AuthService {
         userRepository.save(user);
         token.setUsed(true);
         passwordResetTokenRepository.save(token);
+        log.info("Password reset completed userId={}", user.getId());
+    }
+
+    private String hashToken(String token) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hashed = digest.digest(token.getBytes(StandardCharsets.UTF_8));
+            return HexFormat.of().formatHex(hashed);
+        } catch (NoSuchAlgorithmException e) {
+            throw new IllegalStateException("SHA-256 is not available", e);
+        }
     }
 }

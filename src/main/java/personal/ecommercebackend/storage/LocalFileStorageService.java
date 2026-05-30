@@ -2,6 +2,7 @@ package personal.ecommercebackend.storage;
 
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ import java.util.UUID;
 @Service
 @ConditionalOnProperty(name = "app.storage.type", havingValue = "local", matchIfMissing = true)
 @RequiredArgsConstructor
+@Slf4j
 public class LocalFileStorageService implements FileStorageService {
 
     private static final Set<String> ALLOWED_CONTENT_TYPES = Set.of(
@@ -61,7 +63,9 @@ public class LocalFileStorageService implements FileStorageService {
             throw new ApiException(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to store file");
         }
 
-        return "/uploads/" + filename;
+        String url = "/uploads/" + filename;
+        log.info("Stored upload filename={} size={} contentType={}", filename, file.getSize(), contentType);
+        return url;
     }
 
     @Override

@@ -27,8 +27,8 @@ export default function PaymentCard({
         borderColor: 'primary.main',
         background: (t) =>
           t.palette.mode === 'dark'
-            ? 'linear-gradient(145deg, rgba(61,77,230,0.18) 0%, rgba(24,28,38,1) 45%)'
-            : 'linear-gradient(145deg, rgba(91,108,255,0.12) 0%, #ffffff 50%)',
+            ? `linear-gradient(145deg, ${t.palette.primary.main}2f 0%, ${t.palette.background.paper} 45%)`
+            : `linear-gradient(145deg, ${t.palette.secondary.light}2b 0%, ${t.palette.background.paper} 50%)`,
       }}
     >
       <Box
@@ -37,8 +37,8 @@ export default function PaymentCard({
           py: 2,
           background: (t) =>
             t.palette.mode === 'dark'
-              ? 'linear-gradient(90deg, rgba(61,77,230,0.35), rgba(154,123,21,0.25))'
-              : 'linear-gradient(90deg, rgba(61,77,230,0.15), rgba(201,162,39,0.12))',
+              ? `linear-gradient(90deg, ${t.palette.primary.main}4d, ${t.palette.secondary.main}33)`
+              : `linear-gradient(90deg, ${t.palette.primary.light}33, ${t.palette.secondary.light}3d)`,
           borderBottom: 1,
           borderColor: 'divider',
         }}

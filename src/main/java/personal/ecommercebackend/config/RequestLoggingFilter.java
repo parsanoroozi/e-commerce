@@ -5,6 +5,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.MDC;
 import org.springframework.lang.NonNull;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.UUID;
 
 @Slf4j
 @Component
@@ -28,6 +30,9 @@ public class RequestLoggingFilter extends OncePerRequestFilter {
         String uri = request.getRequestURI();
         String query = request.getQueryString();
         String fullPath = query == null ? uri : uri + "?" + query;
+        String requestId = resolveRequestId(request);
+        MDC.put("requestId", requestId);
+        response.setHeader("X-Request-Id", requestId);
 
         try {
             filterChain.doFilter(request, response);
@@ -40,7 +45,16 @@ public class RequestLoggingFilter extends OncePerRequestFilter {
                 log.info("HTTP {} {} -> {} ({} ms) user={}",
                         method, fullPath, status, durationMs, user);
             }
+            MDC.remove("requestId");
         }
+    }
+
+    private static String resolveRequestId(HttpServletRequest request) {
+        String supplied = request.getHeader("X-Request-Id");
+        if (supplied == null || supplied.isBlank()) {
+            return UUID.randomUUID().toString();
+        }
+        return supplied.length() > 80 ? supplied.substring(0, 80) : supplied;
     }
 
     private static boolean shouldLog(String uri, int status) {

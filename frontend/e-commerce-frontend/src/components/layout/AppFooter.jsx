@@ -11,6 +11,10 @@ export default function AppFooter() {
         borderTop: 1,
         borderColor: 'divider',
         bgcolor: 'background.paper',
+        backgroundImage: (t) =>
+          t.palette.mode === 'dark'
+            ? `linear-gradient(90deg, ${t.palette.primary.main}18, ${t.palette.secondary.main}14)`
+            : `linear-gradient(90deg, ${t.palette.primary.light}1f, ${t.palette.secondary.light}26)`,
       }}
     >
       <Container maxWidth="lg">

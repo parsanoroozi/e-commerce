@@ -9,6 +9,8 @@ import java.time.Instant;
 @Entity
 @Table(name = "wishlist_items", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"user_id", "product_id"})
+}, indexes = {
+        @Index(name = "idx_wishlist_user_created", columnList = "user_id, created_at")
 })
 @Getter
 @Setter

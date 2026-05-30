@@ -12,8 +12,9 @@ import {
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
+import { subscribeToApiChanges } from '../api/client';
 import { cartApi } from '../api/cart';
 import PageContainer from '../components/layout/PageContainer';
 import { resolveImageUrl } from '../utils/imageUrl';
@@ -23,18 +24,26 @@ export default function CartPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  const loadCart = () => {
+  const loadCart = useCallback(() => {
     setLoading(true);
     cartApi
       .get()
       .then(setCart)
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
-  };
+  }, []);
 
   useEffect(() => {
     loadCart();
-  }, []);
+  }, [loadCart]);
+
+  useEffect(() => {
+    return subscribeToApiChanges((change) => {
+      if (change?.resources?.includes('cart')) {
+        loadCart();
+      }
+    });
+  }, [loadCart]);
 
   const updateQty = async (productId, quantity) => {
     if (quantity < 1) return;

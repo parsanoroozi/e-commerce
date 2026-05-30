@@ -17,8 +17,9 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Link as RouterLink, useLocation, useParams } from 'react-router-dom';
+import { subscribeToApiChanges } from '../api/client';
 import { ordersApi } from '../api/orders';
 import OrderTimeline, { OrderTimelineMobile } from '../components/OrderTimeline';
 import PageContainer from '../components/layout/PageContainer';
@@ -33,13 +34,26 @@ export default function OrderDetailPage() {
   const [error, setError] = useState('');
   const [cancelling, setCancelling] = useState(false);
 
-  useEffect(() => {
+  const loadOrder = useCallback(() => {
+    setLoading(true);
     ordersApi
       .get(id)
       .then(setOrder)
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
   }, [id]);
+
+  useEffect(() => {
+    loadOrder();
+  }, [loadOrder]);
+
+  useEffect(() => {
+    return subscribeToApiChanges((change) => {
+      if (change?.resources?.includes('orders')) {
+        loadOrder();
+      }
+    });
+  }, [loadOrder]);
 
   const canCancel = order && (order.status === 'CONFIRMED' || order.status === 'PENDING');
 

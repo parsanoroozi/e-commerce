@@ -1,6 +1,7 @@
 import { Button, Card, Grid, Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
+import { subscribeToApiChanges } from '../api/client';
 import { wishlistApi } from '../api/wishlist';
 import PageContainer from '../components/layout/PageContainer';
 import ProductCard from '../components/ProductCard';
@@ -11,16 +12,24 @@ export default function WishlistPage() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const load = () =>
+  const load = useCallback(() =>
     wishlistApi
       .list()
       .then(setItems)
       .catch((err) => showError(err.message))
-      .finally(() => setLoading(false));
+      .finally(() => setLoading(false)), []);
 
   useEffect(() => {
     load();
-  }, []);
+  }, [load]);
+
+  useEffect(() => {
+    return subscribeToApiChanges((change) => {
+      if (change?.resources?.includes('wishlist')) {
+        load();
+      }
+    });
+  }, [load]);
 
   const remove = async (id) => {
     await wishlistApi.remove(id);

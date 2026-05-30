@@ -5,6 +5,7 @@ import personal.ecommercebackend.service.*;
 
 import com.stripe.model.PaymentIntent;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,7 @@ import personal.ecommercebackend.exception.ApiException;
 import personal.ecommercebackend.mapper.EntityMapper;
 import personal.ecommercebackend.repository.CartRepository;
 import personal.ecommercebackend.repository.OrderRepository;
+import personal.ecommercebackend.repository.ProductRepository;
 import personal.ecommercebackend.repository.UserRepository;
 import personal.ecommercebackend.security.SecurityUtils;
 
@@ -31,11 +33,13 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
     private final CartRepository cartRepository;
     private final UserRepository userRepository;
+    private final ProductRepository productRepository;
     private final ProductService productService;
     private final StripePaymentService stripePaymentService;
     private final PaymentModeService paymentModeService;
@@ -116,6 +120,9 @@ public class OrderServiceImpl implements OrderService {
         }
 
         Order saved = orderRepository.save(order);
+        log.info("Checkout initiated orderId={} userId={} subtotal={} total={} devMode={}",
+                saved.getId(), userId, saved.getSubtotalAmount(), saved.getTotalAmount(),
+                paymentModeService.isDevModeActive());
 
         if (paymentModeService.isDevModeActive()) {
             saved.setStripePaymentIntentId(paymentModeService.devPaymentIntentId(saved.getId()));
@@ -142,10 +149,11 @@ public class OrderServiceImpl implements OrderService {
 
     @Transactional
     public OrderResponse confirmPayment(Long orderId) {
-        Order order = orderRepository.findWithDetailsByIdAndUserId(orderId, SecurityUtils.currentUserId())
+        Order order = orderRepository.findWithDetailsByIdAndUserIdForUpdate(orderId, SecurityUtils.currentUserId())
                 .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, "Order not found"));
 
         if (order.getStatus() == OrderStatus.CONFIRMED) {
+            log.info("Payment confirmation ignored for already confirmed orderId={}", order.getId());
             return EntityMapper.toOrderResponse(order, false);
         }
 
@@ -170,7 +178,7 @@ public class OrderServiceImpl implements OrderService {
         if (paymentModeService.isDevPaymentIntent(paymentIntentId)) {
             return;
         }
-        Order order = orderRepository.findWithDetailsByStripePaymentIntentId(paymentIntentId)
+        Order order = orderRepository.findWithDetailsByStripePaymentIntentIdForUpdate(paymentIntentId)
                 .orElse(null);
         if (order == null || order.getStatus() == OrderStatus.CONFIRMED) {
             return;
@@ -187,7 +195,8 @@ public class OrderServiceImpl implements OrderService {
         }
 
         for (OrderItem item : order.getItems()) {
-            Product product = productService.getProduct(item.getProduct().getId());
+            Product product = productRepository.findByIdForUpdate(item.getProduct().getId())
+                    .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, "Product not found"));
             if (product.getStockQuantity() < item.getQuantity()) {
                 throw new ApiException(HttpStatus.CONFLICT,
                         "Insufficient stock for '" + product.getName() + "'");
@@ -199,6 +208,8 @@ public class OrderServiceImpl implements OrderService {
 
         order.setStatus(OrderStatus.CONFIRMED);
         Order saved = orderRepository.save(order);
+        log.info("Order fulfilled orderId={} userId={} total={} itemCount={}",
+                saved.getId(), saved.getUser().getId(), saved.getTotalAmount(), saved.getItems().size());
 
         if (!saved.isConfirmationEmailSent()) {
             try {
@@ -224,6 +235,7 @@ public class OrderServiceImpl implements OrderService {
         }
         order.setStatus(OrderStatus.CANCELLED);
         Order saved = orderRepository.save(order);
+        log.info("Order cancelled orderId={} userId={}", saved.getId(), saved.getUser().getId());
         notificationService.notifyUser(saved.getUser(), "Order cancelled",
                 "Your order #" + saved.getId() + " was cancelled.", saved.getId());
         return EntityMapper.toOrderResponse(saved, false);
@@ -275,6 +287,8 @@ public class OrderServiceImpl implements OrderService {
         OrderStatus previous = order.getStatus();
         order.setStatus(request.status());
         Order saved = orderRepository.save(order);
+        log.info("Admin updated order status orderId={} from={} to={}",
+                saved.getId(), previous, request.status());
 
         if (request.status() == OrderStatus.SHIPPED && previous != OrderStatus.SHIPPED) {
             emailService.sendOrderShipped(saved, saved.getUser());

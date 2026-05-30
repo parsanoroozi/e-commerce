@@ -12,5 +12,5 @@ export const cartApi = {
   removeItem: (productId) =>
     apiRequest(`/api/cart/items/${productId}`, { method: 'DELETE' }),
   clear: () => apiRequest('/api/cart', { method: 'DELETE' }),
-  summary: () => apiRequest('/api/cart/summary'),
+  summary: () => apiRequest('/api/cart/summary', { cache: false }),
 };

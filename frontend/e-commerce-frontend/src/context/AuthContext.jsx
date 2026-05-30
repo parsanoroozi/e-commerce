@@ -1,5 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { authApi } from '../api/auth';
+import { clearApiCache, emitApiChange } from '../api/client';
 
 const AuthContext = createContext(null);
 
@@ -32,6 +33,8 @@ export function AuthProvider({ children }) {
   const login = async (credentials) => {
     const { token, user: loggedIn } = await authApi.login(credentials);
     localStorage.setItem('token', token);
+    clearApiCache();
+    emitApiChange({ method: 'POST', path: '/api/auth/login', resources: ['auth', 'cart', 'wishlist', 'notifications', 'orders'] });
     setUser(loggedIn);
     return loggedIn;
   };
@@ -39,12 +42,16 @@ export function AuthProvider({ children }) {
   const register = async (data) => {
     const { token, user: registered } = await authApi.register(data);
     localStorage.setItem('token', token);
+    clearApiCache();
+    emitApiChange({ method: 'POST', path: '/api/auth/register', resources: ['auth', 'cart', 'wishlist', 'notifications', 'orders'] });
     setUser(registered);
     return registered;
   };
 
   const logout = () => {
     localStorage.removeItem('token');
+    clearApiCache();
+    emitApiChange({ method: 'POST', path: '/api/auth/logout', resources: ['auth', 'cart', 'wishlist', 'notifications', 'orders'] });
     setUser(null);
   };
 

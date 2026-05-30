@@ -44,7 +44,7 @@ export function AppThemeProvider({ children }) {
   return (
     <ColorModeContext.Provider value={value}>
       <ThemeProvider theme={theme}>
-        <CssBaseline />
+        <CssBaseline enableColorScheme />
         {children}
       </ThemeProvider>
     </ColorModeContext.Provider>

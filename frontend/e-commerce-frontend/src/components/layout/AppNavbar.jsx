@@ -25,8 +25,9 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
+import { subscribeToApiChanges } from '../../api/client';
 import { cartApi } from '../../api/cart';
 import { notificationsApi } from '../../api/notifications';
 import { wishlistApi } from '../../api/wishlist';
@@ -53,17 +54,71 @@ export default function AppNavbar() {
   const [notifAnchor, setNotifAnchor] = useState(null);
   const [notifications, setNotifications] = useState([]);
 
-  const refreshCounts = () => {
-    if (!isAuthenticated) return;
-    cartApi.summary().then((d) => setCartCount(d.itemCount)).catch(() => {});
-    wishlistApi.count().then((d) => setWishCount(d.count)).catch(() => {});
-    notificationsApi.unreadCount().then((d) => setUnread(d.count)).catch(() => {});
-  };
+  const refreshCounts = useCallback(async () => {
+    if (!isAuthenticated) {
+      setCartCount(0);
+      setWishCount(0);
+      setUnread(0);
+      setNotifications([]);
+      return;
+    }
+    await Promise.all([
+      cartApi.summary().then((d) => setCartCount(d.itemCount)).catch(() => {}),
+      wishlistApi.count().then((d) => setWishCount(d.count)).catch(() => {}),
+      notificationsApi.unreadCount().then((d) => setUnread(d.count)).catch(() => {}),
+    ]);
+  }, [isAuthenticated]);
 
   useEffect(() => {
     refreshCounts();
     setDrawerOpen(false);
-  }, [isAuthenticated, location.pathname]);
+  }, [isAuthenticated, location.pathname, refreshCounts]);
+
+  useEffect(() => {
+    const unsubscribe = subscribeToApiChanges((change) => {
+      const resources = change?.resources || [];
+      if (change?.mutation === 'wishlist:add') {
+        setWishCount((count) => count + 1);
+      }
+      if (change?.mutation === 'wishlist:remove') {
+        setWishCount((count) => Math.max(0, count - 1));
+      }
+      if (change?.mutation === 'cart:add') {
+        setCartCount((count) => count + 1);
+      }
+      if (change?.mutation === 'cart:remove' || change?.mutation === 'cart:clear') {
+        setCartCount((count) => Math.max(0, count - 1));
+      }
+      if (change?.mutation === 'notifications:read') {
+        setUnread((count) => Math.max(0, count - 1));
+      }
+      if (
+        resources.includes('cart')
+        || resources.includes('wishlist')
+        || resources.includes('notifications')
+        || resources.includes('orders')
+        || resources.includes('auth')
+      ) {
+        refreshCounts();
+      }
+    });
+    return unsubscribe;
+  }, [refreshCounts]);
+
+  useEffect(() => {
+    if (!isAuthenticated) return undefined;
+    const refreshOnFocus = () => {
+      if (!document.hidden) refreshCounts();
+    };
+    const interval = window.setInterval(refreshCounts, 30000);
+    window.addEventListener('focus', refreshCounts);
+    document.addEventListener('visibilitychange', refreshOnFocus);
+    return () => {
+      window.clearInterval(interval);
+      window.removeEventListener('focus', refreshCounts);
+      document.removeEventListener('visibilitychange', refreshOnFocus);
+    };
+  }, [isAuthenticated, refreshCounts]);
 
   const visibleItems = navItems.filter((item) => {
     if (item.admin && !isAdmin) return false;
@@ -79,7 +134,7 @@ export default function AppNavbar() {
 
   const markAllRead = async () => {
     await notificationsApi.markAllRead();
-    setUnread(0);
+    await refreshCounts();
     setNotifications(await notificationsApi.list());
   };
 

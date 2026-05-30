@@ -36,11 +36,11 @@ public class EmailServiceImpl implements EmailService {
     private String fromName;
 
     public void sendOrderConfirmation(Order order, User user) {
-        String subject = "Order confirmed — ShopVerse #" + order.getId();
+        String subject = "Order confirmed - ShopVerse #" + order.getId();
         String body = buildOrderConfirmationHtml(order, user);
 
         if (!mailEnabled) {
-            log.info("Mail disabled — order confirmation for {} (order #{}):\n{}", user.getEmail(), order.getId(), body);
+            log.info("Mail disabled - order confirmation for {} (order #{}):\n{}", user.getEmail(), order.getId(), body);
             return;
         }
 
@@ -72,14 +72,14 @@ public class EmailServiceImpl implements EmailService {
                 <p>Your payment was received. Order <strong>#%d</strong> is confirmed.</p>
                 <p><strong>Placed:</strong> %s</p>
                 <h3>Shipping to</h3>
-                <p>%s<br>%s, %s %s<br>%s</p>
+                <p>%s<br>%s, %s<br>%s</p>
                 <h3>Items</h3>
                 <table border="1" cellpadding="8" cellspacing="0" style="border-collapse:collapse;">
                 <tr><th>Product</th><th>Qty</th><th>Total</th></tr>
                 %s
                 </table>
                 <p style="margin-top:16px;"><strong>Order total: $%s</strong></p>
-                <p style="color:#64748b;font-size:14px;">ShopVerse — happy shopping!</p>
+                <p style="color:#64748b;font-size:14px;">ShopVerse - happy shopping!</p>
                 </body></html>
                 """.formatted(
                 escape(user.getFirstName()),
@@ -94,7 +94,7 @@ public class EmailServiceImpl implements EmailService {
     }
 
     public void sendOrderShipped(Order order, User user) {
-        String subject = "Your order has shipped — ShopVerse #" + order.getId();
+        String subject = "Your order has shipped - ShopVerse #" + order.getId();
         String body = "<p>Hi " + escape(user.getFirstName()) + ",</p>"
                 + "<p>Great news! Order <strong>#" + order.getId() + "</strong> has been shipped.</p>"
                 + "<p>Shipping to: " + escape(order.getShippingStreet()) + ", "
@@ -119,7 +119,7 @@ public class EmailServiceImpl implements EmailService {
 
     private void sendHtml(String to, String subject, String htmlBody, String logContext) {
         if (!mailEnabled) {
-            log.info("Mail disabled — {}:\n{}", logContext, htmlBody);
+            log.info("Mail disabled - {}:\n{}", logContext, htmlBody);
             return;
         }
         try {

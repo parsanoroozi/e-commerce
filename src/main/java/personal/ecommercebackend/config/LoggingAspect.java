@@ -31,16 +31,16 @@ public class LoggingAspect {
         String methodName = signature.getName();
         String args = formatArgs(joinPoint.getArgs());
 
-        log.debug("{} {}.{}({}) — start", layer, className, methodName, args);
+        log.debug("{} {}.{}({}) - start", layer, className, methodName, args);
         long start = System.currentTimeMillis();
         try {
             Object result = joinPoint.proceed();
             long durationMs = System.currentTimeMillis() - start;
-            log.debug("{} {}.{} — success ({} ms)", layer, className, methodName, durationMs);
+            log.debug("{} {}.{} - success ({} ms)", layer, className, methodName, durationMs);
             return result;
         } catch (Throwable ex) {
             long durationMs = System.currentTimeMillis() - start;
-            log.warn("{} {}.{} — failed ({} ms): {}", layer, className, methodName, durationMs, ex.getMessage());
+            log.warn("{} {}.{} - failed ({} ms): {}", layer, className, methodName, durationMs, ex.getMessage());
             throw ex;
         }
     }

@@ -79,8 +79,8 @@ export default function HomePage() {
           p: { xs: 2, md: 4 },
           background: (t) =>
             t.palette.mode === 'dark'
-              ? 'linear-gradient(135deg, rgba(91,108,255,0.15), rgba(201,162,39,0.08))'
-              : 'linear-gradient(135deg, rgba(91,108,255,0.1), rgba(201,162,39,0.06))',
+              ? `linear-gradient(135deg, ${t.palette.secondary.dark}55, ${t.palette.primary.main}24)`
+              : `linear-gradient(135deg, ${t.palette.secondary.light}55, ${t.palette.primary.light}2f)`,
         }}
       >
         <Typography variant="overline" color="secondary.main" fontWeight={600}>

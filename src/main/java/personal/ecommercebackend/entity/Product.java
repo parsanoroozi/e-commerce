@@ -11,7 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "products")
+@Table(name = "products", indexes = {
+        @Index(name = "idx_products_active_category", columnList = "active, category_id"),
+        @Index(name = "idx_products_active_stock", columnList = "active, stock_quantity")
+})
 @Getter
 @Setter
 @NoArgsConstructor
@@ -22,6 +25,9 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Version
+    private Long version;
 
     @Column(nullable = false)
     private String name;

@@ -10,7 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "orders")
+@Table(name = "orders", indexes = {
+        @Index(name = "idx_orders_user_created", columnList = "user_id, created_at"),
+        @Index(name = "idx_orders_status_created", columnList = "status, created_at"),
+        @Index(name = "idx_orders_payment_intent", columnList = "stripe_payment_intent_id")
+})
 @Getter
 @Setter
 @NoArgsConstructor
@@ -21,6 +25,9 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Version
+    private Long version;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
