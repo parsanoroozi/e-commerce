@@ -42,10 +42,7 @@ export default function WishlistPage() {
         <Grid container spacing={2}>
           {items.map((p) => (
             <Grid key={p.id} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-              <ProductCard product={p} />
-              <Button size="small" color="inherit" onClick={() => remove(p.id)} sx={{ mt: 1 }}>
-                Remove
-              </Button>
+              <ProductCard product={p} onRemove={remove} />
             </Grid>
           ))}
         </Grid>
