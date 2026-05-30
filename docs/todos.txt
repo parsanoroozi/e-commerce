@@ -1,1 +1,5 @@
 // todo 1) stripe dev key
+// todo 2) better front caching for speed
+// todo 3) pagination for tables
+// todo 4) make payment summary and order summary card, tabular not simple text
+// todo 5) still having issue with email

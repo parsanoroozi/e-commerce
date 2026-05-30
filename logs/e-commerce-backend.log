@@ -25701,3 +25701,1002 @@ java.lang.NullPointerException: Cannot invoke "java.lang.Long.longValue()" becau
 2026-05-30 21:02:06.884 INFO  [http-nio-0.0.0.0-8080-exec-6] [9982c419-9a8f-4f3b-84c0-e4568037d64f] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (13 ms) user=admin@shop.com
 2026-05-30 21:02:06.908 INFO  [http-nio-0.0.0.0-8080-exec-5] [786c5b6e-f241-47cd-819d-485c7c22022f] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist -> 200 (37 ms) user=admin@shop.com
 2026-05-30 21:02:06.961 INFO  [http-nio-0.0.0.0-8080-exec-1] [7f73c048-1a04-4410-bb09-b611793f0126] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist -> 200 (35 ms) user=admin@shop.com
+2026-05-30 21:34:47.445 INFO  [http-nio-0.0.0.0-8080-exec-4] [a9f5ecd8-4196-4978-aed2-0fba956912d8] p.e.config.RequestLoggingFilter - HTTP GET /api/auth/me -> 200 (11 ms) user=admin@shop.com
+2026-05-30 21:34:47.473 INFO  [http-nio-0.0.0.0-8080-exec-7] [d030af3a-2ff5-4f3a-99f5-92a9f0df958f] p.e.config.RequestLoggingFilter - HTTP GET /api/auth/me -> 200 (8 ms) user=admin@shop.com
+2026-05-30 21:34:47.856 INFO  [http-nio-0.0.0.0-8080-exec-9] [0c5c468b-8895-43ce-bb04-7b6f9ab5b987] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (17 ms) user=admin@shop.com
+2026-05-30 21:34:47.860 INFO  [http-nio-0.0.0.0-8080-exec-10] [e0457bc1-8d88-43ed-a8a1-42c022f0fad8] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (10 ms) user=admin@shop.com
+2026-05-30 21:34:47.860 INFO  [http-nio-0.0.0.0-8080-exec-8] [4e94d8df-2de2-4196-add9-2550021cfa7b] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (10 ms) user=admin@shop.com
+2026-05-30 21:34:47.888 INFO  [http-nio-0.0.0.0-8080-exec-2] [015026b2-f927-4a47-b557-c529f9e3b1c8] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist -> 200 (36 ms) user=admin@shop.com
+2026-05-30 21:34:48.241 INFO  [http-nio-0.0.0.0-8080-exec-3] [cf2f991e-6ec3-469e-8095-99624e804210] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist -> 200 (27 ms) user=admin@shop.com
+2026-05-30 21:34:51.505 INFO  [http-nio-0.0.0.0-8080-exec-9] [de705a85-fd52-4454-8a1d-365ed557b23f] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (17 ms) user=admin@shop.com
+2026-05-30 21:34:51.813 INFO  [http-nio-0.0.0.0-8080-exec-8] [5467de05-7453-4256-95db-0b3eb448c122] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (9 ms) user=admin@shop.com
+2026-05-30 21:34:51.813 INFO  [http-nio-0.0.0.0-8080-exec-10] [3ef0b025-a606-46ad-9b43-d4d5268b0dff] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (9 ms) user=admin@shop.com
+2026-05-30 21:34:51.816 INFO  [http-nio-0.0.0.0-8080-exec-2] [d7d55580-a2c6-458a-a116-6f73ac0b2c9e] p.e.config.RequestLoggingFilter - HTTP GET /api/categories -> 200 (12 ms) user=admin@shop.com
+2026-05-30 21:34:51.927 INFO  [http-nio-0.0.0.0-8080-exec-3] [1046de25-0e44-4ee0-ac48-6b24ac97c441] p.e.config.RequestLoggingFilter - HTTP GET /api/products?page=0&size=12&sort=name%2Casc -> 200 (124 ms) user=admin@shop.com
+2026-05-30 21:34:52.138 INFO  [http-nio-0.0.0.0-8080-exec-6] [3a4e1848-918f-43b3-a5e2-7579c0e07bc6] p.e.config.RequestLoggingFilter - HTTP GET /api/categories -> 200 (7 ms) user=admin@shop.com
+2026-05-30 21:34:52.334 INFO  [http-nio-0.0.0.0-8080-exec-1] [a20b9ad7-19cf-42f6-acd0-ac711638b20b] p.e.config.RequestLoggingFilter - HTTP GET /api/products?page=0&size=12&sort=name%2Casc -> 200 (76 ms) user=admin@shop.com
+2026-05-30 21:34:54.575 INFO  [http-nio-0.0.0.0-8080-exec-2] [eac8c716-9c1b-481e-b4b4-4740ad85f1b6] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (9 ms) user=admin@shop.com
+2026-05-30 21:34:54.608 INFO  [http-nio-0.0.0.0-8080-exec-3] [54226db5-6d15-4498-9a94-f4e7b9a4726b] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 21:34:54.608 INFO  [http-nio-0.0.0.0-8080-exec-6] [6f503957-9075-4610-b1d1-fe0c3797e46d] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 21:34:54.623 INFO  [http-nio-0.0.0.0-8080-exec-1] [54eec9e0-73ec-4aba-ac14-0d01fb7901fa] p.e.config.RequestLoggingFilter - HTTP GET /api/products/8 -> 200 (21 ms) user=admin@shop.com
+2026-05-30 21:34:54.626 INFO  [http-nio-0.0.0.0-8080-exec-5] [aaac9563-1ef6-4762-82a1-acdfa8141fa5] p.e.config.RequestLoggingFilter - HTTP GET /api/products/8/reviews?page=0&size=10 -> 200 (21 ms) user=admin@shop.com
+2026-05-30 21:34:54.641 INFO  [http-nio-0.0.0.0-8080-exec-9] [e7dfc7f5-a37e-4028-98ab-3b12010bb32f] p.e.config.RequestLoggingFilter - HTTP GET /api/products/8/related?size=4 -> 200 (41 ms) user=admin@shop.com
+2026-05-30 21:34:54.906 INFO  [http-nio-0.0.0.0-8080-exec-4] [1ff49fab-007e-4ca3-a7cc-44b060bfaf7e] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist -> 200 (18 ms) user=admin@shop.com
+2026-05-30 21:34:54.968 INFO  [http-nio-0.0.0.0-8080-exec-10] [4f0deb81-f1bf-458b-9790-c2387ed04021] p.e.config.RequestLoggingFilter - HTTP GET /api/products/8/reviews?page=0&size=10 -> 200 (15 ms) user=admin@shop.com
+2026-05-30 21:34:54.970 INFO  [http-nio-0.0.0.0-8080-exec-7] [257134a2-6027-4351-8963-1ff66a04ace1] p.e.config.RequestLoggingFilter - HTTP GET /api/products/8 -> 200 (17 ms) user=admin@shop.com
+2026-05-30 21:34:55.003 INFO  [http-nio-0.0.0.0-8080-exec-8] [a129bf0b-ad27-4cfa-836b-6dd265d2b117] p.e.config.RequestLoggingFilter - HTTP GET /api/products/8/related?size=4 -> 200 (36 ms) user=admin@shop.com
+2026-05-30 21:34:55.106 INFO  [http-nio-0.0.0.0-8080-exec-2] [a50cca62-d85c-4ed5-9144-81ef8784c4f8] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist -> 200 (17 ms) user=admin@shop.com
+2026-05-30 21:34:56.588 INFO  [http-nio-0.0.0.0-8080-exec-3] [cc84a141-e456-45db-9461-31c69d77cbd8] p.e.config.RequestLoggingFilter - HTTP DELETE /api/wishlist/8 -> 204 (19 ms) user=admin@shop.com
+2026-05-30 21:35:01.392 INFO  [http-nio-0.0.0.0-8080-exec-6] [107b2778-10a5-4891-8ea6-adc1066cd5f2] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (7 ms) user=admin@shop.com
+2026-05-30 21:35:01.454 INFO  [http-nio-0.0.0.0-8080-exec-9] [aabcd3bb-4c2c-431b-9ea6-b1aa8e22c708] p.e.config.RequestLoggingFilter - HTTP GET /api/categories -> 200 (6 ms) user=admin@shop.com
+2026-05-30 21:35:01.454 INFO  [http-nio-0.0.0.0-8080-exec-1] [7a6fe104-ee93-456f-bd30-80b40ec82835] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 21:35:01.454 INFO  [http-nio-0.0.0.0-8080-exec-5] [9d6e1e13-8e51-4c66-beec-4b25a35cb952] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 21:35:01.479 INFO  [http-nio-0.0.0.0-8080-exec-10] [09ffccbf-9207-49de-9711-b90c2a406d0d] p.e.config.RequestLoggingFilter - HTTP GET /api/categories -> 200 (8 ms) user=admin@shop.com
+2026-05-30 21:35:01.548 INFO  [http-nio-0.0.0.0-8080-exec-4] [f9ed38db-bede-4dea-b709-6ccd0b2aaa80] p.e.config.RequestLoggingFilter - HTTP GET /api/products?page=0&size=12&sort=name%2Casc -> 200 (104 ms) user=admin@shop.com
+2026-05-30 21:35:01.945 INFO  [http-nio-0.0.0.0-8080-exec-7] [99f903c7-ec16-46d7-93bc-8f1954a95047] p.e.config.RequestLoggingFilter - HTTP GET /api/products?page=0&size=12&sort=name%2Casc -> 200 (71 ms) user=admin@shop.com
+2026-05-30 21:35:04.284 INFO  [http-nio-0.0.0.0-8080-exec-8] [73358b48-2b0c-41e5-a462-350c47653bae] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (8 ms) user=admin@shop.com
+2026-05-30 21:35:04.304 INFO  [http-nio-0.0.0.0-8080-exec-2] [3e1a17e3-677b-47bf-8731-69ea1c15f2fd] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 21:35:04.312 INFO  [http-nio-0.0.0.0-8080-exec-3] [c8e305d2-74a5-40e5-869a-8cc9a884cae9] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (7 ms) user=admin@shop.com
+2026-05-30 21:35:04.316 INFO  [http-nio-0.0.0.0-8080-exec-5] [883cd32d-af36-4149-b0c8-2d6910c7fcbf] p.e.config.RequestLoggingFilter - HTTP GET /api/products/3/reviews?page=0&size=10 -> 200 (11 ms) user=admin@shop.com
+2026-05-30 21:35:04.322 INFO  [http-nio-0.0.0.0-8080-exec-6] [60ae9bd2-7b9f-47bf-80be-7c319f3ba5a3] p.e.config.RequestLoggingFilter - HTTP GET /api/products/3 -> 200 (17 ms) user=admin@shop.com
+2026-05-30 21:35:04.332 INFO  [http-nio-0.0.0.0-8080-exec-9] [263f055a-ce74-41f6-8f35-ef7f406f8e86] p.e.config.RequestLoggingFilter - HTTP GET /api/products/3/related?size=4 -> 200 (29 ms) user=admin@shop.com
+2026-05-30 21:35:04.629 INFO  [http-nio-0.0.0.0-8080-exec-1] [3c4fce37-3bf3-4883-8697-68919ff4ffb9] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist -> 200 (19 ms) user=admin@shop.com
+2026-05-30 21:35:04.656 INFO  [http-nio-0.0.0.0-8080-exec-10] [6666bc5d-f6e9-48f6-ba47-61f3bb4d4d42] p.e.config.RequestLoggingFilter - HTTP GET /api/products/3/reviews?page=0&size=10 -> 200 (11 ms) user=admin@shop.com
+2026-05-30 21:35:04.662 INFO  [http-nio-0.0.0.0-8080-exec-4] [710f5b61-860a-4f54-882c-2146a81430a5] p.e.config.RequestLoggingFilter - HTTP GET /api/products/3 -> 200 (15 ms) user=admin@shop.com
+2026-05-30 21:35:04.680 INFO  [http-nio-0.0.0.0-8080-exec-7] [6052c4e4-04b5-47aa-8bd0-b88d7dafcdb1] p.e.config.RequestLoggingFilter - HTTP GET /api/products/3/related?size=4 -> 200 (33 ms) user=admin@shop.com
+2026-05-30 21:35:04.797 INFO  [http-nio-0.0.0.0-8080-exec-8] [a528191e-1fe7-4ed9-aed0-68b85350ab52] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist -> 200 (17 ms) user=admin@shop.com
+2026-05-30 21:35:05.588 INFO  [http-nio-0.0.0.0-8080-exec-2] [cc622b6b-f856-4fd0-800b-235cb902896f] p.e.config.RequestLoggingFilter - HTTP POST /api/cart/items -> 200 (127 ms) user=admin@shop.com
+2026-05-30 21:35:10.233 INFO  [http-nio-0.0.0.0-8080-exec-3] [ab0af0cd-3596-49e8-af97-44b0052fa0ed] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (9 ms) user=admin@shop.com
+2026-05-30 21:35:10.257 INFO  [http-nio-0.0.0.0-8080-exec-6] [3257fbeb-d4ae-4200-a92d-d869d34f6c0a] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 21:35:10.257 INFO  [http-nio-0.0.0.0-8080-exec-5] [5893add3-e3af-468e-b9dd-eb42b49fb9ef] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 21:35:10.262 INFO  [http-nio-0.0.0.0-8080-exec-9] [a20b145b-5ccf-4e76-9438-0238cae3ecb9] p.e.config.RequestLoggingFilter - HTTP GET /api/cart -> 200 (11 ms) user=admin@shop.com
+2026-05-30 21:35:10.285 INFO  [http-nio-0.0.0.0-8080-exec-1] [b10e859c-9492-4373-84ea-02e2d718c8d2] p.e.config.RequestLoggingFilter - HTTP GET /api/cart -> 200 (9 ms) user=admin@shop.com
+2026-05-30 21:35:12.108 INFO  [http-nio-0.0.0.0-8080-exec-10] [1cc10443-e5c3-4e44-970d-9a7cf942a923] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (7 ms) user=admin@shop.com
+2026-05-30 21:35:12.427 INFO  [http-nio-0.0.0.0-8080-exec-4] [45453285-ffc3-4d8c-a6dc-fe7f1dc14b0a] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 21:35:12.427 INFO  [http-nio-0.0.0.0-8080-exec-7] [c28f8161-8213-4c78-9fd2-9f0521c37d94] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 21:35:12.427 INFO  [http-nio-0.0.0.0-8080-exec-8] [b4660f4a-7cac-48a2-b09a-56afb7189f30] p.e.config.RequestLoggingFilter - HTTP GET /api/cart -> 200 (8 ms) user=admin@shop.com
+2026-05-30 21:35:12.435 INFO  [http-nio-0.0.0.0-8080-exec-2] [37282477-ef97-47fa-aa51-4b41442cdd30] p.e.config.RequestLoggingFilter - HTTP GET /api/shipping-addresses -> 200 (14 ms) user=admin@shop.com
+2026-05-30 21:35:12.750 INFO  [http-nio-0.0.0.0-8080-exec-3] [092bfbdc-cbc4-429c-a3a9-1f2c1acc283c] p.e.config.RequestLoggingFilter - HTTP GET /api/cart -> 200 (7 ms) user=admin@shop.com
+2026-05-30 21:35:12.766 INFO  [http-nio-0.0.0.0-8080-exec-6] [1e6db1a3-9c7a-493b-acd2-1c40d5719fd5] p.e.config.RequestLoggingFilter - HTTP GET /api/shipping-addresses -> 200 (6 ms) user=admin@shop.com
+2026-05-30 21:35:16.988 INFO  [http-nio-0.0.0.0-8080-exec-5] [54b9e0ea-2700-4c79-b7ec-5f038d4f0982] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=16 userId=1 subtotal=49.99 total=60.46 devMode=true
+2026-05-30 21:35:17.008 INFO  [http-nio-0.0.0.0-8080-exec-5] [54b9e0ea-2700-4c79-b7ec-5f038d4f0982] p.e.config.RequestLoggingFilter - HTTP POST /api/orders/checkout/initiate -> 201 (83 ms) user=admin@shop.com
+2026-05-30 21:35:17.193 INFO  [http-nio-0.0.0.0-8080-exec-9] [1daae625-1924-4267-8250-43f8292f300e] p.e.config.RequestLoggingFilter - HTTP GET /api/orders/16 -> 200 (14 ms) user=admin@shop.com
+2026-05-30 21:35:18.120 INFO  [http-nio-0.0.0.0-8080-exec-1] [0ea88177-744b-48a3-adc1-47bf056d6b77] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=16 userId=1 total=60.46 itemCount=1
+2026-05-30 21:35:18.136 ERROR [http-nio-0.0.0.0-8080-exec-1] [0ea88177-744b-48a3-adc1-47bf056d6b77] p.e.service.impl.EmailServiceImpl - Failed to send email to admin@shop.com (order confirmation #16)
+org.springframework.mail.MailSendException: Failed messages: org.eclipse.angus.mail.smtp.SMTPSendFailedException: 550 Invalid sender noreply@shopverse.local
+;
+  nested exception is:
+	org.eclipse.angus.mail.smtp.SMTPSenderFailedException: 550 Invalid sender noreply@shopverse.local
+; message exceptions (1) are:
+Failed message 1: org.eclipse.angus.mail.smtp.SMTPSendFailedException: 550 Invalid sender noreply@shopverse.local
+;
+  nested exception is:
+	org.eclipse.angus.mail.smtp.SMTPSenderFailedException: 550 Invalid sender noreply@shopverse.local
+
+	at org.springframework.mail.javamail.JavaMailSenderImpl.doSend(JavaMailSenderImpl.java:440)
+	at org.springframework.mail.javamail.JavaMailSenderImpl.send(JavaMailSenderImpl.java:337)
+	at org.springframework.mail.javamail.JavaMailSender.send(JavaMailSender.java:101)
+	at personal.ecommercebackend.service.impl.EmailServiceImpl.sendHtml(EmailServiceImpl.java:132)
+	at personal.ecommercebackend.service.impl.EmailServiceImpl.sendOrderConfirmation(EmailServiceImpl.java:47)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158)
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:82)
+	at personal.ecommercebackend.config.LoggingAspect.logExecution(LoggingAspect.java:37)
+	at personal.ecommercebackend.config.LoggingAspect.logService(LoggingAspect.java:20)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:648)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:630)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:70)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:96)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:719)
+	at personal.ecommercebackend.service.impl.EmailServiceImpl$$SpringCGLIB$$0.sendOrderConfirmation(<generated>)
+	at personal.ecommercebackend.service.impl.OrderServiceImpl.fulfillPaidOrder(OrderServiceImpl.java:216)
+	at personal.ecommercebackend.service.impl.OrderServiceImpl.confirmPayment(OrderServiceImpl.java:165)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158)
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:82)
+	at personal.ecommercebackend.config.LoggingAspect.logExecution(LoggingAspect.java:37)
+	at personal.ecommercebackend.config.LoggingAspect.logService(LoggingAspect.java:20)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:648)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:630)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:70)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:133)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:371)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:130)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:96)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:719)
+	at personal.ecommercebackend.service.impl.OrderServiceImpl$$SpringCGLIB$$0.confirmPayment(<generated>)
+	at personal.ecommercebackend.controller.OrderController.confirmPayment(OrderController.java:39)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158)
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:82)
+	at personal.ecommercebackend.config.LoggingAspect.logExecution(LoggingAspect.java:37)
+	at personal.ecommercebackend.config.LoggingAspect.logController(LoggingAspect.java:25)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:648)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:630)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:70)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:96)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:719)
+	at personal.ecommercebackend.controller.OrderController$$SpringCGLIB$$0.confirmPayment(<generated>)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:649)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at personal.ecommercebackend.config.RequestLoggingFilter.doFilterInternal(RequestLoggingFilter.java:38)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at personal.ecommercebackend.config.AuthRateLimitFilter.doFilterInternal(AuthRateLimitFilter.java:36)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:235)
+	at org.springframework.security.web.ObservationFilterChainDecorator$FilterObservation$SimpleFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:493)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:354)
+	at org.springframework.security.web.ObservationFilterChainDecorator.lambda$wrapSecured$0(ObservationFilterChainDecorator.java:86)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:132)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:101)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:132)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:86)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:181)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at personal.ecommercebackend.security.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:53)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:110)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:96)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$0(ObservationFilterChainDecorator.java:337)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:237)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:195)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.ServletRequestPathFilter.doFilter(ServletRequestPathFilter.java:52)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebSecurityConfiguration.java:317)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:355)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:272)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:110)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1801)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+2026-05-30 21:35:18.141 WARN  [http-nio-0.0.0.0-8080-exec-1] [0ea88177-744b-48a3-adc1-47bf056d6b77] p.e.config.LoggingAspect - SERVICE EmailServiceImpl.sendOrderConfirmation - failed (21 ms): Failed to send email
+2026-05-30 21:35:18.156 INFO  [http-nio-0.0.0.0-8080-exec-1] [0ea88177-744b-48a3-adc1-47bf056d6b77] p.e.config.RequestLoggingFilter - HTTP POST /api/orders/16/confirm-payment -> 200 (62 ms) user=admin@shop.com
+2026-05-30 21:35:18.512 INFO  [http-nio-0.0.0.0-8080-exec-10] [6a655458-d501-4ff7-8de8-28e6128c6eb3] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (9 ms) user=admin@shop.com
+2026-05-30 21:35:18.527 INFO  [http-nio-0.0.0.0-8080-exec-7] [e4102cb4-8c7e-4531-85c9-290f30376693] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (8 ms) user=admin@shop.com
+2026-05-30 21:35:18.529 INFO  [http-nio-0.0.0.0-8080-exec-4] [821504ff-aca7-4aab-a30d-d65431c6995d] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (7 ms) user=admin@shop.com
+2026-05-30 21:35:18.535 INFO  [http-nio-0.0.0.0-8080-exec-8] [1c37dda6-da18-48c3-946a-2e6c43ec1bf7] p.e.config.RequestLoggingFilter - HTTP GET /api/orders/16 -> 200 (16 ms) user=admin@shop.com
+2026-05-30 21:35:18.565 INFO  [http-nio-0.0.0.0-8080-exec-2] [32048a98-0bfc-41d0-bd26-14457caa422f] p.e.config.RequestLoggingFilter - HTTP GET /api/orders/16 -> 200 (14 ms) user=admin@shop.com
+2026-05-30 21:35:21.256 INFO  [http-nio-0.0.0.0-8080-exec-3] [aeb90cb0-a130-448e-85f2-e23087c12f9b] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications -> 200 (6 ms) user=admin@shop.com
+2026-05-30 21:35:29.052 INFO  [http-nio-0.0.0.0-8080-exec-6] [c94423c9-c34b-4669-b283-9accbb281640] p.e.config.RequestLoggingFilter - HTTP PATCH /api/notifications/read-all -> 200 (13 ms) user=admin@shop.com
+2026-05-30 21:35:31.556 INFO  [http-nio-0.0.0.0-8080-exec-5] [5808fabc-1f7b-4bd3-b8b8-c38ef26eb74d] p.e.config.RequestLoggingFilter - HTTP PATCH /api/notifications/read-all -> 200 (5 ms) user=admin@shop.com
+2026-05-30 21:36:06.408 INFO  [http-nio-0.0.0.0-8080-exec-9] [156fc39d-31e1-4f47-96f4-e1e8718e6b07] p.e.config.RequestLoggingFilter - HTTP GET /api/auth/me -> 200 (9 ms) user=admin@shop.com
+2026-05-30 21:36:06.480 INFO  [http-nio-0.0.0.0-8080-exec-1] [adc3cf56-1b44-433a-a180-5d0275b24515] p.e.config.RequestLoggingFilter - HTTP GET /api/auth/me -> 200 (36 ms) user=admin@shop.com
+2026-05-30 21:36:06.809 INFO  [http-nio-0.0.0.0-8080-exec-7] [f748969d-4683-47ea-a97e-dc740fbf894d] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (12 ms) user=admin@shop.com
+2026-05-30 21:36:06.813 INFO  [http-nio-0.0.0.0-8080-exec-4] [f02109e3-6423-496e-b3ae-2a9ae0f88060] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (13 ms) user=admin@shop.com
+2026-05-30 21:36:06.829 INFO  [http-nio-0.0.0.0-8080-exec-10] [59285de5-2a0b-45b4-b123-fb9b23a147a1] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (30 ms) user=admin@shop.com
+2026-05-30 21:36:06.831 INFO  [http-nio-0.0.0.0-8080-exec-8] [e4c67620-2145-48a1-aa0d-82a99319df1c] p.e.config.RequestLoggingFilter - HTTP GET /api/orders/16 -> 200 (32 ms) user=admin@shop.com
+2026-05-30 21:36:07.114 INFO  [http-nio-0.0.0.0-8080-exec-2] [13aeb839-7329-417d-b101-91eca4798a24] p.e.config.RequestLoggingFilter - HTTP GET /api/orders/16 -> 200 (11 ms) user=admin@shop.com
+2026-05-30 21:36:40.653 INFO  [http-nio-0.0.0.0-8080-exec-3] [cadf4a15-bd4a-4317-a645-f35d2920b78d] p.e.config.RequestLoggingFilter - HTTP GET /api/auth/me -> 200 (6 ms) user=admin@shop.com
+2026-05-30 21:36:40.675 INFO  [http-nio-0.0.0.0-8080-exec-6] [b4d8f580-4a40-4565-a626-f80613126f98] p.e.config.RequestLoggingFilter - HTTP GET /api/auth/me -> 200 (6 ms) user=admin@shop.com
+2026-05-30 21:36:40.928 INFO  [http-nio-0.0.0.0-8080-exec-9] [82b685ed-b705-43ec-98a6-83da851cca23] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (17 ms) user=admin@shop.com
+2026-05-30 21:36:40.928 INFO  [http-nio-0.0.0.0-8080-exec-5] [0cf1e4fc-44f5-41e1-bf66-3b6b8f36c5c6] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (16 ms) user=admin@shop.com
+2026-05-30 21:36:40.929 INFO  [http-nio-0.0.0.0-8080-exec-1] [6632e6c8-3715-4e08-acc0-cbf721026e07] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (17 ms) user=admin@shop.com
+2026-05-30 21:36:40.933 INFO  [http-nio-0.0.0.0-8080-exec-7] [788ed7b6-d8ec-4bff-a3c6-a2f6481e0b53] p.e.config.RequestLoggingFilter - HTTP GET /api/orders/16 -> 200 (37 ms) user=admin@shop.com
+2026-05-30 21:36:41.215 INFO  [http-nio-0.0.0.0-8080-exec-4] [aafdffe5-9434-4378-8351-9794e2aee9c1] p.e.config.RequestLoggingFilter - HTTP GET /api/orders/16 -> 200 (12 ms) user=admin@shop.com
+2026-05-30 22:40:53.914 INFO  [http-nio-0.0.0.0-8080-exec-10] [c6c16b03-2120-4b18-a65b-9c362ad36d8b] p.e.config.RequestLoggingFilter - HTTP GET /api/auth/me -> 200 (9 ms) user=admin@shop.com
+2026-05-30 22:40:53.934 INFO  [http-nio-0.0.0.0-8080-exec-8] [541d1c82-ac7d-43c8-8769-d45be0c63317] p.e.config.RequestLoggingFilter - HTTP GET /api/auth/me -> 200 (7 ms) user=admin@shop.com
+2026-05-30 22:40:54.191 INFO  [http-nio-0.0.0.0-8080-exec-2] [bfc2bfd7-b895-4ce8-8449-f940f427a484] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (28 ms) user=admin@shop.com
+2026-05-30 22:40:54.194 INFO  [http-nio-0.0.0.0-8080-exec-6] [f586f5d4-1e56-4221-aa09-6565998358b0] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (12 ms) user=admin@shop.com
+2026-05-30 22:40:54.195 INFO  [http-nio-0.0.0.0-8080-exec-3] [64b78afa-b065-43e9-a3d6-5d92e1205f24] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (12 ms) user=admin@shop.com
+2026-05-30 22:40:54.220 INFO  [http-nio-0.0.0.0-8080-exec-9] [56541bcf-efea-434e-ad42-d06e0e473d72] p.e.config.RequestLoggingFilter - HTTP GET /api/orders/16 -> 200 (38 ms) user=admin@shop.com
+2026-05-30 22:40:54.553 INFO  [http-nio-0.0.0.0-8080-exec-5] [2945e1f9-9824-4a7b-9655-2f850579d53b] p.e.config.RequestLoggingFilter - HTTP GET /api/orders/16 -> 200 (13 ms) user=admin@shop.com
+2026-05-30 22:59:08.711 INFO  [http-nio-0.0.0.0-8080-exec-1] [5c5cdc72-a25b-4185-a7af-25e8f4388d73] p.e.config.RequestLoggingFilter - HTTP GET /api/auth/me -> 200 (9 ms) user=admin@shop.com
+2026-05-30 22:59:08.733 INFO  [http-nio-0.0.0.0-8080-exec-7] [b91e9f07-fc97-428b-abeb-c503c4c04086] p.e.config.RequestLoggingFilter - HTTP GET /api/auth/me -> 200 (7 ms) user=admin@shop.com
+2026-05-30 22:59:09.046 INFO  [http-nio-0.0.0.0-8080-exec-4] [65f9de0f-0d8c-48f7-b3f2-6dfd51440b21] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (34 ms) user=admin@shop.com
+2026-05-30 22:59:09.047 INFO  [http-nio-0.0.0.0-8080-exec-10] [5b272886-84b5-4253-a58b-a05c17c715c6] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (21 ms) user=admin@shop.com
+2026-05-30 22:59:09.065 INFO  [http-nio-0.0.0.0-8080-exec-8] [4952f5a9-154b-4a4c-98e5-f23afcf47c93] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (20 ms) user=admin@shop.com
+2026-05-30 22:59:09.069 INFO  [http-nio-0.0.0.0-8080-exec-2] [80a4d821-3091-4a4f-865a-721d447dfe3d] p.e.config.RequestLoggingFilter - HTTP GET /api/orders/16 -> 200 (43 ms) user=admin@shop.com
+2026-05-30 22:59:09.393 INFO  [http-nio-0.0.0.0-8080-exec-6] [047aab4f-43f3-4545-b037-9bb3811f0bdb] p.e.config.RequestLoggingFilter - HTTP GET /api/orders/16 -> 200 (12 ms) user=admin@shop.com
+2026-05-30 22:59:30.232 INFO  [http-nio-0.0.0.0-8080-exec-9] [a1f62f25-56a2-41bd-9922-77f02d0937cf] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (283 ms) user=admin@shop.com
+2026-05-30 22:59:30.368 INFO  [http-nio-0.0.0.0-8080-exec-3] [b4c63360-7d41-4788-b087-3b2df115c34c] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (365 ms) user=admin@shop.com
+2026-05-30 22:59:31.006 INFO  [http-nio-0.0.0.0-8080-exec-5] [705fe322-f022-4955-9d63-912514ff839f] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (610 ms) user=admin@shop.com
+2026-05-30 22:59:31.012 INFO  [http-nio-0.0.0.0-8080-exec-1] [9a36fd4e-f863-4241-98aa-cf292f38518f] p.e.config.RequestLoggingFilter - HTTP GET /api/categories -> 200 (633 ms) user=admin@shop.com
+2026-05-30 22:59:31.563 INFO  [http-nio-0.0.0.0-8080-exec-4] [77da251c-e696-4773-8e60-4a58d42027d9] p.e.config.RequestLoggingFilter - HTTP GET /api/categories -> 200 (30 ms) user=admin@shop.com
+2026-05-30 22:59:31.846 INFO  [http-nio-0.0.0.0-8080-exec-7] [2b100d28-0c85-4aa3-872d-4251ab407e79] p.e.config.RequestLoggingFilter - HTTP GET /api/products?page=0&size=12&sort=name%2Casc -> 200 (1466 ms) user=admin@shop.com
+2026-05-30 22:59:32.473 INFO  [http-nio-0.0.0.0-8080-exec-10] [d7846811-f1cf-43e4-b14a-f0ea2970578f] p.e.config.RequestLoggingFilter - HTTP GET /api/products?page=0&size=12&sort=name%2Casc -> 200 (200 ms) user=admin@shop.com
+2026-05-30 23:00:11.246 INFO  [http-nio-0.0.0.0-8080-exec-2] [4fe3ac48-436f-43ea-93dc-441d7a1a0cce] p.e.config.RequestLoggingFilter - HTTP GET /api/auth/me -> 200 (8 ms) user=admin@shop.com
+2026-05-30 23:00:11.246 INFO  [http-nio-0.0.0.0-8080-exec-3] [ad85b407-47b9-43c4-af6b-c9423f08a8e6] p.e.config.RequestLoggingFilter - HTTP GET /api/categories -> 200 (8 ms) user=admin@shop.com
+2026-05-30 23:00:11.279 INFO  [http-nio-0.0.0.0-8080-exec-9] [eaa09967-bfff-4c4f-a682-8411e3a81426] p.e.config.RequestLoggingFilter - HTTP GET /api/auth/me -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:00:11.282 INFO  [http-nio-0.0.0.0-8080-exec-5] [7ec923e6-c17d-4d7b-aec8-7810d7c339a3] p.e.config.RequestLoggingFilter - HTTP GET /api/categories -> 200 (9 ms) user=admin@shop.com
+2026-05-30 23:00:11.352 INFO  [http-nio-0.0.0.0-8080-exec-6] [7a457a90-6a73-4160-90d2-2a10d3e587df] p.e.config.RequestLoggingFilter - HTTP GET /api/products?page=0&size=12&sort=name%2Casc -> 200 (114 ms) user=admin@shop.com
+2026-05-30 23:00:11.493 INFO  [http-nio-0.0.0.0-8080-exec-1] [d78a20af-3654-41a5-b97b-e5847fc3feea] p.e.config.RequestLoggingFilter - HTTP GET /api/products?page=0&size=12&sort=name%2Casc -> 200 (120 ms) user=admin@shop.com
+2026-05-30 23:00:12.039 INFO  [http-nio-0.0.0.0-8080-exec-10] [49081cce-1547-49e5-8f11-98bb880ac1cd] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (8 ms) user=admin@shop.com
+2026-05-30 23:00:12.039 INFO  [http-nio-0.0.0.0-8080-exec-4] [2afe23bd-5e2c-4ef8-a589-3546902a6dc7] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (8 ms) user=admin@shop.com
+2026-05-30 23:00:12.044 INFO  [http-nio-0.0.0.0-8080-exec-7] [1a2864c1-4f36-46fa-8179-a0571af78386] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (13 ms) user=admin@shop.com
+2026-05-30 23:00:24.750 INFO  [http-nio-0.0.0.0-8080-exec-2] [c8eb5455-553e-42f1-9548-60db09265fa9] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (24 ms) user=admin@shop.com
+2026-05-30 23:00:24.838 INFO  [http-nio-0.0.0.0-8080-exec-8] [d8a0d307-90a7-4137-869b-205f6c2d936d] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (41 ms) user=admin@shop.com
+2026-05-30 23:00:24.842 INFO  [http-nio-0.0.0.0-8080-exec-9] [9d7904a3-6000-454d-a278-f935ebe0c914] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (47 ms) user=admin@shop.com
+2026-05-30 23:00:24.884 INFO  [http-nio-0.0.0.0-8080-exec-5] [6425c17f-5018-4b04-94fc-54f6037b46da] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist -> 200 (96 ms) user=admin@shop.com
+2026-05-30 23:00:24.969 INFO  [http-nio-0.0.0.0-8080-exec-1] [d57d2c92-1da5-4167-be39-5a89e896d9f1] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist -> 200 (52 ms) user=admin@shop.com
+2026-05-30 23:00:25.395 INFO  [http-nio-0.0.0.0-8080-exec-6] [b7490cff-4774-44d8-a612-3199872393ca] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (15 ms) user=admin@shop.com
+2026-05-30 23:00:25.704 INFO  [http-nio-0.0.0.0-8080-exec-4] [17c124e6-47dd-422a-b215-8e90e06302fa] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:00:25.704 INFO  [http-nio-0.0.0.0-8080-exec-10] [fb07f76c-7e39-464d-9915-9fbfee1af068] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (9 ms) user=admin@shop.com
+2026-05-30 23:00:25.711 INFO  [http-nio-0.0.0.0-8080-exec-3] [f572cc3b-8419-4dbd-9ed3-0501d0651417] p.e.config.RequestLoggingFilter - HTTP GET /api/categories -> 200 (14 ms) user=admin@shop.com
+2026-05-30 23:00:25.827 INFO  [http-nio-0.0.0.0-8080-exec-7] [669d54cd-2379-42fe-bb01-b0eab6504e8e] p.e.config.RequestLoggingFilter - HTTP GET /api/products?page=0&size=12&sort=name%2Casc -> 200 (130 ms) user=admin@shop.com
+2026-05-30 23:00:26.046 INFO  [http-nio-0.0.0.0-8080-exec-2] [47f7265e-4cae-4ec3-9c69-d302840a96c1] p.e.config.RequestLoggingFilter - HTTP GET /api/categories -> 200 (10 ms) user=admin@shop.com
+2026-05-30 23:00:26.425 INFO  [http-nio-0.0.0.0-8080-exec-8] [96d9a5f0-f33b-4070-9858-8a4302da7d03] p.e.config.RequestLoggingFilter - HTTP GET /api/products?page=0&size=12&sort=name%2Casc -> 200 (259 ms) user=admin@shop.com
+2026-05-30 23:00:26.969 INFO  [http-nio-0.0.0.0-8080-exec-9] [9bffbeda-c6b8-4cd6-98c3-209cf9d98459] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (10 ms) user=admin@shop.com
+2026-05-30 23:00:27.029 INFO  [http-nio-0.0.0.0-8080-exec-1] [0514bd91-f7da-4237-aea1-124ed8ef9f00] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:00:27.029 INFO  [http-nio-0.0.0.0-8080-exec-5] [ce179f95-bed3-452e-bbb5-845d8be1b705] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:00:27.035 INFO  [http-nio-0.0.0.0-8080-exec-6] [daa00867-9988-43ea-b9f2-8b3a367abd82] p.e.config.RequestLoggingFilter - HTTP GET /api/cart -> 200 (12 ms) user=admin@shop.com
+2026-05-30 23:00:27.060 INFO  [http-nio-0.0.0.0-8080-exec-4] [371e70a7-6226-4c4e-ac26-a68fcfaf9e85] p.e.config.RequestLoggingFilter - HTTP GET /api/cart -> 200 (11 ms) user=admin@shop.com
+2026-05-30 23:00:27.666 INFO  [http-nio-0.0.0.0-8080-exec-10] [5f61e176-5d6d-4d99-a558-d754fa21ee70] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (14 ms) user=admin@shop.com
+2026-05-30 23:00:27.965 INFO  [http-nio-0.0.0.0-8080-exec-3] [0a3336c5-ac0a-4c47-a69e-e0be3488a187] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:00:27.966 INFO  [http-nio-0.0.0.0-8080-exec-7] [f124e2bd-b67a-4e01-8350-39c7bcd8171e] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:00:27.980 WARN  [http-nio-0.0.0.0-8080-exec-2] [3db7ef7c-a97f-4aa5-9e50-5b1f6ba166fc] org.hibernate.orm.query - HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+2026-05-30 23:00:28.001 INFO  [http-nio-0.0.0.0-8080-exec-2] [3db7ef7c-a97f-4aa5-9e50-5b1f6ba166fc] p.e.config.RequestLoggingFilter - HTTP GET /api/orders?page=0&size=10 -> 200 (42 ms) user=admin@shop.com
+2026-05-30 23:00:28.334 WARN  [http-nio-0.0.0.0-8080-exec-8] [d869ffe1-cf7f-4b94-8e10-f2d0cf03fab5] org.hibernate.orm.query - HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+2026-05-30 23:00:28.347 INFO  [http-nio-0.0.0.0-8080-exec-8] [d869ffe1-cf7f-4b94-8e10-f2d0cf03fab5] p.e.config.RequestLoggingFilter - HTTP GET /api/orders?page=0&size=10 -> 200 (16 ms) user=admin@shop.com
+2026-05-30 23:00:38.323 INFO  [http-nio-0.0.0.0-8080-exec-9] [b8406b0a-e438-436b-88ed-0bda16943c46] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (206 ms) user=admin@shop.com
+2026-05-30 23:00:38.543 INFO  [http-nio-0.0.0.0-8080-exec-1] [c3c07e5c-afb4-48c6-950e-63ba5aac69f0] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (93 ms) user=admin@shop.com
+2026-05-30 23:00:38.844 INFO  [http-nio-0.0.0.0-8080-exec-5] [f2f5fe1d-b741-4494-a81c-6199fb369932] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (291 ms) user=admin@shop.com
+2026-05-30 23:00:39.443 INFO  [http-nio-0.0.0.0-8080-exec-6] [544c4579-490a-433c-8b7c-8fee2b890583] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist -> 200 (893 ms) user=admin@shop.com
+2026-05-30 23:00:39.613 INFO  [http-nio-0.0.0.0-8080-exec-4] [d91f01d9-cf3b-4992-8f0d-9eceb099c7d8] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (170 ms) user=admin@shop.com
+2026-05-30 23:00:39.670 INFO  [http-nio-0.0.0.0-8080-exec-10] [40de5413-2d33-4816-bfc4-62e7aceb3cac] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (223 ms) user=admin@shop.com
+2026-05-30 23:00:39.707 INFO  [http-nio-0.0.0.0-8080-exec-3] [a1bd2da8-4250-4ca9-b450-24cb9fd9ae25] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (31 ms) user=admin@shop.com
+2026-05-30 23:00:39.781 INFO  [http-nio-0.0.0.0-8080-exec-7] [94f9db3d-8d58-4902-84dd-8b24a3d26c11] p.e.config.RequestLoggingFilter - HTTP GET /api/cart -> 200 (78 ms) user=admin@shop.com
+2026-05-30 23:00:39.991 INFO  [http-nio-0.0.0.0-8080-exec-2] [9fa3d01d-e4f2-4d72-a60a-032928136e3c] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist -> 200 (288 ms) user=admin@shop.com
+2026-05-30 23:00:40.148 INFO  [http-nio-0.0.0.0-8080-exec-8] [93e18254-f4e0-49cc-abd2-b323fffe4f52] p.e.config.RequestLoggingFilter - HTTP GET /api/cart -> 200 (19 ms) user=admin@shop.com
+2026-05-30 23:00:40.474 INFO  [http-nio-0.0.0.0-8080-exec-9] [071e7baf-f906-4220-8375-d522f4425265] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (19 ms) user=admin@shop.com
+2026-05-30 23:00:40.867 INFO  [http-nio-0.0.0.0-8080-exec-6] [6f5b6434-5d36-4394-8bc8-63c40cddbeab] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (66 ms) user=admin@shop.com
+2026-05-30 23:00:40.889 INFO  [http-nio-0.0.0.0-8080-exec-5] [430aa259-142b-49f1-a84d-d735ba9d8ec2] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (89 ms) user=admin@shop.com
+2026-05-30 23:00:40.889 INFO  [http-nio-0.0.0.0-8080-exec-1] [93211f5b-b9c3-46cc-9bc6-b9ee201e3a95] p.e.config.RequestLoggingFilter - HTTP GET /api/categories -> 200 (89 ms) user=admin@shop.com
+2026-05-30 23:00:40.938 INFO  [http-nio-0.0.0.0-8080-exec-10] [05c4cb17-c321-4426-9fbf-d82919285ecc] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (19 ms) user=admin@shop.com
+2026-05-30 23:00:41.329 INFO  [http-nio-0.0.0.0-8080-exec-8] [27132b57-8249-4084-80b8-8e776b4ce32b] p.e.config.RequestLoggingFilter - HTTP GET /api/categories -> 200 (51 ms) user=admin@shop.com
+2026-05-30 23:00:41.375 INFO  [http-nio-0.0.0.0-8080-exec-3] [46e3d505-3d62-49c7-a025-158b400f25ad] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist -> 200 (189 ms) user=admin@shop.com
+2026-05-30 23:00:41.432 INFO  [http-nio-0.0.0.0-8080-exec-7] [f4af8aa3-00a2-43a1-a3ea-d4f42988b083] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (117 ms) user=admin@shop.com
+2026-05-30 23:00:41.432 INFO  [http-nio-0.0.0.0-8080-exec-2] [76e02160-9a48-4058-a9ca-1815dd175352] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (117 ms) user=admin@shop.com
+2026-05-30 23:00:41.637 INFO  [http-nio-0.0.0.0-8080-exec-4] [6229f9ca-2aa5-4f6b-b868-9631a8255762] p.e.config.RequestLoggingFilter - HTTP GET /api/products?page=0&size=12&sort=name%2Casc -> 200 (887 ms) user=admin@shop.com
+2026-05-30 23:00:41.846 INFO  [http-nio-0.0.0.0-8080-exec-9] [6b4dcb47-a544-4559-862d-c8c8bbc5dfab] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist -> 200 (117 ms) user=admin@shop.com
+2026-05-30 23:00:42.200 INFO  [http-nio-0.0.0.0-8080-exec-6] [71909e29-f5ca-49ee-9852-6439108aa975] p.e.config.RequestLoggingFilter - HTTP GET /api/products?page=0&size=12&sort=name%2Casc -> 200 (184 ms) user=admin@shop.com
+2026-05-30 23:01:32.973 INFO  [SpringApplicationShutdownHook] [no-request] o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-05-30 23:01:34.139 INFO  [tomcat-shutdown] [no-request] o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-05-30 23:01:34.158 INFO  [SpringApplicationShutdownHook] [no-request] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-30 23:01:34.164 INFO  [SpringApplicationShutdownHook] [no-request] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-05-30 23:01:34.170 INFO  [SpringApplicationShutdownHook] [no-request] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-05-30 23:03:08.062 INFO  [main] [no-request] p.e.ECommerceBackendApplication - Starting ECommerceBackendApplication using Java 19.0.2 with PID 19680 (C:\Users\God -01.11\Desktop\e-commerce-backend - codex\target\classes started by God -01.11 in C:\Users\God -01.11\Desktop\e-commerce-backend - codex)
+2026-05-30 23:03:08.069 INFO  [main] [no-request] p.e.ECommerceBackendApplication - No active profile set, falling back to 1 default profile: "default"
+2026-05-30 23:03:12.123 INFO  [main] [no-request] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-30 23:03:12.590 INFO  [main] [no-request] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 437 ms. Found 14 JPA repository interfaces.
+2026-05-30 23:03:14.761 INFO  [main] [no-request] o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-05-30 23:03:14.784 INFO  [main] [no-request] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-05-30 23:03:14.784 INFO  [main] [no-request] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.21]
+2026-05-30 23:03:14.881 INFO  [main] [no-request] o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 6723 ms
+2026-05-30 23:03:15.322 INFO  [main] [no-request] org.hibernate.orm.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-05-30 23:03:15.420 INFO  [main] [no-request] org.hibernate.orm.core - HHH000001: Hibernate ORM core version 7.2.12.Final
+2026-05-30 23:03:16.152 INFO  [main] [no-request] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-30 23:03:16.225 INFO  [main] [no-request] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-05-30 23:03:16.588 INFO  [main] [no-request] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@45f6181a
+2026-05-30 23:03:16.592 INFO  [main] [no-request] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-05-30 23:03:16.750 INFO  [main] [no-request] o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/ecommerce]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.2
+	Default catalog/schema: ecommerce/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-30 23:03:18.954 INFO  [main] [no-request] org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-30 23:03:19.122 INFO  [main] [no-request] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-30 23:03:19.214 INFO  [main] [no-request] o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-05-30 23:03:21.739 INFO  [main] [no-request] o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-05-30 23:03:21.740 WARN  [main] [no-request] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-05-30 23:03:23.352 INFO  [main] [no-request] o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2026-05-30 23:03:23.546 INFO  [main] [no-request] o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-05-30 23:03:23.559 INFO  [main] [no-request] p.e.ECommerceBackendApplication - Started ECommerceBackendApplication in 16.445 seconds (process running for 19.822)
+2026-05-30 23:03:23.571 INFO  [main] [no-request] p.ecommercebackend.config.DataSeeder - Running database seed checks...
+2026-05-30 23:03:23.803 INFO  [main] [no-request] p.ecommercebackend.config.MailConfig - Email delivery ENABLED — SMTP localhost:1025 (view MailHog UI at http://localhost:8025)
+2026-05-30 23:03:47.957 INFO  [http-nio-0.0.0.0-8080-exec-2] [no-request] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-30 23:03:47.958 INFO  [http-nio-0.0.0.0-8080-exec-2] [no-request] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-05-30 23:03:47.962 INFO  [http-nio-0.0.0.0-8080-exec-2] [no-request] o.s.web.servlet.DispatcherServlet - Completed initialization in 4 ms
+2026-05-30 23:03:48.699 INFO  [http-nio-0.0.0.0-8080-exec-1] [232fdc9e-30b5-469c-8219-1d0336159fa1] p.e.config.RequestLoggingFilter - HTTP GET /api/categories -> 200 (273 ms) user=admin@shop.com
+2026-05-30 23:03:48.699 INFO  [http-nio-0.0.0.0-8080-exec-3] [f6543c74-ca73-4c3a-974f-a300961c63bf] p.e.config.RequestLoggingFilter - HTTP GET /api/auth/me -> 200 (273 ms) user=admin@shop.com
+2026-05-30 23:03:48.734 INFO  [http-nio-0.0.0.0-8080-exec-2] [31c5f374-809e-4510-81b7-896379f7ff17] p.e.config.RequestLoggingFilter - HTTP GET /api/products?page=0&size=12&sort=name%2Casc -> 200 (308 ms) user=admin@shop.com
+2026-05-30 23:03:48.821 INFO  [http-nio-0.0.0.0-8080-exec-5] [cf147d67-aa13-416d-9e8b-c04155ccb7e6] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (21 ms) user=admin@shop.com
+2026-05-30 23:03:48.821 INFO  [http-nio-0.0.0.0-8080-exec-6] [5294ad7a-0e43-4590-b1ec-787f62531be4] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (21 ms) user=admin@shop.com
+2026-05-30 23:03:48.851 INFO  [http-nio-0.0.0.0-8080-exec-4] [c80fb761-93a7-4783-a42d-09fcee72b74b] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (51 ms) user=admin@shop.com
+2026-05-30 23:04:06.726 INFO  [http-nio-0.0.0.0-8080-exec-3] [7a34df0e-fb9a-4555-ad50-3e6ed701eec4] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (9 ms) user=admin@shop.com
+2026-05-30 23:04:06.726 INFO  [http-nio-0.0.0.0-8080-exec-10] [8e910e59-eef7-4471-a7c2-528fb9c759d2] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (9 ms) user=admin@shop.com
+2026-05-30 23:04:06.730 INFO  [http-nio-0.0.0.0-8080-exec-7] [7cb8cd9f-fd95-426c-9fc2-46010b2e1d32] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (13 ms) user=admin@shop.com
+2026-05-30 23:04:10.259 INFO  [http-nio-0.0.0.0-8080-exec-9] [18262fbe-b336-4dfb-bd99-0e99e9606550] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (10 ms) user=admin@shop.com
+2026-05-30 23:04:10.567 INFO  [http-nio-0.0.0.0-8080-exec-2] [187555e7-693b-4518-908b-241fbd002cff] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (8 ms) user=admin@shop.com
+2026-05-30 23:04:10.567 INFO  [http-nio-0.0.0.0-8080-exec-1] [26bfa659-a313-4338-9ca9-8a3c82878a84] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (8 ms) user=admin@shop.com
+2026-05-30 23:04:10.606 WARN  [http-nio-0.0.0.0-8080-exec-6] [62d2bd33-04b7-4085-a1ca-5df98a396031] org.hibernate.orm.query - HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+2026-05-30 23:04:10.649 INFO  [http-nio-0.0.0.0-8080-exec-6] [62d2bd33-04b7-4085-a1ca-5df98a396031] p.e.config.RequestLoggingFilter - HTTP GET /api/admin/dashboard -> 200 (90 ms) user=admin@shop.com
+2026-05-30 23:04:16.335 INFO  [http-nio-0.0.0.0-8080-exec-4] [3b7afdd1-fe4b-4ce3-8948-689309d45979] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (8 ms) user=admin@shop.com
+2026-05-30 23:04:16.408 INFO  [http-nio-0.0.0.0-8080-exec-5] [91357820-5ef3-4491-81f1-1172850ff50b] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:04:16.408 INFO  [http-nio-0.0.0.0-8080-exec-8] [bf0f866c-d620-4800-8c93-342a3786040a] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:04:16.413 INFO  [http-nio-0.0.0.0-8080-exec-10] [3f5c91d7-8537-419d-b9c7-07d284c787e2] p.e.config.RequestLoggingFilter - HTTP GET /api/admin/coupons -> 200 (11 ms) user=admin@shop.com
+2026-05-30 23:04:17.263 INFO  [http-nio-0.0.0.0-8080-exec-7] [a2143110-68e2-40cf-ad45-cb44afb1f6c0] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:04:17.267 INFO  [http-nio-0.0.0.0-8080-exec-3] [f3fd686e-5fd4-40ec-b94f-981ca582c829] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (10 ms) user=admin@shop.com
+2026-05-30 23:04:17.561 WARN  [http-nio-0.0.0.0-8080-exec-2] [46ff6e41-c653-4334-bcd3-7fb7db8ccefb] org.hibernate.orm.query - HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+2026-05-30 23:04:17.562 INFO  [http-nio-0.0.0.0-8080-exec-9] [75694536-2201-4dd9-8e87-6baca39cee03] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (8 ms) user=admin@shop.com
+2026-05-30 23:04:17.587 INFO  [http-nio-0.0.0.0-8080-exec-2] [46ff6e41-c653-4334-bcd3-7fb7db8ccefb] p.e.config.RequestLoggingFilter - HTTP GET /api/orders/admin/all?page=0&size=10 -> 200 (31 ms) user=admin@shop.com
+2026-05-30 23:04:19.123 INFO  [http-nio-0.0.0.0-8080-exec-6] [2ae55cba-e076-41b5-84ac-616b58d2525d] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:04:19.123 INFO  [http-nio-0.0.0.0-8080-exec-4] [cba1d1eb-d6b9-4526-b691-94ea075ea4a1] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:04:19.127 INFO  [http-nio-0.0.0.0-8080-exec-1] [dabc13ab-f463-4958-b4ea-ebf2a6e2b918] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (11 ms) user=admin@shop.com
+2026-05-30 23:04:20.608 INFO  [http-nio-0.0.0.0-8080-exec-8] [04d743ae-eea7-4e85-a04a-3fd7f42d75cb] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (10 ms) user=admin@shop.com
+2026-05-30 23:04:20.907 INFO  [http-nio-0.0.0.0-8080-exec-5] [97ff0f0b-7833-40ab-994d-19f8f52d7529] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:04:20.907 INFO  [http-nio-0.0.0.0-8080-exec-10] [12c75471-9253-4132-9168-47f50203e0f4] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:04:21.449 INFO  [http-nio-0.0.0.0-8080-exec-7] [02e9c010-bf20-4840-90ad-68567d9bcc26] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (10 ms) user=admin@shop.com
+2026-05-30 23:04:21.511 INFO  [http-nio-0.0.0.0-8080-exec-9] [3721ccd6-52f8-41e5-bcbf-caf5e844948c] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:04:21.511 INFO  [http-nio-0.0.0.0-8080-exec-3] [703ae3d0-8e14-4d3f-a133-06d5382afae1] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:04:21.548 INFO  [http-nio-0.0.0.0-8080-exec-2] [f0950e00-e764-4b48-8c61-328d8084b00e] p.e.config.RequestLoggingFilter - HTTP GET /api/products/admin/all?page=0&size=100 -> 200 (44 ms) user=admin@shop.com
+2026-05-30 23:04:22.543 INFO  [http-nio-0.0.0.0-8080-exec-6] [fca00d46-e44a-4b53-b641-2a946560f3c8] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:04:22.548 INFO  [http-nio-0.0.0.0-8080-exec-4] [3f54e6d2-2818-4361-b317-828325fb0ce2] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (12 ms) user=admin@shop.com
+2026-05-30 23:04:22.850 INFO  [http-nio-0.0.0.0-8080-exec-1] [a75a36ae-b086-459b-aca1-34905a8b6048] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:04:25.402 INFO  [http-nio-0.0.0.0-8080-exec-8] [f618c153-076f-44c0-bad2-1f975ef20ed4] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (9 ms) user=admin@shop.com
+2026-05-30 23:04:25.418 INFO  [http-nio-0.0.0.0-8080-exec-3] [c61dfa2b-a8e4-44f5-9b9f-776406f7ce9d] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:04:25.421 INFO  [http-nio-0.0.0.0-8080-exec-10] [26060391-37bf-4933-b85e-8f190931afb3] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:04:25.441 INFO  [http-nio-0.0.0.0-8080-exec-7] [9fabdd06-c858-410a-b18b-bdeb19ef8982] p.e.config.RequestLoggingFilter - HTTP GET /api/products/8 -> 200 (27 ms) user=admin@shop.com
+2026-05-30 23:04:25.443 INFO  [http-nio-0.0.0.0-8080-exec-4] [a5f80e79-9860-43cb-887c-ff1c9dbbafc2] p.e.config.RequestLoggingFilter - HTTP GET /api/products/8/reviews?page=0&size=10 -> 200 (25 ms) user=admin@shop.com
+2026-05-30 23:04:25.465 INFO  [http-nio-0.0.0.0-8080-exec-9] [7332f527-24a5-4647-a4dc-cc1ca537c8fb] p.e.config.RequestLoggingFilter - HTTP GET /api/products/8/related?size=4 -> 200 (47 ms) user=admin@shop.com
+2026-05-30 23:04:25.750 INFO  [http-nio-0.0.0.0-8080-exec-1] [0ab0db11-65aa-4631-9535-d8eccc884ab4] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist -> 200 (18 ms) user=admin@shop.com
+2026-05-30 23:04:27.388 INFO  [http-nio-0.0.0.0-8080-exec-2] [abd958de-36b1-4a2b-9b60-cbcc801bce24] p.e.config.RequestLoggingFilter - HTTP POST /api/wishlist/8 -> 201 (94 ms) user=admin@shop.com
+2026-05-30 23:04:27.918 INFO  [http-nio-0.0.0.0-8080-exec-6] [32217a1a-e8a7-4208-a57d-d9ff2d1ba488] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (8 ms) user=admin@shop.com
+2026-05-30 23:04:28.216 INFO  [http-nio-0.0.0.0-8080-exec-8] [bad069da-c83d-46d6-aa3d-aec8bd2769ff] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:04:28.218 INFO  [http-nio-0.0.0.0-8080-exec-5] [c9e249bc-4dca-45e3-a86b-5940d137577e] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:04:49.498 INFO  [http-nio-0.0.0.0-8080-exec-10] [0a4516ec-dca3-46ad-8405-08c39aebc3cd] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:04:49.498 INFO  [http-nio-0.0.0.0-8080-exec-7] [35484b64-ccdd-4f23-9022-3c75842bab7c] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:04:49.502 INFO  [http-nio-0.0.0.0-8080-exec-3] [96ad131e-139c-43dd-902a-f9221f84a974] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (11 ms) user=admin@shop.com
+2026-05-30 23:05:19.178 INFO  [http-nio-0.0.0.0-8080-exec-4] [5d7432df-aadc-46ba-94a6-6c654490eb5f] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (8 ms) user=admin@shop.com
+2026-05-30 23:05:19.486 INFO  [http-nio-0.0.0.0-8080-exec-1] [e2e03128-2b20-4d04-928b-c4760c57f2fd] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:05:19.486 INFO  [http-nio-0.0.0.0-8080-exec-9] [148b399a-f16d-4114-9a5d-8cf3fdcc6231] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:05:49.490 INFO  [http-nio-0.0.0.0-8080-exec-6] [53059158-6aef-49d5-a79e-834b66a815b3] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:05:49.490 INFO  [http-nio-0.0.0.0-8080-exec-8] [fe470a82-2a01-4903-884b-4d093717b26a] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:05:49.493 INFO  [http-nio-0.0.0.0-8080-exec-2] [0168cb98-ca8f-4c4b-976d-09ef33f92c7d] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (9 ms) user=admin@shop.com
+2026-05-30 23:06:19.173 INFO  [http-nio-0.0.0.0-8080-exec-5] [0211a96b-437a-49ac-8cd1-696d70475902] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (8 ms) user=admin@shop.com
+2026-05-30 23:06:19.482 INFO  [http-nio-0.0.0.0-8080-exec-7] [73b9b5fb-890b-4f5c-98d8-baede78bff7a] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:06:19.484 INFO  [http-nio-0.0.0.0-8080-exec-10] [4dfa4148-b207-4bf8-a834-468acd6a1cba] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:06:49.496 INFO  [http-nio-0.0.0.0-8080-exec-1] [3a135031-13c3-425c-884e-9f332b05f3cd] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:06:49.497 INFO  [http-nio-0.0.0.0-8080-exec-4] [a7e11ed6-b4be-4a86-b2cb-cd7a41bcac75] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:06:49.499 INFO  [http-nio-0.0.0.0-8080-exec-3] [e4ce289c-ad95-40f5-a8be-a1c8afad3bd8] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (9 ms) user=admin@shop.com
+2026-05-30 23:08:17.491 INFO  [http-nio-0.0.0.0-8080-exec-8] [2e4c3c55-8199-42db-8578-6704ef22070f] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:08:17.491 INFO  [http-nio-0.0.0.0-8080-exec-6] [a9481f60-8599-495f-a1d1-8c7d7c72b62d] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:08:17.495 INFO  [http-nio-0.0.0.0-8080-exec-9] [fb78f6ce-e222-4dd7-b675-b64405734c35] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (9 ms) user=admin@shop.com
+2026-05-30 23:09:06.870 INFO  [http-nio-0.0.0.0-8080-exec-5] [3cb8aa5e-5fd7-462d-ba1a-84387b3969c1] p.e.config.RequestLoggingFilter - HTTP GET /api/auth/me -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-30 23:09:06.870 INFO  [http-nio-0.0.0.0-8080-exec-2] [d7854d02-21af-4a80-aded-5587341cff95] p.e.config.RequestLoggingFilter - HTTP GET /api/auth/me -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-30 23:09:06.907 INFO  [http-nio-0.0.0.0-8080-exec-10] [8f7a44cb-4395-423c-991b-ae2a9a894ae0] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-30 23:09:06.907 INFO  [http-nio-0.0.0.0-8080-exec-1] [64a41169-a274-48c9-a32d-d180cab54ab5] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-30 23:09:06.910 INFO  [http-nio-0.0.0.0-8080-exec-7] [2a182ccf-943f-41c4-b0c7-47c256d3b83c] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (10 ms) user=parsan6347@gmail.com
+2026-05-30 23:09:06.960 INFO  [http-nio-0.0.0.0-8080-exec-4] [d659c3c5-4025-415d-8e03-d31d0a97f0db] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-30 23:09:06.969 INFO  [http-nio-0.0.0.0-8080-exec-3] [162a26dc-3ec9-4011-b951-2cbff0b03801] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=parsan6347@gmail.com
+2026-05-30 23:09:06.969 INFO  [http-nio-0.0.0.0-8080-exec-8] [980914cb-ac3a-40da-bc32-087057cf1499] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=parsan6347@gmail.com
+2026-05-30 23:09:06.985 INFO  [http-nio-0.0.0.0-8080-exec-6] [761e84d5-597e-43dd-9969-87cc78277731] p.e.config.RequestLoggingFilter - HTTP GET /api/categories -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-30 23:09:06.985 INFO  [http-nio-0.0.0.0-8080-exec-2] [61afd2fe-ca75-4ccc-9b89-306d8f426b1f] p.e.config.RequestLoggingFilter - HTTP GET /api/categories -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-30 23:09:07.062 INFO  [http-nio-0.0.0.0-8080-exec-9] [b8b4eeb4-0e96-46f8-8552-063882b90f0b] p.e.config.RequestLoggingFilter - HTTP GET /api/products?page=0&size=12&sort=name%2Casc -> 200 (81 ms) user=parsan6347@gmail.com
+2026-05-30 23:09:07.096 INFO  [http-nio-0.0.0.0-8080-exec-5] [84277607-457e-4ece-a307-19a4e18cb6d1] p.e.config.RequestLoggingFilter - HTTP GET /api/products?page=0&size=12&sort=name%2Casc -> 200 (79 ms) user=parsan6347@gmail.com
+2026-05-30 23:09:10.367 INFO  [http-nio-0.0.0.0-8080-exec-3] [1de90215-6821-4262-90c0-aa37a992b417] p.e.config.RequestLoggingFilter - HTTP GET /api/auth/me -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-30 23:09:10.367 INFO  [http-nio-0.0.0.0-8080-exec-4] [02549dbe-c0e1-4617-99b2-65387f444757] p.e.config.RequestLoggingFilter - HTTP GET /api/categories -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-30 23:09:10.374 INFO  [http-nio-0.0.0.0-8080-exec-9] [f9f1e1e0-ec94-47bd-b2ae-8d3dac2f46b5] p.e.config.RequestLoggingFilter - HTTP GET /api/auth/me -> 200 (8 ms) user=parsan6347@gmail.com
+2026-05-30 23:09:10.377 INFO  [http-nio-0.0.0.0-8080-exec-2] [a7094e12-c6ca-4ec9-a389-0f2fa045c22b] p.e.config.RequestLoggingFilter - HTTP GET /api/categories -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-30 23:09:10.435 INFO  [http-nio-0.0.0.0-8080-exec-7] [606876a5-658e-4bfe-a3d6-1a1d7b984ea4] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-30 23:09:10.435 INFO  [http-nio-0.0.0.0-8080-exec-10] [83ad7558-ea47-4e9e-9843-e7fc465f8867] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-30 23:09:10.437 INFO  [http-nio-0.0.0.0-8080-exec-5] [5fb8aeed-fdc4-45ac-b7db-e90c8b53564c] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (9 ms) user=parsan6347@gmail.com
+2026-05-30 23:09:10.452 INFO  [http-nio-0.0.0.0-8080-exec-8] [6c7ea0dc-ded7-467f-a236-d9ba2386a8ab] p.e.config.RequestLoggingFilter - HTTP GET /api/products?page=0&size=12&sort=name%2Casc -> 200 (92 ms) user=parsan6347@gmail.com
+2026-05-30 23:09:10.454 INFO  [http-nio-0.0.0.0-8080-exec-6] [5afd4dd1-9447-4b7b-bfbb-c381d79ee807] p.e.config.RequestLoggingFilter - HTTP GET /api/products?page=0&size=12&sort=name%2Casc -> 200 (89 ms) user=parsan6347@gmail.com
+2026-05-30 23:09:17.181 INFO  [http-nio-0.0.0.0-8080-exec-9] [f32253c7-52f8-4145-934b-96000214edd3] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (8 ms) user=admin@shop.com
+2026-05-30 23:09:17.486 INFO  [http-nio-0.0.0.0-8080-exec-2] [67d8bdee-d029-4b22-b931-9080e31279a6] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:09:17.486 INFO  [http-nio-0.0.0.0-8080-exec-7] [ab3723a3-a482-4448-9073-6375925b8497] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:09:19.599 INFO  [http-nio-0.0.0.0-8080-exec-10] [decd255b-79fd-4314-ab33-70abcd54b484] p.e.config.RequestLoggingFilter - HTTP GET /api/auth/me -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-30 23:09:19.599 INFO  [http-nio-0.0.0.0-8080-exec-5] [77f8bd94-1dbf-4ad2-bf4f-14ead2d38ee8] p.e.config.RequestLoggingFilter - HTTP GET /api/auth/me -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-30 23:09:19.639 INFO  [http-nio-0.0.0.0-8080-exec-1] [7752e092-28bf-40b1-86f1-5de85c7ca955] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=parsan6347@gmail.com
+2026-05-30 23:09:19.641 INFO  [http-nio-0.0.0.0-8080-exec-8] [d7259618-3096-4056-94bf-68d5a3be9243] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (10 ms) user=parsan6347@gmail.com
+2026-05-30 23:09:19.641 INFO  [http-nio-0.0.0.0-8080-exec-6] [662a77e6-e770-46a7-a92d-7e51e70246c1] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-30 23:09:19.660 INFO  [http-nio-0.0.0.0-8080-exec-4] [f6d31c8b-0c8d-4932-9c93-eb616887b300] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (8 ms) user=parsan6347@gmail.com
+2026-05-30 23:09:19.668 INFO  [http-nio-0.0.0.0-8080-exec-3] [41c7f2ea-0259-45fb-91d2-dda10267e2b6] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-30 23:09:19.672 INFO  [http-nio-0.0.0.0-8080-exec-9] [69da0671-f5f2-4f4e-acfe-e96fa5dced7d] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-30 23:09:19.681 INFO  [http-nio-0.0.0.0-8080-exec-2] [ff7c7034-0f8b-470a-b4a1-bfcdae04ab56] p.e.config.RequestLoggingFilter - HTTP GET /api/categories -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-30 23:09:19.681 INFO  [http-nio-0.0.0.0-8080-exec-10] [edfb72e0-083b-402e-9b2a-b9e8d1466c86] p.e.config.RequestLoggingFilter - HTTP GET /api/categories -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-30 23:09:19.751 INFO  [http-nio-0.0.0.0-8080-exec-7] [3307cd6b-c734-448e-9c16-9d7fd09a678a] p.e.config.RequestLoggingFilter - HTTP GET /api/products?page=0&size=12&sort=name%2Casc -> 200 (77 ms) user=parsan6347@gmail.com
+2026-05-30 23:09:19.760 INFO  [http-nio-0.0.0.0-8080-exec-10] [3639abeb-f03a-4bbe-b0ce-f798e6dd6dfe] p.e.config.RequestLoggingFilter - HTTP GET /api/products?page=0&size=12&sort=name%2Casc -> 200 (70 ms) user=parsan6347@gmail.com
+2026-05-30 23:09:27.762 INFO  [http-nio-0.0.0.0-8080-exec-4] [972d4f50-2b0d-4ea4-9633-c5cc88f90861] p.e.config.RequestLoggingFilter - HTTP GET /api/categories -> 200 (9 ms) user=anonymous
+2026-05-30 23:09:27.824 INFO  [http-nio-0.0.0.0-8080-exec-3] [4d5a7645-eb5a-4129-966c-0ea91d527c5b] p.e.config.RequestLoggingFilter - HTTP GET /api/products?page=0&size=12&sort=name%2Casc -> 200 (69 ms) user=anonymous
+2026-05-30 23:09:28.790 INFO  [http-nio-0.0.0.0-8080-exec-9] [594cd53b-c5e6-4a13-a19b-58ea8e28c2c9] p.e.config.RequestLoggingFilter - HTTP GET /api/categories -> 200 (9 ms) user=anonymous
+2026-05-30 23:09:28.844 INFO  [http-nio-0.0.0.0-8080-exec-5] [8e3440f2-f80c-4e9d-88d2-3bcf98f81c01] p.e.config.RequestLoggingFilter - HTTP GET /api/products?page=0&size=12&sort=name%2Casc -> 200 (61 ms) user=anonymous
+2026-05-30 23:09:33.247 INFO  [http-nio-0.0.0.0-8080-exec-2] [b99fa449-bb5e-4fdf-b72e-bc1b2b539df5] p.e.config.RequestLoggingFilter - HTTP GET /api/categories -> 200 (8 ms) user=anonymous
+2026-05-30 23:09:33.312 INFO  [http-nio-0.0.0.0-8080-exec-7] [157e5e20-8c74-4c8c-b826-a4798e481470] p.e.config.RequestLoggingFilter - HTTP GET /api/products?page=0&size=12&sort=name%2Casc -> 200 (73 ms) user=anonymous
+2026-05-30 23:09:54.851 INFO  [http-nio-0.0.0.0-8080-exec-7] [2102e971-21a4-44f6-a9a6-2b31eb95e6fa] p.e.config.RequestLoggingFilter - HTTP GET /api/categories -> 200 (7 ms) user=anonymous
+2026-05-30 23:09:54.901 INFO  [http-nio-0.0.0.0-8080-exec-10] [9ceaac2d-4b12-4ac9-b89a-b1292180c8e0] p.e.config.RequestLoggingFilter - HTTP GET /api/products?page=0&size=12&sort=name%2Casc -> 200 (57 ms) user=anonymous
+2026-05-30 23:10:17.509 INFO  [http-nio-0.0.0.0-8080-exec-9] [c1124757-416f-4f80-8f70-6bde9c942bc5] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:10:17.509 INFO  [http-nio-0.0.0.0-8080-exec-6] [2be8c6c1-2717-46a7-a8f1-3806f3f0bf7a] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:10:17.513 INFO  [http-nio-0.0.0.0-8080-exec-1] [9cddd07d-f6f8-4880-b3fc-0e7c623fe1ee] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (10 ms) user=admin@shop.com
+2026-05-30 23:11:00.207 INFO  [http-nio-0.0.0.0-8080-exec-4] [57caa78a-138e-4a0b-bd0d-89eabad8cdb9] p.e.service.impl.AuthServiceImpl - User logged in userId=2 email=parsan6347@gmail.com
+2026-05-30 23:11:00.209 INFO  [http-nio-0.0.0.0-8080-exec-4] [57caa78a-138e-4a0b-bd0d-89eabad8cdb9] p.e.config.RequestLoggingFilter - HTTP POST /api/auth/login -> 200 (353 ms) user=anonymous
+2026-05-30 23:11:00.312 INFO  [http-nio-0.0.0.0-8080-exec-5] [6107f176-8e10-4b89-a6a7-276270b4b13b] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-30 23:11:00.322 INFO  [http-nio-0.0.0.0-8080-exec-3] [a7876d2b-d286-43d8-a365-933114c86fe9] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=parsan6347@gmail.com
+2026-05-30 23:11:00.324 INFO  [http-nio-0.0.0.0-8080-exec-2] [07d4e672-155b-404d-a99e-9e1c3cec24da] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=parsan6347@gmail.com
+2026-05-30 23:11:00.343 INFO  [http-nio-0.0.0.0-8080-exec-10] [0229e8f7-5440-4623-b698-61764333217b] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (4 ms) user=parsan6347@gmail.com
+2026-05-30 23:11:00.347 INFO  [http-nio-0.0.0.0-8080-exec-6] [7c8e8767-1591-4f31-b329-c05a938b5278] p.e.config.RequestLoggingFilter - HTTP GET /api/categories -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-30 23:11:00.347 INFO  [http-nio-0.0.0.0-8080-exec-7] [4ef3268b-fc2f-4342-8c30-b6132e0c44c7] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (8 ms) user=parsan6347@gmail.com
+2026-05-30 23:11:00.347 INFO  [http-nio-0.0.0.0-8080-exec-8] [c750c2e2-aca7-419a-a6b1-cb96f3e5c522] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=parsan6347@gmail.com
+2026-05-30 23:11:00.406 INFO  [http-nio-0.0.0.0-8080-exec-9] [e08c3b37-8139-4d2b-974a-b4bfad87eaf3] p.e.config.RequestLoggingFilter - HTTP GET /api/products?page=0&size=12&sort=name%2Casc -> 200 (59 ms) user=parsan6347@gmail.com
+2026-05-30 23:11:17.174 INFO  [http-nio-0.0.0.0-8080-exec-8] [2b2d9f5b-71b7-4b7a-aacf-e1c01b794b0c] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:11:17.483 INFO  [http-nio-0.0.0.0-8080-exec-9] [9b5fc8b4-33c3-40ff-bd3f-d7f1eacd652f] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:11:17.483 INFO  [http-nio-0.0.0.0-8080-exec-7] [6adde3fb-ea92-4943-b8f2-600865cc4564] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:11:30.358 INFO  [http-nio-0.0.0.0-8080-exec-1] [4868dddb-a3ee-4bca-b540-46c43470c5f2] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (12 ms) user=parsan6347@gmail.com
+2026-05-30 23:11:30.360 INFO  [http-nio-0.0.0.0-8080-exec-5] [431d2668-a802-4c24-9f46-c1faaa626ef0] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-30 23:11:30.360 INFO  [http-nio-0.0.0.0-8080-exec-4] [a08bab74-5d6a-4c62-96e2-4cedca4f77bd] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-30 23:12:00.338 INFO  [http-nio-0.0.0.0-8080-exec-3] [e7e87114-fae2-4f2a-bc3a-acab9d845b77] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (8 ms) user=parsan6347@gmail.com
+2026-05-30 23:12:00.347 INFO  [http-nio-0.0.0.0-8080-exec-2] [6e94081e-fe09-4c21-9878-4713c3325c22] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (4 ms) user=parsan6347@gmail.com
+2026-05-30 23:12:00.349 INFO  [http-nio-0.0.0.0-8080-exec-6] [f3c9c44e-8fa1-4b3b-89bd-6812ce6007d1] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=parsan6347@gmail.com
+2026-05-30 23:12:17.516 INFO  [http-nio-0.0.0.0-8080-exec-7] [e4770559-4c6b-459e-b69b-781e484ef7ab] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (12 ms) user=admin@shop.com
+2026-05-30 23:12:17.516 INFO  [http-nio-0.0.0.0-8080-exec-8] [6ce48018-b6ae-48f6-a2bd-0b18381ca50b] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (12 ms) user=admin@shop.com
+2026-05-30 23:12:17.521 INFO  [http-nio-0.0.0.0-8080-exec-10] [86a59fdd-06ed-4e4a-bcc3-5ec0826006a8] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (17 ms) user=admin@shop.com
+2026-05-30 23:12:30.336 INFO  [http-nio-0.0.0.0-8080-exec-9] [5db8eb84-1677-4087-a883-f1249400db80] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (9 ms) user=parsan6347@gmail.com
+2026-05-30 23:12:30.341 INFO  [http-nio-0.0.0.0-8080-exec-1] [cfedc254-57fc-47aa-8530-af6143c1861a] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-30 23:12:30.342 INFO  [http-nio-0.0.0.0-8080-exec-5] [bdd3a8d1-e9ca-4af0-8308-cd6d7eca73d7] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-30 23:13:00.322 INFO  [http-nio-0.0.0.0-8080-exec-4] [fa52948b-ae0f-4bca-910c-72ab8ebd8ac8] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (8 ms) user=parsan6347@gmail.com
+2026-05-30 23:13:00.330 INFO  [http-nio-0.0.0.0-8080-exec-3] [33a8ea31-4b52-44f7-a023-6310a48c2aea] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-30 23:13:00.333 INFO  [http-nio-0.0.0.0-8080-exec-2] [09c1a4bf-3dfe-4f83-b3d4-20b9329216a3] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-30 23:13:17.171 INFO  [http-nio-0.0.0.0-8080-exec-6] [da36c32a-d469-4f6a-a6cb-58b1a88dc74c] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:13:17.477 INFO  [http-nio-0.0.0.0-8080-exec-8] [362c6752-ef2f-4770-a611-f20679b62623] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:13:17.477 INFO  [http-nio-0.0.0.0-8080-exec-7] [531a3216-7144-47ad-bcf1-5f5966324e3c] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:13:30.319 INFO  [http-nio-0.0.0.0-8080-exec-10] [62f0715b-7420-497d-88ac-21de030d1994] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-30 23:13:30.331 INFO  [http-nio-0.0.0.0-8080-exec-9] [8d4b2b55-c9d1-46f9-b2c0-a9ad1f221165] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=parsan6347@gmail.com
+2026-05-30 23:13:30.332 INFO  [http-nio-0.0.0.0-8080-exec-1] [0e70e6eb-aee0-4933-bcdc-e3299e7beefc] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=parsan6347@gmail.com
+2026-05-30 23:14:00.337 INFO  [http-nio-0.0.0.0-8080-exec-5] [b94c3a03-d827-43e0-a3e9-f6a42ac28de4] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (9 ms) user=parsan6347@gmail.com
+2026-05-30 23:14:00.350 INFO  [http-nio-0.0.0.0-8080-exec-4] [b356436e-49d9-4694-bd65-dc97990ac08b] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-30 23:14:00.353 INFO  [http-nio-0.0.0.0-8080-exec-3] [fd4a3cfd-610d-4619-8d42-670ab24ae9c0] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-30 23:14:15.492 INFO  [http-nio-0.0.0.0-8080-exec-7] [51954848-b1c1-46a2-9089-c664ba460b0d] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:14:15.492 INFO  [http-nio-0.0.0.0-8080-exec-6] [ca8317cd-445e-48de-8ff5-68caba51042d] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:14:15.500 INFO  [http-nio-0.0.0.0-8080-exec-2] [de30cb89-c321-4523-9279-95bb1b3ad2ec] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (14 ms) user=admin@shop.com
+2026-05-30 23:14:25.707 INFO  [http-nio-0.0.0.0-8080-exec-8] [c368b683-3379-4ffe-b5b7-cf36ad7a1677] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (22 ms) user=admin@shop.com
+2026-05-30 23:14:26.009 INFO  [http-nio-0.0.0.0-8080-exec-5] [1efbb233-5f76-4aef-9faa-302c2bb0f575] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:14:26.013 INFO  [http-nio-0.0.0.0-8080-exec-10] [fe491ec5-e765-471b-9f8e-3c96a8891955] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (8 ms) user=admin@shop.com
+2026-05-30 23:14:26.014 INFO  [http-nio-0.0.0.0-8080-exec-4] [09c5b650-15c2-4051-a73a-854cab1643fc] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (9 ms) user=admin@shop.com
+2026-05-30 23:14:26.015 INFO  [http-nio-0.0.0.0-8080-exec-9] [22ce0ee7-b197-4722-be9a-e0b9ed5770d2] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (11 ms) user=admin@shop.com
+2026-05-30 23:14:26.018 INFO  [http-nio-0.0.0.0-8080-exec-1] [a039a6e2-54f5-48fa-8001-950a8866987e] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (13 ms) user=admin@shop.com
+2026-05-30 23:14:26.038 INFO  [http-nio-0.0.0.0-8080-exec-3] [b204f2d6-f0a9-414a-ad4a-53da5414cf8b] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (10 ms) user=admin@shop.com
+2026-05-30 23:14:26.344 INFO  [http-nio-0.0.0.0-8080-exec-7] [c6133177-9e1f-48bb-9ca8-542e3b3d0239] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:14:26.344 INFO  [http-nio-0.0.0.0-8080-exec-6] [4b76182a-f134-42a6-ba94-f2157f4a7fbc] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:14:30.989 INFO  [http-nio-0.0.0.0-8080-exec-2] [ca3bb4fb-7c99-4a0e-a5ac-b8b35dd4d39a] p.e.config.RequestLoggingFilter - HTTP DELETE /api/wishlist/8 -> 204 (30 ms) user=admin@shop.com
+2026-05-30 23:14:31.511 INFO  [http-nio-0.0.0.0-8080-exec-8] [fc82556b-52eb-4820-85bb-a434f5b96503] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:14:31.820 INFO  [http-nio-0.0.0.0-8080-exec-5] [1ba9dbb0-8cb3-4866-a033-2a271ff404de] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:14:31.823 INFO  [http-nio-0.0.0.0-8080-exec-10] [3e3ab8ef-92f6-429e-93ec-8be229e25e30] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:14:33.534 INFO  [http-nio-0.0.0.0-8080-exec-4] [62a7d8ba-09e4-41af-b68f-b454fd36d66a] p.e.config.RequestLoggingFilter - HTTP POST /api/wishlist/8 -> 201 (17 ms) user=admin@shop.com
+2026-05-30 23:14:34.056 INFO  [http-nio-0.0.0.0-8080-exec-9] [40ff9387-1af8-46cd-a2a6-e8082b1604c9] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:14:34.363 INFO  [http-nio-0.0.0.0-8080-exec-1] [5640ff59-49d8-4ed7-9882-248c30f20e46] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:14:34.363 INFO  [http-nio-0.0.0.0-8080-exec-3] [02e8784d-843d-41b3-9f28-98d640ac7a14] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:14:39.820 INFO  [http-nio-0.0.0.0-8080-exec-7] [14619349-090f-43e5-84ea-db73613477c8] p.e.config.RequestLoggingFilter - HTTP POST /api/cart/items -> 200 (48 ms) user=admin@shop.com
+2026-05-30 23:14:40.352 INFO  [http-nio-0.0.0.0-8080-exec-6] [667080b1-b5c5-458e-828f-14f249cc99b9] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:14:40.664 INFO  [http-nio-0.0.0.0-8080-exec-8] [10359709-1646-4777-9188-05d6a8219ba5] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:14:40.664 INFO  [http-nio-0.0.0.0-8080-exec-2] [0f47e78e-5acc-4853-9bb8-9ee730da6a3f] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:14:43.046 INFO  [http-nio-0.0.0.0-8080-exec-5] [ade9e7ef-45a2-4223-b6d9-c61c74ef2462] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (9 ms) user=admin@shop.com
+2026-05-30 23:14:43.074 INFO  [http-nio-0.0.0.0-8080-exec-10] [824f4345-7870-4e52-9064-e4a8fc83a822] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:14:43.074 INFO  [http-nio-0.0.0.0-8080-exec-4] [b856fe27-631c-4c7c-8c28-169e7123e10b] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:14:43.078 INFO  [http-nio-0.0.0.0-8080-exec-9] [61dda36c-2ab9-4217-9bf0-93462e8a9c12] p.e.config.RequestLoggingFilter - HTTP GET /api/cart -> 200 (9 ms) user=admin@shop.com
+2026-05-30 23:14:44.883 INFO  [http-nio-0.0.0.0-8080-exec-1] [829ebb18-ea8d-4670-adea-bd9afc7dd495] p.e.config.RequestLoggingFilter - HTTP PUT /api/cart/items/8 -> 200 (32 ms) user=admin@shop.com
+2026-05-30 23:14:44.905 INFO  [http-nio-0.0.0.0-8080-exec-3] [14d5c815-5999-45c3-a661-c3f5730fcb68] p.e.config.RequestLoggingFilter - HTTP GET /api/cart -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:14:45.719 INFO  [http-nio-0.0.0.0-8080-exec-2] [1f185e3a-99c9-4229-bf97-a74c50fda3b3] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:14:45.719 INFO  [http-nio-0.0.0.0-8080-exec-6] [c345601d-d959-474b-b2c1-3d9b937d80ad] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:14:45.723 INFO  [http-nio-0.0.0.0-8080-exec-7] [1f863451-95d5-4e1c-95f5-d378d9e8e9dd] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (9 ms) user=admin@shop.com
+2026-05-30 23:14:48.794 INFO  [http-nio-0.0.0.0-8080-exec-8] [35a2bf08-aea7-4a43-8c3f-795df4dd608f] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (8 ms) user=admin@shop.com
+2026-05-30 23:14:49.104 INFO  [http-nio-0.0.0.0-8080-exec-5] [c5e2133c-2702-4f60-aac6-3915a247ab24] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:14:49.106 INFO  [http-nio-0.0.0.0-8080-exec-10] [0ec74f0b-af4a-4d99-a22b-47bde6508e48] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:14:52.854 INFO  [http-nio-0.0.0.0-8080-exec-4] [d7fbd91f-b9a3-4ef3-9abb-265cf064d5a9] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (9 ms) user=admin@shop.com
+2026-05-30 23:14:52.869 INFO  [http-nio-0.0.0.0-8080-exec-1] [5350fd06-54d2-4f7a-8b16-cdfd6c1d2dcb] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:14:52.869 INFO  [http-nio-0.0.0.0-8080-exec-9] [05c592dd-bf15-4664-a9d9-7e580b9d2061] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:14:52.875 INFO  [http-nio-0.0.0.0-8080-exec-3] [e1a30fbb-e036-4fcd-9b97-8f72c6bc126a] p.e.config.RequestLoggingFilter - HTTP GET /api/shipping-addresses -> 200 (12 ms) user=admin@shop.com
+2026-05-30 23:15:19.181 INFO  [http-nio-0.0.0.0-8080-exec-6] [faccff76-ee13-4851-ad20-4f31fadcb8c9] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:15:19.185 INFO  [http-nio-0.0.0.0-8080-exec-2] [b2a2eaec-349b-4abf-93d6-627d89b64eb9] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (9 ms) user=admin@shop.com
+2026-05-30 23:15:19.489 INFO  [http-nio-0.0.0.0-8080-exec-7] [859a1d0b-ffaa-4553-9ea5-8f964cced225] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:15:49.483 INFO  [http-nio-0.0.0.0-8080-exec-10] [c31c5b3f-d69e-4783-96d3-c81e9bb11526] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:15:49.483 INFO  [http-nio-0.0.0.0-8080-exec-5] [33121dbe-40c9-4b01-b295-a682ff33d4f2] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:15:49.486 INFO  [http-nio-0.0.0.0-8080-exec-8] [0f5d9e45-1c67-4107-9785-e14f52c43005] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (8 ms) user=admin@shop.com
+2026-05-30 23:16:00.437 INFO  [http-nio-0.0.0.0-8080-exec-4] [6266e81b-3e8e-4d9d-806a-09b4c4e3974e] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-30 23:16:00.459 INFO  [http-nio-0.0.0.0-8080-exec-1] [d7cb0a4c-ceca-4d73-a7e5-36b117cff9df] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=parsan6347@gmail.com
+2026-05-30 23:16:00.459 INFO  [http-nio-0.0.0.0-8080-exec-9] [5fd489c0-56e7-47ac-99f7-e0eb344befc3] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=parsan6347@gmail.com
+2026-05-30 23:16:00.460 INFO  [http-nio-0.0.0.0-8080-exec-6] [c8527ffc-0d75-4134-8bad-e0c858f8d733] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=parsan6347@gmail.com
+2026-05-30 23:16:00.460 INFO  [http-nio-0.0.0.0-8080-exec-2] [f3941877-93b1-46b3-8715-aafd92244024] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=parsan6347@gmail.com
+2026-05-30 23:16:00.463 INFO  [http-nio-0.0.0.0-8080-exec-3] [e611fba0-ca3f-40fb-8e73-aa5e0e97bd36] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (8 ms) user=parsan6347@gmail.com
+2026-05-30 23:16:00.475 INFO  [http-nio-0.0.0.0-8080-exec-7] [87acf4da-99b7-4638-a37c-87f7b65f45b6] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-30 23:16:00.541 INFO  [http-nio-0.0.0.0-8080-exec-10] [60ac8583-a7aa-461e-bad3-2a409988bcdc] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-30 23:16:00.541 INFO  [http-nio-0.0.0.0-8080-exec-5] [f3f98e74-cbde-4000-b7c4-e703545e0b0c] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-30 23:16:01.161 INFO  [http-nio-0.0.0.0-8080-exec-8] [b3a9220b-6f29-4030-94ec-4f5f01eaeb90] p.e.config.RequestLoggingFilter - HTTP GET /api/categories -> 200 (8 ms) user=parsan6347@gmail.com
+2026-05-30 23:16:01.164 INFO  [http-nio-0.0.0.0-8080-exec-1] [40db0a78-c793-4ed7-97aa-a7444e5370ed] p.e.config.RequestLoggingFilter - HTTP GET /api/auth/me -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-30 23:16:01.219 INFO  [http-nio-0.0.0.0-8080-exec-6] [db4501bf-8374-49cd-b02c-a34cf0097319] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-30 23:16:01.219 INFO  [http-nio-0.0.0.0-8080-exec-9] [c888bbde-97c6-4f40-a375-0c9c1b49936c] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (8 ms) user=parsan6347@gmail.com
+2026-05-30 23:16:01.220 INFO  [http-nio-0.0.0.0-8080-exec-2] [4ee797a1-c707-4e1d-9971-fc66764999cd] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=parsan6347@gmail.com
+2026-05-30 23:16:01.242 INFO  [http-nio-0.0.0.0-8080-exec-4] [4de1a4d9-bf67-4580-a1a6-a7ed90dcedb5] p.e.config.RequestLoggingFilter - HTTP GET /api/products?page=0&size=12&sort=name%2Casc -> 200 (85 ms) user=parsan6347@gmail.com
+2026-05-30 23:16:11.337 INFO  [http-nio-0.0.0.0-8080-exec-5] [2779c024-6ecd-46cf-83cb-f3de0261c20f] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (8 ms) user=parsan6347@gmail.com
+2026-05-30 23:16:11.342 INFO  [http-nio-0.0.0.0-8080-exec-8] [ba5937e2-f304-4031-8901-970d4350bac0] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=parsan6347@gmail.com
+2026-05-30 23:16:11.343 INFO  [http-nio-0.0.0.0-8080-exec-1] [8735ab62-0d8f-473a-97bf-d4f6ae1f2973] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=parsan6347@gmail.com
+2026-05-30 23:16:11.348 INFO  [http-nio-0.0.0.0-8080-exec-6] [a262f5f8-b34b-4cde-bd34-08c209290eb1] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-30 23:16:11.351 INFO  [http-nio-0.0.0.0-8080-exec-2] [2eb2411b-a231-4a4b-8b27-b46e6fd9f38e] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=parsan6347@gmail.com
+2026-05-30 23:16:11.351 INFO  [http-nio-0.0.0.0-8080-exec-9] [32a2d189-4d29-4d81-b570-ffa0ac14a1ae] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-30 23:16:11.379 INFO  [http-nio-0.0.0.0-8080-exec-4] [baa9816c-de53-41d6-833d-2dd1784037c3] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=parsan6347@gmail.com
+2026-05-30 23:16:11.381 INFO  [http-nio-0.0.0.0-8080-exec-10] [b8a1e5fa-0c93-4a1a-9734-23749620acd8] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=parsan6347@gmail.com
+2026-05-30 23:16:11.383 INFO  [http-nio-0.0.0.0-8080-exec-3] [b7ee3427-234b-4eac-81c3-2ee0d3d828a6] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-30 23:16:11.743 INFO  [http-nio-0.0.0.0-8080-exec-8] [70766b9f-58a2-41de-8279-204c1e8d0dc5] p.e.config.RequestLoggingFilter - HTTP GET /api/auth/me -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-30 23:16:11.743 INFO  [http-nio-0.0.0.0-8080-exec-7] [93fc343c-c6b4-423f-afcd-ef8820ae8068] p.e.config.RequestLoggingFilter - HTTP GET /api/categories -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-30 23:16:11.781 INFO  [http-nio-0.0.0.0-8080-exec-1] [c1aa84d5-6a11-4b09-b7f6-56d5e1026d54] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-30 23:16:11.784 INFO  [http-nio-0.0.0.0-8080-exec-6] [bd58e75d-5832-43f2-a50c-3369504fc773] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (4 ms) user=parsan6347@gmail.com
+2026-05-30 23:16:11.784 INFO  [http-nio-0.0.0.0-8080-exec-9] [fd8d17ed-7f74-4c04-82d7-42f1ba7eafd8] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=parsan6347@gmail.com
+2026-05-30 23:16:11.804 INFO  [http-nio-0.0.0.0-8080-exec-5] [78af21a5-24aa-4be9-a5db-5afddbb82766] p.e.config.RequestLoggingFilter - HTTP GET /api/products?page=0&size=12&sort=name%2Casc -> 200 (68 ms) user=parsan6347@gmail.com
+2026-05-30 23:16:31.898 INFO  [http-nio-0.0.0.0-8080-exec-1] [047aa654-f8a2-4e82-9838-f4d1fbd7c63b] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-30 23:16:31.920 INFO  [http-nio-0.0.0.0-8080-exec-9] [8b82498b-cc05-4ff5-bc3f-5ae9bc6c3be2] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=parsan6347@gmail.com
+2026-05-30 23:16:31.920 INFO  [http-nio-0.0.0.0-8080-exec-6] [3adac06f-2c9e-4c36-b061-1b4a64611111] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=parsan6347@gmail.com
+2026-05-30 23:16:41.168 INFO  [http-nio-0.0.0.0-8080-exec-5] [93cf52b8-9a77-4150-8327-d9c65c1b59ee] p.e.config.RequestLoggingFilter - HTTP GET /api/categories -> 200 (8 ms) user=anonymous
+2026-05-30 23:16:41.222 INFO  [http-nio-0.0.0.0-8080-exec-2] [245dd9f8-c59f-4ce1-a9ef-7181a346dd03] p.e.config.RequestLoggingFilter - HTTP GET /api/products?page=0&size=12&sort=name%2Casc -> 200 (62 ms) user=anonymous
+2026-05-30 23:17:16.372 INFO  [http-nio-0.0.0.0-8080-exec-3] [56c212c3-80db-4f01-a6fb-9fce9cffcdb8] p.e.service.impl.AuthServiceImpl - User logged in userId=1 email=admin@shop.com
+2026-05-30 23:17:16.372 INFO  [http-nio-0.0.0.0-8080-exec-3] [56c212c3-80db-4f01-a6fb-9fce9cffcdb8] p.e.config.RequestLoggingFilter - HTTP POST /api/auth/login -> 200 (95 ms) user=anonymous
+2026-05-30 23:17:16.523 INFO  [http-nio-0.0.0.0-8080-exec-10] [e4cda655-6f0c-4ef8-aaa9-d055d245bf9f] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:17:16.530 INFO  [http-nio-0.0.0.0-8080-exec-8] [ea4bd17d-3ed2-45d5-9974-394faeab340e] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:17:16.532 INFO  [http-nio-0.0.0.0-8080-exec-7] [12da7311-f21a-4c9d-9068-b25aad3d1456] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:17:16.541 INFO  [http-nio-0.0.0.0-8080-exec-1] [48427c2b-7537-4878-acdd-aee366657544] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:17:16.541 INFO  [http-nio-0.0.0.0-8080-exec-9] [e5c0c9f0-9def-4b98-9731-dae5866177d9] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (3 ms) user=admin@shop.com
+2026-05-30 23:17:16.547 INFO  [http-nio-0.0.0.0-8080-exec-6] [accfe020-9c80-4341-aa70-4c25fb42362e] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:17:16.566 INFO  [http-nio-0.0.0.0-8080-exec-2] [afaa1a27-94c2-4752-b199-89ccd0ee3dca] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:17:16.566 INFO  [http-nio-0.0.0.0-8080-exec-5] [7c44bdc2-51cb-4039-b690-3e17e51ae6dc] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:17:16.575 INFO  [http-nio-0.0.0.0-8080-exec-4] [bb112607-69c4-4f22-9a55-f74be275dbad] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:17:16.582 WARN  [http-nio-0.0.0.0-8080-exec-3] [b2acf772-ad56-4dc6-9cfe-f9c634e5ff5b] org.hibernate.orm.query - HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+2026-05-30 23:17:16.601 INFO  [http-nio-0.0.0.0-8080-exec-3] [b2acf772-ad56-4dc6-9cfe-f9c634e5ff5b] p.e.config.RequestLoggingFilter - HTTP GET /api/admin/dashboard -> 200 (28 ms) user=admin@shop.com
+2026-05-30 23:17:17.480 INFO  [http-nio-0.0.0.0-8080-exec-8] [230e13ab-877b-478f-b0ce-3b861a961ba4] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:17:17.480 INFO  [http-nio-0.0.0.0-8080-exec-7] [e5720353-e6c9-42a4-98a2-21b18c0d35ea] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:17:17.482 INFO  [http-nio-0.0.0.0-8080-exec-10] [427f07d2-8e69-4f9b-8f7e-f4d288923d9a] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:17:23.431 INFO  [http-nio-0.0.0.0-8080-exec-1] [8be59f98-682e-454e-9715-d29d4057f6ce] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:17:23.442 INFO  [http-nio-0.0.0.0-8080-exec-9] [ec631ec9-dfe3-4b76-bd74-d9c01dd8b6c8] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:17:23.445 INFO  [http-nio-0.0.0.0-8080-exec-6] [4e3abe34-062b-4f87-8bd1-84c110759a4d] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:17:23.450 INFO  [http-nio-0.0.0.0-8080-exec-2] [9165d398-2553-47c6-b3c5-dd188ae810a5] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (8 ms) user=admin@shop.com
+2026-05-30 23:17:23.450 INFO  [http-nio-0.0.0.0-8080-exec-5] [0271ac31-411d-4dda-a421-7d32f75d1358] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:17:23.452 INFO  [http-nio-0.0.0.0-8080-exec-4] [468dd1dd-1dd9-45a1-8047-f0e98a1bcf89] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:17:23.467 INFO  [http-nio-0.0.0.0-8080-exec-3] [c2c3b2ae-c4ef-4cf4-831b-6b2ad5900924] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:17:23.475 INFO  [http-nio-0.0.0.0-8080-exec-7] [9f39578c-fe52-469d-827f-72cbea9b686a] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:17:23.475 INFO  [http-nio-0.0.0.0-8080-exec-8] [2b384154-105a-48e9-abcf-8c62caf7a096] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:17:46.531 INFO  [http-nio-0.0.0.0-8080-exec-10] [76ddba42-9b8c-459b-af5c-b1ccc943ec46] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:17:46.532 INFO  [http-nio-0.0.0.0-8080-exec-1] [0426137d-7ec0-4e47-9fe9-f39f5f9041f3] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:17:46.536 INFO  [http-nio-0.0.0.0-8080-exec-9] [c4d44031-c60d-49d4-bfa7-73a1f91ff78c] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:18:17.181 INFO  [http-nio-0.0.0.0-8080-exec-6] [61085846-b8ae-475f-88ac-e997cbb7d654] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:18:17.492 INFO  [http-nio-0.0.0.0-8080-exec-5] [0e1f0cf2-abab-49f9-a7eb-9e79309c890b] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:18:17.492 INFO  [http-nio-0.0.0.0-8080-exec-2] [dc7cb558-842a-4b23-9c63-52eb1c1ac082] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:19:15.937 INFO  [http-nio-0.0.0.0-8080-exec-4] [32cb8742-4905-4006-8946-acb578d0a614] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (9 ms) user=admin@shop.com
+2026-05-30 23:19:15.939 INFO  [http-nio-0.0.0.0-8080-exec-3] [9303e5b0-cd7d-4e5a-b57f-eb201740568e] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:19:15.941 INFO  [http-nio-0.0.0.0-8080-exec-8] [d78cb796-0b02-4aba-b1d1-e4d6c763348a] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:19:15.956 INFO  [http-nio-0.0.0.0-8080-exec-10] [19adea70-6d7e-42ac-988d-06d3d1b82959] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:19:15.959 INFO  [http-nio-0.0.0.0-8080-exec-1] [499cdf97-21e1-48f5-8efa-fc9693fd793e] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:19:15.959 INFO  [http-nio-0.0.0.0-8080-exec-7] [1e0a8d1b-d7c3-4e07-b74b-ab5c0e3269d2] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (8 ms) user=admin@shop.com
+2026-05-30 23:19:16.009 INFO  [http-nio-0.0.0.0-8080-exec-5] [e5e2ca60-c107-4902-95a4-77124d07a6a1] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:19:16.010 INFO  [http-nio-0.0.0.0-8080-exec-9] [9ea6fa4a-ef60-44f3-b4b8-fe1e70f129e7] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (10 ms) user=admin@shop.com
+2026-05-30 23:19:16.010 INFO  [http-nio-0.0.0.0-8080-exec-6] [2d073d94-241f-4bfb-ae5a-cdd12885c894] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:19:17.487 INFO  [http-nio-0.0.0.0-8080-exec-4] [33abfaa2-304c-47db-8d09-2fd3bfa55425] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:19:17.487 INFO  [http-nio-0.0.0.0-8080-exec-3] [0fd5e30a-16bd-4fd7-b54b-0c1c7a657d89] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:19:17.490 INFO  [http-nio-0.0.0.0-8080-exec-2] [4a405cb7-4160-43e1-ac17-d0fef9db93ea] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (8 ms) user=admin@shop.com
+2026-05-30 23:19:20.333 INFO  [http-nio-0.0.0.0-8080-exec-8] [877a9e91-419a-4266-888d-3aa72b1124f3] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:19:20.350 INFO  [http-nio-0.0.0.0-8080-exec-10] [b1518bc3-6d8b-4519-9be8-d7ef169c4e32] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:19:20.353 INFO  [http-nio-0.0.0.0-8080-exec-1] [cb8721f9-f236-43fe-976d-18ed82e675e4] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:19:20.353 INFO  [http-nio-0.0.0.0-8080-exec-5] [32002184-8e3c-4e89-b217-091937adec10] p.e.config.RequestLoggingFilter - HTTP GET /api/categories -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:19:20.378 INFO  [http-nio-0.0.0.0-8080-exec-7] [359a5baf-da11-4c40-b834-a7686700174a] p.e.config.RequestLoggingFilter - HTTP GET /api/products/admin/all?page=0&size=100 -> 200 (29 ms) user=admin@shop.com
+2026-05-30 23:19:34.274 INFO  [http-nio-0.0.0.0-8080-exec-9] [18b46c25-cacb-4656-b6d2-59fe8fda1ff0] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:19:34.282 INFO  [http-nio-0.0.0.0-8080-exec-6] [d3b3d265-0f18-443d-b431-c9034583c8af] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:19:34.282 INFO  [http-nio-0.0.0.0-8080-exec-3] [d343de47-d73d-452a-bcbc-d86ecabf6fa3] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:19:45.501 INFO  [http-nio-0.0.0.0-8080-exec-4] [3ea2fc69-f010-4516-9394-aedf5d9200f3] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:19:45.506 INFO  [http-nio-0.0.0.0-8080-exec-2] [74ce9d21-8fca-48b3-9086-ac1888483642] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:19:45.507 INFO  [http-nio-0.0.0.0-8080-exec-8] [384a2287-a1ec-4a11-a2ef-6e0aa2c4c15e] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:19:45.561 INFO  [http-nio-0.0.0.0-8080-exec-10] [1d79c257-4e70-4f35-b10a-d1f13847dbb9] p.e.config.RequestLoggingFilter - HTTP GET /api/products?page=0&size=12&sort=name%2Casc -> 200 (58 ms) user=admin@shop.com
+2026-05-30 23:19:49.931 INFO  [http-nio-0.0.0.0-8080-exec-2] [42282c11-6096-4bb8-8249-a6756144da7e] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:19:49.941 INFO  [http-nio-0.0.0.0-8080-exec-8] [f9cf38a2-c642-411a-9608-50c48e3e1f6e] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:19:49.942 INFO  [http-nio-0.0.0.0-8080-exec-10] [732611cf-65ae-49e7-8876-5c6d2169d43c] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:19:49.949 INFO  [http-nio-0.0.0.0-8080-exec-1] [f63cd4b3-7341-4913-9a6e-4f1697608b5d] p.e.config.RequestLoggingFilter - HTTP GET /api/products/8 -> 200 (11 ms) user=admin@shop.com
+2026-05-30 23:19:49.949 INFO  [http-nio-0.0.0.0-8080-exec-5] [4ddc3863-02b7-4140-9460-e0f34b6786c4] p.e.config.RequestLoggingFilter - HTTP GET /api/products/8/reviews?page=0&size=10 -> 200 (10 ms) user=admin@shop.com
+2026-05-30 23:19:49.963 INFO  [http-nio-0.0.0.0-8080-exec-7] [b0b687d8-8b31-4c77-a57e-91fef6aa0321] p.e.config.RequestLoggingFilter - HTTP GET /api/products/8/related?size=4 -> 200 (25 ms) user=admin@shop.com
+2026-05-30 23:19:49.990 INFO  [http-nio-0.0.0.0-8080-exec-9] [2d4d64be-5902-4b4c-87eb-131a82f712e0] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist -> 200 (14 ms) user=admin@shop.com
+2026-05-30 23:19:54.543 INFO  [http-nio-0.0.0.0-8080-exec-2] [3ff0dc74-e09e-4154-985d-db31d500f5fa] p.e.config.RequestLoggingFilter - HTTP POST /api/cart/items -> 200 (14 ms) user=admin@shop.com
+2026-05-30 23:19:55.082 INFO  [http-nio-0.0.0.0-8080-exec-8] [d677a42f-6f3d-4a57-bcba-23d7b6ce639f] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:19:55.089 INFO  [http-nio-0.0.0.0-8080-exec-10] [765a2d01-65ff-4cb2-bca6-4937674f5a6f] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:19:55.090 INFO  [http-nio-0.0.0.0-8080-exec-1] [728c2779-3f23-428c-83db-a5c0607b0215] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:19:57.821 INFO  [http-nio-0.0.0.0-8080-exec-5] [496bfe95-54d6-4a02-aaac-8c4eb59352f3] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:19:57.822 INFO  [http-nio-0.0.0.0-8080-exec-7] [fbc5c3b2-da5b-40e4-8ba2-dd3b0781edab] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:19:57.827 INFO  [http-nio-0.0.0.0-8080-exec-9] [695c218d-b804-40f2-b701-a87a43a6478b] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:19:57.832 INFO  [http-nio-0.0.0.0-8080-exec-6] [bff16bc8-7ef1-45f5-a942-d46ba14c186f] p.e.config.RequestLoggingFilter - HTTP GET /api/cart -> 200 (10 ms) user=admin@shop.com
+2026-05-30 23:20:04.234 INFO  [http-nio-0.0.0.0-8080-exec-3] [5580c728-683c-4183-b1d6-97095c47b912] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (9 ms) user=admin@shop.com
+2026-05-30 23:20:04.237 INFO  [http-nio-0.0.0.0-8080-exec-4] [e9dd8fba-cad8-4758-8f64-248fb9a3c4f2] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:20:04.238 INFO  [http-nio-0.0.0.0-8080-exec-2] [175dd2bc-b8b2-4f0d-abb8-1fb681158665] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:20:04.243 INFO  [http-nio-0.0.0.0-8080-exec-8] [f9198ff0-bbc4-46ef-87d6-26e87ef440d7] p.e.config.RequestLoggingFilter - HTTP GET /api/shipping-addresses -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:20:04.246 INFO  [http-nio-0.0.0.0-8080-exec-10] [5bdc81f0-6120-4f29-a844-036d45990ab2] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:20:04.246 INFO  [http-nio-0.0.0.0-8080-exec-1] [7865f926-f8c6-4f96-bf98-28fe95d98b30] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:20:04.263 INFO  [http-nio-0.0.0.0-8080-exec-5] [510534c5-7eb6-456b-85e0-83fb721a96ee] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (3 ms) user=admin@shop.com
+2026-05-30 23:20:08.650 INFO  [http-nio-0.0.0.0-8080-exec-7] [67b1b1ca-8b9d-47f5-b1c7-89b16377b2b0] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=17 userId=1 subtotal=119.97 total=136.04 devMode=true
+2026-05-30 23:20:08.664 INFO  [http-nio-0.0.0.0-8080-exec-7] [67b1b1ca-8b9d-47f5-b1c7-89b16377b2b0] p.e.config.RequestLoggingFilter - HTTP POST /api/orders/checkout/initiate -> 201 (74 ms) user=admin@shop.com
+2026-05-30 23:20:08.704 INFO  [http-nio-0.0.0.0-8080-exec-9] [be660638-9c62-414d-bbaa-26584c050643] p.e.config.RequestLoggingFilter - HTTP GET /api/orders/17 -> 200 (14 ms) user=admin@shop.com
+2026-05-30 23:20:09.207 INFO  [http-nio-0.0.0.0-8080-exec-6] [07226ce5-6e75-4b90-99b3-0612fb8d8b81] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:20:09.209 INFO  [http-nio-0.0.0.0-8080-exec-3] [3bd33dd5-dab1-44e1-86fe-0a26774c095c] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:20:09.213 INFO  [http-nio-0.0.0.0-8080-exec-4] [6351e864-9b9a-430f-ab77-9b6255988e65] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:20:17.180 INFO  [http-nio-0.0.0.0-8080-exec-2] [1210185d-38c0-4249-a4b3-bad0b4154791] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:20:17.489 INFO  [http-nio-0.0.0.0-8080-exec-1] [ecc017e9-7bef-40fa-bffa-eedee0ddc725] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:20:17.489 INFO  [http-nio-0.0.0.0-8080-exec-8] [8990b389-f51b-4d9d-9997-85c11ca205bd] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:20:23.129 INFO  [http-nio-0.0.0.0-8080-exec-10] [58862111-b85e-4e29-84ee-2100c8b22c04] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=17 userId=1 total=136.04 itemCount=1
+2026-05-30 23:20:23.266 INFO  [http-nio-0.0.0.0-8080-exec-10] [58862111-b85e-4e29-84ee-2100c8b22c04] p.e.service.impl.EmailServiceImpl - Email sent to admin@shop.com (order confirmation #17)
+2026-05-30 23:20:23.286 INFO  [http-nio-0.0.0.0-8080-exec-10] [58862111-b85e-4e29-84ee-2100c8b22c04] p.e.config.RequestLoggingFilter - HTTP POST /api/orders/17/confirm-payment -> 200 (205 ms) user=admin@shop.com
+2026-05-30 23:20:23.348 INFO  [http-nio-0.0.0.0-8080-exec-5] [885fae8a-63fe-4a78-8413-1b4853be1619] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:20:23.357 INFO  [http-nio-0.0.0.0-8080-exec-7] [0181c965-3bcb-4d9d-824c-f2c8c63f25ed] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:20:23.384 INFO  [http-nio-0.0.0.0-8080-exec-9] [7e2241e0-ea77-469a-abfe-fc316a36bf6c] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:20:23.393 INFO  [http-nio-0.0.0.0-8080-exec-6] [3943c50f-e5b8-4047-a320-f16116700124] p.e.config.RequestLoggingFilter - HTTP GET /api/orders/17 -> 200 (11 ms) user=admin@shop.com
+2026-05-30 23:20:23.825 INFO  [http-nio-0.0.0.0-8080-exec-3] [4c84a3e9-b31a-4e91-89e6-af1fce418877] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:20:23.832 INFO  [http-nio-0.0.0.0-8080-exec-4] [726a35f5-524f-49ef-88b6-8199ee891286] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:20:23.833 INFO  [http-nio-0.0.0.0-8080-exec-2] [2b57f1ae-4cb4-46ff-8a9b-04b758948c8d] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (3 ms) user=admin@shop.com
+2026-05-30 23:20:30.124 INFO  [http-nio-0.0.0.0-8080-exec-1] [f8f6bf81-94aa-4ce2-bd8c-cdd805a4a2d8] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications -> 200 (9 ms) user=admin@shop.com
+2026-05-30 23:20:34.279 INFO  [http-nio-0.0.0.0-8080-exec-8] [c15e3742-1a08-468b-a86d-ead746d89fd9] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:20:34.287 INFO  [http-nio-0.0.0.0-8080-exec-10] [6cb9115b-612f-4e94-b515-b909421a8d20] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:20:34.287 INFO  [http-nio-0.0.0.0-8080-exec-5] [33be6e86-9966-4a66-9612-470387041420] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:20:37.190 INFO  [http-nio-0.0.0.0-8080-exec-7] [fac39088-98a9-4f79-96c1-d1d53b576480] p.e.config.RequestLoggingFilter - HTTP PATCH /api/notifications/read-all -> 200 (12 ms) user=admin@shop.com
+2026-05-30 23:20:43.495 INFO  [http-nio-0.0.0.0-8080-exec-9] [2e8c83bd-cdd6-4275-aad2-1df0b7b4e194] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:20:43.501 INFO  [http-nio-0.0.0.0-8080-exec-6] [06cdc025-61bd-437f-befd-a7983b646143] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:20:43.501 WARN  [http-nio-0.0.0.0-8080-exec-4] [7774ed59-d706-49e0-a183-35cff0d81847] org.hibernate.orm.query - HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+2026-05-30 23:20:43.503 INFO  [http-nio-0.0.0.0-8080-exec-3] [99ee3397-f7b4-4946-a7c3-580f45f13b7e] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:20:43.508 INFO  [http-nio-0.0.0.0-8080-exec-4] [7774ed59-d706-49e0-a183-35cff0d81847] p.e.config.RequestLoggingFilter - HTTP GET /api/orders?page=0&size=10 -> 200 (9 ms) user=admin@shop.com
+2026-05-30 23:20:47.509 INFO  [http-nio-0.0.0.0-8080-exec-2] [1ad32ee9-2268-4ebe-b4f4-a5f3c3425235] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (8 ms) user=admin@shop.com
+2026-05-30 23:20:47.519 INFO  [http-nio-0.0.0.0-8080-exec-1] [79fb0a8a-5774-4b37-b8c6-4a3fbf69a272] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:20:47.521 INFO  [http-nio-0.0.0.0-8080-exec-8] [f5798fec-62f1-4f84-b75c-c4260ac95ed7] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:20:47.527 WARN  [http-nio-0.0.0.0-8080-exec-10] [92d8422c-8169-48b1-9efd-282760aff0dd] org.hibernate.orm.query - HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+2026-05-30 23:20:47.549 INFO  [http-nio-0.0.0.0-8080-exec-10] [92d8422c-8169-48b1-9efd-282760aff0dd] p.e.config.RequestLoggingFilter - HTTP GET /api/admin/dashboard -> 200 (33 ms) user=admin@shop.com
+2026-05-30 23:21:04.245 INFO  [http-nio-0.0.0.0-8080-exec-5] [f02e1d94-a167-47b1-a540-ff623260718a] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:21:04.250 INFO  [http-nio-0.0.0.0-8080-exec-7] [7c115def-7578-4732-9aa1-0a67063e405a] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (3 ms) user=admin@shop.com
+2026-05-30 23:21:04.250 INFO  [http-nio-0.0.0.0-8080-exec-9] [86c177a0-b733-4a03-93a9-3dcb80125f17] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (3 ms) user=admin@shop.com
+2026-05-30 23:21:07.480 INFO  [http-nio-0.0.0.0-8080-exec-6] [3c9b9d8a-88d3-4f94-ac52-1993f422b3b1] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (10 ms) user=admin@shop.com
+2026-05-30 23:21:07.488 INFO  [http-nio-0.0.0.0-8080-exec-3] [de4d24b0-1176-4430-a8f1-338bc8be8380] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:21:07.492 INFO  [http-nio-0.0.0.0-8080-exec-1] [186e0da2-0742-4a4f-b9f3-c669770dd76d] p.e.config.RequestLoggingFilter - HTTP GET /api/categories -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:21:07.492 INFO  [http-nio-0.0.0.0-8080-exec-4] [ae969344-5044-4ec3-97e6-3d19257ebfaa] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:21:07.516 INFO  [http-nio-0.0.0.0-8080-exec-2] [b9315e2a-94c0-4ddc-9754-a0d2c520d747] p.e.config.RequestLoggingFilter - HTTP GET /api/products/admin/all?page=0&size=100 -> 200 (29 ms) user=admin@shop.com
+2026-05-30 23:21:13.405 INFO  [http-nio-0.0.0.0-8080-exec-8] [28e44e89-a301-4ab8-900c-d98fdcaf23a3] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (8 ms) user=admin@shop.com
+2026-05-30 23:21:13.412 INFO  [http-nio-0.0.0.0-8080-exec-10] [90d85f3b-565c-4d11-8a64-6daf8dd7d77d] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:21:13.416 INFO  [http-nio-0.0.0.0-8080-exec-5] [c4893803-1caa-49a5-8b9c-557a26cc17c1] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:21:17.481 INFO  [http-nio-0.0.0.0-8080-exec-7] [0b97a3a7-59ca-4403-a2e1-6ec89f8ea1e0] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:21:17.481 INFO  [http-nio-0.0.0.0-8080-exec-6] [a96205bc-1d05-4bba-acc6-aec547d76738] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:21:17.483 INFO  [http-nio-0.0.0.0-8080-exec-9] [7faabdef-8b91-4740-bfed-d50047312b0a] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (8 ms) user=admin@shop.com
+2026-05-30 23:21:21.045 INFO  [http-nio-0.0.0.0-8080-exec-3] [19d06192-062f-4415-9bea-0606518e03eb] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:21:21.051 WARN  [http-nio-0.0.0.0-8080-exec-2] [47f27e1f-2573-48f4-9ed5-7837c2021f39] org.hibernate.orm.query - HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+2026-05-30 23:21:21.053 INFO  [http-nio-0.0.0.0-8080-exec-1] [ae8aa09e-febc-45d2-95f5-6ba753e73d8c] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:21:21.053 INFO  [http-nio-0.0.0.0-8080-exec-4] [a1e72b5b-a506-478f-b5ba-b73847396302] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:21:21.066 INFO  [http-nio-0.0.0.0-8080-exec-2] [47f27e1f-2573-48f4-9ed5-7837c2021f39] p.e.config.RequestLoggingFilter - HTTP GET /api/orders/admin/all?page=0&size=10 -> 200 (17 ms) user=admin@shop.com
+2026-05-30 23:21:34.244 INFO  [http-nio-0.0.0.0-8080-exec-8] [d0262186-d790-4e4e-8278-2b3f3c2c24ee] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:21:34.248 INFO  [http-nio-0.0.0.0-8080-exec-10] [bb881075-b5cd-473e-ab78-5c629a5e12d0] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:21:34.253 INFO  [http-nio-0.0.0.0-8080-exec-5] [a780cf69-ba33-4851-bb0e-a6d7f3a388ee] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:21:56.675 INFO  [http-nio-0.0.0.0-8080-exec-7] [2b18bf36-9de0-4471-9b98-8c821dd5ea8f] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:21:56.682 INFO  [http-nio-0.0.0.0-8080-exec-6] [d13f7597-c5f2-42f5-b0a7-c70ffa526a76] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (3 ms) user=admin@shop.com
+2026-05-30 23:21:56.684 INFO  [http-nio-0.0.0.0-8080-exec-9] [99983f19-f4e6-417b-b453-3b970f872214] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:21:56.686 INFO  [http-nio-0.0.0.0-8080-exec-3] [5585e4b0-0924-4983-b38a-b12d0d2f5a49] p.e.config.RequestLoggingFilter - HTTP GET /api/admin/coupons -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:21:59.891 INFO  [http-nio-0.0.0.0-8080-exec-4] [0f20fd95-a998-49d1-94b7-c7464e4c6ab8] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (8 ms) user=admin@shop.com
+2026-05-30 23:21:59.896 INFO  [http-nio-0.0.0.0-8080-exec-1] [ec9a2365-4eea-4c63-b041-05d8519c340c] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:21:59.899 INFO  [http-nio-0.0.0.0-8080-exec-2] [b4857a1b-96ff-4a3b-bee7-95889d5bbb93] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:22:04.242 INFO  [http-nio-0.0.0.0-8080-exec-8] [62a11225-77ca-4b5c-a0de-0e515fccf8b6] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:22:04.281 INFO  [http-nio-0.0.0.0-8080-exec-5] [cb09058d-6f8d-4719-a177-5f107f8a1480] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (3 ms) user=admin@shop.com
+2026-05-30 23:22:04.281 INFO  [http-nio-0.0.0.0-8080-exec-10] [70a1f370-d51e-466d-999e-5c91c1458a7b] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (3 ms) user=admin@shop.com
+2026-05-30 23:22:17.169 INFO  [http-nio-0.0.0.0-8080-exec-7] [1ced3cb0-c9d5-427c-bdbf-b1cb0ecbb73c] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:22:17.475 INFO  [http-nio-0.0.0.0-8080-exec-6] [153f4934-0bdc-42a1-9a0e-e5d812d9a1d0] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:22:17.475 INFO  [http-nio-0.0.0.0-8080-exec-9] [3a1e252c-1146-4a96-a436-9e5131d57942] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:22:34.247 INFO  [http-nio-0.0.0.0-8080-exec-3] [ba23e03e-2707-4701-8aa8-df702bfac23e] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:22:34.255 INFO  [http-nio-0.0.0.0-8080-exec-4] [0c37f854-5e1a-40d3-856f-2a02e56c4152] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:22:34.256 INFO  [http-nio-0.0.0.0-8080-exec-1] [21645f20-ef32-4c2f-aaf7-9b6f18d1dd31] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:23:04.271 INFO  [http-nio-0.0.0.0-8080-exec-2] [c928dfc5-5c53-4858-98f1-ac33ca71cfc9] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:23:04.275 INFO  [http-nio-0.0.0.0-8080-exec-8] [9de16c52-3181-4ccc-82fd-e3d34db818fa] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (3 ms) user=admin@shop.com
+2026-05-30 23:23:04.277 INFO  [http-nio-0.0.0.0-8080-exec-5] [ec568788-ac72-4002-9faf-8da1b68491bf] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (3 ms) user=admin@shop.com
+2026-05-30 23:23:17.486 INFO  [http-nio-0.0.0.0-8080-exec-6] [276c90cc-4aeb-4f5c-8b61-418937655551] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (3 ms) user=admin@shop.com
+2026-05-30 23:23:17.486 INFO  [http-nio-0.0.0.0-8080-exec-7] [8dba1c9c-9dc2-4442-9075-93e690fc46de] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (3 ms) user=admin@shop.com
+2026-05-30 23:23:17.488 INFO  [http-nio-0.0.0.0-8080-exec-10] [53d20d51-2e35-46f7-ae4f-29bc2d6afe15] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:23:30.321 INFO  [http-nio-0.0.0.0-8080-exec-9] [f59e996c-8694-4fc2-860b-046b1c0c9a79] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:23:34.238 INFO  [http-nio-0.0.0.0-8080-exec-3] [9613a3fd-dac3-4990-9fbd-56135c36a043] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:23:34.245 INFO  [http-nio-0.0.0.0-8080-exec-4] [94186827-9fd4-48a9-8d05-8bc01e0c6aa8] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:23:34.247 INFO  [http-nio-0.0.0.0-8080-exec-1] [1e21dc18-a43c-4acb-b683-85baa5052eea] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:23:35.528 INFO  [http-nio-0.0.0.0-8080-exec-2] [b95a6984-8377-40a7-b04b-afc5bef7db86] p.e.config.RequestLoggingFilter - HTTP GET /api/auth/me -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:23:35.800 INFO  [http-nio-0.0.0.0-8080-exec-5] [ae134dc8-210b-4dff-8f38-593377547076] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:23:35.800 INFO  [http-nio-0.0.0.0-8080-exec-8] [a18bb186-edcc-4de7-973e-9fa54c71d282] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:23:35.802 INFO  [http-nio-0.0.0.0-8080-exec-7] [393b20d7-e6cf-4706-a309-5e2c39144330] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:23:35.841 WARN  [http-nio-0.0.0.0-8080-exec-6] [3a9f7b27-9fa4-4552-ab8e-5fb86fe18404] org.hibernate.orm.query - HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+2026-05-30 23:23:35.853 INFO  [http-nio-0.0.0.0-8080-exec-6] [3a9f7b27-9fa4-4552-ab8e-5fb86fe18404] p.e.config.RequestLoggingFilter - HTTP GET /api/orders/admin/all?page=0&size=10 -> 200 (13 ms) user=admin@shop.com
+2026-05-30 23:24:17.172 INFO  [http-nio-0.0.0.0-8080-exec-10] [f9c6c4e0-48bb-4b70-8f55-28aa050f8702] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:24:17.477 INFO  [http-nio-0.0.0.0-8080-exec-9] [d24b8ea6-46f6-4d2e-98b3-01c9dd69e296] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (3 ms) user=admin@shop.com
+2026-05-30 23:24:17.479 INFO  [http-nio-0.0.0.0-8080-exec-3] [8a999443-0f28-46b3-9e56-1d069ca445fe] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:24:21.452 INFO  [http-nio-0.0.0.0-8080-exec-4] [1e13b30e-097c-414c-bb4e-006180b4bc2b] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:24:21.471 INFO  [http-nio-0.0.0.0-8080-exec-1] [c9932f5a-d651-48dc-af1f-8ab443070fd3] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:24:21.480 INFO  [http-nio-0.0.0.0-8080-exec-2] [b3f2f70b-6b5a-4158-9453-ef09d3a4bc81] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:24:21.482 INFO  [http-nio-0.0.0.0-8080-exec-5] [705b51b7-3012-4785-96b5-968022dfeb83] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:24:21.485 INFO  [http-nio-0.0.0.0-8080-exec-8] [8e2b3fa0-1e99-40f6-bee9-a9ac2da2196d] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:24:21.487 INFO  [http-nio-0.0.0.0-8080-exec-7] [dae8b7c6-8158-4ad0-8cfa-ee5ffc55d1e4] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:24:21.489 INFO  [http-nio-0.0.0.0-8080-exec-6] [616f2610-491c-4b27-89ac-6a34a289b7e3] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:24:21.518 INFO  [http-nio-0.0.0.0-8080-exec-10] [d3bbb11b-d326-443e-a153-1febf9a704c1] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:24:21.520 INFO  [http-nio-0.0.0.0-8080-exec-9] [6064acd6-c4bb-4a05-94d8-352cdcc54492] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:24:28.986 INFO  [http-nio-0.0.0.0-8080-exec-4] [ca33d5b4-a238-4cad-88ac-9afda7781f9f] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:24:28.986 INFO  [http-nio-0.0.0.0-8080-exec-8] [0a753cfb-42da-4f07-989e-10de2c352cf4] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:24:28.986 INFO  [http-nio-0.0.0.0-8080-exec-5] [d64c90ec-7d1e-430c-9440-6ea3b204926c] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:24:28.986 INFO  [http-nio-0.0.0.0-8080-exec-1] [02cce935-248e-476b-bb62-c1dfe3bc76cd] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:24:28.986 INFO  [http-nio-0.0.0.0-8080-exec-3] [e3effb03-49d5-4e33-905c-05711a2e1f1f] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (8 ms) user=admin@shop.com
+2026-05-30 23:24:28.991 INFO  [http-nio-0.0.0.0-8080-exec-2] [29d9f6ee-b260-4ed7-a982-60b2fed25d47] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (11 ms) user=admin@shop.com
+2026-05-30 23:24:29.318 INFO  [http-nio-0.0.0.0-8080-exec-6] [8efd915e-9d80-48bb-8a32-4d7681447936] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:24:29.318 INFO  [http-nio-0.0.0.0-8080-exec-10] [e30e14bb-7981-4915-bf48-964af6d0d1f2] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:24:29.321 INFO  [http-nio-0.0.0.0-8080-exec-7] [f46bcb0d-5f10-4292-9e42-30b139e1f7b7] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (8 ms) user=admin@shop.com
+2026-05-30 23:24:32.245 INFO  [http-nio-0.0.0.0-8080-exec-9] [bb1e85ee-18b7-4167-9604-793d2d00ac5b] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:24:32.271 INFO  [http-nio-0.0.0.0-8080-exec-1] [73455e93-21af-428e-8220-e3a66245a660] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:24:32.271 INFO  [http-nio-0.0.0.0-8080-exec-4] [641d1df5-91be-49bf-ae9e-59f8e539cf67] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:24:32.282 WARN  [http-nio-0.0.0.0-8080-exec-8] [0ffe9c72-a49b-410b-b97d-9ecccd2d4f61] org.hibernate.orm.query - HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+2026-05-30 23:24:32.304 INFO  [http-nio-0.0.0.0-8080-exec-8] [0ffe9c72-a49b-410b-b97d-9ecccd2d4f61] p.e.config.RequestLoggingFilter - HTTP GET /api/admin/dashboard -> 200 (37 ms) user=admin@shop.com
+2026-05-30 23:24:41.864 INFO  [http-nio-0.0.0.0-8080-exec-5] [5e927b34-914b-4a84-9c22-bb3b0dac4048] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:24:41.871 INFO  [http-nio-0.0.0.0-8080-exec-2] [23895870-02c4-41fd-bcef-b9bf85c2030b] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:24:41.871 INFO  [http-nio-0.0.0.0-8080-exec-3] [182b1436-087e-4280-8559-3f3517e3230f] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:24:43.969 INFO  [http-nio-0.0.0.0-8080-exec-6] [c8909c9d-2c53-4167-8df4-f44e97024e0e] p.e.config.RequestLoggingFilter - HTTP PATCH /api/admin/settings/low-stock-threshold -> 200 (26 ms) user=admin@shop.com
+2026-05-30 23:24:43.989 WARN  [http-nio-0.0.0.0-8080-exec-10] [b8130bbc-e51d-4000-a0e2-f5ab02a4df4c] org.hibernate.orm.query - HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+2026-05-30 23:24:44.018 INFO  [http-nio-0.0.0.0-8080-exec-10] [b8130bbc-e51d-4000-a0e2-f5ab02a4df4c] p.e.config.RequestLoggingFilter - HTTP GET /api/admin/dashboard -> 200 (39 ms) user=admin@shop.com
+2026-05-30 23:24:49.107 INFO  [http-nio-0.0.0.0-8080-exec-9] [1ef8239c-270f-48af-8f9c-bdb5aa312ede] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (3 ms) user=admin@shop.com
+2026-05-30 23:24:49.107 INFO  [http-nio-0.0.0.0-8080-exec-1] [82370618-9035-4f1d-9afa-c654887a8ef6] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (3 ms) user=admin@shop.com
+2026-05-30 23:24:49.109 INFO  [http-nio-0.0.0.0-8080-exec-7] [fdbe293f-3dfb-4370-a2c5-bcd258672e23] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:25:02.046 INFO  [http-nio-0.0.0.0-8080-exec-4] [0c86799d-5275-40e0-ad44-8400e014a461] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:25:02.361 INFO  [http-nio-0.0.0.0-8080-exec-5] [5fd8f338-837c-4bf1-acdd-3fea184c3b28] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:25:02.361 INFO  [http-nio-0.0.0.0-8080-exec-8] [a176914c-558d-4ba8-b8f6-8555fed79513] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:25:02.362 INFO  [http-nio-0.0.0.0-8080-exec-2] [a1c8aaad-352f-47b0-a9e4-be5caefb9655] p.e.config.RequestLoggingFilter - HTTP GET /api/admin/coupons -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:25:04.919 INFO  [http-nio-0.0.0.0-8080-exec-3] [3fcf033e-5fc7-4c1b-aacd-6034d2c3c29d] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:25:04.979 WARN  [http-nio-0.0.0.0-8080-exec-1] [f09b1aa6-f7b6-46f9-962f-6db58d928e34] org.hibernate.orm.query - HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+2026-05-30 23:25:04.980 INFO  [http-nio-0.0.0.0-8080-exec-10] [c821ae1a-8bc7-482f-830d-1963770303e6] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:25:04.982 INFO  [http-nio-0.0.0.0-8080-exec-6] [1803bfb5-0dc4-4502-b6d9-2b06a7fe25c4] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:25:04.995 INFO  [http-nio-0.0.0.0-8080-exec-1] [f09b1aa6-f7b6-46f9-962f-6db58d928e34] p.e.config.RequestLoggingFilter - HTTP GET /api/orders/admin/all?page=0&size=10 -> 200 (18 ms) user=admin@shop.com
+2026-05-30 23:25:11.871 INFO  [http-nio-0.0.0.0-8080-exec-9] [9b6e2359-9489-4ef4-ba2b-e4e4f429382f] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:25:11.876 INFO  [http-nio-0.0.0.0-8080-exec-7] [34fce2c5-0466-4087-8f4c-888c49a1d03d] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:25:11.878 INFO  [http-nio-0.0.0.0-8080-exec-4] [9dadf0e4-716f-4c96-9469-705c306304ec] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (3 ms) user=admin@shop.com
+2026-05-30 23:25:19.181 INFO  [http-nio-0.0.0.0-8080-exec-5] [cedc5865-c8b4-4d1b-b4d2-3d20e41709a6] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:25:19.181 INFO  [http-nio-0.0.0.0-8080-exec-8] [834c5c1a-c0fd-4388-976c-129923cf9682] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:25:19.493 INFO  [http-nio-0.0.0.0-8080-exec-2] [75fe52ee-6d86-4bc4-92b5-48460ab52f4b] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:25:41.885 INFO  [http-nio-0.0.0.0-8080-exec-3] [67d6dfe7-ec99-48bc-a570-fa3d01131223] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:25:41.894 INFO  [http-nio-0.0.0.0-8080-exec-10] [57a17d91-0ef5-4609-ac50-c2c69dafce62] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:25:41.898 INFO  [http-nio-0.0.0.0-8080-exec-6] [07b19b22-914a-4e2b-8c32-ec58589de964] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:25:49.487 INFO  [http-nio-0.0.0.0-8080-exec-9] [5f652724-f92e-40e3-850b-cfacb26f06e8] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:25:49.487 INFO  [http-nio-0.0.0.0-8080-exec-7] [3e31d6ab-c5d2-4d1b-9aaf-605f2f2745b1] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:25:49.490 INFO  [http-nio-0.0.0.0-8080-exec-1] [23540e6b-d760-4a1f-a1d7-5c71de381193] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (8 ms) user=admin@shop.com
+2026-05-30 23:26:11.865 INFO  [http-nio-0.0.0.0-8080-exec-4] [7144ccd9-7469-44df-9ed5-90dfe49252c9] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:26:11.874 INFO  [http-nio-0.0.0.0-8080-exec-8] [7d50339e-775f-4cf4-b72b-8f477ee4901f] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:26:11.876 INFO  [http-nio-0.0.0.0-8080-exec-5] [882ddd97-30fb-45d3-bff6-73d3aac4dc68] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:26:41.854 INFO  [http-nio-0.0.0.0-8080-exec-2] [bb94e29e-671a-4b01-8000-552ddedd189f] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:26:41.861 INFO  [http-nio-0.0.0.0-8080-exec-3] [d1a7bede-e92f-4aff-8a24-869181f806f5] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (3 ms) user=admin@shop.com
+2026-05-30 23:26:41.863 INFO  [http-nio-0.0.0.0-8080-exec-10] [9d79d951-56ff-4b9a-a1c4-8dcbc67c7fd7] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:27:11.865 INFO  [http-nio-0.0.0.0-8080-exec-6] [3fcdaafb-8201-4086-ae31-b2372eb8ee66] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:27:11.873 INFO  [http-nio-0.0.0.0-8080-exec-7] [a2768e3b-38ab-4a0d-afd9-5b27871422e7] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (3 ms) user=admin@shop.com
+2026-05-30 23:27:11.875 INFO  [http-nio-0.0.0.0-8080-exec-9] [3ade31c4-92df-4410-a9b0-10a78c973b7b] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:27:17.488 INFO  [http-nio-0.0.0.0-8080-exec-4] [9579d582-1db9-44cb-94ec-c94862479edf] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:27:17.488 INFO  [http-nio-0.0.0.0-8080-exec-8] [d6ce107e-093f-4717-86f3-b1a4913f0937] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:27:17.491 INFO  [http-nio-0.0.0.0-8080-exec-1] [1902eea9-ec25-43c5-a199-eecaa329ff9a] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (8 ms) user=admin@shop.com
+2026-05-30 23:27:24.725 INFO  [http-nio-0.0.0.0-8080-exec-5] [9cd3382c-6053-42ec-83c2-1f4116a57181] p.e.config.RequestLoggingFilter - HTTP GET /api/auth/me -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:27:24.968 INFO  [http-nio-0.0.0.0-8080-exec-3] [94bd65f4-da86-45ce-bb09-df0cca7146d7] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:27:24.968 INFO  [http-nio-0.0.0.0-8080-exec-10] [68ec38c3-9b97-4138-a681-4d1135331f00] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:27:24.970 INFO  [http-nio-0.0.0.0-8080-exec-2] [3e767b2f-7ad4-4718-a83a-11adcf0be905] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:27:24.998 WARN  [http-nio-0.0.0.0-8080-exec-6] [33048cc6-7050-476b-ae6f-d6a19e972b0b] org.hibernate.orm.query - HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+2026-05-30 23:27:25.012 INFO  [http-nio-0.0.0.0-8080-exec-6] [33048cc6-7050-476b-ae6f-d6a19e972b0b] p.e.config.RequestLoggingFilter - HTTP GET /api/orders/admin/all?page=0&size=10 -> 200 (15 ms) user=admin@shop.com
+2026-05-30 23:27:33.133 INFO  [http-nio-0.0.0.0-8080-exec-7] [04a0d26a-d6c3-4ee4-b31f-c4c4e3603289] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (10 ms) user=admin@shop.com
+2026-05-30 23:27:33.442 INFO  [http-nio-0.0.0.0-8080-exec-5] [e529bc34-ddab-4286-8830-eec72b8762c6] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:27:33.446 INFO  [http-nio-0.0.0.0-8080-exec-9] [dee9fc58-98c3-40f2-b1a2-6f1696f7e64f] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (8 ms) user=admin@shop.com
+2026-05-30 23:27:33.446 INFO  [http-nio-0.0.0.0-8080-exec-8] [74bd6350-55b2-4d78-b375-d2dbf34a0924] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (8 ms) user=admin@shop.com
+2026-05-30 23:27:33.446 INFO  [http-nio-0.0.0.0-8080-exec-1] [3256b596-d707-4a64-b838-38e1879c31e1] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (9 ms) user=admin@shop.com
+2026-05-30 23:27:33.450 INFO  [http-nio-0.0.0.0-8080-exec-4] [fb19916f-1ae3-428d-b623-7a3446ae5f4f] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (13 ms) user=admin@shop.com
+2026-05-30 23:27:33.471 INFO  [http-nio-0.0.0.0-8080-exec-10] [9bdcb81a-23a5-4982-b757-f6e7ed00ae64] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:27:33.772 INFO  [http-nio-0.0.0.0-8080-exec-3] [9073d7e1-2b60-4c0b-a448-7d8f1f9dde2c] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:27:33.774 INFO  [http-nio-0.0.0.0-8080-exec-2] [26e28dd5-1a55-450d-88bc-cd27491492e8] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:27:35.334 INFO  [http-nio-0.0.0.0-8080-exec-6] [41976a24-6dc7-4f0b-a6fc-950c2ec5cee7] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:27:35.394 INFO  [http-nio-0.0.0.0-8080-exec-7] [b6ea0d98-185b-4243-9fbf-7751ae15c340] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:27:35.395 INFO  [http-nio-0.0.0.0-8080-exec-5] [b9947458-44b0-469d-8b94-5a844c9a895b] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:27:35.407 INFO  [http-nio-0.0.0.0-8080-exec-9] [97e0d97c-f013-4a65-8333-b8a5b1f67c49] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist -> 200 (16 ms) user=admin@shop.com
+2026-05-30 23:27:36.493 INFO  [http-nio-0.0.0.0-8080-exec-2] [52e180c3-99be-4a78-8986-027adbbe3c92] p.e.config.RequestLoggingFilter - HTTP DELETE /api/wishlist/1 -> 204 (11 ms) user=admin@shop.com
+2026-05-30 23:27:36.829 INFO  [http-nio-0.0.0.0-8080-exec-6] [38163cd0-fc1f-4e74-9aae-ad93fb889f33] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist -> 200 (12 ms) user=admin@shop.com
+2026-05-30 23:27:37.072 INFO  [http-nio-0.0.0.0-8080-exec-7] [0574a94a-0cd3-48dd-ae4c-a8d901ec1b1b] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:27:37.320 INFO  [http-nio-0.0.0.0-8080-exec-5] [2eee5a06-29b9-4af8-8106-accb11f04ef8] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (3 ms) user=admin@shop.com
+2026-05-30 23:27:37.320 INFO  [http-nio-0.0.0.0-8080-exec-9] [012fee29-1df3-47d3-8f64-76a78b61ad83] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (3 ms) user=admin@shop.com
+2026-05-30 23:27:38.428 INFO  [http-nio-0.0.0.0-8080-exec-8] [429c0723-8ed8-4800-af8a-ed682190b07d] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (11 ms) user=admin@shop.com
+2026-05-30 23:27:38.727 INFO  [http-nio-0.0.0.0-8080-exec-10] [3e12a348-6ec8-4bc0-8e8f-16153e5af6e2] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:27:38.727 INFO  [http-nio-0.0.0.0-8080-exec-1] [ce14c2b4-3f13-40d1-9309-dacc943b1e35] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:27:38.727 INFO  [http-nio-0.0.0.0-8080-exec-3] [180cacb4-ba36-4e86-9ca0-e79d55e94ee8] p.e.config.RequestLoggingFilter - HTTP GET /api/cart -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:27:40.600 INFO  [http-nio-0.0.0.0-8080-exec-4] [3415c119-93ec-47f9-a3b6-4df18dd36c69] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:27:40.662 INFO  [http-nio-0.0.0.0-8080-exec-6] [7b06503d-cd7f-4976-9bc7-cf99ba1009eb] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:27:40.664 INFO  [http-nio-0.0.0.0-8080-exec-2] [9301ad50-c7a7-4a38-8b3d-4b392ee345bf] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:27:40.665 INFO  [http-nio-0.0.0.0-8080-exec-7] [58d71410-2052-48dc-ab29-4c13c4264455] p.e.config.RequestLoggingFilter - HTTP GET /api/categories -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:27:40.743 INFO  [http-nio-0.0.0.0-8080-exec-5] [61031e6d-bcfd-43e8-a956-8e9296445750] p.e.config.RequestLoggingFilter - HTTP GET /api/products?page=0&size=12&sort=name%2Casc -> 200 (85 ms) user=admin@shop.com
+2026-05-30 23:27:43.503 INFO  [http-nio-0.0.0.0-8080-exec-10] [715b0f3f-a092-4501-82ae-61712cc0e192] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (12 ms) user=admin@shop.com
+2026-05-30 23:27:43.550 INFO  [http-nio-0.0.0.0-8080-exec-8] [e39943fc-eed4-4397-9909-414a98c9ba84] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (9 ms) user=admin@shop.com
+2026-05-30 23:27:43.550 INFO  [http-nio-0.0.0.0-8080-exec-4] [7bc6244b-20db-46a1-a062-a0a5c08c86a8] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (9 ms) user=admin@shop.com
+2026-05-30 23:27:43.569 INFO  [http-nio-0.0.0.0-8080-exec-6] [03c4a371-2dc6-44db-b386-d845bdb68b56] p.e.config.RequestLoggingFilter - HTTP GET /api/products/2/reviews?page=0&size=10 -> 200 (24 ms) user=admin@shop.com
+2026-05-30 23:27:43.573 INFO  [http-nio-0.0.0.0-8080-exec-1] [68602b5b-16ef-4437-b0b9-3d03fde07ec1] p.e.config.RequestLoggingFilter - HTTP GET /api/products/2 -> 200 (28 ms) user=admin@shop.com
+2026-05-30 23:27:43.592 INFO  [http-nio-0.0.0.0-8080-exec-3] [e162d273-65cd-4d22-bbb7-da4ba792eecf] p.e.config.RequestLoggingFilter - HTTP GET /api/products/2/related?size=4 -> 200 (47 ms) user=admin@shop.com
+2026-05-30 23:27:45.215 INFO  [http-nio-0.0.0.0-8080-exec-5] [e2b007c5-1ba9-4f57-9318-949b9205f947] p.e.config.RequestLoggingFilter - HTTP POST /api/cart/items -> 200 (17 ms) user=admin@shop.com
+2026-05-30 23:27:45.735 INFO  [http-nio-0.0.0.0-8080-exec-7] [2ce6e5ec-059d-49e2-93c1-e407a9cc8940] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:27:46.036 INFO  [http-nio-0.0.0.0-8080-exec-9] [ca052f9b-63cd-4143-aeee-903fc2455da5] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (3 ms) user=admin@shop.com
+2026-05-30 23:27:46.037 INFO  [http-nio-0.0.0.0-8080-exec-2] [03a85ce0-bd48-46bd-be9b-bf5bf66e7206] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (2 ms) user=admin@shop.com
+2026-05-30 23:27:49.222 INFO  [http-nio-0.0.0.0-8080-exec-8] [cd2f95ad-79a0-4b9d-8f56-6d87ce0525b1] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:27:49.222 INFO  [http-nio-0.0.0.0-8080-exec-4] [0eba470b-9c77-4368-ac29-7ca239add688] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:27:49.224 INFO  [http-nio-0.0.0.0-8080-exec-10] [08fab270-cd46-40ed-8d74-f13914c0021e] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:27:55.066 INFO  [http-nio-0.0.0.0-8080-exec-6] [d342b937-e9e6-4d27-b5fe-92814255fcfb] p.e.config.RequestLoggingFilter - HTTP POST /api/products/2/reviews -> 201 (27 ms) user=admin@shop.com
+2026-05-30 23:27:55.408 INFO  [http-nio-0.0.0.0-8080-exec-1] [5d63f307-db63-4b09-bfff-56f372db6b88] p.e.config.RequestLoggingFilter - HTTP GET /api/products/2 -> 200 (18 ms) user=admin@shop.com
+2026-05-30 23:28:01.585 INFO  [http-nio-0.0.0.0-8080-exec-3] [87347dda-37a1-4363-91f0-1a4faa8032e2] p.e.config.RequestLoggingFilter - HTTP POST /api/cart/items -> 200 (14 ms) user=admin@shop.com
+2026-05-30 23:28:02.406 INFO  [http-nio-0.0.0.0-8080-exec-7] [cc5c68b7-bfc4-4f67-8d66-5c8eb098bed5] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (3 ms) user=admin@shop.com
+2026-05-30 23:28:02.406 INFO  [http-nio-0.0.0.0-8080-exec-9] [979fe81b-9022-45bc-bcb1-0ba50edafb88] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (3 ms) user=admin@shop.com
+2026-05-30 23:28:02.409 INFO  [http-nio-0.0.0.0-8080-exec-5] [3e35ce2b-08e7-49c1-b8f9-b6ce14707ef6] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:28:03.768 INFO  [http-nio-0.0.0.0-8080-exec-2] [9dfe27c9-fe02-4dab-b2b6-e94dcb3658f9] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:28:04.074 INFO  [http-nio-0.0.0.0-8080-exec-8] [32f3f631-3e9b-4a77-a6d7-ecd05e5a6665] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:28:04.074 INFO  [http-nio-0.0.0.0-8080-exec-4] [b7e4fcfc-4cd1-493c-b5aa-addc4c6d9cb1] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:28:04.076 INFO  [http-nio-0.0.0.0-8080-exec-10] [a39a19e4-ee44-4351-9e63-1c8c6d12ce12] p.e.config.RequestLoggingFilter - HTTP GET /api/cart -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:28:10.170 INFO  [http-nio-0.0.0.0-8080-exec-6] [961a2fc5-36b8-4ed7-ab42-c2aed2fc0947] p.e.config.RequestLoggingFilter - HTTP DELETE /api/cart/items/2 -> 200 (13 ms) user=admin@shop.com
+2026-05-30 23:28:10.427 INFO  [http-nio-0.0.0.0-8080-exec-1] [f81e70ae-69aa-4e0a-b99b-5e8a216e4b94] p.e.config.RequestLoggingFilter - HTTP GET /api/cart -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:28:10.692 INFO  [http-nio-0.0.0.0-8080-exec-3] [cc36ef44-ac3b-43cb-94a9-624f8269c376] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:28:11.003 INFO  [http-nio-0.0.0.0-8080-exec-9] [2d9095e4-420d-4413-8b84-72a52cd9cb64] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:28:11.004 INFO  [http-nio-0.0.0.0-8080-exec-7] [f188f4c9-cca3-4c4d-b225-e17dd88abc33] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:28:12.751 INFO  [http-nio-0.0.0.0-8080-exec-5] [9a9d0410-876d-447f-bbde-f3e5e4ffecc4] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:28:12.793 INFO  [http-nio-0.0.0.0-8080-exec-4] [121ded91-d882-421e-b45b-ab37fc822212] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:28:12.793 INFO  [http-nio-0.0.0.0-8080-exec-2] [70bcaea6-a4e3-4470-b781-c01251af3987] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:28:12.802 INFO  [http-nio-0.0.0.0-8080-exec-8] [44e31801-f4ff-4f63-b517-f483c4fce850] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist -> 200 (13 ms) user=admin@shop.com
+2026-05-30 23:28:14.093 INFO  [http-nio-0.0.0.0-8080-exec-9] [bdee15d7-050c-4f11-904a-d5d504aea443] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:28:14.395 WARN  [http-nio-0.0.0.0-8080-exec-2] [14ae47a4-a8ff-4f0a-ab4f-52f224b277c0] org.hibernate.orm.query - HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+2026-05-30 23:28:14.398 INFO  [http-nio-0.0.0.0-8080-exec-5] [d9f29b2c-f59f-46ec-98c5-00abc8ad02eb] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:28:14.398 INFO  [http-nio-0.0.0.0-8080-exec-7] [98b6bf9d-8ae5-400c-a11a-659fdc72856f] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:28:14.403 INFO  [http-nio-0.0.0.0-8080-exec-2] [14ae47a4-a8ff-4f0a-ab4f-52f224b277c0] p.e.config.RequestLoggingFilter - HTTP GET /api/orders?page=0&size=10 -> 200 (9 ms) user=admin@shop.com
+2026-05-30 23:28:18.710 INFO  [http-nio-0.0.0.0-8080-exec-4] [f3fd5af4-0d94-4232-8e80-de41bdbe8299] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:28:18.728 INFO  [http-nio-0.0.0.0-8080-exec-10] [024e92b9-16c8-42f3-9a40-182f2897e4a9] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:28:18.728 INFO  [http-nio-0.0.0.0-8080-exec-8] [2ef8ecdd-81cc-4e12-b71b-3af6b190cffd] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:28:18.736 INFO  [http-nio-0.0.0.0-8080-exec-6] [d455249f-19bc-4738-971d-9d109e332f1a] p.e.config.RequestLoggingFilter - HTTP GET /api/orders/5 -> 200 (9 ms) user=admin@shop.com
+2026-05-30 23:28:18.791 INFO  [http-nio-0.0.0.0-8080-exec-3] [039104c5-13e5-4a2d-9400-7f3a2f5be356] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:28:18.957 INFO  [http-nio-0.0.0.0-8080-exec-1] [735bcf26-c691-451a-bb8f-28c396286c7f] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (2 ms) user=admin@shop.com
+2026-05-30 23:28:19.097 INFO  [http-nio-0.0.0.0-8080-exec-9] [f0b4ab36-18e9-4f57-814b-e5b11ada295a] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (3 ms) user=admin@shop.com
+2026-05-30 23:28:47.282 INFO  [http-nio-0.0.0.0-8080-exec-7] [f3ee1005-ae0f-4259-93b7-6b899d2cd295] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:28:47.589 INFO  [http-nio-0.0.0.0-8080-exec-2] [535d323b-36df-4e97-ace1-e4065a722599] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (3 ms) user=admin@shop.com
+2026-05-30 23:28:47.589 INFO  [http-nio-0.0.0.0-8080-exec-5] [1b8ba2e7-69e5-4207-958f-a406e5e4e1b9] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (3 ms) user=admin@shop.com
+2026-05-30 23:28:48.678 INFO  [http-nio-0.0.0.0-8080-exec-3] [185ec8fb-9b4a-4695-83e0-af7164cbd25c] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:28:48.708 INFO  [http-nio-0.0.0.0-8080-exec-9] [7d566922-1ae8-4aa1-9426-b289b03f1e36] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:28:48.710 INFO  [http-nio-0.0.0.0-8080-exec-1] [7bf942a0-2486-45c3-bef1-48f25fe00c84] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:28:48.717 INFO  [http-nio-0.0.0.0-8080-exec-5] [68d3dd91-83d8-4efc-975e-9b58d22a3d0f] p.e.config.RequestLoggingFilter - HTTP GET /api/products/8/reviews?page=0&size=10 -> 200 (12 ms) user=admin@shop.com
+2026-05-30 23:28:48.720 INFO  [http-nio-0.0.0.0-8080-exec-7] [a06e87a1-603e-4821-8128-aed800a1ac60] p.e.config.RequestLoggingFilter - HTTP GET /api/products/8 -> 200 (15 ms) user=admin@shop.com
+2026-05-30 23:28:48.734 INFO  [http-nio-0.0.0.0-8080-exec-2] [71495682-2cdf-4e06-b83c-95a2c4ea7527] p.e.config.RequestLoggingFilter - HTTP GET /api/products/8/related?size=4 -> 200 (29 ms) user=admin@shop.com
+2026-05-30 23:28:49.128 INFO  [http-nio-0.0.0.0-8080-exec-4] [9c45cd62-8b3d-4df6-ad54-cfdc09d15bdf] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:28:49.131 INFO  [http-nio-0.0.0.0-8080-exec-8] [2cdca79f-998e-49a5-90c0-22c86e9686de] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:28:49.131 INFO  [http-nio-0.0.0.0-8080-exec-6] [9896bd39-ad45-4371-942c-cf008476a9e2] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (8 ms) user=admin@shop.com
+2026-05-30 23:28:49.588 INFO  [http-nio-0.0.0.0-8080-exec-9] [64b1a18b-c9ff-4f64-b79f-fbe976728c12] p.e.config.RequestLoggingFilter - HTTP POST /api/cart/items -> 200 (21 ms) user=admin@shop.com
+2026-05-30 23:28:50.452 INFO  [http-nio-0.0.0.0-8080-exec-5] [f19d602c-7fe9-4c2d-a5ea-4f4c1a287b81] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (3 ms) user=admin@shop.com
+2026-05-30 23:28:50.452 INFO  [http-nio-0.0.0.0-8080-exec-7] [314e11e8-ca0c-4cb3-b4f5-86fae390d4a1] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (3 ms) user=admin@shop.com
+2026-05-30 23:28:50.456 INFO  [http-nio-0.0.0.0-8080-exec-1] [f0a4d3d7-4010-444c-a0e5-83f3c74eb5b2] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:28:50.720 INFO  [http-nio-0.0.0.0-8080-exec-2] [2d84255a-2b4a-4c3e-a4c7-960fbfa2ada5] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (6 ms) user=admin@shop.com
+2026-05-30 23:28:50.977 INFO  [http-nio-0.0.0.0-8080-exec-3] [13089430-bd3c-43d7-9830-3dbaec374959] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:28:51.007 INFO  [http-nio-0.0.0.0-8080-exec-4] [022818f6-7e68-4df1-92bd-b689e23e4495] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:28:51.011 INFO  [http-nio-0.0.0.0-8080-exec-8] [d8b7adaa-6895-437d-a3f7-a64c8f461f40] p.e.config.RequestLoggingFilter - HTTP GET /api/cart -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:28:51.857 INFO  [http-nio-0.0.0.0-8080-exec-10] [50a2d23d-b6f4-448f-a016-76b8fa288cfb] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:28:51.859 INFO  [http-nio-0.0.0.0-8080-exec-6] [91d00665-eb29-4b65-b3a1-42560e0ba281] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:28:52.159 INFO  [http-nio-0.0.0.0-8080-exec-5] [7b3ce3b3-4881-46eb-a5fb-946d5fa4ff45] p.e.config.RequestLoggingFilter - HTTP GET /api/shipping-addresses -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:28:52.161 INFO  [http-nio-0.0.0.0-8080-exec-9] [6a3e572d-ffdc-431e-901f-23848b9218bc] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:28:55.072 INFO  [http-nio-0.0.0.0-8080-exec-7] [01e5e327-4a24-4083-b301-ca209806b3fb] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=18 userId=1 subtotal=39.99 total=49.66 devMode=true
+2026-05-30 23:28:55.082 INFO  [http-nio-0.0.0.0-8080-exec-7] [01e5e327-4a24-4083-b301-ca209806b3fb] p.e.config.RequestLoggingFilter - HTTP POST /api/orders/checkout/initiate -> 201 (29 ms) user=admin@shop.com
+2026-05-30 23:28:55.309 INFO  [http-nio-0.0.0.0-8080-exec-1] [cb7f8e77-25dd-43d1-b67e-73db17dafe74] p.e.config.RequestLoggingFilter - HTTP GET /api/orders/18 -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:28:55.601 INFO  [http-nio-0.0.0.0-8080-exec-2] [1b2e5f30-a054-417b-8ed3-e65b032bed54] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:28:55.912 INFO  [http-nio-0.0.0.0-8080-exec-4] [5fb5c3c4-fc93-4365-a6a1-70a5ea25f52a] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:28:55.912 INFO  [http-nio-0.0.0.0-8080-exec-3] [deb199ae-1398-45fb-a85c-f8701e395f3b] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:28:58.393 INFO  [http-nio-0.0.0.0-8080-exec-8] [0fc831e9-d511-46cb-8e39-5f151d6172c3] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=18 userId=1 total=49.66 itemCount=1
+2026-05-30 23:28:58.431 INFO  [http-nio-0.0.0.0-8080-exec-8] [0fc831e9-d511-46cb-8e39-5f151d6172c3] p.e.service.impl.EmailServiceImpl - Email sent to admin@shop.com (order confirmation #18)
+2026-05-30 23:28:58.445 INFO  [http-nio-0.0.0.0-8080-exec-8] [0fc831e9-d511-46cb-8e39-5f151d6172c3] p.e.config.RequestLoggingFilter - HTTP POST /api/orders/18/confirm-payment -> 200 (69 ms) user=admin@shop.com
+2026-05-30 23:28:58.630 INFO  [http-nio-0.0.0.0-8080-exec-10] [086a51c1-2a41-4e5d-a2ef-01faac87d9e8] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:28:58.782 INFO  [http-nio-0.0.0.0-8080-exec-6] [df8cca2e-7e7f-41f0-8585-be4639630a9a] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (3 ms) user=admin@shop.com
+2026-05-30 23:28:58.814 INFO  [http-nio-0.0.0.0-8080-exec-5] [2405547a-b087-445c-927b-614a39b92afe] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:28:58.822 INFO  [http-nio-0.0.0.0-8080-exec-9] [7b4fdcd8-e76b-491f-86ff-f839cdb2961c] p.e.config.RequestLoggingFilter - HTTP GET /api/orders/18 -> 200 (10 ms) user=admin@shop.com
+2026-05-30 23:28:58.970 INFO  [http-nio-0.0.0.0-8080-exec-1] [38df5097-c396-4dee-873d-4438538c530c] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (3 ms) user=admin@shop.com
+2026-05-30 23:28:58.970 INFO  [http-nio-0.0.0.0-8080-exec-7] [3cc7a440-849e-45e0-9825-e47b5687a3a4] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (4 ms) user=admin@shop.com
+2026-05-30 23:28:59.280 INFO  [http-nio-0.0.0.0-8080-exec-2] [28c17dd7-f1d9-49ad-99c5-9bf319ce6903] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (3 ms) user=admin@shop.com
+2026-05-30 23:29:19.481 INFO  [http-nio-0.0.0.0-8080-exec-4] [094ebe6e-7b79-46de-857c-e8c83cd69743] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (3 ms) user=admin@shop.com
+2026-05-30 23:29:19.481 INFO  [http-nio-0.0.0.0-8080-exec-8] [ae32f9f5-9fb7-4c6f-8bc4-7697f80c9786] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (3 ms) user=admin@shop.com
+2026-05-30 23:29:19.483 INFO  [http-nio-0.0.0.0-8080-exec-3] [047012ac-6098-4142-af62-6ef87d037c56] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:29:49.186 INFO  [http-nio-0.0.0.0-8080-exec-10] [475fa71d-571d-4a37-baaf-b34830c2e449] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:29:49.491 INFO  [http-nio-0.0.0.0-8080-exec-6] [d9f1af57-9034-493f-817b-8573fa80a7d5] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:29:49.493 INFO  [http-nio-0.0.0.0-8080-exec-5] [730ff03f-6fe6-4008-bb50-1a870b66aece] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:31:17.497 INFO  [http-nio-0.0.0.0-8080-exec-7] [bee04a23-ec3b-47f6-bfe6-5b959fe1943c] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=admin@shop.com
+2026-05-30 23:31:17.499 INFO  [http-nio-0.0.0.0-8080-exec-9] [76296a0b-5d39-41f4-99fa-4d060a366de5] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (7 ms) user=admin@shop.com
+2026-05-30 23:31:17.509 INFO  [http-nio-0.0.0.0-8080-exec-1] [820db506-af54-462d-9e3a-8a745c5c427e] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=admin@shop.com
