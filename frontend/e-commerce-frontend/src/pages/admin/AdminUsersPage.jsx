@@ -16,10 +16,12 @@ import {
 import { useCallback, useEffect, useState } from 'react';
 import { adminApi } from '../../api/admin';
 import { useAuth } from '../../context/AuthContext';
+import { useConfirm } from '../../context/ConfirmDialogContext';
 import { showError, showSuccess } from '../../utils/toast';
 
 export default function AdminUsersPage() {
   const { user } = useAuth();
+  const confirm = useConfirm();
   const [users, setUsers] = useState([]);
   const [page, setPage] = useState(0);
   const [pageData, setPageData] = useState({ page: 0, totalPages: 0 });
@@ -38,7 +40,11 @@ export default function AdminUsersPage() {
   }, [load]);
 
   const deleteUser = async (target) => {
-    if (!window.confirm(`Delete ${target.email}? This removes the user and their related account data.`)) return;
+    if (!(await confirm({
+      title: `Delete ${target.email}?`,
+      description: 'This removes the user and their related account data.',
+      confirmText: 'Delete user',
+    }))) return;
     try {
       await adminApi.deleteUser(target.id);
       showSuccess('User deleted');

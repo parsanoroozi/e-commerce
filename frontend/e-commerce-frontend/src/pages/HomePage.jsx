@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   Card,
   FormControl,
   Grid,
@@ -12,7 +11,7 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { categoriesApi } from '../api/categories';
 import { productsApi } from '../api/products';
 import PageContainer from '../components/layout/PageContainer';
@@ -44,7 +43,8 @@ export default function HomePage() {
     categoriesApi.list().then(setCategories).catch(() => {});
   }, []);
 
-  const loadProducts = useCallback(() => {
+  useEffect(() => {
+    const controller = new AbortController();
     setLoading(true);
     const [sortField, sortDir] = sort.split(',');
     productsApi
@@ -54,22 +54,19 @@ export default function HomePage() {
         page,
         size: 12,
         sort: `${sortField},${sortDir}`,
-      })
+      }, { signal: controller.signal })
       .then((data) => {
         setProducts(data.content);
         setTotalPages(data.totalPages);
       })
-      .catch((err) => showError(err.message))
-      .finally(() => setLoading(false));
+      .catch((err) => {
+        if (err.name !== 'AbortError') showError(err.message);
+      })
+      .finally(() => {
+        if (!controller.signal.aborted) setLoading(false);
+      });
+    return () => controller.abort();
   }, [categoryId, debouncedSearch, page, sort]);
-
-  useEffect(() => {
-    setPage(0);
-  }, [categoryId, debouncedSearch, sort]);
-
-  useEffect(() => {
-    loadProducts();
-  }, [loadProducts]);
 
   return (
     <PageContainer>
@@ -101,11 +98,17 @@ export default function HomePage() {
             size="small"
             placeholder="Search products..."
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => {
+              setSearch(e.target.value);
+              setPage(0);
+            }}
           />
           <FormControl size="small" sx={{ minWidth: { sm: 180 }, width: { xs: '100%', sm: 'auto' } }}>
             <InputLabel>Category</InputLabel>
-            <Select value={categoryId} label="Category" onChange={(e) => setCategoryId(e.target.value)}>
+            <Select value={categoryId} label="Category" onChange={(e) => {
+              setCategoryId(e.target.value);
+              setPage(0);
+            }}>
               <MenuItem value="">All categories</MenuItem>
               {categories.map((c) => (
                 <MenuItem key={c.id} value={c.id}>{c.name}</MenuItem>
@@ -114,7 +117,10 @@ export default function HomePage() {
           </FormControl>
           <FormControl size="small" sx={{ minWidth: { sm: 200 }, width: { xs: '100%', sm: 'auto' } }}>
             <InputLabel>Sort</InputLabel>
-            <Select value={sort} label="Sort" onChange={(e) => setSort(e.target.value)}>
+            <Select value={sort} label="Sort" onChange={(e) => {
+              setSort(e.target.value);
+              setPage(0);
+            }}>
               <MenuItem value="name,asc">Name A–Z</MenuItem>
               <MenuItem value="price,asc">Price: Low to high</MenuItem>
               <MenuItem value="price,desc">Price: High to low</MenuItem>

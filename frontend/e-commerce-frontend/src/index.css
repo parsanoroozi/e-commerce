@@ -6,3 +6,9 @@ html {
 #root {
   min-height: 100vh;
 }
+
+.page-center {
+  display: grid;
+  min-height: 40vh;
+  place-items: center;
+}

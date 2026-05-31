@@ -10,17 +10,10 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   const loadUser = useCallback(async () => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      setUser(null);
-      setLoading(false);
-      return;
-    }
     try {
       const profile = await authApi.me();
       setUser(profile);
     } catch {
-      localStorage.removeItem('token');
       setUser(null);
     } finally {
       setLoading(false);
@@ -31,39 +24,41 @@ export function AuthProvider({ children }) {
     loadUser();
   }, [loadUser]);
 
-  const login = async (credentials) => {
-    const { token, user: loggedIn } = await authApi.login(credentials);
-    localStorage.setItem('token', token);
+  const login = useCallback(async (credentials) => {
+    const { user: loggedIn } = await authApi.login(credentials);
     clearApiCache();
     emitApiChange({ method: 'POST', path: '/api/auth/login', resources: ['auth', 'cart', 'wishlist', 'notifications', 'orders'] });
     setUser(loggedIn);
     return loggedIn;
-  };
+  }, []);
 
-  const register = async (data) => {
-    const { token, user: registered } = await authApi.register(data);
-    localStorage.setItem('token', token);
+  const register = useCallback(async (data) => {
+    const { user: registered } = await authApi.register(data);
     clearApiCache();
     emitApiChange({ method: 'POST', path: '/api/auth/register', resources: ['auth', 'cart', 'wishlist', 'notifications', 'orders'] });
     setUser(registered);
     return registered;
-  };
+  }, []);
 
-  const updateProfile = async (data) => {
+  const updateProfile = useCallback(async (data) => {
     const updated = await authApi.updateProfile(data);
     setUser(updated);
     return updated;
-  };
+  }, []);
 
-  const logout = () => {
+  const logout = useCallback(async () => {
     if (user?.id != null) {
       localStorage.setItem(LAST_LOGGED_OUT_USER_KEY, String(user.id));
     }
-    localStorage.removeItem('token');
+    try {
+      await authApi.logout();
+    } catch {
+      // Local logout should still clear UI state if the network is unavailable.
+    }
     clearApiCache();
     emitApiChange({ method: 'POST', path: '/api/auth/logout', resources: ['auth', 'cart', 'wishlist', 'notifications', 'orders'] });
     setUser(null);
-  };
+  }, [user]);
 
   const value = useMemo(
     () => ({
@@ -77,7 +72,7 @@ export function AuthProvider({ children }) {
       logout,
       lastLoggedOutUserKey: LAST_LOGGED_OUT_USER_KEY,
     }),
-    [user, loading],
+    [user, loading, login, register, updateProfile, logout],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

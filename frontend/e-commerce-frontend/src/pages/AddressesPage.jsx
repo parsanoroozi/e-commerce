@@ -13,11 +13,12 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { shippingAddressesApi } from '../api/shippingAddresses';
 import PageContainer from '../components/layout/PageContainer';
 import LocationPicker from '../components/LocationPicker';
+import { useConfirm } from '../context/ConfirmDialogContext';
 
 const emptyForm = {
   label: '',
@@ -38,16 +39,17 @@ export default function AddressesPage() {
   const [editingId, setEditingId] = useState(null);
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
+  const confirm = useConfirm();
 
-  const load = () =>
+  const load = useCallback(() =>
     shippingAddressesApi.list(page).then((data) => {
       setAddresses(data.content);
       setPageData(data);
-    }).catch((err) => setError(err.message));
+    }).catch((err) => setError(err.message)), [page]);
 
   useEffect(() => {
     load();
-  }, [page]);
+  }, [load]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -84,7 +86,11 @@ export default function AddressesPage() {
   };
 
   const remove = async (id) => {
-    if (!window.confirm('Delete this address?')) return;
+    if (!(await confirm({
+      title: 'Delete address?',
+      description: 'This address will be removed from your saved addresses.',
+      confirmText: 'Delete',
+    }))) return;
     try {
       await shippingAddressesApi.remove(id);
       await load();

@@ -16,6 +16,7 @@ import {
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { categoriesApi } from '../../api/categories';
+import { useConfirm } from '../../context/ConfirmDialogContext';
 
 export default function AdminCategoriesPage() {
   const [categories, setCategories] = useState([]);
@@ -23,6 +24,7 @@ export default function AdminCategoriesPage() {
   const [description, setDescription] = useState('');
   const [editingId, setEditingId] = useState(null);
   const [error, setError] = useState('');
+  const confirm = useConfirm();
 
   const load = () => categoriesApi.list().then(setCategories);
 
@@ -53,7 +55,11 @@ export default function AdminCategoriesPage() {
   };
 
   const remove = async (id) => {
-    if (!window.confirm('Delete this category?')) return;
+    if (!(await confirm({
+      title: 'Delete category?',
+      description: 'Products in this category may be affected by this change.',
+      confirmText: 'Delete',
+    }))) return;
     try {
       await categoriesApi.remove(id);
       await load();

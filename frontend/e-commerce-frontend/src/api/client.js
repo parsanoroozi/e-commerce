@@ -1,7 +1,6 @@
 export const API_BASE = import.meta.env.VITE_API_URL || '';
 const DEFAULT_CACHE_TTL_MS = 60_000;
 const responseCache = new Map();
-const SESSION_CACHE_PREFIX = 'shopverse:api-cache:';
 const API_CHANGE_EVENT = 'shopverse:api-change';
 
 export class ApiError extends Error {
@@ -27,13 +26,12 @@ export async function apiRequest(path, options = {}) {
     cacheTtlMs,
     notify,
     headers: optionHeaders,
+    signal,
     ...fetchOptions
   } = options;
   const method = fetchOptions.method || 'GET';
-  const token = localStorage.getItem('token');
-  const authScope = token ? token.slice(-12) : 'guest';
-  const cacheKey = `${authScope}:${method}:${path}`;
-  const useCache = method === 'GET' && cacheEnabled !== false;
+  const cacheKey = `${method}:${path}`;
+  const useCache = method === 'GET' && cacheEnabled !== false && !signal;
   const requestOptions = { ...fetchOptions };
   if (method === 'GET' && cacheEnabled === false) {
     requestOptions.cache = 'no-store';
@@ -44,24 +42,18 @@ export async function apiRequest(path, options = {}) {
     if (cached && cached.expiresAt > Date.now()) {
       return cached.data !== undefined ? cached.data : cached.promise;
     }
-    const stored = readSessionCache(cacheKey);
-    if (stored) {
-      responseCache.set(cacheKey, stored);
-      return stored.data;
-    }
   }
 
   const headers = {
     'Content-Type': 'application/json',
     ...(optionHeaders || {}),
   };
-  if (token) {
-    headers.Authorization = `Bearer ${token}`;
-  }
 
   const request = fetch(`${API_BASE}${path}`, {
     ...requestOptions,
     headers,
+    signal,
+    credentials: 'include',
   }).then(async (response) => {
     if (response.status === 204 || response.status === 202 || response.headers.get('content-length') === '0') {
       return null;
@@ -86,13 +78,11 @@ export async function apiRequest(path, options = {}) {
       promise: request
         .then((data) => {
           const entry = { data, expiresAt };
-          responseCache.set(cacheKey, entry);
-          writeSessionCache(cacheKey, entry);
-          return data;
-        })
+            responseCache.set(cacheKey, entry);
+            return data;
+          })
         .catch((error) => {
           responseCache.delete(cacheKey);
-          removeSessionCache(cacheKey);
           throw error;
         }),
       expiresAt,
@@ -114,19 +104,13 @@ export async function apiRequest(path, options = {}) {
 }
 
 export async function apiUpload(path, file) {
-  const token = localStorage.getItem('token');
   const formData = new FormData();
   formData.append('file', file);
 
-  const headers = {};
-  if (token) {
-    headers.Authorization = `Bearer ${token}`;
-  }
-
   const response = await fetch(`${API_BASE}${path}`, {
     method: 'POST',
-    headers,
     body: formData,
+    credentials: 'include',
   });
 
   if (!response.ok) {
@@ -146,9 +130,6 @@ export async function apiUpload(path, file) {
 
 export function clearApiCache() {
   responseCache.clear();
-  Object.keys(sessionStorage)
-    .filter((key) => key.startsWith(SESSION_CACHE_PREFIX))
-    .forEach((key) => sessionStorage.removeItem(key));
 }
 
 export function subscribeToApiChanges(listener) {
@@ -196,32 +177,4 @@ function inferMutation(path, method) {
     return 'orders:update';
   }
   return null;
-}
-
-function readSessionCache(cacheKey) {
-  try {
-    const raw = sessionStorage.getItem(`${SESSION_CACHE_PREFIX}${cacheKey}`);
-    if (!raw) return null;
-    const parsed = JSON.parse(raw);
-    if (!parsed || parsed.expiresAt <= Date.now()) {
-      removeSessionCache(cacheKey);
-      return null;
-    }
-    return parsed;
-  } catch {
-    removeSessionCache(cacheKey);
-    return null;
-  }
-}
-
-function writeSessionCache(cacheKey, entry) {
-  try {
-    sessionStorage.setItem(`${SESSION_CACHE_PREFIX}${cacheKey}`, JSON.stringify(entry));
-  } catch {
-    // Storage can be unavailable or full; in-memory caching still applies.
-  }
-}
-
-function removeSessionCache(cacheKey) {
-  sessionStorage.removeItem(`${SESSION_CACHE_PREFIX}${cacheKey}`);
 }

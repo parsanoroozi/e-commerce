@@ -2,12 +2,18 @@ package personal.ecommercebackend.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseCookie;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import personal.ecommercebackend.dto.request.*;
 import personal.ecommercebackend.dto.response.AuthResponse;
 import personal.ecommercebackend.dto.response.UserResponse;
 import personal.ecommercebackend.service.AuthService;
+
+import java.time.Duration;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -15,6 +21,15 @@ import personal.ecommercebackend.service.AuthService;
 public class AuthController {
 
     private final AuthService authService;
+
+    @Value("${app.auth.cookie.name:SHOPVERSE_AUTH}")
+    private String authCookieName;
+
+    @Value("${app.auth.cookie.secure:false}")
+    private boolean authCookieSecure;
+
+    @Value("${app.jwt.expiration-ms}")
+    private long jwtExpirationMs;
 
     @PostMapping("/email-verification")
     @ResponseStatus(HttpStatus.ACCEPTED)
@@ -24,13 +39,27 @@ public class AuthController {
 
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public AuthResponse register(@Valid @RequestBody RegisterRequest request) {
-        return authService.register(request);
+    public ResponseEntity<AuthResponse> register(@Valid @RequestBody RegisterRequest request) {
+        AuthResponse response = authService.register(request);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .header(HttpHeaders.SET_COOKIE, createAuthCookie(response.token()).toString())
+                .body(cookieOnlyResponse(response));
     }
 
     @PostMapping("/login")
-    public AuthResponse login(@Valid @RequestBody LoginRequest request) {
-        return authService.login(request);
+    public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request) {
+        AuthResponse response = authService.login(request);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.SET_COOKIE, createAuthCookie(response.token()).toString())
+                .body(cookieOnlyResponse(response));
+    }
+
+    @PostMapping("/logout")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public ResponseEntity<Void> logout() {
+        return ResponseEntity.noContent()
+                .header(HttpHeaders.SET_COOKIE, clearAuthCookie().toString())
+                .build();
     }
 
     @GetMapping("/me")
@@ -59,5 +88,29 @@ public class AuthController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void resetPassword(@Valid @RequestBody ResetPasswordRequest request) {
         authService.resetPassword(request);
+    }
+
+    private ResponseCookie createAuthCookie(String token) {
+        return ResponseCookie.from(authCookieName, token)
+                .httpOnly(true)
+                .secure(authCookieSecure)
+                .sameSite("Lax")
+                .path("/")
+                .maxAge(Duration.ofMillis(jwtExpirationMs))
+                .build();
+    }
+
+    private ResponseCookie clearAuthCookie() {
+        return ResponseCookie.from(authCookieName, "")
+                .httpOnly(true)
+                .secure(authCookieSecure)
+                .sameSite("Lax")
+                .path("/")
+                .maxAge(Duration.ZERO)
+                .build();
+    }
+
+    private AuthResponse cookieOnlyResponse(AuthResponse response) {
+        return new AuthResponse(null, response.user());
     }
 }

@@ -29,7 +29,7 @@ public class OpenApiConfig {
                         .description("""
                                 REST API for ShopVerse: authentication, catalog, cart, checkout, orders,
                                 wishlist, reviews, coupons, notifications, and admin operations.
-                                Authenticated routes require a JWT from POST /api/auth/login or /api/auth/register.
+                                Browser clients authenticate with the HttpOnly SHOPVERSE_AUTH cookie set by login/register.
                                 """)
                         .version("1.0.0")
                         .contact(new Contact().name("ShopVerse").email("support@shopverse.local"))
@@ -44,6 +44,6 @@ public class OpenApiConfig {
                                 .type(SecurityScheme.Type.HTTP)
                                 .scheme("bearer")
                                 .bearerFormat("JWT")
-                                .description("JWT token from login/register response")));
+                                .description("Optional JWT bearer token for non-browser clients")));
     }
 }

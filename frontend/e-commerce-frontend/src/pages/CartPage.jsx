@@ -24,17 +24,23 @@ export default function CartPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  const loadCart = useCallback(() => {
+  const loadCart = useCallback((options = {}) => {
     setLoading(true);
     cartApi
-      .get()
+      .get(options)
       .then(setCart)
-      .catch((err) => setError(err.message))
-      .finally(() => setLoading(false));
+      .catch((err) => {
+        if (err.name !== 'AbortError') setError(err.message);
+      })
+      .finally(() => {
+        if (!options.signal?.aborted) setLoading(false);
+      });
   }, []);
 
   useEffect(() => {
-    loadCart();
+    const controller = new AbortController();
+    loadCart({ signal: controller.signal });
+    return () => controller.abort();
   }, [loadCart]);
 
   useEffect(() => {

@@ -15,6 +15,7 @@ export const authApi = {
     apiRequest('/api/auth/profile', { method: 'PATCH', body: JSON.stringify(data) }),
   changePassword: (data) =>
     apiRequest('/api/auth/change-password', { method: 'POST', body: JSON.stringify(data) }),
+  logout: () => apiRequest('/api/auth/logout', { method: 'POST', notify: false }),
   forgotPassword: (email) =>
     apiRequest('/api/auth/forgot-password', {
       method: 'POST',

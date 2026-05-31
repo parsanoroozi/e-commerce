@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { cartApi } from '../api/cart';
 import { notificationsApi } from '../api/notifications';
@@ -15,16 +15,16 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [notifOpen, setNotifOpen] = useState(false);
 
-  const refreshCounts = () => {
+  const refreshCounts = useCallback(() => {
     if (!isAuthenticated) return;
     cartApi.summary().then((d) => setCartCount(d.itemCount)).catch(() => {});
     wishlistApi.count().then((d) => setWishCount(d.count)).catch(() => {});
     notificationsApi.unreadCount().then((d) => setUnread(d.count)).catch(() => {});
-  };
+  }, [isAuthenticated]);
 
   useEffect(() => {
     refreshCounts();
-  }, [isAuthenticated, location.pathname]);
+  }, [isAuthenticated, location.pathname, refreshCounts]);
 
   const toggleNotifications = async () => {
     if (!notifOpen) {

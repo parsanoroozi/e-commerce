@@ -8,7 +8,6 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  Stack,
   Table,
   TableBody,
   TableCell,
@@ -20,6 +19,7 @@ import {
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { couponsApi } from '../../api/coupons';
+import { useConfirm } from '../../context/ConfirmDialogContext';
 import { showError, showSuccess } from '../../utils/toast';
 
 const empty = {
@@ -33,6 +33,7 @@ const empty = {
 export default function AdminCouponsPage() {
   const [coupons, setCoupons] = useState([]);
   const [form, setForm] = useState(empty);
+  const confirm = useConfirm();
 
   const load = () =>
     couponsApi.adminList().then(setCoupons).catch((err) => showError(err.message));
@@ -61,7 +62,11 @@ export default function AdminCouponsPage() {
   };
 
   const remove = async (id) => {
-    if (!window.confirm('Delete this coupon?')) return;
+    if (!(await confirm({
+      title: 'Delete coupon?',
+      description: 'Customers will no longer be able to use this coupon.',
+      confirmText: 'Delete',
+    }))) return;
     try {
       await couponsApi.remove(id);
       showSuccess('Coupon deleted');

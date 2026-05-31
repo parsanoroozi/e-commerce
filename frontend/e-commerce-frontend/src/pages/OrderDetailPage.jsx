@@ -24,6 +24,7 @@ import { ordersApi } from '../api/orders';
 import OrderTimeline, { OrderTimelineMobile } from '../components/OrderTimeline';
 import PageContainer from '../components/layout/PageContainer';
 import PricingSummary from '../components/PricingSummary';
+import { useConfirm } from '../context/ConfirmDialogContext';
 import { showError, showSuccess } from '../utils/toast';
 
 export default function OrderDetailPage() {
@@ -33,6 +34,7 @@ export default function OrderDetailPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [cancelling, setCancelling] = useState(false);
+  const confirm = useConfirm();
 
   const loadOrder = useCallback(() => {
     setLoading(true);
@@ -58,7 +60,11 @@ export default function OrderDetailPage() {
   const canCancel = order && (order.status === 'CONFIRMED' || order.status === 'PENDING');
 
   const handleCancel = async () => {
-    if (!window.confirm('Cancel this order?')) return;
+    if (!(await confirm({
+      title: 'Cancel order?',
+      description: 'The order will be cancelled and reserved stock will be released.',
+      confirmText: 'Cancel order',
+    }))) return;
     setCancelling(true);
     try {
       setOrder(await ordersApi.cancel(id));

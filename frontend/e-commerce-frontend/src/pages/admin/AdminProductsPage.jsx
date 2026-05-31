@@ -22,10 +22,11 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { categoriesApi } from '../../api/categories';
 import { productsApi } from '../../api/products';
 import { uploadsApi } from '../../api/uploads';
+import { useConfirm } from '../../context/ConfirmDialogContext';
 import { resolveImageUrl } from '../../utils/imageUrl';
 
 const emptyProduct = {
@@ -48,8 +49,9 @@ export default function AdminProductsPage() {
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
   const [uploading, setUploading] = useState(false);
+  const confirm = useConfirm();
 
-  const load = async () => {
+  const load = useCallback(async () => {
     const [prodData, catData] = await Promise.all([
       productsApi.adminList(productPage, 20),
       categoriesApi.list(),
@@ -57,14 +59,16 @@ export default function AdminProductsPage() {
     setProducts(prodData.content || prodData);
     setProductPageData(prodData.content ? prodData : { page: 0, totalPages: 0 });
     setCategories(catData);
-    if (catData.length && !form.categoryId) {
-      setForm((f) => ({ ...f, categoryId: String(catData[0].id) }));
-    }
-  };
+    setForm((current) => (
+      catData.length && !current.categoryId
+        ? { ...current, categoryId: String(catData[0].id) }
+        : current
+    ));
+  }, [productPage]);
 
   useEffect(() => {
     load().catch((err) => setError(err.message));
-  }, [productPage]);
+  }, [load]);
 
   const payload = () => ({
     name: form.name,
@@ -112,6 +116,16 @@ export default function AdminProductsPage() {
   const handleImageUpload = async (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
+    if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) {
+      setError('Upload a JPEG, PNG, or WebP image.');
+      e.target.value = '';
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      setError('Image must be 5 MB or smaller.');
+      e.target.value = '';
+      return;
+    }
     setUploading(true);
     setError('');
     try {
@@ -127,7 +141,11 @@ export default function AdminProductsPage() {
   };
 
   const deactivate = async (id) => {
-    if (!window.confirm('Deactivate this product?')) return;
+    if (!(await confirm({
+      title: 'Deactivate product?',
+      description: 'This product will no longer be available for purchase.',
+      confirmText: 'Deactivate',
+    }))) return;
     await productsApi.remove(id);
     await load();
   };
@@ -166,7 +184,7 @@ export default function AdminProductsPage() {
                 <Typography variant="subtitle2">Product image</Typography>
                 <Button variant="outlined" component="label" disabled={uploading}>
                   {uploading ? 'Uploading...' : 'Upload image'}
-                  <input type="file" hidden accept="image/jpeg,image/png,image/webp,image/gif" onChange={handleImageUpload} />
+                  <input type="file" hidden accept="image/jpeg,image/png,image/webp" onChange={handleImageUpload} />
                 </Button>
                 {form.imageUrl && (
                   <Box component="img" src={resolveImageUrl(form.imageUrl)} alt="Preview" sx={{ width: 120, height: 90, objectFit: 'cover', borderRadius: 2 }} />

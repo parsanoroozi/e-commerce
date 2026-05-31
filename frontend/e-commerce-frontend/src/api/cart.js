@@ -2,7 +2,7 @@ import { apiRequest } from './client';
 import { emitAppAction } from '../utils/appEvents';
 
 export const cartApi = {
-  get: () => apiRequest('/api/cart'),
+  get: (options = {}) => apiRequest('/api/cart', options),
   addItem: async (data) => {
     const result = await apiRequest('/api/cart/items', { method: 'POST', body: JSON.stringify(data) });
     emitAppAction('cart:item-added', {

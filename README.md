@@ -26,6 +26,25 @@ Full-stack e-commerce application with Spring Boot backend and React (Vite) fron
 
 ## Quick start
 
+### One-command local run on Windows
+
+```bat
+run-dev.cmd
+```
+
+This starts Docker infrastructure when Docker is available, opens the backend and frontend in separate terminals, and uses local development defaults:
+
+- Backend: `http://localhost:8080`
+- Frontend: `http://127.0.0.1:5173`
+- MailHog: `http://localhost:8025`
+
+You can also run each side separately:
+
+```bat
+run-backend.cmd
+run-frontend.cmd
+```
+
 ### 1. Infrastructure
 
 ```bash

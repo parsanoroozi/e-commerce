@@ -22,7 +22,7 @@ import {
 } from '@mui/material';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { API_BASE, apiRequest } from '../api/client';
 
 const DEFAULT_LOCATION = { latitude: 51.5074, longitude: -0.1278 };
@@ -104,6 +104,27 @@ function LeafletLocationMap({ location, onPick, dialogOpen, onResolvingAddressCh
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
+  const selectCoordinates = useCallback(async (latitude, longitude) => {
+    const next = {
+      latitude: Number(latitude.toFixed(6)),
+      longitude: Number(longitude.toFixed(6)),
+    };
+    setSelected(next);
+    onPick(next);
+    onResolvingAddressChange(true);
+    try {
+      const params = new URLSearchParams({ lat: next.latitude, lon: next.longitude });
+      const data = await apiRequest(`/api/maps/reverse?${params}`, { cache: false });
+      const enriched = { ...next, address: toAddress(data) };
+      setSelected(enriched);
+      onPick(enriched);
+    } catch {
+      // Coordinates are still useful if reverse geocoding is unavailable.
+    } finally {
+      onResolvingAddressChange(false);
+    }
+  }, [onPick, onResolvingAddressChange]);
+
   useEffect(() => {
     setSelected(location);
   }, [location]);
@@ -155,7 +176,7 @@ function LeafletLocationMap({ location, onPick, dialogOpen, onResolvingAddressCh
       mapRef.current = null;
       markerRef.current = null;
     };
-  }, [dialogOpen]);
+  }, [dialogOpen, selectCoordinates, selected.latitude, selected.longitude]);
 
   useEffect(() => {
     if (!mapRef.current || !markerRef.current) return;
@@ -222,27 +243,6 @@ function LeafletLocationMap({ location, onPick, dialogOpen, onResolvingAddressCh
       },
       { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 },
     );
-  };
-
-  const selectCoordinates = async (latitude, longitude) => {
-    const next = {
-      latitude: Number(latitude.toFixed(6)),
-      longitude: Number(longitude.toFixed(6)),
-    };
-    setSelected(next);
-    onPick(next);
-    onResolvingAddressChange(true);
-    try {
-      const params = new URLSearchParams({ lat: next.latitude, lon: next.longitude });
-      const data = await apiRequest(`/api/maps/reverse?${params}`, { cache: false });
-      const enriched = { ...next, address: toAddress(data) };
-      setSelected(enriched);
-      onPick(enriched);
-    } catch {
-      // Coordinates are still useful if reverse geocoding is unavailable.
-    } finally {
-      onResolvingAddressChange(false);
-    }
   };
 
   return (

@@ -77,7 +77,11 @@ export default function CheckoutPage() {
   const [step, setStep] = useState('shipping');
 
   useEffect(() => {
-    Promise.all([cartApi.get(), shippingAddressesApi.listAll()])
+    const controller = new AbortController();
+    Promise.all([
+      cartApi.get({ signal: controller.signal }),
+      shippingAddressesApi.listAll({ signal: controller.signal }),
+    ])
       .then(([cartData, addresses]) => {
         setCart(cartData);
         setSavedAddresses(addresses);
@@ -89,7 +93,10 @@ export default function CheckoutPage() {
           setAddressMode('new');
         }
       })
-      .catch((err) => setError(err.message));
+      .catch((err) => {
+        if (err.name !== 'AbortError') setError(err.message);
+      });
+    return () => controller.abort();
   }, []);
 
   const estimate = useMemo(() => {
@@ -138,6 +145,10 @@ export default function CheckoutPage() {
 
   const handleShippingSubmit = async (e) => {
     e.preventDefault();
+    if (checkout) {
+      setStep('payment');
+      return;
+    }
     setLoading(true);
     setError('');
     try {
@@ -331,9 +342,9 @@ export default function CheckoutPage() {
                     </>
                   )
                 )}
-                <Button variant="outlined" onClick={() => setStep('shipping')} sx={{ mt: 2 }}>
-                  Back to shipping
-                </Button>
+                <Typography variant="body2" color="text.secondary" sx={{ mt: 2 }}>
+                  To change shipping details, return to the cart and start checkout again.
+                </Typography>
               </CardContent>
             </Card>
           )}

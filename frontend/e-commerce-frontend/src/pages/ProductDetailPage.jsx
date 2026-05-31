@@ -55,22 +55,33 @@ export default function ProductDetailPage() {
   const [error, setError] = useState('');
 
   useEffect(() => {
+    const controller = new AbortController();
     setLoading(true);
-    Promise.all([
-      productsApi.get(id),
-      productsApi.related(id),
-      reviewsApi.list(id).then((p) => p.content ?? p),
+    setError('');
+    Promise.allSettled([
+      productsApi.get(id, { signal: controller.signal }),
+      productsApi.related(id, { signal: controller.signal }),
+      reviewsApi.list(id, 0, { signal: controller.signal }).then((p) => p.content ?? p),
     ])
-      .then(([prod, rel, revs]) => {
+      .then(([productResult, relatedResult, reviewsResult]) => {
+        if (productResult.status === 'rejected') {
+          throw productResult.reason;
+        }
+        const prod = productResult.value;
         setProduct(prod);
-        setRelated(rel);
-        setReviews(revs);
+        setRelated(relatedResult.status === 'fulfilled' ? relatedResult.value : []);
+        setReviews(reviewsResult.status === 'fulfilled' ? reviewsResult.value : []);
         const imgs = prod.images?.length ? prod.images : prod.imageUrl ? [prod.imageUrl] : [];
         setActiveImage(imgs[0] || '');
         trackRecent(id);
       })
-      .catch((err) => setError(err.message))
-      .finally(() => setLoading(false));
+      .catch((err) => {
+        if (err.name !== 'AbortError') setError(err.message);
+      })
+      .finally(() => {
+        if (!controller.signal.aborted) setLoading(false);
+      });
+    return () => controller.abort();
   }, [id]);
 
   useEffect(() => {
@@ -212,7 +223,14 @@ export default function ProductDetailPage() {
             sx={{ width: 100, my: 2 }}
             inputProps={{ min: 1, max: product.stockQuantity }}
             value={quantity}
-            onChange={(e) => setQuantity(Number(e.target.value))}
+            onChange={(e) => {
+              const next = Number(e.target.value);
+              if (!Number.isFinite(next)) {
+                setQuantity(1);
+                return;
+              }
+              setQuantity(Math.min(product.stockQuantity, Math.max(1, Math.floor(next))));
+            }}
           />
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1}>
             <Button variant="contained" disabled={product.stockQuantity < 1} onClick={addToCart}>

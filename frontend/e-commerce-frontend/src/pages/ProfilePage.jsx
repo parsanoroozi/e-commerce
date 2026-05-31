@@ -1,11 +1,12 @@
 import { Alert, Box, Button, Card, CardContent, Checkbox, Chip, FormControlLabel, Grid, Pagination, Stack, TextField, Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import PageContainer from '../components/layout/PageContainer';
 import { useAuth } from '../context/AuthContext';
 import { authApi } from '../api/auth';
 import { shippingAddressesApi } from '../api/shippingAddresses';
 import LocationPicker from '../components/LocationPicker';
 import PasswordField from '../components/PasswordField';
+import { useConfirm } from '../context/ConfirmDialogContext';
 import { showError, showSuccess } from '../utils/toast';
 
 const emptyAddress = {
@@ -21,6 +22,7 @@ const emptyAddress = {
 
 export default function ProfilePage() {
   const { user, updateProfile } = useAuth();
+  const confirm = useConfirm();
   const [profile, setProfile] = useState({
     firstName: user?.firstName || '',
     lastName: user?.lastName || '',
@@ -42,15 +44,15 @@ export default function ProfilePage() {
     });
   }, [user]);
 
-  const loadAddresses = () =>
+  const loadAddresses = useCallback(() =>
     shippingAddressesApi.list(addressPage).then((data) => {
       setAddresses(data.content);
       setAddressPageData(data);
-    }).catch((err) => setAddressError(err.message));
+    }).catch((err) => setAddressError(err.message)), [addressPage]);
 
   useEffect(() => {
     loadAddresses();
-  }, [addressPage]);
+  }, [loadAddresses]);
 
   const saveProfile = async (e) => {
     e.preventDefault();
@@ -97,7 +99,11 @@ export default function ProfilePage() {
   };
 
   const deleteAddress = async (id) => {
-    if (!window.confirm('Delete this address?')) return;
+    if (!(await confirm({
+      title: 'Delete address?',
+      description: 'This address will be removed from your saved addresses.',
+      confirmText: 'Delete',
+    }))) return;
     try {
       await shippingAddressesApi.remove(id);
       showSuccess('Address deleted');

@@ -153,11 +153,9 @@ export default function AppNavbar() {
     const refreshOnFocus = () => {
       if (!document.hidden) refreshCounts();
     };
-    const interval = window.setInterval(refreshCounts, 30000);
     window.addEventListener('focus', refreshCounts);
     document.addEventListener('visibilitychange', refreshOnFocus);
     return () => {
-      window.clearInterval(interval);
       window.removeEventListener('focus', refreshCounts);
       document.removeEventListener('visibilitychange', refreshOnFocus);
     };
