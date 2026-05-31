@@ -10,6 +10,7 @@ import {
   Grid,
   InputLabel,
   MenuItem,
+  Pagination,
   Select,
   Stack,
   Table,
@@ -39,6 +40,8 @@ const emptyProduct = {
 
 export default function AdminProductsPage() {
   const [products, setProducts] = useState([]);
+  const [productPage, setProductPage] = useState(0);
+  const [productPageData, setProductPageData] = useState({ page: 0, totalPages: 0 });
   const [categories, setCategories] = useState([]);
   const [form, setForm] = useState(emptyProduct);
   const [editingId, setEditingId] = useState(null);
@@ -48,10 +51,11 @@ export default function AdminProductsPage() {
 
   const load = async () => {
     const [prodData, catData] = await Promise.all([
-      productsApi.adminList(),
+      productsApi.adminList(productPage, 20),
       categoriesApi.list(),
     ]);
     setProducts(prodData.content || prodData);
+    setProductPageData(prodData.content ? prodData : { page: 0, totalPages: 0 });
     setCategories(catData);
     if (catData.length && !form.categoryId) {
       setForm((f) => ({ ...f, categoryId: String(catData[0].id) }));
@@ -60,7 +64,7 @@ export default function AdminProductsPage() {
 
   useEffect(() => {
     load().catch((err) => setError(err.message));
-  }, []);
+  }, [productPage]);
 
   const payload = () => ({
     name: form.name,
@@ -220,6 +224,16 @@ export default function AdminProductsPage() {
           </TableBody>
         </Table>
       </TableContainer>
+      {productPageData.totalPages > 1 && (
+        <Stack alignItems="center" sx={{ mt: 3 }}>
+          <Pagination
+            count={productPageData.totalPages}
+            page={productPage + 1}
+            onChange={(_, value) => setProductPage(value - 1)}
+            color="primary"
+          />
+        </Stack>
+      )}
     </Box>
   );
 }

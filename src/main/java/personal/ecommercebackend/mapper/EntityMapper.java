@@ -16,6 +16,7 @@ public final class EntityMapper {
                 user.getEmail(),
                 user.getFirstName(),
                 user.getLastName(),
+                user.getMobileNumber(),
                 user.getRole()
         );
     }
@@ -102,6 +103,8 @@ public final class EntityMapper {
                 order.getShippingCity(),
                 order.getShippingZipCode(),
                 order.getShippingCountry(),
+                order.getShippingLatitude(),
+                order.getShippingLongitude(),
                 order.getCreatedAt(),
                 items,
                 customer

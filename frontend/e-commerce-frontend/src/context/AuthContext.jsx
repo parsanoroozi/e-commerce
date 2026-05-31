@@ -48,6 +48,12 @@ export function AuthProvider({ children }) {
     return registered;
   };
 
+  const updateProfile = async (data) => {
+    const updated = await authApi.updateProfile(data);
+    setUser(updated);
+    return updated;
+  };
+
   const logout = () => {
     localStorage.removeItem('token');
     clearApiCache();
@@ -63,6 +69,7 @@ export function AuthProvider({ children }) {
       isAdmin: user?.role === 'ADMIN',
       login,
       register,
+      updateProfile,
       logout,
     }),
     [user, loading],

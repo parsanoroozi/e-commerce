@@ -1,4 +1,4 @@
-import { Box, Card, Chip, CircularProgress, Stack, Typography } from '@mui/material';
+import { Box, Card, Chip, CircularProgress, Pagination, Stack, Typography } from '@mui/material';
 import { useCallback, useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { subscribeToApiChanges } from '../api/client';
@@ -17,17 +17,22 @@ const STATUS_COLOR = {
 
 export default function OrdersPage() {
   const [orders, setOrders] = useState([]);
+  const [page, setPage] = useState(0);
+  const [pageData, setPageData] = useState({ page: 0, totalPages: 0 });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   const loadOrders = useCallback(() => {
     setLoading(true);
     ordersApi
-      .myOrders()
-      .then((data) => setOrders(data.content))
+      .myOrders(page)
+      .then((data) => {
+        setOrders(data.content);
+        setPageData(data);
+      })
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
-  }, []);
+  }, [page]);
 
   useEffect(() => {
     loadOrders();
@@ -92,6 +97,16 @@ export default function OrdersPage() {
               </Stack>
             </Card>
           ))}
+        </Stack>
+      )}
+      {pageData.totalPages > 1 && (
+        <Stack alignItems="center" sx={{ mt: 3 }}>
+          <Pagination
+            count={pageData.totalPages}
+            page={page + 1}
+            onChange={(_, value) => setPage(value - 1)}
+            color="primary"
+          />
         </Stack>
       )}
     </PageContainer>

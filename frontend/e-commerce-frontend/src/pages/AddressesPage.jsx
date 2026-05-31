@@ -8,6 +8,7 @@ import {
   Checkbox,
   Chip,
   FormControlLabel,
+  Pagination,
   Stack,
   TextField,
   Typography,
@@ -16,6 +17,7 @@ import { useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { shippingAddressesApi } from '../api/shippingAddresses';
 import PageContainer from '../components/layout/PageContainer';
+import LocationPicker from '../components/LocationPicker';
 
 const emptyForm = {
   label: '',
@@ -23,22 +25,29 @@ const emptyForm = {
   city: '',
   zipCode: '',
   country: '',
+  latitude: '',
+  longitude: '',
   isDefault: false,
 };
 
 export default function AddressesPage() {
   const [addresses, setAddresses] = useState([]);
+  const [pageData, setPageData] = useState({ page: 0, totalPages: 0 });
   const [form, setForm] = useState(emptyForm);
+  const [page, setPage] = useState(0);
   const [editingId, setEditingId] = useState(null);
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
 
   const load = () =>
-    shippingAddressesApi.list().then(setAddresses).catch((err) => setError(err.message));
+    shippingAddressesApi.list(page).then((data) => {
+      setAddresses(data.content);
+      setPageData(data);
+    }).catch((err) => setError(err.message));
 
   useEffect(() => {
     load();
-  }, []);
+  }, [page]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,10 +55,10 @@ export default function AddressesPage() {
     setMessage('');
     try {
       if (editingId) {
-        await shippingAddressesApi.update(editingId, form);
+        await shippingAddressesApi.update(editingId, normalizeAddressPayload(form));
         setMessage('Address updated');
       } else {
-        await shippingAddressesApi.create(form);
+        await shippingAddressesApi.create(normalizeAddressPayload(form));
         setMessage('Address saved');
       }
       setForm(emptyForm);
@@ -68,6 +77,8 @@ export default function AddressesPage() {
       city: addr.city,
       zipCode: addr.zipCode,
       country: addr.country,
+      latitude: addr.latitude ?? '',
+      longitude: addr.longitude ?? '',
       isDefault: addr.isDefault,
     });
   };
@@ -107,8 +118,12 @@ export default function AddressesPage() {
             <TextField label="Label (optional)" placeholder="Home, Work..." value={form.label} onChange={(e) => setForm({ ...form, label: e.target.value })} />
             <TextField label="Street" required value={form.street} onChange={(e) => setForm({ ...form, street: e.target.value })} />
             <TextField label="City" required value={form.city} onChange={(e) => setForm({ ...form, city: e.target.value })} />
-            <TextField label="ZIP" required value={form.zipCode} onChange={(e) => setForm({ ...form, zipCode: e.target.value })} />
+            <TextField label="Postal code" required value={form.zipCode} onChange={(e) => setForm({ ...form, zipCode: e.target.value })} />
             <TextField label="Country" required value={form.country} onChange={(e) => setForm({ ...form, country: e.target.value })} />
+            <LocationPicker
+              value={{ latitude: form.latitude, longitude: form.longitude }}
+              onChange={(location) => setForm({ ...form, latitude: location.latitude, longitude: location.longitude })}
+            />
             <FormControlLabel
               control={<Checkbox checked={form.isDefault} onChange={(e) => setForm({ ...form, isDefault: e.target.checked })} />}
               label="Set as default"
@@ -137,6 +152,11 @@ export default function AddressesPage() {
                 <Typography variant="body2" color="text.secondary">
                   {addr.street}, {addr.city}, {addr.zipCode}, {addr.country}
                 </Typography>
+                {addr.latitude != null && addr.longitude != null && (
+                  <Typography variant="body2" color="text.secondary">
+                    Map: {Number(addr.latitude).toFixed(5)}, {Number(addr.longitude).toFixed(5)}
+                  </Typography>
+                )}
               </Box>
               <Stack direction="row" flexWrap="wrap" spacing={1}>
                 {!addr.isDefault && (
@@ -149,6 +169,16 @@ export default function AddressesPage() {
           </Card>
         ))}
       </Stack>
+      {pageData.totalPages > 1 && (
+        <Stack alignItems="center" sx={{ mt: 3 }}>
+          <Pagination
+            count={pageData.totalPages}
+            page={page + 1}
+            onChange={(_, value) => setPage(value - 1)}
+            color="primary"
+          />
+        </Stack>
+      )}
       {addresses.length === 0 && (
         <Typography color="text.secondary" sx={{ mt: 2 }}>
           No saved addresses yet. Add one above or at checkout.
@@ -156,4 +186,12 @@ export default function AddressesPage() {
       )}
     </PageContainer>
   );
+}
+
+function normalizeAddressPayload(form) {
+  return {
+    ...form,
+    latitude: form.latitude === '' ? null : Number(form.latitude),
+    longitude: form.longitude === '' ? null : Number(form.longitude),
+  };
 }

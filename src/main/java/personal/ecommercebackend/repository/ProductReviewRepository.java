@@ -19,4 +19,6 @@ public interface ProductReviewRepository extends JpaRepository<ProductReview, Lo
     Double averageRatingByProductId(@Param("productId") Long productId);
 
     long countByProductId(Long productId);
+
+    void deleteByUserId(Long userId);
 }

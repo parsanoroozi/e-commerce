@@ -9,5 +9,7 @@ public record ShippingAddressRequest(
         @NotBlank @Size(max = 100) String city,
         @NotBlank @Size(max = 20) String zipCode,
         @NotBlank @Size(max = 100) String country,
+        Double latitude,
+        Double longitude,
         Boolean isDefault
 ) {}

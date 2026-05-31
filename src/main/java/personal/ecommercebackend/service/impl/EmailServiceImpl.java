@@ -117,6 +117,20 @@ public class EmailServiceImpl implements EmailService {
         sendHtml(user.getEmail(), subject, body, "password reset for " + user.getEmail());
     }
 
+    public void sendEmailVerificationCode(String email, String code) {
+        String subject = "Your ShopVerse verification code";
+        String body = """
+                <html><body style="font-family:Segoe UI,sans-serif;color:#1a2332;">
+                <h2>Verify your email</h2>
+                <p>Use this code to finish creating your ShopVerse account:</p>
+                <p style="font-size:28px;font-weight:700;letter-spacing:6px;margin:20px 0;">%s</p>
+                <p>This code expires in 10 minutes.</p>
+                <p style="color:#64748b;font-size:14px;">If you did not request this, you can ignore this email.</p>
+                </body></html>
+                """.formatted(escape(code));
+        sendHtml(email, subject, body, "email verification for " + email);
+    }
+
     private void sendHtml(String to, String subject, String htmlBody, String logContext) {
         if (!mailEnabled) {
             log.info("Mail disabled - {}:\n{}", logContext, htmlBody);

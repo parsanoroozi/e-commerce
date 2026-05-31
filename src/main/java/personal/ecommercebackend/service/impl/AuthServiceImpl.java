@@ -14,11 +14,13 @@ import personal.ecommercebackend.dto.request.*;
 import personal.ecommercebackend.dto.response.AuthResponse;
 import personal.ecommercebackend.dto.response.UserResponse;
 import personal.ecommercebackend.entity.Cart;
+import personal.ecommercebackend.entity.EmailVerificationCode;
 import personal.ecommercebackend.entity.Role;
 import personal.ecommercebackend.entity.User;
 import personal.ecommercebackend.exception.ApiException;
 import personal.ecommercebackend.mapper.EntityMapper;
 import personal.ecommercebackend.entity.PasswordResetToken;
+import personal.ecommercebackend.repository.EmailVerificationCodeRepository;
 import personal.ecommercebackend.repository.PasswordResetTokenRepository;
 import personal.ecommercebackend.repository.UserRepository;
 import personal.ecommercebackend.security.JwtService;
@@ -32,6 +34,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
 import java.util.HexFormat;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.UUID;
 
 @Service
@@ -40,26 +43,47 @@ import java.util.UUID;
 public class AuthServiceImpl implements AuthService {
 
     private final UserRepository userRepository;
+    private final EmailVerificationCodeRepository emailVerificationCodeRepository;
     private final PasswordResetTokenRepository passwordResetTokenRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
     private final EmailService emailService;
 
-    @Value("${app.frontend.url:http://localhost:5176}")
+    @Value("${app.frontend.url:http://localhost:5173}")
     private String frontendUrl;
 
     @Transactional
-    public AuthResponse register(RegisterRequest request) {
-        if (userRepository.existsByEmail(request.email())) {
+    public void sendEmailVerification(EmailVerificationRequest request) {
+        String email = normalizeEmail(request.email());
+        if (userRepository.existsByEmail(email)) {
             throw new ApiException(HttpStatus.CONFLICT, "Email already registered");
         }
+        String code = String.valueOf(ThreadLocalRandom.current().nextInt(100000, 1000000));
+        emailVerificationCodeRepository.save(EmailVerificationCode.builder()
+                .email(email)
+                .codeHash(hashToken(code))
+                .expiresAt(Instant.now().plusSeconds(600))
+                .used(false)
+                .build());
+        emailService.sendEmailVerificationCode(email, code);
+        log.info("Email verification code sent email={}", email);
+    }
+
+    @Transactional
+    public AuthResponse register(RegisterRequest request) {
+        String email = normalizeEmail(request.email());
+        if (userRepository.existsByEmail(email)) {
+            throw new ApiException(HttpStatus.CONFLICT, "Email already registered");
+        }
+        verifyEmailCode(email, request.emailVerificationCode());
 
         User user = User.builder()
-                .email(request.email().toLowerCase().trim())
+                .email(email)
                 .password(passwordEncoder.encode(request.password()))
                 .firstName(request.firstName().trim())
                 .lastName(request.lastName().trim())
+                .mobileNumber(normalizeOptional(request.mobileNumber()))
                 .role(Role.CUSTOMER)
                 .build();
 
@@ -76,10 +100,10 @@ public class AuthServiceImpl implements AuthService {
     public AuthResponse login(LoginRequest request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        request.email().toLowerCase().trim(),
+                        normalizeEmail(request.email()),
                         request.password()));
 
-        User user = userRepository.findByEmail(request.email().toLowerCase().trim())
+        User user = userRepository.findByEmail(normalizeEmail(request.email()))
                 .orElseThrow(() -> new ApiException(HttpStatus.UNAUTHORIZED, "Invalid credentials"));
 
         UserPrincipal principal = new UserPrincipal(user);
@@ -101,6 +125,7 @@ public class AuthServiceImpl implements AuthService {
                 .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, "User not found"));
         user.setFirstName(request.firstName().trim());
         user.setLastName(request.lastName().trim());
+        user.setMobileNumber(normalizeOptional(request.mobileNumber()));
         log.info("User profile updated userId={}", user.getId());
         return EntityMapper.toUserResponse(userRepository.save(user));
     }
@@ -119,7 +144,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Transactional
     public void forgotPassword(ForgotPasswordRequest request) {
-        userRepository.findByEmail(request.email().toLowerCase().trim()).ifPresent(user -> {
+        userRepository.findByEmail(normalizeEmail(request.email())).ifPresent(user -> {
             String token = UUID.randomUUID().toString();
             passwordResetTokenRepository.save(PasswordResetToken.builder()
                     .user(user)
@@ -157,5 +182,27 @@ public class AuthServiceImpl implements AuthService {
         } catch (NoSuchAlgorithmException e) {
             throw new IllegalStateException("SHA-256 is not available", e);
         }
+    }
+
+    private void verifyEmailCode(String email, String code) {
+        EmailVerificationCode verification = emailVerificationCodeRepository
+                .findTopByEmailAndUsedFalseOrderByCreatedAtDesc(email)
+                .orElseThrow(() -> new ApiException(HttpStatus.BAD_REQUEST, "Send a verification code first"));
+        if (verification.getExpiresAt().isBefore(Instant.now())) {
+            throw new ApiException(HttpStatus.BAD_REQUEST, "Verification code expired");
+        }
+        if (!verification.getCodeHash().equals(hashToken(code))) {
+            throw new ApiException(HttpStatus.BAD_REQUEST, "Invalid verification code");
+        }
+        verification.setUsed(true);
+        emailVerificationCodeRepository.save(verification);
+    }
+
+    private String normalizeEmail(String email) {
+        return email.toLowerCase().trim();
+    }
+
+    private String normalizeOptional(String value) {
+        return value == null || value.isBlank() ? null : value.trim();
     }
 }

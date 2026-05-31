@@ -12,6 +12,7 @@ import com.stripe.model.PaymentIntent;
 
 public interface WishlistService {
     List<ProductResponse> listMine();
+    PageResponse<ProductResponse> listMine(Pageable pageable);
     long count();
     void add(Long productId);
     void remove(Long productId);

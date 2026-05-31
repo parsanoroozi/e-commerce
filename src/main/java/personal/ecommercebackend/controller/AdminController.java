@@ -18,6 +18,7 @@ import personal.ecommercebackend.dto.response.AuditLogResponse;
 import personal.ecommercebackend.dto.response.OrderResponse;
 import personal.ecommercebackend.dto.response.PageResponse;
 import personal.ecommercebackend.service.AdminDashboardService;
+import personal.ecommercebackend.service.AdminUserService;
 import personal.ecommercebackend.service.AuditService;
 import personal.ecommercebackend.service.OrderService;
 import personal.ecommercebackend.service.ShopSettingsService;
@@ -29,6 +30,7 @@ import personal.ecommercebackend.service.ShopSettingsService;
 public class AdminController {
 
     private final AdminDashboardService dashboardService;
+    private final AdminUserService adminUserService;
     private final AuditService auditService;
     private final OrderService orderService;
     private final ShopSettingsService shopSettingsService;
@@ -41,6 +43,18 @@ public class AdminController {
     @GetMapping("/settings")
     public AdminSettingsResponse settings() {
         return shopSettingsService.getSettings();
+    }
+
+    @GetMapping("/users")
+    public PageResponse<personal.ecommercebackend.dto.response.UserResponse> users(
+            @PageableDefault(size = 20, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
+        return adminUserService.list(pageable);
+    }
+
+    @DeleteMapping("/users/{id}")
+    public void deleteUser(@PathVariable Long id) {
+        adminUserService.delete(id);
+        auditService.log("DELETE", "USER", String.valueOf(id), null);
     }
 
     @PatchMapping("/settings/low-stock-threshold")

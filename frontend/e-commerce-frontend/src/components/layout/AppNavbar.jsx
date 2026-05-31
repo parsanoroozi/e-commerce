@@ -1,4 +1,5 @@
 import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettingsOutlined';
+import DeleteSweepOutlinedIcon from '@mui/icons-material/DeleteSweepOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import MenuIcon from '@mui/icons-material/Menu';
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
@@ -56,7 +57,9 @@ export default function AppNavbar() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [notifAnchor, setNotifAnchor] = useState(null);
   const [notifications, setNotifications] = useState([]);
-  const [visibleNotifications, setVisibleNotifications] = useState(INITIAL_VISIBLE_NOTIFICATIONS);
+  const [notificationPage, setNotificationPage] = useState(0);
+  const [notificationLastPage, setNotificationLastPage] = useState(true);
+  const [notificationLoading, setNotificationLoading] = useState(false);
   const notificationClearStartedAt = useRef(0);
 
   const refreshCounts = useCallback(async () => {
@@ -132,6 +135,12 @@ export default function AppNavbar() {
           setUnread(0);
           setNotifications((items) => items.map((item) => ({ ...item, read: true })));
           break;
+        case 'notifications:cleared':
+          setUnread(0);
+          setNotifications([]);
+          setNotificationPage(0);
+          setNotificationLastPage(true);
+          break;
         default:
           break;
       }
@@ -160,11 +169,21 @@ export default function AppNavbar() {
     return true;
   });
 
+  const loadNotificationsPage = async (page, append = false) => {
+    setNotificationLoading(true);
+    try {
+      const data = await notificationsApi.list(page, INITIAL_VISIBLE_NOTIFICATIONS);
+      setNotifications((items) => append ? [...items, ...(data.content || [])] : (data.content || []));
+      setNotificationPage(data.page ?? page);
+      setNotificationLastPage(Boolean(data.last));
+    } finally {
+      setNotificationLoading(false);
+    }
+  };
+
   const openNotifications = async (e) => {
     setNotifAnchor(e.currentTarget);
-    setVisibleNotifications(INITIAL_VISIBLE_NOTIFICATIONS);
-    const list = await notificationsApi.list();
-    setNotifications(list);
+    await loadNotificationsPage(0, false);
   };
 
   const markAllRead = async () => {
@@ -173,11 +192,27 @@ export default function AppNavbar() {
     setNotifications((items) => items.map((item) => ({ ...item, read: true })));
     await notificationsApi.markAllRead();
     setUnread(0);
-    setNotifications((await notificationsApi.list()).map((item) => ({ ...item, read: true })));
+    await loadNotificationsPage(0, false);
   };
 
-  const visibleNotificationItems = notifications.slice(0, visibleNotifications);
-  const hasMoreNotifications = visibleNotifications < notifications.length;
+  const clearNotifications = async () => {
+    notificationClearStartedAt.current = Date.now();
+    setUnread(0);
+    setNotifications([]);
+    setNotificationPage(0);
+    setNotificationLastPage(true);
+    await notificationsApi.clear();
+  };
+
+  const showMoreNotifications = () => {
+    if (!notificationLoading && !notificationLastPage) {
+      loadNotificationsPage(notificationPage + 1, true);
+    }
+  };
+
+  const showLessNotifications = () => {
+    loadNotificationsPage(0, false);
+  };
 
   const badgeFor = (to) => {
     if (to === '/cart') return cartCount;
@@ -325,31 +360,57 @@ export default function AppNavbar() {
                     },
                   }}
                 >
-                  <Box sx={{ px: 2, py: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <Box sx={{ px: 2, py: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 1 }}>
                     <Typography variant="subtitle2">Notifications</Typography>
-                    {unread > 0 && (
-                      <Button size="small" onClick={markAllRead}>Mark all read</Button>
-                    )}
+                    <Stack direction="row" spacing={0.5}>
+                      {notifications.length > 0 && (
+                        <Button size="small" color="error" startIcon={<DeleteSweepOutlinedIcon />} onClick={clearNotifications}>
+                          Clear
+                        </Button>
+                      )}
+                      {unread > 0 && (
+                        <Button size="small" onClick={markAllRead}>Mark all read</Button>
+                      )}
+                    </Stack>
                   </Box>
                   {notifications.length === 0 ? (
                     <MenuItem disabled>No notifications</MenuItem>
                   ) : (
                     <Box sx={{ maxHeight: 360, overflowY: 'auto' }}>
-                      {visibleNotificationItems.map((n) => (
-                        <MenuItem key={n.id} onClick={() => setNotifAnchor(null)} sx={{ flexDirection: 'column', alignItems: 'flex-start', whiteSpace: 'normal' }}>
-                          <Typography variant="body2" fontWeight={n.read ? 400 : 700}>{n.title}</Typography>
+                      {notifications.map((n) => (
+                        <MenuItem key={n.id} onClick={() => setNotifAnchor(null)} sx={{ flexDirection: 'column', alignItems: 'stretch', whiteSpace: 'normal', gap: 0.25 }}>
+                          <Stack direction="row" justifyContent="space-between" alignItems="baseline" spacing={1}>
+                            <Typography variant="body2" fontWeight={n.read ? 500 : 800}>{n.title}</Typography>
+                            <Typography variant="caption" color="text.secondary" sx={{ flexShrink: 0 }}>
+                              {formatNotificationTime(n.createdAt)}
+                            </Typography>
+                          </Stack>
                           <Typography variant="caption" color="text.secondary">{n.message}</Typography>
                         </MenuItem>
                       ))}
-                      {hasMoreNotifications && (
+                      {!notificationLastPage && (
                         <Box sx={{ px: 1, py: 1 }}>
                           <Button
                             size="small"
                             variant="text"
                             fullWidth
-                            onClick={() => setVisibleNotifications((count) => count + INITIAL_VISIBLE_NOTIFICATIONS)}
+                            disabled={notificationLoading}
+                            onClick={showMoreNotifications}
                           >
-                            Show more
+                            {notificationLoading ? 'Loading...' : 'Show more'}
+                          </Button>
+                        </Box>
+                      )}
+                      {notifications.length > INITIAL_VISIBLE_NOTIFICATIONS && (
+                        <Box sx={{ px: 1, pb: 1 }}>
+                          <Button
+                            size="small"
+                            variant="text"
+                            fullWidth
+                            disabled={notificationLoading}
+                            onClick={showLessNotifications}
+                          >
+                            Show less
                           </Button>
                         </Box>
                       )}
@@ -381,4 +442,14 @@ export default function AppNavbar() {
       </Drawer>
     </>
   );
+}
+
+function formatNotificationTime(value) {
+  if (!value) return '';
+  return new Date(value).toLocaleString(undefined, {
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
 }

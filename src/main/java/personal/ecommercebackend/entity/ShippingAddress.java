@@ -39,6 +39,12 @@ public class ShippingAddress {
     @Column(nullable = false)
     private String country;
 
+    @Column(precision = 10)
+    private Double latitude;
+
+    @Column(precision = 10)
+    private Double longitude;
+
     @Column(nullable = false)
     @Builder.Default
     private boolean isDefault = false;

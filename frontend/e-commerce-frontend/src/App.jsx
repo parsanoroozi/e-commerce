@@ -25,6 +25,7 @@ import AdminCouponsPage from './pages/admin/AdminCouponsPage';
 import AdminDashboardPage from './pages/admin/AdminDashboardPage';
 import AdminOrdersPage from './pages/admin/AdminOrdersPage';
 import AdminProductsPage from './pages/admin/AdminProductsPage';
+import AdminUsersPage from './pages/admin/AdminUsersPage';
 
 function App() {
   return (
@@ -54,6 +55,7 @@ function App() {
                 <Route path="products" element={<AdminProductsPage />} />
                 <Route path="categories" element={<AdminCategoriesPage />} />
                 <Route path="orders" element={<AdminOrdersPage />} />
+                <Route path="users" element={<AdminUsersPage />} />
                 <Route path="coupons" element={<AdminCouponsPage />} />
               </Route>
               <Route path="*" element={<Navigate to="/" replace />} />

@@ -110,6 +110,8 @@ public class OrderServiceImpl implements OrderService {
                 .shippingCity(shipping.city())
                 .shippingZipCode(shipping.zipCode())
                 .shippingCountry(shipping.country())
+                .shippingLatitude(shipping.latitude())
+                .shippingLongitude(shipping.longitude())
                 .items(new ArrayList<>())
                 .confirmationEmailSent(false)
                 .build();

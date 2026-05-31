@@ -1,4 +1,4 @@
-import { Button, Card, Grid, Typography } from '@mui/material';
+import { Button, Card, Grid, Pagination, Stack, Typography } from '@mui/material';
 import { useCallback, useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { subscribeToApiChanges } from '../api/client';
@@ -10,14 +10,19 @@ import { showError, showSuccess } from '../utils/toast';
 
 export default function WishlistPage() {
   const [items, setItems] = useState([]);
+  const [page, setPage] = useState(0);
+  const [pageData, setPageData] = useState({ page: 0, totalPages: 0 });
   const [loading, setLoading] = useState(true);
 
   const load = useCallback(() =>
     wishlistApi
-      .list()
-      .then(setItems)
+      .list(page)
+      .then((data) => {
+        setItems(data.content);
+        setPageData(data);
+      })
       .catch((err) => showError(err.message))
-      .finally(() => setLoading(false)), []);
+      .finally(() => setLoading(false)), [page]);
 
   useEffect(() => {
     load();
@@ -55,6 +60,16 @@ export default function WishlistPage() {
             </Grid>
           ))}
         </Grid>
+      )}
+      {pageData.totalPages > 1 && (
+        <Stack alignItems="center" sx={{ mt: 3 }}>
+          <Pagination
+            count={pageData.totalPages}
+            page={page + 1}
+            onChange={(_, value) => setPage(value - 1)}
+            color="primary"
+          />
+        </Stack>
       )}
     </PageContainer>
   );

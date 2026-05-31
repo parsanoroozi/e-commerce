@@ -9,6 +9,8 @@ public record ShippingAddressResponse(
         String city,
         String zipCode,
         String country,
+        Double latitude,
+        Double longitude,
         boolean isDefault,
         Instant lastUsedAt
 ) {}

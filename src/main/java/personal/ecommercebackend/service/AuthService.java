@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.stripe.model.PaymentIntent;
 
 public interface AuthService {
+    void sendEmailVerification(EmailVerificationRequest request);
     AuthResponse register(RegisterRequest request);
     AuthResponse login(LoginRequest request);
     UserResponse me();

@@ -14,4 +14,5 @@ public interface EmailService {
     void sendOrderConfirmation(Order order, User user);
     void sendOrderShipped(Order order, User user);
     void sendPasswordReset(User user, String resetLink);
+    void sendEmailVerificationCode(String email, String code);
 }

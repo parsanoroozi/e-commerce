@@ -1,7 +1,8 @@
 import { apiRequest } from './client';
 
 export const shippingAddressesApi = {
-  list: () => apiRequest('/api/shipping-addresses'),
+  list: (page = 0, size = 10) => apiRequest(`/api/shipping-addresses?page=${page}&size=${size}`),
+  listAll: () => apiRequest('/api/shipping-addresses/all'),
   create: (data) =>
     apiRequest('/api/shipping-addresses', { method: 'POST', body: JSON.stringify(data) }),
   update: (id, data) =>

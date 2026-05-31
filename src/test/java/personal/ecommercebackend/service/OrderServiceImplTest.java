@@ -135,6 +135,8 @@ class OrderServiceImplTest {
                 "12345",
                 "USA",
                 null,
+                null,
+                null,
                 "STANDARD");
     }
 

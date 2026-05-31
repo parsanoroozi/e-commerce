@@ -4,9 +4,11 @@ import personal.ecommercebackend.service.*;
 
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import personal.ecommercebackend.dto.response.PageResponse;
 import personal.ecommercebackend.dto.response.NotificationResponse;
 import personal.ecommercebackend.entity.Notification;
 import personal.ecommercebackend.entity.User;
@@ -43,6 +45,14 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Transactional(readOnly = true)
+    public PageResponse<NotificationResponse> listMine(Pageable pageable) {
+        return PageResponse.from(notificationRepository
+                .findByUserIdOrderByCreatedAtDesc(SecurityUtils.currentUserId(), pageable)
+                .map(n -> new NotificationResponse(n.getId(), n.getTitle(), n.getMessage(), n.isRead(),
+                        n.getRelatedOrderId(), n.getCreatedAt())));
+    }
+
+    @Transactional(readOnly = true)
     public long unreadCount() {
         return notificationRepository.countByUserIdAndReadFalse(SecurityUtils.currentUserId());
     }
@@ -60,7 +70,11 @@ public class NotificationServiceImpl implements NotificationService {
 
     @Transactional
     public void markAllRead() {
-        notificationRepository.findTop20ByUserIdOrderByCreatedAtDesc(SecurityUtils.currentUserId())
-                .forEach(n -> n.setRead(true));
+        notificationRepository.markAllReadForUser(SecurityUtils.currentUserId());
+    }
+
+    @Transactional
+    public void clearMine() {
+        notificationRepository.deleteByUserId(SecurityUtils.currentUserId());
     }
 }

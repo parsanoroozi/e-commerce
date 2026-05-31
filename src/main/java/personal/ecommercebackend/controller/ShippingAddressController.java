@@ -2,9 +2,13 @@ package personal.ecommercebackend.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import personal.ecommercebackend.dto.request.ShippingAddressRequest;
+import personal.ecommercebackend.dto.response.PageResponse;
 import personal.ecommercebackend.dto.response.ShippingAddressResponse;
 import personal.ecommercebackend.service.ShippingAddressService;
 
@@ -18,7 +22,13 @@ public class ShippingAddressController {
     private final ShippingAddressService shippingAddressService;
 
     @GetMapping
-    public List<ShippingAddressResponse> listMine() {
+    public PageResponse<ShippingAddressResponse> listMine(
+            @PageableDefault(size = 10, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
+        return shippingAddressService.listMine(pageable);
+    }
+
+    @GetMapping("/all")
+    public List<ShippingAddressResponse> listAllMine() {
         return shippingAddressService.listMine();
     }
 

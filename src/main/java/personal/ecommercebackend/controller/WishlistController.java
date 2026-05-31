@@ -1,8 +1,12 @@
 package personal.ecommercebackend.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import personal.ecommercebackend.dto.response.PageResponse;
 import personal.ecommercebackend.dto.response.ProductResponse;
 import personal.ecommercebackend.service.WishlistService;
 
@@ -17,7 +21,13 @@ public class WishlistController {
     private final WishlistService wishlistService;
 
     @GetMapping
-    public List<ProductResponse> list() {
+    public PageResponse<ProductResponse> list(
+            @PageableDefault(size = 12, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
+        return wishlistService.listMine(pageable);
+    }
+
+    @GetMapping("/all")
+    public List<ProductResponse> listAll() {
         return wishlistService.listMine();
     }
 

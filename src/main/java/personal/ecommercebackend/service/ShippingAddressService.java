@@ -12,6 +12,7 @@ import com.stripe.model.PaymentIntent;
 
 public interface ShippingAddressService {
     List<ShippingAddressResponse> listMine();
+    PageResponse<ShippingAddressResponse> listMine(Pageable pageable);
     ShippingAddressResponse create(ShippingAddressRequest request);
     ShippingAddressResponse update(Long id, ShippingAddressRequest request);
     void delete(Long id);

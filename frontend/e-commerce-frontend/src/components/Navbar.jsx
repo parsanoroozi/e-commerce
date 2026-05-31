@@ -29,7 +29,7 @@ export default function Navbar() {
   const toggleNotifications = async () => {
     if (!notifOpen) {
       const list = await notificationsApi.list();
-      setNotifications(list);
+      setNotifications(list.content || []);
     }
     setNotifOpen(!notifOpen);
   };
@@ -38,7 +38,7 @@ export default function Navbar() {
     await notificationsApi.markAllRead();
     setUnread(0);
     const list = await notificationsApi.list();
-    setNotifications(list);
+    setNotifications(list.content || []);
   };
 
   return (

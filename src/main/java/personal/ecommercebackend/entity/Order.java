@@ -74,6 +74,12 @@ public class Order {
     @Column(nullable = false)
     private String shippingCountry;
 
+    @Column(precision = 10)
+    private Double shippingLatitude;
+
+    @Column(precision = 10)
+    private Double shippingLongitude;
+
     @Column(unique = true)
     private String stripePaymentIntentId;
 

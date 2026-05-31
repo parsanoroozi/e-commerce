@@ -21,6 +21,8 @@ public record OrderResponse(
         String shippingCity,
         String shippingZipCode,
         String shippingCountry,
+        Double shippingLatitude,
+        Double shippingLongitude,
         Instant createdAt,
         List<OrderItemResponse> items,
         UserResponse customer

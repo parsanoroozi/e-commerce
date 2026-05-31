@@ -16,6 +16,12 @@ public class AuthController {
 
     private final AuthService authService;
 
+    @PostMapping("/email-verification")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void sendEmailVerification(@Valid @RequestBody EmailVerificationRequest request) {
+        authService.sendEmailVerification(request);
+    }
+
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
     public AuthResponse register(@Valid @RequestBody RegisterRequest request) {

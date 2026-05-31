@@ -13,7 +13,9 @@ import com.stripe.model.PaymentIntent;
 public interface NotificationService {
     void notifyUser(User user, String title, String message, Long orderId);
     List<NotificationResponse> listMine();
+    PageResponse<NotificationResponse> listMine(Pageable pageable);
     long unreadCount();
     void markRead(Long id);
     void markAllRead();
+    void clearMine();
 }

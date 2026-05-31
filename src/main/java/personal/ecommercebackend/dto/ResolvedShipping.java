@@ -4,5 +4,7 @@ public record ResolvedShipping(
         String street,
         String city,
         String zipCode,
-        String country
+        String country,
+        Double latitude,
+        Double longitude
 ) {}

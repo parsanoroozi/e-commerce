@@ -1,6 +1,11 @@
 import { apiRequest } from './client';
 
 export const authApi = {
+  sendEmailVerification: (email) =>
+    apiRequest('/api/auth/email-verification', {
+      method: 'POST',
+      body: JSON.stringify({ email }),
+    }),
   register: (data) =>
     apiRequest('/api/auth/register', { method: 'POST', body: JSON.stringify(data) }),
   login: (data) =>

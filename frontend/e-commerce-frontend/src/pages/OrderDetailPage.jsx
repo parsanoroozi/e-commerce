@@ -122,6 +122,11 @@ export default function OrderDetailPage() {
               <Typography variant="body2" paragraph>
                 {order.shippingStreet}, {order.shippingCity}, {order.shippingZipCode}, {order.shippingCountry}
               </Typography>
+              {order.shippingLatitude != null && order.shippingLongitude != null && (
+                <Typography variant="body2" color="text.secondary" gutterBottom>
+                  Map: {Number(order.shippingLatitude).toFixed(5)}, {Number(order.shippingLongitude).toFixed(5)}
+                </Typography>
+              )}
               {order.shippingMethod && (
                 <Typography variant="body2" color="text.secondary" gutterBottom>
                   Method: {order.shippingMethod}

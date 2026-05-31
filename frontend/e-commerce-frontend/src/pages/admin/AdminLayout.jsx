@@ -7,6 +7,7 @@ const tabs = [
   { path: '/admin/products', label: 'Products' },
   { path: '/admin/categories', label: 'Categories' },
   { path: '/admin/orders', label: 'Orders' },
+  { path: '/admin/users', label: 'Users' },
   { path: '/admin/coupons', label: 'Coupons' },
 ];
 

@@ -4,12 +4,14 @@ import personal.ecommercebackend.service.*;
 
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import personal.ecommercebackend.dto.ResolvedShipping;
 import personal.ecommercebackend.dto.request.CheckoutRequest;
 import personal.ecommercebackend.dto.request.ShippingAddressRequest;
+import personal.ecommercebackend.dto.response.PageResponse;
 import personal.ecommercebackend.dto.response.ShippingAddressResponse;
 import personal.ecommercebackend.entity.ShippingAddress;
 import personal.ecommercebackend.entity.User;
@@ -37,6 +39,13 @@ public class ShippingAddressServiceImpl implements ShippingAddressService {
                 .toList();
     }
 
+    @Transactional(readOnly = true)
+    public PageResponse<ShippingAddressResponse> listMine(Pageable pageable) {
+        return PageResponse.from(shippingAddressRepository
+                .findByUserIdOrderByIsDefaultDescLastUsedAtDescCreatedAtDesc(SecurityUtils.currentUserId(), pageable)
+                .map(this::toResponse));
+    }
+
     @Transactional
     public ShippingAddressResponse create(ShippingAddressRequest request) {
         Long userId = SecurityUtils.currentUserId();
@@ -58,6 +67,8 @@ public class ShippingAddressServiceImpl implements ShippingAddressService {
         address.setCity(request.city().trim());
         address.setZipCode(request.zipCode().trim());
         address.setCountry(request.country().trim());
+        address.setLatitude(request.latitude());
+        address.setLongitude(request.longitude());
         if (Boolean.TRUE.equals(request.isDefault())) {
             setAsDefault(address);
         }
@@ -111,6 +122,8 @@ public class ShippingAddressServiceImpl implements ShippingAddressService {
                 request.shippingCity().trim(),
                 request.shippingZipCode().trim(),
                 request.shippingCountry().trim(),
+                request.shippingLatitude(),
+                request.shippingLongitude(),
                 true);
 
         ShippingAddress saved = saveOrFindExisting(user, saveRequest);
@@ -132,6 +145,8 @@ public class ShippingAddressServiceImpl implements ShippingAddressService {
                     if (request.label() != null && !request.label().isBlank()) {
                         existing.setLabel(normalizeLabel(request.label()));
                     }
+                    existing.setLatitude(request.latitude());
+                    existing.setLongitude(request.longitude());
                     return shippingAddressRepository.save(existing);
                 })
                 .orElseGet(() -> {
@@ -143,6 +158,8 @@ public class ShippingAddressServiceImpl implements ShippingAddressService {
                             .city(city)
                             .zipCode(zip)
                             .country(country)
+                            .latitude(request.latitude())
+                            .longitude(request.longitude())
                             .isDefault(first || Boolean.TRUE.equals(request.isDefault()))
                             .build();
                     return shippingAddressRepository.save(address);
@@ -181,7 +198,9 @@ public class ShippingAddressServiceImpl implements ShippingAddressService {
                 address.getStreet(),
                 address.getCity(),
                 address.getZipCode(),
-                address.getCountry());
+                address.getCountry(),
+                address.getLatitude(),
+                address.getLongitude());
     }
 
     private ShippingAddressResponse toResponse(ShippingAddress address) {
@@ -192,6 +211,8 @@ public class ShippingAddressServiceImpl implements ShippingAddressService {
                 address.getCity(),
                 address.getZipCode(),
                 address.getCountry(),
+                address.getLatitude(),
+                address.getLongitude(),
                 address.isDefault(),
                 address.getLastUsedAt());
     }

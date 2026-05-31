@@ -16,6 +16,12 @@ import {
   Step,
   StepLabel,
   Stepper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
   TextField,
   ToggleButton,
   ToggleButtonGroup,
@@ -30,6 +36,7 @@ import { couponsApi } from '../api/coupons';
 import { ordersApi } from '../api/orders';
 import { shippingAddressesApi } from '../api/shippingAddresses';
 import DevPaymentForm from '../components/DevPaymentForm';
+import LocationPicker from '../components/LocationPicker';
 import PricingSummary from '../components/PricingSummary';
 import StripePaymentForm from '../components/StripePaymentForm';
 import { estimateCheckout, SHIPPING_OPTIONS } from '../utils/checkoutPricing';
@@ -41,6 +48,8 @@ const emptyForm = {
   shippingCity: '',
   shippingZipCode: '',
   shippingCountry: '',
+  shippingLatitude: '',
+  shippingLongitude: '',
 };
 
 function formatAddress(addr) {
@@ -68,7 +77,7 @@ export default function CheckoutPage() {
   const [step, setStep] = useState('shipping');
 
   useEffect(() => {
-    Promise.all([cartApi.get(), shippingAddressesApi.list()])
+    Promise.all([cartApi.get(), shippingAddressesApi.listAll()])
       .then(([cartData, addresses]) => {
         setCart(cartData);
         setSavedAddresses(addresses);
@@ -98,6 +107,8 @@ export default function CheckoutPage() {
             shippingCity: form.shippingCity,
             shippingZipCode: form.shippingZipCode,
             shippingCountry: form.shippingCountry,
+            shippingLatitude: form.shippingLatitude === '' ? null : Number(form.shippingLatitude),
+            shippingLongitude: form.shippingLongitude === '' ? null : Number(form.shippingLongitude),
           };
     return {
       ...base,
@@ -239,8 +250,16 @@ export default function CheckoutPage() {
                     <TextField label="Label (optional)" placeholder="Home, Work..." value={form.label} onChange={(e) => setForm({ ...form, label: e.target.value })} />
                     <TextField label="Street address" required value={form.shippingStreet} onChange={(e) => setForm({ ...form, shippingStreet: e.target.value })} />
                     <TextField label="City" required value={form.shippingCity} onChange={(e) => setForm({ ...form, shippingCity: e.target.value })} />
-                    <TextField label="ZIP / Postal code" required value={form.shippingZipCode} onChange={(e) => setForm({ ...form, shippingZipCode: e.target.value })} />
+                    <TextField label="Postal code" required value={form.shippingZipCode} onChange={(e) => setForm({ ...form, shippingZipCode: e.target.value })} />
                     <TextField label="Country" required value={form.shippingCountry} onChange={(e) => setForm({ ...form, shippingCountry: e.target.value })} />
+                    <LocationPicker
+                      value={{ latitude: form.shippingLatitude, longitude: form.shippingLongitude }}
+                      onChange={(location) => setForm({
+                        ...form,
+                        shippingLatitude: location.latitude,
+                        shippingLongitude: location.longitude,
+                      })}
+                    />
                   </Stack>
                 )}
 
@@ -319,14 +338,35 @@ export default function CheckoutPage() {
         <Grid size={{ xs: 12, md: 4 }}>
           <Card sx={{ p: 2.5, position: { md: 'sticky' }, top: { md: 88 } }}>
             <Typography variant="h6" gutterBottom>Order summary</Typography>
-            <Stack spacing={1} sx={{ mb: 2 }}>
-              {cart.items.map((item) => (
-                <Stack key={item.productId} direction="row" justifyContent="space-between">
-                  <Typography variant="body2">{item.productName} × {item.quantity}</Typography>
-                  <Typography variant="body2">${Number(item.lineTotal).toFixed(2)}</Typography>
-                </Stack>
-              ))}
-            </Stack>
+            <TableContainer
+              sx={{
+                mb: 2,
+                borderRadius: 2,
+                border: '1px solid',
+                borderColor: 'divider',
+                bgcolor: 'background.default',
+                overflow: 'hidden',
+              }}
+            >
+              <Table size="small" aria-label="Checkout items">
+                <TableHead>
+                  <TableRow sx={{ bgcolor: 'action.hover' }}>
+                    <TableCell sx={{ px: 1.5, py: 1, color: 'text.secondary', fontSize: 12, fontWeight: 700 }}>Item</TableCell>
+                    <TableCell align="center" sx={{ px: 1, py: 1, color: 'text.secondary', fontSize: 12, fontWeight: 700 }}>Qty</TableCell>
+                    <TableCell align="right" sx={{ px: 1.5, py: 1, color: 'text.secondary', fontSize: 12, fontWeight: 700 }}>Total</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {cart.items.map((item) => (
+                    <TableRow key={item.productId} sx={{ '&:last-child td': { borderBottom: 0 } }}>
+                      <TableCell sx={{ px: 1.5, py: 1.25, fontWeight: 600 }}>{item.productName}</TableCell>
+                      <TableCell align="center" sx={{ px: 1, py: 1.25, color: 'text.secondary' }}>{item.quantity}</TableCell>
+                      <TableCell align="right" sx={{ px: 1.5, py: 1.25, fontWeight: 700 }}>${Number(item.lineTotal).toFixed(2)}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
             {summary && (
               <PricingSummary
                 subtotal={summary.subtotalAmount ?? summary.subtotal}
@@ -344,3 +384,4 @@ export default function CheckoutPage() {
     </PageContainer>
   );
 }
+

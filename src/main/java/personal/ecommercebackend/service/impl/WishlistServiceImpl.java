@@ -4,9 +4,11 @@ import personal.ecommercebackend.service.*;
 
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import personal.ecommercebackend.dto.response.PageResponse;
 import personal.ecommercebackend.dto.response.ProductResponse;
 import personal.ecommercebackend.entity.Product;
 import personal.ecommercebackend.entity.User;
@@ -33,6 +35,13 @@ public class WishlistServiceImpl implements WishlistService {
                 .stream()
                 .map(w -> EntityMapper.toProductResponse(w.getProduct()))
                 .toList();
+    }
+
+    @Transactional(readOnly = true)
+    public PageResponse<ProductResponse> listMine(Pageable pageable) {
+        return PageResponse.from(wishlistItemRepository
+                .findByUserIdOrderByCreatedAtDesc(SecurityUtils.currentUserId(), pageable)
+                .map(w -> EntityMapper.toProductResponse(w.getProduct())));
     }
 
     @Transactional(readOnly = true)

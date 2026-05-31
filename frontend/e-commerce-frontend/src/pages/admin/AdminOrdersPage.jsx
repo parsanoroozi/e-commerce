@@ -6,6 +6,7 @@ import {
   InputAdornment,
   Link,
   MenuItem,
+  Pagination,
   Select,
   Stack,
   Table,
@@ -27,12 +28,17 @@ const STATUSES = ['AWAITING_PAYMENT', 'PENDING', 'CONFIRMED', 'SHIPPED', 'DELIVE
 
 export default function AdminOrdersPage() {
   const [orders, setOrders] = useState([]);
+  const [page, setPage] = useState(0);
+  const [pageData, setPageData] = useState({ page: 0, totalPages: 0 });
   const [error, setError] = useState('');
   const [statusFilter, setStatusFilter] = useState('ALL');
   const [search, setSearch] = useState('');
 
   const load = useCallback(() =>
-    ordersApi.adminAll().then((data) => setOrders(data.content)).catch((err) => setError(err.message)), []);
+    ordersApi.adminAll(page).then((data) => {
+      setOrders(data.content);
+      setPageData(data);
+    }).catch((err) => setError(err.message)), [page]);
 
   useEffect(() => {
     load();
@@ -169,6 +175,16 @@ export default function AdminOrdersPage() {
           </TableBody>
         </Table>
       </TableContainer>
+      {pageData.totalPages > 1 && (
+        <Stack alignItems="center" sx={{ mt: 3 }}>
+          <Pagination
+            count={pageData.totalPages}
+            page={page + 1}
+            onChange={(_, value) => setPage(value - 1)}
+            color="primary"
+          />
+        </Stack>
+      )}
     </Box>
   );
 }
