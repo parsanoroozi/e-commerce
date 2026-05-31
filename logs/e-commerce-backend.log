@@ -50436,3 +50436,1074 @@ Caused by: java.net.ConnectException: Connection timed out: connect
 2026-05-31 15:40:36.666 INFO  [http-nio-0.0.0.0-8080-exec-5] [83beb8f9-d6ba-4d73-b3bd-cd6194238739] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=parsan6347@gmail.com
 2026-05-31 15:40:36.666 INFO  [http-nio-0.0.0.0-8080-exec-1] [08d1f0d7-8697-407a-8e5e-5b99e244d3c0] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=parsan6347@gmail.com
 2026-05-31 15:40:36.670 INFO  [http-nio-0.0.0.0-8080-exec-3] [2a9cd2bb-2d99-488b-b8cf-7350c99bd13c] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (9 ms) user=parsan6347@gmail.com
+2026-05-31 15:41:47.675 INFO  [http-nio-0.0.0.0-8080-exec-7] [e43ecbfa-6c29-45b4-a584-c8cd671efeb8] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-31 15:41:47.675 INFO  [http-nio-0.0.0.0-8080-exec-9] [af41c0de-ecc0-42d7-988e-e21bebeadd75] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-31 15:41:47.680 INFO  [http-nio-0.0.0.0-8080-exec-10] [765d2ad2-2425-4b7c-87c9-5235482e196a] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (12 ms) user=parsan6347@gmail.com
+2026-05-31 15:42:14.597 INFO  [http-nio-0.0.0.0-8080-exec-4] [1e230eec-32a3-44b1-86c4-d98c543cf087] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (11 ms) user=parsan6347@gmail.com
+2026-05-31 15:42:14.912 INFO  [http-nio-0.0.0.0-8080-exec-6] [3efd81cf-2fc6-473d-97d8-3abb7f1dc82e] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (10 ms) user=parsan6347@gmail.com
+2026-05-31 15:42:14.914 INFO  [http-nio-0.0.0.0-8080-exec-5] [40105aca-cbc5-43d8-a420-424297f24205] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (10 ms) user=parsan6347@gmail.com
+2026-05-31 15:42:14.914 INFO  [http-nio-0.0.0.0-8080-exec-8] [57acbbbb-cb29-4cd4-9c50-919f538928e4] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (11 ms) user=parsan6347@gmail.com
+2026-05-31 15:42:14.916 INFO  [http-nio-0.0.0.0-8080-exec-1] [f9f1a589-d78b-4c17-955c-8837cd9ff6d4] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (11 ms) user=parsan6347@gmail.com
+2026-05-31 15:42:14.920 INFO  [http-nio-0.0.0.0-8080-exec-2] [2ac1fd69-d82e-4748-bc25-121c5440e93a] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (18 ms) user=parsan6347@gmail.com
+2026-05-31 15:42:14.937 INFO  [http-nio-0.0.0.0-8080-exec-3] [ae58d6ad-a7e8-4f01-9f19-163d0e027376] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (12 ms) user=parsan6347@gmail.com
+2026-05-31 15:42:15.241 INFO  [http-nio-0.0.0.0-8080-exec-7] [227b6448-c077-43a8-8796-e3f8c9ce75c5] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (8 ms) user=parsan6347@gmail.com
+2026-05-31 15:42:15.252 INFO  [http-nio-0.0.0.0-8080-exec-9] [fc52623a-8fae-42f7-a61d-c595750bb44f] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-31 15:42:16.658 WARN  [http-nio-0.0.0.0-8080-exec-4] [6b679f4b-585f-4622-b1db-11322c343934] p.e.exception.GlobalExceptionHandler - Validation failed for shippingAddressRequest: {zipCode=must not be blank, country=must not be blank, city=must not be blank, street=must not be blank}
+2026-05-31 15:42:16.659 INFO  [http-nio-0.0.0.0-8080-exec-4] [6b679f4b-585f-4622-b1db-11322c343934] p.e.config.RequestLoggingFilter - HTTP POST /api/shipping-addresses -> 400 (6 ms) user=parsan6347@gmail.com
+2026-05-31 15:42:21.031 INFO  [http-nio-0.0.0.0-8080-exec-6] [df76629f-4784-4a86-ab92-fa5b71e09a3e] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (17 ms) user=parsan6347@gmail.com
+2026-05-31 15:42:21.317 INFO  [http-nio-0.0.0.0-8080-exec-8] [f072a65e-44e6-45c5-85e4-a002d1ba896c] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-31 15:42:21.317 INFO  [http-nio-0.0.0.0-8080-exec-5] [f956bd2e-e10b-470b-a9c9-451d3120ea9d] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-31 15:42:21.339 INFO  [http-nio-0.0.0.0-8080-exec-2] [0ce43cb6-7be9-42db-8855-331fa70463e2] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-31 15:42:21.340 INFO  [http-nio-0.0.0.0-8080-exec-1] [c699eadf-d37d-4810-b14b-68b68c93f065] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (10 ms) user=parsan6347@gmail.com
+2026-05-31 15:42:21.358 INFO  [http-nio-0.0.0.0-8080-exec-3] [2dfb727e-9ccf-467e-bc73-9b23e410f36c] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-31 15:42:24.698 INFO  [http-nio-0.0.0.0-8080-exec-10] [18eb1259-7a99-4174-b6de-30055814f2d4] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/search?q=%D8%A7%D8%AE%D8%AA%DB%8C%D8%A7%D8%B1%DB%8C%D9%87 -> 200 (8045 ms) user=parsan6347@gmail.com
+2026-05-31 15:42:26.941 WARN  [http-nio-0.0.0.0-8080-exec-9] [2aa1851a-098d-40d9-872a-9068278e98d9] p.e.exception.GlobalExceptionHandler - Validation failed for shippingAddressRequest: {zipCode=must not be blank, country=must not be blank, city=must not be blank, street=must not be blank}
+2026-05-31 15:42:26.942 INFO  [http-nio-0.0.0.0-8080-exec-9] [2aa1851a-098d-40d9-872a-9068278e98d9] p.e.config.RequestLoggingFilter - HTTP POST /api/shipping-addresses -> 400 (4 ms) user=parsan6347@gmail.com
+2026-05-31 15:42:37.963 INFO  [http-nio-0.0.0.0-8080-exec-6] [feb1d6db-6c22-4b0c-9356-786d0a99017a] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (11 ms) user=parsan6347@gmail.com
+2026-05-31 15:42:39.540 INFO  [http-nio-0.0.0.0-8080-exec-5] [1bbd5335-dce1-4695-8cee-762faa30d10c] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (1585 ms) user=parsan6347@gmail.com
+2026-05-31 15:42:39.549 INFO  [http-nio-0.0.0.0-8080-exec-4] [f0f4a2f1-47dc-4cbf-87ec-91212cdfbdcc] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (1597 ms) user=parsan6347@gmail.com
+2026-05-31 15:43:46.430 WARN  [HikariPool-1:housekeeper] [no-request] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=58s34ms715µs400ns).
+2026-05-31 15:43:46.441 INFO  [http-nio-0.0.0.0-8080-exec-2] [b7db764e-1296-4bef-86b5-1d42f77b4b18] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-31 15:43:46.441 INFO  [http-nio-0.0.0.0-8080-exec-1] [0b339faf-d198-4476-92ec-7caa97075de0] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-31 15:43:46.445 INFO  [http-nio-0.0.0.0-8080-exec-8] [054717f0-0cac-46f3-b236-27360b09d41f] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (11 ms) user=parsan6347@gmail.com
+2026-05-31 15:43:46.922 INFO  [http-nio-0.0.0.0-8080-exec-7] [5fb75848-5136-467b-9173-2f0d632a3f79] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/search?q=%D8%A7%D8%AE%D8%AA%DB%8C%D8%A7%D8%B1%DB%8C%D9%87 -> 200 (79984 ms) user=parsan6347@gmail.com
+2026-05-31 15:43:47.654 INFO  [http-nio-0.0.0.0-8080-exec-10] [f9075831-8985-4f55-a5bf-cb9558c4623a] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-31 15:43:47.654 INFO  [http-nio-0.0.0.0-8080-exec-9] [dfb8fd2a-8973-4de2-b9b7-edbf552995ef] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-31 15:43:47.657 INFO  [http-nio-0.0.0.0-8080-exec-3] [d88fe740-6293-4b3c-a76b-888e41ee031d] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (9 ms) user=parsan6347@gmail.com
+2026-05-31 15:43:48.362 INFO  [http-nio-0.0.0.0-8080-exec-6] [c1f021ab-9e2e-4c68-8b32-f62372fbd886] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (19 ms) user=parsan6347@gmail.com
+2026-05-31 15:43:48.645 INFO  [http-nio-0.0.0.0-8080-exec-5] [48c79088-282d-4658-b026-58ba378687f2] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-31 15:43:48.645 INFO  [http-nio-0.0.0.0-8080-exec-4] [ec2ef97f-dbf2-40fd-88c3-092726151df6] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-31 15:43:48.668 INFO  [http-nio-0.0.0.0-8080-exec-1] [7e895533-4729-44d3-aa3b-293045c4a5fd] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-31 15:43:48.670 INFO  [http-nio-0.0.0.0-8080-exec-8] [b808a725-2a48-4f70-b5d1-7c58a220e195] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-31 15:43:48.674 INFO  [http-nio-0.0.0.0-8080-exec-2] [a5a672f5-6d1d-40f0-948e-33a5fd47854c] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (10 ms) user=parsan6347@gmail.com
+2026-05-31 15:44:08.775 INFO  [http-nio-0.0.0.0-8080-exec-26] [30ffa500-deda-4474-8fe8-b41cd76f06e0] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-31 15:44:08.775 INFO  [http-nio-0.0.0.0-8080-exec-25] [1b3bf3df-5c4e-4c7c-b2dd-942f1ab0a4a2] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-31 15:44:08.778 INFO  [http-nio-0.0.0.0-8080-exec-24] [18b6bca4-9816-4f37-b68c-876876b4293d] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (9 ms) user=parsan6347@gmail.com
+2026-05-31 15:44:09.969 INFO  [http-nio-0.0.0.0-8080-exec-29] [8505782b-0113-4f0e-9ca4-804496380924] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/16/42135/25783.png -> 502 (1208 ms) user=anonymous
+2026-05-31 15:44:09.970 INFO  [http-nio-0.0.0.0-8080-exec-15] [a07375d4-9082-4855-bdac-82a0884f83c1] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/16/42135/25784.png -> 502 (8329 ms) user=anonymous
+2026-05-31 15:44:09.970 INFO  [http-nio-0.0.0.0-8080-exec-20] [f3a21861-7a75-4aa8-b066-cc5447ee1e38] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168543/103132.png -> 502 (7232 ms) user=anonymous
+2026-05-31 15:44:09.969 INFO  [http-nio-0.0.0.0-8080-exec-18] [d6792d68-a72b-4066-9080-1673dc86e9b3] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168542/103132.png -> 502 (7231 ms) user=anonymous
+2026-05-31 15:44:09.970 INFO  [http-nio-0.0.0.0-8080-exec-6] [a1d5e361-5da8-46ea-b4c8-a451c3a74b24] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/17/84270/51565.png -> 502 (14565 ms) user=anonymous
+2026-05-31 15:44:09.970 INFO  [http-nio-0.0.0.0-8080-exec-5] [7da068cf-d92a-4bdd-91fd-69ad13c049c1] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168544/103131.png -> 502 (13985 ms) user=anonymous
+2026-05-31 15:44:09.970 INFO  [http-nio-0.0.0.0-8080-exec-12] [644f66fa-7037-4cad-a111-397dbf06a0ad] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/16/42134/25784.png -> 502 (8572 ms) user=anonymous
+2026-05-31 15:44:09.970 INFO  [http-nio-0.0.0.0-8080-exec-24] [701f6493-81ed-425f-8aca-59b4b3789347] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/16/42137/25784.png -> 502 (713 ms) user=anonymous
+2026-05-31 15:44:09.970 INFO  [http-nio-0.0.0.0-8080-exec-2] [794e9582-5d36-4aa5-a013-f03b3d1e6ea6] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168543/103132.png -> 502 (13985 ms) user=anonymous
+2026-05-31 15:44:09.969 INFO  [http-nio-0.0.0.0-8080-exec-8] [6a2ee390-f2c1-4058-87cd-be42bb9baf91] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168546/103131.png -> 502 (13984 ms) user=anonymous
+2026-05-31 15:44:09.969 INFO  [http-nio-0.0.0.0-8080-exec-14] [55ee7f7f-de4b-4155-8e1f-5a20a220d16b] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/16/42136/25784.png -> 502 (8571 ms) user=anonymous
+2026-05-31 15:44:09.969 INFO  [http-nio-0.0.0.0-8080-exec-21] [a6b6393c-30c2-4423-b137-afb4590d55df] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168542/103133.png -> 502 (7231 ms) user=anonymous
+2026-05-31 15:44:09.969 INFO  [http-nio-0.0.0.0-8080-exec-22] [f3cf83ae-76e0-472b-a9df-099b2cb45396] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168545/103132.png -> 502 (7231 ms) user=anonymous
+2026-05-31 15:44:09.969 INFO  [http-nio-0.0.0.0-8080-exec-26] [92de7471-e04e-452e-bb8c-d5fd296efe67] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/16/42134/25784.png -> 502 (712 ms) user=anonymous
+2026-05-31 15:44:09.969 INFO  [http-nio-0.0.0.0-8080-exec-28] [7ececa3f-e88f-4279-abe3-d5753777feb1] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/16/42135/25784.png -> 502 (1208 ms) user=anonymous
+2026-05-31 15:44:09.972 INFO  [http-nio-0.0.0.0-8080-exec-16] [34d31cb0-b9fc-4f19-a48f-28c845302706] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/16/42137/25784.png -> 502 (8331 ms) user=anonymous
+2026-05-31 15:44:09.972 INFO  [http-nio-0.0.0.0-8080-exec-4] [edf49d53-ff9c-4e79-83ca-8d3d18dea55c] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168545/103132.png -> 502 (14255 ms) user=anonymous
+2026-05-31 15:44:09.972 INFO  [http-nio-0.0.0.0-8080-exec-27] [266a9b43-60b7-4693-bc5a-9bee6930a290] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/16/42136/25784.png -> 502 (1212 ms) user=anonymous
+2026-05-31 15:44:09.970 INFO  [http-nio-0.0.0.0-8080-exec-3] [ad76010b-5281-4f3d-b45a-1cd9a6e04c87] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/16/42134/25783.png -> 502 (19636 ms) user=anonymous
+2026-05-31 15:44:09.972 INFO  [http-nio-0.0.0.0-8080-exec-17] [6fd18ee7-f9d0-4269-aeab-087fab6ef3de] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/16/42135/25783.png -> 502 (8331 ms) user=anonymous
+2026-05-31 15:44:09.972 INFO  [http-nio-0.0.0.0-8080-exec-1] [233c454c-3531-4477-8273-b6880f79d4a5] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168546/103132.png -> 502 (13987 ms) user=anonymous
+2026-05-31 15:44:09.970 INFO  [http-nio-0.0.0.0-8080-exec-11] [8282c5df-1d65-4fad-93c5-889ed948a042] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168543/103131.png -> 502 (13984 ms) user=anonymous
+2026-05-31 15:44:09.973 INFO  [http-nio-0.0.0.0-8080-exec-23] [5748e51b-9cde-459a-a0bb-30e8f86e78e2] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168544/103132.png -> 502 (6983 ms) user=anonymous
+2026-05-31 15:44:09.974 INFO  [http-nio-0.0.0.0-8080-exec-13] [1a8b5f8d-7990-40a4-aac0-979631e5398e] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/16/42134/25783.png -> 502 (8576 ms) user=anonymous
+2026-05-31 15:44:09.971 INFO  [http-nio-0.0.0.0-8080-exec-25] [56b6fd2d-38c7-4d06-bf55-e5ba53beba7e] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/16/42134/25782.png -> 502 (714 ms) user=anonymous
+2026-05-31 15:44:09.976 INFO  [http-nio-0.0.0.0-8080-exec-19] [ed746148-99c8-4cd1-99dd-27a1a0b6457d] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168543/103133.png -> 502 (7238 ms) user=anonymous
+2026-05-31 15:44:09.977 INFO  [http-nio-0.0.0.0-8080-exec-10] [a624e406-aa89-407e-b2be-90148c5ec545] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/16/42134/25782.png -> 502 (19643 ms) user=anonymous
+2026-05-31 15:44:10.116 INFO  [http-nio-0.0.0.0-8080-exec-9] [4efbabab-9440-4a1a-8457-4eb624f5cb1d] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/16/42135/25783.png -> 502 (19782 ms) user=anonymous
+2026-05-31 15:44:10.193 INFO  [http-nio-0.0.0.0-8080-exec-7] [cc8aa0ba-3496-4f86-8e9b-179c59a73111] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/16/42135/25782.png -> 502 (19859 ms) user=anonymous
+2026-05-31 15:44:10.720 INFO  [http-nio-0.0.0.0-8080-exec-20] [f16a8e9c-ccc9-4c89-ad3e-56c9a3743007] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/16/42135/25782.png -> 200 (429 ms) user=anonymous
+2026-05-31 15:44:18.101 INFO  [http-nio-0.0.0.0-8080-exec-6] [24adaa6d-0825-4764-a711-0e6ff7e9e578] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/reverse?lat=35.784009&lon=51.464046 -> 200 (515 ms) user=parsan6347@gmail.com
+2026-05-31 15:44:29.315 INFO  [http-nio-0.0.0.0-8080-exec-21] [85441c42-e057-4126-bb10-48c38aeef788] p.e.config.RequestLoggingFilter - HTTP POST /api/shipping-addresses -> 201 (164 ms) user=parsan6347@gmail.com
+2026-05-31 15:44:29.419 INFO  [http-nio-0.0.0.0-8080-exec-22] [d1d7fb65-dff9-4552-833a-e12fb22c1d6f] p.e.config.RequestLoggingFilter - HTTP GET /api/shipping-addresses?page=0&size=10 -> 200 (11 ms) user=parsan6347@gmail.com
+2026-05-31 15:44:30.306 INFO  [http-nio-0.0.0.0-8080-exec-15] [4acad456-ffa4-4888-9dad-f72a3b03e36a] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/16/42134/25783.png -> 502 (20016 ms) user=anonymous
+2026-05-31 15:44:30.923 INFO  [http-nio-0.0.0.0-8080-exec-4] [de69b07d-2b97-4c4d-ad81-e514344ad631] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/19/337091/206268.png -> 502 (14960 ms) user=anonymous
+2026-05-31 15:44:30.923 INFO  [http-nio-0.0.0.0-8080-exec-29] [6cc175a9-2cd6-4dcd-a506-98ba6f3d6c7d] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168545/103135.png -> 502 (15712 ms) user=anonymous
+2026-05-31 15:44:30.923 INFO  [http-nio-0.0.0.0-8080-exec-5] [974dd82e-ac9b-4f8e-8516-b6f3c4823f68] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168546/103135.png -> 502 (15712 ms) user=anonymous
+2026-05-31 15:44:30.923 INFO  [http-nio-0.0.0.0-8080-exec-2] [8992c998-b0c0-4f31-b7be-96735fd46825] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168544/103134.png -> 502 (15710 ms) user=anonymous
+2026-05-31 15:44:30.923 INFO  [http-nio-0.0.0.0-8080-exec-26] [a4013230-635d-4585-b5ba-885a523284dd] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168544/103135.png -> 502 (15710 ms) user=anonymous
+2026-05-31 15:44:30.923 INFO  [http-nio-0.0.0.0-8080-exec-14] [37562865-1f76-43fe-a3f8-63d88003c67c] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168544/103133.png -> 502 (15710 ms) user=anonymous
+2026-05-31 15:44:30.924 INFO  [http-nio-0.0.0.0-8080-exec-16] [d865543d-0c9a-44ba-808a-abe1dd03c954] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168547/103135.png -> 502 (15711 ms) user=anonymous
+2026-05-31 15:44:30.924 INFO  [http-nio-0.0.0.0-8080-exec-24] [0a402659-56ea-4a63-8fb8-d6d4381d9d0d] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/19/337091/206269.png -> 502 (14961 ms) user=anonymous
+2026-05-31 15:44:31.639 INFO  [http-nio-0.0.0.0-8080-exec-8] [d8528d13-58dc-44b7-ae58-24753a69b6e1] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (13 ms) user=parsan6347@gmail.com
+2026-05-31 15:44:31.941 INFO  [http-nio-0.0.0.0-8080-exec-28] [f420bd70-4eb8-429b-a07d-131d1e8c74a7] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=parsan6347@gmail.com
+2026-05-31 15:44:31.941 INFO  [http-nio-0.0.0.0-8080-exec-3] [d6e16254-a26a-469d-8690-a78a08fa4ab1] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=parsan6347@gmail.com
+2026-05-31 15:44:35.962 INFO  [http-nio-0.0.0.0-8080-exec-11] [9cef4d84-74b1-4da7-a8c5-3bc1b0ef6b0c] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=parsan6347@gmail.com
+2026-05-31 15:44:35.962 INFO  [http-nio-0.0.0.0-8080-exec-23] [bab86bba-d660-4010-9ca4-d36c1cc503eb] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=parsan6347@gmail.com
+2026-05-31 15:44:35.965 INFO  [http-nio-0.0.0.0-8080-exec-27] [a6091803-3144-4767-a0ac-6c27743e911b] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (8 ms) user=parsan6347@gmail.com
+2026-05-31 15:44:41.818 INFO  [http-nio-0.0.0.0-8080-exec-17] [6f750841-3cf2-4dc8-96c0-d3bd93c61438] p.e.config.RequestLoggingFilter - HTTP PUT /api/shipping-addresses/6 -> 200 (25 ms) user=parsan6347@gmail.com
+2026-05-31 15:44:42.148 INFO  [http-nio-0.0.0.0-8080-exec-13] [68a3cf7d-50fc-48d4-b3ab-28afce53bbf4] p.e.config.RequestLoggingFilter - HTTP GET /api/shipping-addresses?page=0&size=10 -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-31 15:44:49.159 INFO  [http-nio-0.0.0.0-8080-exec-18] [09fa81ae-dc7c-43a8-a351-6dfa6602e615] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/reverse?lat=35.784392&lon=51.475589 -> 200 (511 ms) user=parsan6347@gmail.com
+2026-05-31 15:44:49.586 INFO  [http-nio-0.0.0.0-8080-exec-19] [891f9643-72c1-42c7-9e95-89c515b71a28] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/15/21071/12890.png -> 200 (419 ms) user=anonymous
+2026-05-31 15:44:50.981 ERROR [http-nio-0.0.0.0-8080-exec-25] [6ddcdac9-7f44-4563-a306-a73e5c15ecba] p.e.exception.GlobalExceptionHandler - Unhandled exception: ServletOutputStream failed to write: java.io.IOException: An established connection was aborted by the software in your host machine
+org.springframework.web.context.request.async.AsyncRequestNotUsableException: ServletOutputStream failed to write: java.io.IOException: An established connection was aborted by the software in your host machine
+	at org.springframework.web.context.request.async.StandardServletAsyncWebRequest$LifecycleHttpServletResponse.handleIOException(StandardServletAsyncWebRequest.java:340)
+	at org.springframework.web.context.request.async.StandardServletAsyncWebRequest$LifecycleServletOutputStream.write(StandardServletAsyncWebRequest.java:399)
+	at org.springframework.util.StreamUtils$NonClosingOutputStream.write(StreamUtils.java:311)
+	at java.base/java.io.FilterOutputStream.write(FilterOutputStream.java:108)
+	at org.springframework.http.converter.ByteArrayHttpMessageConverter.writeInternal(ByteArrayHttpMessageConverter.java:67)
+	at org.springframework.http.converter.ByteArrayHttpMessageConverter.writeInternal(ByteArrayHttpMessageConverter.java:38)
+	at org.springframework.http.converter.AbstractHttpMessageConverter.write(AbstractHttpMessageConverter.java:232)
+	at org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodProcessor.writeWithMessageConverters(AbstractMessageConverterMethodProcessor.java:340)
+	at org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor.handleReturnValue(HttpEntityMethodProcessor.java:261)
+	at org.springframework.web.servlet.mvc.method.annotation.ResponseEntityReturnValueHandler.handleReturnValue(ResponseEntityReturnValueHandler.java:80)
+	at org.springframework.web.method.support.HandlerMethodReturnValueHandlerComposite.handleReturnValue(HandlerMethodReturnValueHandlerComposite.java:77)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:135)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at personal.ecommercebackend.config.RequestLoggingFilter.doFilterInternal(RequestLoggingFilter.java:38)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at personal.ecommercebackend.config.AuthRateLimitFilter.doFilterInternal(AuthRateLimitFilter.java:36)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:235)
+	at org.springframework.security.web.ObservationFilterChainDecorator$FilterObservation$SimpleFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:493)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:354)
+	at org.springframework.security.web.ObservationFilterChainDecorator.lambda$wrapSecured$0(ObservationFilterChainDecorator.java:86)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:132)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:101)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:132)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:86)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:181)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at personal.ecommercebackend.security.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:32)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:110)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:96)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$0(ObservationFilterChainDecorator.java:337)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:237)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:195)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.ServletRequestPathFilter.doFilter(ServletRequestPathFilter.java:52)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebSecurityConfiguration.java:317)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:355)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:272)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:110)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1801)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+Caused by: org.apache.catalina.connector.ClientAbortException: java.io.IOException: An established connection was aborted by the software in your host machine
+	at org.apache.catalina.connector.OutputBuffer.realWriteBytes(OutputBuffer.java:328)
+	at org.apache.catalina.connector.OutputBuffer.appendByteArray(OutputBuffer.java:734)
+	at org.apache.catalina.connector.OutputBuffer.append(OutputBuffer.java:655)
+	at org.apache.catalina.connector.OutputBuffer.writeBytes(OutputBuffer.java:363)
+	at org.apache.catalina.connector.OutputBuffer.write(OutputBuffer.java:341)
+	at org.apache.catalina.connector.CoyoteOutputStream.write(CoyoteOutputStream.java:99)
+	at org.springframework.security.web.util.OnCommittedResponseWrapper$SaveContextServletOutputStream.write(OnCommittedResponseWrapper.java:668)
+	at org.springframework.web.context.request.async.StandardServletAsyncWebRequest$LifecycleServletOutputStream.write(StandardServletAsyncWebRequest.java:396)
+	... 133 common frames omitted
+Caused by: java.io.IOException: An established connection was aborted by the software in your host machine
+	at java.base/sun.nio.ch.SocketDispatcher.write0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.write(SocketDispatcher.java:54)
+	at java.base/sun.nio.ch.IOUtil.writeFromNativeBuffer(IOUtil.java:136)
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:101)
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:57)
+	at java.base/sun.nio.ch.SocketChannelImpl.write(SocketChannelImpl.java:542)
+	at org.apache.tomcat.util.net.NioChannel.write(NioChannel.java:129)
+	at org.apache.tomcat.util.net.NioEndpoint$NioSocketWrapper.doWrite(NioEndpoint.java:1441)
+	at org.apache.tomcat.util.net.SocketWrapperBase.doWrite(SocketWrapperBase.java:747)
+	at org.apache.tomcat.util.net.SocketWrapperBase.writeBlocking(SocketWrapperBase.java:587)
+	at org.apache.tomcat.util.net.SocketWrapperBase.write(SocketWrapperBase.java:535)
+	at org.apache.coyote.http11.Http11OutputBuffer$SocketOutputBuffer.doWrite(Http11OutputBuffer.java:537)
+	at org.apache.coyote.http11.filters.IdentityOutputFilter.doWrite(IdentityOutputFilter.java:71)
+	at org.apache.coyote.http11.Http11OutputBuffer.doWrite(Http11OutputBuffer.java:193)
+	at org.apache.coyote.Response.doWrite(Response.java:633)
+	at org.apache.catalina.connector.OutputBuffer.realWriteBytes(OutputBuffer.java:316)
+	... 140 common frames omitted
+2026-05-31 15:44:50.987 WARN  [http-nio-0.0.0.0-8080-exec-25] [6ddcdac9-7f44-4563-a306-a73e5c15ecba] o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Failure in @ExceptionHandler personal.ecommercebackend.exception.GlobalExceptionHandler#handleGeneric(Exception)
+org.springframework.http.converter.HttpMessageNotWritableException: No converter for [class org.springframework.http.ProblemDetail] with preset Content-Type 'image/png'
+	at org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodProcessor.writeWithMessageConverters(AbstractMessageConverterMethodProcessor.java:363)
+	at org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor.handleReturnValue(HttpEntityMethodProcessor.java:261)
+	at org.springframework.web.method.support.HandlerMethodReturnValueHandlerComposite.handleReturnValue(HandlerMethodReturnValueHandlerComposite.java:77)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:135)
+	at org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver.doResolveHandlerMethodException(ExceptionHandlerExceptionResolver.java:460)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodExceptionResolver.doResolveException(AbstractHandlerMethodExceptionResolver.java:72)
+	at org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver.resolveException(AbstractHandlerExceptionResolver.java:176)
+	at org.springframework.web.servlet.handler.HandlerExceptionResolverComposite.resolveException(HandlerExceptionResolverComposite.java:78)
+	at org.springframework.web.servlet.DispatcherServlet.processHandlerException(DispatcherServlet.java:1227)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1035)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:980)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at personal.ecommercebackend.config.RequestLoggingFilter.doFilterInternal(RequestLoggingFilter.java:38)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at personal.ecommercebackend.config.AuthRateLimitFilter.doFilterInternal(AuthRateLimitFilter.java:36)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:235)
+	at org.springframework.security.web.ObservationFilterChainDecorator$FilterObservation$SimpleFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:493)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:354)
+	at org.springframework.security.web.ObservationFilterChainDecorator.lambda$wrapSecured$0(ObservationFilterChainDecorator.java:86)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:132)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:101)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:132)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:86)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:181)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at personal.ecommercebackend.security.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:32)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:110)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:96)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$0(ObservationFilterChainDecorator.java:337)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:237)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:195)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.ServletRequestPathFilter.doFilter(ServletRequestPathFilter.java:52)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebSecurityConfiguration.java:317)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:355)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:272)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:110)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1801)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+2026-05-31 15:44:50.988 INFO  [http-nio-0.0.0.0-8080-exec-25] [6ddcdac9-7f44-4563-a306-a73e5c15ecba] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/15/21071/12892.png -> 200 (1820 ms) user=anonymous
+2026-05-31 15:45:05.954 INFO  [http-nio-0.0.0.0-8080-exec-6] [609371ae-b9d6-4798-901e-fe108e87629e] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=parsan6347@gmail.com
+2026-05-31 15:45:05.954 INFO  [http-nio-0.0.0.0-8080-exec-20] [9a5a6672-fd1c-45b8-bebf-d4d6d438e1c9] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=parsan6347@gmail.com
+2026-05-31 15:45:05.957 INFO  [http-nio-0.0.0.0-8080-exec-7] [e1482560-287d-411b-87ed-90d755a250d1] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (8 ms) user=parsan6347@gmail.com
+2026-05-31 15:45:08.279 INFO  [http-nio-0.0.0.0-8080-exec-9] [2343628a-6155-4311-b70f-d4675ea16fe8] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/reverse?lat=35.791076&lon=51.463396 -> 502 (11726 ms) user=parsan6347@gmail.com
+2026-05-31 15:45:08.835 INFO  [http-nio-0.0.0.0-8080-exec-1] [7fe368cd-ef10-4cc2-b179-ab0cc2f51ac4] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/15/21071/12892.png -> 502 (14113 ms) user=anonymous
+2026-05-31 15:45:08.835 INFO  [http-nio-0.0.0.0-8080-exec-10] [e112a4f8-7c71-48a2-882a-8a8fdb37c54e] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/15/21071/12891.png -> 502 (14113 ms) user=anonymous
+2026-05-31 15:45:09.175 INFO  [http-nio-0.0.0.0-8080-exec-12] [72dd401c-c940-4031-8b8e-1c999e7d25ad] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/15/21071/12891.png -> 502 (20007 ms) user=anonymous
+2026-05-31 15:45:17.637 INFO  [http-nio-0.0.0.0-8080-exec-2] [3dff1399-d498-4149-8e2e-a14f0161495b] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/16/42134/25781.png -> 200 (396 ms) user=anonymous
+2026-05-31 15:45:36.853 INFO  [http-nio-0.0.0.0-8080-exec-3] [5383e3fc-db7d-4d0d-9ec7-21408783c6ae] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/19/337091/206257.png -> 502 (17399 ms) user=anonymous
+2026-05-31 15:45:36.853 INFO  [http-nio-0.0.0.0-8080-exec-16] [504dee06-9704-475b-9023-96d0ea2a9252] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/17/84273/51564.png -> 502 (18139 ms) user=anonymous
+2026-05-31 15:45:36.853 INFO  [http-nio-0.0.0.0-8080-exec-14] [98748499-ccdc-4f46-931a-05ce528d773f] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/17/84271/51563.png -> 502 (18140 ms) user=anonymous
+2026-05-31 15:45:36.853 INFO  [http-nio-0.0.0.0-8080-exec-11] [8a6cd5f2-708d-4b35-b8a6-8233ac30fa6f] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/19/337089/206256.png -> 502 (17399 ms) user=anonymous
+2026-05-31 15:45:36.853 INFO  [http-nio-0.0.0.0-8080-exec-8] [efe174ca-76c2-494d-8ab0-b4892f186fe0] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/19/337090/206257.png -> 502 (17399 ms) user=anonymous
+2026-05-31 15:45:36.853 INFO  [http-nio-0.0.0.0-8080-exec-27] [dc3f05d8-9140-49e0-9511-8a7a0b096bb4] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/19/337091/206256.png -> 502 (17398 ms) user=anonymous
+2026-05-31 15:45:36.853 INFO  [http-nio-0.0.0.0-8080-exec-28] [21f090a0-0210-4213-b398-80e0e9cf70ce] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/19/337088/206256.png -> 502 (17399 ms) user=anonymous
+2026-05-31 15:45:36.853 INFO  [http-nio-0.0.0.0-8080-exec-4] [aa172631-c07e-4239-b4c2-a30e51fb5acb] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/17/84272/51563.png -> 502 (18140 ms) user=anonymous
+2026-05-31 15:45:36.853 INFO  [http-nio-0.0.0.0-8080-exec-5] [6051d69d-ed1d-48ba-b8cb-1f227f029808] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/17/84272/51564.png -> 502 (18461 ms) user=anonymous
+2026-05-31 15:45:36.853 INFO  [http-nio-0.0.0.0-8080-exec-24] [3d7474a3-16c4-4f51-9ac2-b15fb65e7a55] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/17/84271/51564.png -> 502 (18139 ms) user=anonymous
+2026-05-31 15:45:36.853 INFO  [http-nio-0.0.0.0-8080-exec-29] [006d1879-7150-4337-b564-bb4b2ab56daf] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/17/84274/51563.png -> 502 (18140 ms) user=anonymous
+2026-05-31 15:45:36.853 INFO  [http-nio-0.0.0.0-8080-exec-23] [0d32bfbe-28c0-4c0b-8e75-68bb47819f0e] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/19/337092/206256.png -> 502 (17398 ms) user=anonymous
+2026-05-31 15:45:36.945 INFO  [http-nio-0.0.0.0-8080-exec-26] [b21a34a3-ddf9-46fd-904b-fbc2d9e02137] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/16/42134/25783.png -> 502 (19704 ms) user=anonymous
+2026-05-31 15:45:36.945 INFO  [http-nio-0.0.0.0-8080-exec-15] [a97a1955-7629-42dd-a6d7-3ffa213270c9] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/16/42135/25783.png -> 502 (19704 ms) user=anonymous
+2026-05-31 15:45:36.976 INFO  [http-nio-0.0.0.0-8080-exec-22] [db372105-264f-4839-803a-fa937e71915c] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/16/42134/25782.png -> 502 (19735 ms) user=anonymous
+2026-05-31 15:45:37.006 INFO  [http-nio-0.0.0.0-8080-exec-21] [5868392a-d1a1-4d3f-a6ed-b4cf8437bb8e] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/16/42135/25781.png -> 502 (19765 ms) user=anonymous
+2026-05-31 15:45:37.185 INFO  [http-nio-0.0.0.0-8080-exec-25] [3847e717-aaa6-4377-891c-dff9e8b6a4d7] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-31 15:45:37.512 INFO  [http-nio-0.0.0.0-8080-exec-6] [c45f7ffd-9005-43b4-83f1-25e5a4bbc14c] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=parsan6347@gmail.com
+2026-05-31 15:45:37.527 INFO  [http-nio-0.0.0.0-8080-exec-18] [8c40af9c-17ef-4d5b-bcdd-2e79f918ced8] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/19/337089/206257.png -> 200 (359 ms) user=anonymous
+2026-05-31 15:45:37.835 INFO  [http-nio-0.0.0.0-8080-exec-7] [fb99e591-d074-441a-96e1-b752a5118851] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-31 15:45:45.201 INFO  [http-nio-0.0.0.0-8080-exec-17] [6c760613-7e17-4a18-99f2-2bf227b14c6a] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/19/337090/206256.png -> 502 (8033 ms) user=anonymous
+2026-05-31 15:45:45.201 INFO  [http-nio-0.0.0.0-8080-exec-13] [d85ce8cb-af9e-4b34-8315-6567033be7e9] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/19/337088/206257.png -> 502 (8033 ms) user=anonymous
+2026-05-31 15:45:45.201 INFO  [http-nio-0.0.0.0-8080-exec-19] [580fcb1a-330a-4fb7-b20d-e1ff97a99c12] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/19/337092/206257.png -> 502 (8030 ms) user=anonymous
+2026-05-31 15:45:45.201 INFO  [http-nio-0.0.0.0-8080-exec-20] [5428359b-3512-432f-8338-df1939ec6b4e] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/reverse?lat=35.79056&lon=51.461219 -> 502 (8023 ms) user=parsan6347@gmail.com
+2026-05-31 15:45:56.748 INFO  [http-nio-0.0.0.0-8080-exec-1] [3f505a78-9a63-4c77-9ce1-f24b316ec26f] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/19/337090/206258.png -> 502 (2089 ms) user=anonymous
+2026-05-31 15:45:56.748 INFO  [http-nio-0.0.0.0-8080-exec-10] [e6ee1911-f9bf-437b-934a-87c9211757f1] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/19/337088/206258.png -> 502 (2089 ms) user=anonymous
+2026-05-31 15:45:56.748 INFO  [http-nio-0.0.0.0-8080-exec-12] [fd6b72c2-845b-4e91-8ec2-2fdd26685fdc] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/19/337091/206258.png -> 502 (2089 ms) user=anonymous
+2026-05-31 15:45:56.748 INFO  [http-nio-0.0.0.0-8080-exec-9] [1f1dca1c-63ae-4c18-aaa5-affa5f43d581] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/19/337089/206258.png -> 502 (2089 ms) user=anonymous
+2026-05-31 15:46:04.081 INFO  [http-nio-0.0.0.0-8080-exec-2] [c345b820-56e8-4d2c-922e-92e573916df1] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/14/10533/6445.png -> 200 (411 ms) user=anonymous
+2026-05-31 15:46:04.523 INFO  [http-nio-0.0.0.0-8080-exec-27] [2c3721ea-f67a-4c27-a476-c36319f47f1f] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/14/10534/6446.png -> 200 (541 ms) user=anonymous
+2026-05-31 15:46:10.764 INFO  [http-nio-0.0.0.0-8080-exec-29] [a739daed-6113-46a5-9249-e7fa6c06582d] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=parsan6347@gmail.com
+2026-05-31 15:46:10.764 INFO  [http-nio-0.0.0.0-8080-exec-24] [0021c6a3-33ea-42c2-bb85-0e0f1828c0b6] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=parsan6347@gmail.com
+2026-05-31 15:46:10.768 INFO  [http-nio-0.0.0.0-8080-exec-4] [c9b1822f-ff3b-43ca-8063-85ef156ee204] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (9 ms) user=parsan6347@gmail.com
+2026-05-31 15:46:23.495 INFO  [http-nio-0.0.0.0-8080-exec-14] [7271d554-3327-47e8-9636-569720af8b3c] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/14/10534/6445.png -> 502 (19513 ms) user=anonymous
+2026-05-31 15:46:23.495 INFO  [http-nio-0.0.0.0-8080-exec-3] [49be6ec8-357d-4a35-89bf-1599474b3290] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/14/10535/6446.png -> 502 (19268 ms) user=anonymous
+2026-05-31 15:46:23.495 INFO  [http-nio-0.0.0.0-8080-exec-26] [9103db57-ae76-4104-80ee-705078661f72] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/15/21064/12889.png -> 502 (12742 ms) user=anonymous
+2026-05-31 15:46:23.495 INFO  [http-nio-0.0.0.0-8080-exec-23] [5f9fef62-765a-40a0-800c-6ec2f9ac1e01] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/15/21067/12889.png -> 502 (12742 ms) user=anonymous
+2026-05-31 15:46:23.495 INFO  [http-nio-0.0.0.0-8080-exec-8] [74dc268c-c178-4301-946d-5be4a70b9f41] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/14/10532/6445.png -> 502 (19100 ms) user=anonymous
+2026-05-31 15:46:23.495 INFO  [http-nio-0.0.0.0-8080-exec-28] [303e5528-5fbb-4339-a1fc-a36905974c8c] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/14/10532/6446.png -> 502 (18655 ms) user=anonymous
+2026-05-31 15:46:23.495 INFO  [http-nio-0.0.0.0-8080-exec-5] [268790be-e343-46d5-ba6c-64590195f025] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/15/21065/12889.png -> 502 (12744 ms) user=anonymous
+2026-05-31 15:46:23.495 INFO  [http-nio-0.0.0.0-8080-exec-22] [4fbb0f75-5bdc-43cd-b8b8-828171f80594] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/15/21065/12891.png -> 502 (12409 ms) user=anonymous
+2026-05-31 15:46:23.495 INFO  [http-nio-0.0.0.0-8080-exec-11] [53c37aef-a798-4b12-adc3-4cca5b2456f3] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/14/10534/6444.png -> 502 (19268 ms) user=anonymous
+2026-05-31 15:46:23.495 INFO  [http-nio-0.0.0.0-8080-exec-16] [5e115627-f6cd-4308-a5e7-b0b1a08e4149] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/14/10533/6446.png -> 502 (19513 ms) user=anonymous
+2026-05-31 15:46:23.496 INFO  [http-nio-0.0.0.0-8080-exec-25] [a86c3d61-633a-47ef-8047-ca60af6b2927] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/17/84265/51561.png -> 502 (11902 ms) user=anonymous
+2026-05-31 15:46:23.496 INFO  [http-nio-0.0.0.0-8080-exec-13] [6d6ceb86-6d85-4b1a-b629-cd5df9693966] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/17/84266/51562.png -> 502 (11885 ms) user=anonymous
+2026-05-31 15:46:23.496 INFO  [http-nio-0.0.0.0-8080-exec-15] [c97451b5-ed02-4552-bc39-a5f84fac6a98] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/15/21064/12891.png -> 502 (12410 ms) user=anonymous
+2026-05-31 15:46:23.496 INFO  [http-nio-0.0.0.0-8080-exec-21] [19cbbb09-edff-488b-a281-8640660ed62e] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/15/21065/12890.png -> 502 (12410 ms) user=anonymous
+2026-05-31 15:46:23.497 INFO  [http-nio-0.0.0.0-8080-exec-6] [8701d5e8-d195-4bc4-9554-fda6d4adbc32] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/17/84266/51560.png -> 502 (11903 ms) user=anonymous
+2026-05-31 15:46:23.497 INFO  [http-nio-0.0.0.0-8080-exec-7] [2d1d42df-4b4c-43aa-88f0-b51eeb034c51] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/17/84264/51560.png -> 502 (11886 ms) user=anonymous
+2026-05-31 15:46:23.496 INFO  [http-nio-0.0.0.0-8080-exec-20] [8af4b5b1-f478-481b-81f5-c54a997320be] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/17/84263/51561.png -> 502 (11885 ms) user=anonymous
+2026-05-31 15:46:23.497 INFO  [http-nio-0.0.0.0-8080-exec-18] [d2236cad-231b-4a3d-9a8d-c0e20909a994] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/17/84263/51560.png -> 502 (11886 ms) user=anonymous
+2026-05-31 15:46:23.497 INFO  [http-nio-0.0.0.0-8080-exec-1] [99522883-cfdf-4804-8c4d-fcaf3a8c1adb] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168529/103123.png -> 502 (7618 ms) user=anonymous
+2026-05-31 15:46:23.497 INFO  [http-nio-0.0.0.0-8080-exec-19] [5e4a6c02-2478-4e09-8da4-b6b3818d88b7] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168531/103124.png -> 502 (7619 ms) user=anonymous
+2026-05-31 15:46:23.497 INFO  [http-nio-0.0.0.0-8080-exec-9] [49d76d63-2f3a-412e-9075-a23103337021] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168532/103123.png -> 502 (7616 ms) user=anonymous
+2026-05-31 15:46:23.497 INFO  [http-nio-0.0.0.0-8080-exec-10] [971fe506-bc67-47ef-9158-6a0497c97ef1] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168529/103124.png -> 502 (7618 ms) user=anonymous
+2026-05-31 15:46:23.497 INFO  [http-nio-0.0.0.0-8080-exec-12] [d15f5ac4-c851-41b9-947f-b20d752dcd26] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168530/103124.png -> 502 (7616 ms) user=anonymous
+2026-05-31 15:46:23.497 INFO  [http-nio-0.0.0.0-8080-exec-17] [3f95d798-82dd-4369-8fa3-4ccdcb875c67] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168531/103123.png -> 502 (7618 ms) user=anonymous
+2026-05-31 15:46:24.200 INFO  [http-nio-0.0.0.0-8080-exec-29] [9ff3c1e4-9c49-4f65-aae6-69930079a325] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168533/103124.png -> 200 (386 ms) user=anonymous
+2026-05-31 15:46:31.869 INFO  [http-nio-0.0.0.0-8080-exec-2] [7d0dc973-e491-4895-8b65-365c931ca8a3] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168532/103124.png -> 502 (8055 ms) user=anonymous
+2026-05-31 15:46:31.869 INFO  [http-nio-0.0.0.0-8080-exec-24] [66d10a7e-f08d-4952-806b-f3a49e3a7234] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168532/103125.png -> 502 (8055 ms) user=anonymous
+2026-05-31 15:46:31.869 INFO  [http-nio-0.0.0.0-8080-exec-4] [0f847978-7462-44c8-8cfb-3601f1103ff5] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168530/103125.png -> 502 (8053 ms) user=anonymous
+2026-05-31 15:46:31.869 INFO  [http-nio-0.0.0.0-8080-exec-5] [9315bef8-850e-451a-922a-874ecd9bfad5] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168533/103123.png -> 502 (8053 ms) user=anonymous
+2026-05-31 15:46:36.666 INFO  [http-nio-0.0.0.0-8080-exec-23] [8a82a105-5c70-4ed8-b4cc-d5b6dc34f7a6] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-31 15:46:36.666 INFO  [http-nio-0.0.0.0-8080-exec-8] [4f84e553-583c-4514-a666-951c32b5f8b2] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-31 15:46:36.668 INFO  [http-nio-0.0.0.0-8080-exec-3] [bdf71703-dea3-473d-965d-47a2cfc75050] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (8 ms) user=parsan6347@gmail.com
+2026-05-31 15:46:43.416 INFO  [http-nio-0.0.0.0-8080-exec-14] [61900870-8897-4273-9be7-a0fce9894395] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168533/103125.png -> 502 (18901 ms) user=anonymous
+2026-05-31 15:46:43.416 INFO  [http-nio-0.0.0.0-8080-exec-26] [8827b664-6b6b-4c46-bd3b-9ea9a2c58ca8] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168531/103125.png -> 502 (11237 ms) user=anonymous
+2026-05-31 15:46:43.476 INFO  [http-nio-0.0.0.0-8080-exec-27] [1b5779f2-0f3c-4f6b-bfc6-00952ffa942f] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168530/103123.png -> 502 (19662 ms) user=anonymous
+2026-05-31 15:46:45.047 INFO  [http-nio-0.0.0.0-8080-exec-22] [94161267-73c1-44d9-9975-901c25ee6730] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (8 ms) user=parsan6347@gmail.com
+2026-05-31 15:46:45.047 INFO  [http-nio-0.0.0.0-8080-exec-11] [659c1ecd-c7bf-407d-b43e-3b38d65f23eb] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (8 ms) user=parsan6347@gmail.com
+2026-05-31 15:46:45.058 INFO  [http-nio-0.0.0.0-8080-exec-28] [7d9f0bb5-6bfb-4c1c-b3ca-e01d1cad5450] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (19 ms) user=parsan6347@gmail.com
+2026-05-31 15:46:45.063 INFO  [http-nio-0.0.0.0-8080-exec-21] [f4d90059-0dc3-49fa-a557-9ef23843e1c9] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-31 15:46:45.066 INFO  [http-nio-0.0.0.0-8080-exec-25] [0a57d1aa-d3d1-4dd8-8e3e-1104e19e8534] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (8 ms) user=parsan6347@gmail.com
+2026-05-31 15:46:45.071 INFO  [http-nio-0.0.0.0-8080-exec-16] [01e08c8b-dc5e-4b93-8fa8-31c6225b2e4a] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (15 ms) user=parsan6347@gmail.com
+2026-05-31 15:47:00.722 INFO  [http-nio-0.0.0.0-8080-exec-7] [4b4ef106-82fb-4a23-9636-71709f2cf77e] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168534/103125.png -> 200 (463 ms) user=anonymous
+2026-05-31 15:47:08.060 INFO  [http-nio-0.0.0.0-8080-exec-15] [0fd858cb-32ab-47c1-ba73-d2909a88090d] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/reverse?lat=35.795303&lon=51.444254 -> 502 (8012 ms) user=parsan6347@gmail.com
+2026-05-31 15:47:08.276 INFO  [http-nio-0.0.0.0-8080-exec-13] [4027d933-9d1b-4d9a-829f-96af99c35b33] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168534/103124.png -> 502 (8017 ms) user=anonymous
+2026-05-31 15:47:08.276 INFO  [http-nio-0.0.0.0-8080-exec-6] [2b0fda13-b16e-4e9a-b9b2-4226d0cc5627] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168534/103123.png -> 502 (8017 ms) user=anonymous
+2026-05-31 15:47:10.476 INFO  [http-nio-0.0.0.0-8080-exec-4] [616d5416-eddd-4be4-8cf5-5e83a556a0a5] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=parsan6347@gmail.com
+2026-05-31 15:47:10.476 INFO  [http-nio-0.0.0.0-8080-exec-29] [69a4700e-60b1-46f1-80ec-44289ec954f4] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=parsan6347@gmail.com
+2026-05-31 15:47:10.480 INFO  [http-nio-0.0.0.0-8080-exec-17] [c1d066f4-e80d-40d3-b670-a7631e56f754] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (9 ms) user=parsan6347@gmail.com
+2026-05-31 15:47:10.966 INFO  [http-nio-0.0.0.0-8080-exec-19] [2db26369-546b-4a73-a591-84f2e406960f] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/reverse?lat=35.793928&lon=51.447238 -> 200 (495 ms) user=parsan6347@gmail.com
+2026-05-31 15:47:19.933 INFO  [http-nio-0.0.0.0-8080-exec-20] [215ec692-b782-4fd1-a226-e26b8d338225] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168535/103125.png -> 502 (17940 ms) user=anonymous
+2026-05-31 15:47:19.933 INFO  [http-nio-0.0.0.0-8080-exec-18] [80a0f237-0fcc-43cf-9b22-e72ee9e7c1b6] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168534/103126.png -> 502 (17631 ms) user=anonymous
+2026-05-31 15:47:19.933 INFO  [http-nio-0.0.0.0-8080-exec-1] [58d254b0-f937-4c3d-964c-12bc03ced6ce] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168535/103124.png -> 502 (17631 ms) user=anonymous
+2026-05-31 15:47:19.933 INFO  [http-nio-0.0.0.0-8080-exec-10] [be218415-c901-4264-bc9a-427a5bf74b36] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168533/103126.png -> 502 (11562 ms) user=anonymous
+2026-05-31 15:47:19.933 INFO  [http-nio-0.0.0.0-8080-exec-24] [478a75a1-1488-40b1-82a0-fed6fb4bafdb] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/15/21066/12889.png -> 502 (4116 ms) user=anonymous
+2026-05-31 15:47:19.933 INFO  [http-nio-0.0.0.0-8080-exec-2] [5b4a3095-e8bd-432a-aca0-8dfa2c959009] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/15/21067/12889.png -> 502 (4116 ms) user=anonymous
+2026-05-31 15:47:19.933 INFO  [http-nio-0.0.0.0-8080-exec-3] [f9b263d5-9b62-455f-bdd0-12cae05f46b2] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/15/21065/12891.png -> 502 (3797 ms) user=anonymous
+2026-05-31 15:47:19.933 INFO  [http-nio-0.0.0.0-8080-exec-23] [c2112664-d0c1-4527-a3cc-1751083b2b39] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/15/21068/12889.png -> 502 (3797 ms) user=anonymous
+2026-05-31 15:47:19.933 INFO  [http-nio-0.0.0.0-8080-exec-5] [2f5e1a3b-3a35-4fc4-a71e-fa1ad0878fd3] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/15/21065/12890.png -> 502 (3798 ms) user=anonymous
+2026-05-31 15:47:19.933 INFO  [http-nio-0.0.0.0-8080-exec-8] [bc37ffbd-1a8d-4b08-8e2f-06f6b818e996] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/15/21065/12889.png -> 502 (3798 ms) user=anonymous
+2026-05-31 15:47:19.933 INFO  [http-nio-0.0.0.0-8080-exec-12] [9a4f4010-5f9c-424b-9bb9-2ee2c2e821d9] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168535/103126.png -> 502 (11345 ms) user=anonymous
+2026-05-31 15:47:19.933 INFO  [http-nio-0.0.0.0-8080-exec-9] [cad14989-6e7c-42b8-9b4a-9a2de2856af1] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168532/103126.png -> 502 (11345 ms) user=anonymous
+2026-05-31 15:47:30.089 INFO  [http-nio-0.0.0.0-8080-exec-14] [54e9d321-ff36-4789-be99-cd321c72c4b0] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/reverse?lat=35.771668&lon=51.36731 -> 502 (8775 ms) user=parsan6347@gmail.com
+2026-05-31 15:47:35.656 INFO  [http-nio-0.0.0.0-8080-exec-26] [a4c82e18-17d0-41c9-b5f7-231a57f4a848] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-31 15:47:35.960 INFO  [http-nio-0.0.0.0-8080-exec-22] [210233dc-175e-4a04-96e9-8a606add2535] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (4 ms) user=parsan6347@gmail.com
+2026-05-31 15:47:35.960 INFO  [http-nio-0.0.0.0-8080-exec-27] [54d4e61e-9c70-4da8-b775-6ff0646054b3] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (4 ms) user=parsan6347@gmail.com
+2026-05-31 15:47:47.388 INFO  [http-nio-0.0.0.0-8080-exec-7] [6aa8722d-b1ae-47e9-a84b-00054127d31d] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/reverse?lat=35.773146&lon=51.368599 -> 200 (602 ms) user=parsan6347@gmail.com
+2026-05-31 15:48:05.953 INFO  [http-nio-0.0.0.0-8080-exec-13] [ce1feca9-c117-447a-9685-ca2e17326126] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=parsan6347@gmail.com
+2026-05-31 15:48:05.953 INFO  [http-nio-0.0.0.0-8080-exec-4] [4e6beafc-b58f-4e83-8af7-41f52077304c] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=parsan6347@gmail.com
+2026-05-31 15:48:05.956 INFO  [http-nio-0.0.0.0-8080-exec-6] [3e1a8b01-9288-4804-8fe9-2f4f14db43c4] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (8 ms) user=parsan6347@gmail.com
+2026-05-31 15:48:06.492 INFO  [http-nio-0.0.0.0-8080-exec-15] [0d3b638f-c511-4662-9f78-435cd153ef53] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/reverse?lat=35.771668&lon=51.36731 -> 502 (18556 ms) user=parsan6347@gmail.com
+2026-05-31 15:48:36.656 INFO  [http-nio-0.0.0.0-8080-exec-13] [a9152755-6b36-4c2c-817c-99b2e62b4079] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-31 15:48:36.656 INFO  [http-nio-0.0.0.0-8080-exec-4] [a8943285-4f1c-4f37-b7c4-f1305e2780d1] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-31 15:48:36.661 INFO  [http-nio-0.0.0.0-8080-exec-7] [116d60c0-e068-4894-b876-aef72522fcce] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (11 ms) user=parsan6347@gmail.com
+2026-05-31 15:49:06.347 INFO  [http-nio-0.0.0.0-8080-exec-15] [886c3bf7-dc40-4470-acd4-9dfcb0099a0d] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-31 15:49:06.654 INFO  [http-nio-0.0.0.0-8080-exec-1] [f8d138fb-ab99-48ce-98a7-4d00e9bf4893] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=parsan6347@gmail.com
+2026-05-31 15:49:06.657 INFO  [http-nio-0.0.0.0-8080-exec-14] [3acc60b2-5809-4b94-9f38-2d6b9b3f7582] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-31 15:49:47.659 INFO  [http-nio-0.0.0.0-8080-exec-22] [0165f566-9460-431c-b4a2-56130d706ca7] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-31 15:49:47.659 INFO  [http-nio-0.0.0.0-8080-exec-27] [614692e9-520d-400f-8969-c2f4d7027726] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-31 15:49:47.661 INFO  [http-nio-0.0.0.0-8080-exec-26] [5c64fe7c-22ad-47d1-902b-ea5d44b20c12] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (9 ms) user=parsan6347@gmail.com
+2026-05-31 15:50:47.353 INFO  [http-nio-0.0.0.0-8080-exec-4] [bef329fb-4e6a-4704-be04-951ab326b526] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-31 15:50:47.660 INFO  [http-nio-0.0.0.0-8080-exec-13] [18f586e7-eee2-45e4-9bd2-b7bb51861db5] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=parsan6347@gmail.com
+2026-05-31 15:50:47.660 INFO  [http-nio-0.0.0.0-8080-exec-7] [1b5ea6e8-e870-45b7-9c83-e870c528b7fc] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-31 15:51:47.662 INFO  [http-nio-0.0.0.0-8080-exec-15] [55390666-a63a-4a69-81bc-9fe40e1ffe78] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-31 15:51:47.662 INFO  [http-nio-0.0.0.0-8080-exec-1] [ec77c0dd-2760-47dc-9328-43d7010471e8] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-31 15:51:47.664 INFO  [http-nio-0.0.0.0-8080-exec-6] [5f8cfbc3-6e62-4033-bbe7-7769163e20c1] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (9 ms) user=parsan6347@gmail.com
+2026-05-31 15:52:47.353 INFO  [http-nio-0.0.0.0-8080-exec-14] [acfb982d-ed7d-499f-8fc9-d6fcadf48988] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-31 15:52:47.655 INFO  [http-nio-0.0.0.0-8080-exec-27] [97faf617-c0f8-49e0-908d-9205db1b8df5] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=parsan6347@gmail.com
+2026-05-31 15:52:47.658 INFO  [http-nio-0.0.0.0-8080-exec-22] [ab8b4a40-f1b7-49bb-bb30-98024fd7e206] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=parsan6347@gmail.com
+2026-05-31 15:53:47.671 INFO  [http-nio-0.0.0.0-8080-exec-13] [f41a1240-6149-4773-9d38-d04c68941e1e] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-31 15:53:47.671 INFO  [http-nio-0.0.0.0-8080-exec-4] [e4aa5ff1-b7fe-41f6-aec1-64ae5b7dba80] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-31 15:53:47.673 INFO  [http-nio-0.0.0.0-8080-exec-26] [727b122c-f762-4295-af56-20f85d783c25] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (8 ms) user=parsan6347@gmail.com
+2026-05-31 15:54:47.364 INFO  [http-nio-0.0.0.0-8080-exec-7] [5d01a402-1acd-4b8f-aeac-9f4c096f9a03] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (11 ms) user=parsan6347@gmail.com
+2026-05-31 15:54:47.665 INFO  [http-nio-0.0.0.0-8080-exec-15] [e4501922-1c32-42e9-a083-38bfe42e4129] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-31 15:54:47.665 INFO  [http-nio-0.0.0.0-8080-exec-1] [066760f0-a50d-4d18-99bf-4e7e18fb5d57] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-31 15:55:47.662 INFO  [http-nio-0.0.0.0-8080-exec-14] [f1a77d86-eadd-48e8-a7ac-fd0e8d3b6126] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-31 15:55:47.664 INFO  [http-nio-0.0.0.0-8080-exec-6] [0bd787db-0575-4fba-b5e3-41988d505178] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (9 ms) user=parsan6347@gmail.com
+2026-05-31 15:55:47.673 INFO  [http-nio-0.0.0.0-8080-exec-27] [a05c5ab4-942d-4c3b-a232-87e220a1942b] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=parsan6347@gmail.com
+2026-05-31 15:56:47.365 INFO  [http-nio-0.0.0.0-8080-exec-22] [d530040a-f2ea-448d-888a-31ea345aec57] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (8 ms) user=parsan6347@gmail.com
+2026-05-31 15:56:47.668 INFO  [http-nio-0.0.0.0-8080-exec-13] [d362dcd5-f517-47ec-96a9-9ae6c8483a0a] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-31 15:56:47.668 INFO  [http-nio-0.0.0.0-8080-exec-4] [7916153c-31bf-44ae-bdb4-4a0465849bd0] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-31 15:57:24.326 INFO  [main] [no-request] p.e.ECommerceBackendApplicationTests - Starting ECommerceBackendApplicationTests using Java 17.0.8 with PID 26244 (started by God -01.11 in C:\Users\God -01.11\Desktop\e-commerce-backend - codex)
+2026-05-31 15:57:24.330 INFO  [main] [no-request] p.e.ECommerceBackendApplicationTests - The following 1 profile is active: "test"
+2026-05-31 15:57:41.217 INFO  [main] [no-request] o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-05-31 15:57:41.218 WARN  [main] [no-request] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-05-31 15:57:44.795 INFO  [main] [no-request] p.e.ECommerceBackendApplicationTests - Started ECommerceBackendApplicationTests in 21.604 seconds (process running for 24.603)
+2026-05-31 15:57:44.911 INFO  [main] [no-request] p.ecommercebackend.config.DataSeeder - Running database seed checks...
+2026-05-31 15:57:45.836 INFO  [main] [no-request] p.ecommercebackend.config.DataSeeder - Default shop settings seeded (low stock threshold: 10)
+2026-05-31 15:57:45.907 WARN  [main] [no-request] p.ecommercebackend.config.MailConfig - Email delivery DISABLED - set MAIL_ENABLED=true and configure SMTP settings
+2026-05-31 15:57:47.448 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=1 userId=2 subtotal=50.00 total=60.47 devMode=true
+2026-05-31 15:57:47.590 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=1 userId=2 total=60.47 itemCount=1
+2026-05-31 15:57:47.614 INFO  [main] [no-request] p.e.service.impl.EmailServiceImpl - Email disabled - order confirmation #1:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order confirmed</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Thanks for your purchase, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your payment was received and your order is now confirmed.</p>
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #1</strong>
+    <span style="float:right;">May 31, 2026 15:57</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from parsan6347@gmail.com.</p>
+  </div>
+</body>
+</html>
+
+2026-05-31 15:57:47.658 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Payment confirmation ignored for already confirmed orderId=1
+2026-05-31 15:57:47.698 INFO  [http-nio-0.0.0.0-8080-exec-15] [f848d6ed-42be-489a-a782-d5a0f74b6738] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (18 ms) user=parsan6347@gmail.com
+2026-05-31 15:57:47.707 INFO  [http-nio-0.0.0.0-8080-exec-7] [c5843300-9e65-4736-832f-91d1b3b20794] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (24 ms) user=parsan6347@gmail.com
+2026-05-31 15:57:47.714 INFO  [http-nio-0.0.0.0-8080-exec-26] [d1f4c768-fd56-42c3-98bb-3d40a1e2cd68] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (34 ms) user=parsan6347@gmail.com
+2026-05-31 15:58:47.364 INFO  [http-nio-0.0.0.0-8080-exec-1] [cc57c541-7309-40e3-b93b-4152eced05ff] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (8 ms) user=parsan6347@gmail.com
+2026-05-31 15:58:47.664 INFO  [http-nio-0.0.0.0-8080-exec-14] [7053b5c8-588d-45f8-bdce-9ed49e1cf126] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-31 15:58:47.668 INFO  [http-nio-0.0.0.0-8080-exec-6] [33422b67-7e19-4d68-a9ad-76468d871b70] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (8 ms) user=parsan6347@gmail.com
+2026-05-31 15:59:44.740 INFO  [SpringApplicationShutdownHook] [no-request] o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-05-31 15:59:45.798 INFO  [tomcat-shutdown] [no-request] o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-05-31 15:59:45.830 INFO  [SpringApplicationShutdownHook] [no-request] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-31 15:59:45.848 INFO  [SpringApplicationShutdownHook] [no-request] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-05-31 15:59:45.854 INFO  [SpringApplicationShutdownHook] [no-request] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-05-31 15:59:56.588 INFO  [main] [no-request] p.e.ECommerceBackendApplication - Starting ECommerceBackendApplication using Java 19.0.2 with PID 28616 (C:\Users\God -01.11\Desktop\e-commerce-backend - codex\target\classes started by God -01.11 in C:\Users\God -01.11\Desktop\e-commerce-backend - codex)
+2026-05-31 15:59:56.595 INFO  [main] [no-request] p.e.ECommerceBackendApplication - No active profile set, falling back to 1 default profile: "default"
+2026-05-31 15:59:59.959 INFO  [main] [no-request] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-31 16:00:00.104 INFO  [main] [no-request] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 132 ms. Found 15 JPA repository interfaces.
+2026-05-31 16:00:01.552 INFO  [main] [no-request] o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-05-31 16:00:01.572 INFO  [main] [no-request] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-05-31 16:00:01.572 INFO  [main] [no-request] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.21]
+2026-05-31 16:00:01.679 INFO  [main] [no-request] o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 4985 ms
+2026-05-31 16:00:02.096 INFO  [main] [no-request] org.hibernate.orm.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-05-31 16:00:02.186 INFO  [main] [no-request] org.hibernate.orm.core - HHH000001: Hibernate ORM core version 7.2.12.Final
+2026-05-31 16:00:03.035 INFO  [main] [no-request] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-31 16:00:03.087 INFO  [main] [no-request] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-05-31 16:00:03.396 INFO  [main] [no-request] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@b272860
+2026-05-31 16:00:03.399 INFO  [main] [no-request] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-05-31 16:00:03.532 INFO  [main] [no-request] o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/ecommerce]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.2
+	Default catalog/schema: ecommerce/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-31 16:00:06.019 INFO  [main] [no-request] org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-31 16:00:06.246 INFO  [main] [no-request] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-31 16:00:06.351 INFO  [main] [no-request] o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-05-31 16:00:09.456 INFO  [main] [no-request] o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-05-31 16:00:09.457 WARN  [main] [no-request] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-05-31 16:00:11.746 INFO  [main] [no-request] o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2026-05-31 16:00:11.900 INFO  [main] [no-request] o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-05-31 16:00:11.914 INFO  [main] [no-request] p.e.ECommerceBackendApplication - Started ECommerceBackendApplication in 16.8 seconds (process running for 19.042)
+2026-05-31 16:00:11.925 INFO  [main] [no-request] p.ecommercebackend.config.MailConfig - Email delivery ENABLED - SMTP smtp.gmail.com:587
+2026-05-31 16:00:11.926 INFO  [main] [no-request] p.ecommercebackend.config.DataSeeder - Running database seed checks...
+2026-05-31 16:00:12.806 INFO  [RMI TCP Connection(2)-172.23.0.1] [no-request] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-31 16:00:12.806 INFO  [RMI TCP Connection(2)-172.23.0.1] [no-request] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-05-31 16:00:12.813 INFO  [RMI TCP Connection(2)-172.23.0.1] [no-request] o.s.web.servlet.DispatcherServlet - Completed initialization in 7 ms
+2026-05-31 16:00:34.099 WARN  [RMI TCP Connection(3)-172.23.0.1] [no-request] o.s.b.m.health.MailHealthIndicator - Mail health check failed
+org.eclipse.angus.mail.util.MailConnectException: Couldn't connect to host, port: smtp.gmail.com, 587; timeout -1;
+  nested exception is:
+	java.net.ConnectException: Connection timed out: connect
+	at org.eclipse.angus.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:2243)
+	at org.eclipse.angus.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:729)
+	at jakarta.mail.Service.connect(Service.java:345)
+	at org.springframework.mail.javamail.JavaMailSenderImpl.connectTransport(JavaMailSenderImpl.java:467)
+	at org.springframework.mail.javamail.JavaMailSenderImpl.testConnection(JavaMailSenderImpl.java:347)
+	at org.springframework.boot.mail.health.MailHealthIndicator.doHealthCheck(MailHealthIndicator.java:52)
+	at org.springframework.boot.health.contributor.AbstractHealthIndicator.health(AbstractHealthIndicator.java:80)
+	at org.springframework.boot.health.contributor.HealthIndicator.health(HealthIndicator.java:37)
+	at org.springframework.boot.health.actuate.endpoint.Contributor$Blocking.getDescriptor(Contributor.java:148)
+	at org.springframework.boot.health.actuate.endpoint.Contributor$Blocking.getDescriptor(Contributor.java:126)
+	at org.springframework.boot.health.actuate.endpoint.HealthEndpointSupport.getDescriptorAndLogIfSlow(HealthEndpointSupport.java:172)
+	at org.springframework.boot.health.actuate.endpoint.HealthEndpointSupport.getDescriptor(HealthEndpointSupport.java:145)
+	at org.springframework.boot.health.actuate.endpoint.HealthEndpointSupport.getAggregateDescriptor(HealthEndpointSupport.java:157)
+	at org.springframework.boot.health.actuate.endpoint.HealthEndpointSupport.getDescriptor(HealthEndpointSupport.java:141)
+	at org.springframework.boot.health.actuate.endpoint.HealthEndpointSupport.getResult(HealthEndpointSupport.java:110)
+	at org.springframework.boot.health.actuate.endpoint.HealthEndpointSupport.getResult(HealthEndpointSupport.java:82)
+	at org.springframework.boot.health.actuate.endpoint.HealthEndpoint.health(HealthEndpoint.java:80)
+	at org.springframework.boot.health.actuate.endpoint.HealthEndpoint.health(HealthEndpoint.java:70)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:281)
+	at org.springframework.boot.actuate.endpoint.invoke.reflect.ReflectiveOperationInvoker.invoke(ReflectiveOperationInvoker.java:76)
+	at org.springframework.boot.actuate.endpoint.annotation.AbstractDiscoveredOperation.invoke(AbstractDiscoveredOperation.java:62)
+	at org.springframework.boot.actuate.endpoint.jmx.EndpointMBean.invoke(EndpointMBean.java:127)
+	at org.springframework.boot.actuate.endpoint.jmx.EndpointMBean.invoke(EndpointMBean.java:99)
+	at java.management/com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.invoke(DefaultMBeanServerInterceptor.java:809)
+	at java.management/com.sun.jmx.mbeanserver.JmxMBeanServer.invoke(JmxMBeanServer.java:802)
+	at java.management.rmi/javax.management.remote.rmi.RMIConnectionImpl.doOperation(RMIConnectionImpl.java:1472)
+	at java.management.rmi/javax.management.remote.rmi.RMIConnectionImpl$PrivilegedOperation.run(RMIConnectionImpl.java:1310)
+	at java.management.rmi/javax.management.remote.rmi.RMIConnectionImpl.doPrivilegedOperation(RMIConnectionImpl.java:1405)
+	at java.management.rmi/javax.management.remote.rmi.RMIConnectionImpl.invoke(RMIConnectionImpl.java:829)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:360)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:712)
+	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:598)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:844)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:721)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:720)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+Caused by: java.net.ConnectException: Connection timed out: connect
+	at java.base/sun.nio.ch.Net.connect0(Native Method)
+	at java.base/sun.nio.ch.Net.connect(Net.java:579)
+	at java.base/sun.nio.ch.Net.connect(Net.java:568)
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:576)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327)
+	at java.base/java.net.Socket.connect(Socket.java:666)
+	at java.base/java.net.Socket.connect(Socket.java:600)
+	at org.eclipse.angus.mail.util.SocketFetcher.createSocket(SocketFetcher.java:368)
+	at org.eclipse.angus.mail.util.SocketFetcher.getSocket(SocketFetcher.java:243)
+	at org.eclipse.angus.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:2193)
+	... 45 common frames omitted
+2026-05-31 16:00:34.107 WARN  [RMI TCP Connection(3)-172.23.0.1] [no-request] o.s.b.h.a.e.HealthEndpointSupport - Health contributor org.springframework.boot.mail.health.MailHealthIndicator (mail) took 21282ms to respond
+2026-05-31 16:00:44.694 INFO  [http-nio-0.0.0.0-8080-exec-1] [b0ec754d-3b3a-4946-b7f7-e816824f6b66] p.e.config.RequestLoggingFilter - HTTP GET /api/categories -> 200 (199 ms) user=parsan6347@gmail.com
+2026-05-31 16:00:44.696 INFO  [http-nio-0.0.0.0-8080-exec-4] [dd10e083-2d71-4cc1-9525-fe30304e1b09] p.e.config.RequestLoggingFilter - HTTP GET /api/auth/me -> 200 (201 ms) user=parsan6347@gmail.com
+2026-05-31 16:00:44.870 INFO  [http-nio-0.0.0.0-8080-exec-2] [2ee01f4d-2725-4a4e-af4b-8b0cd70ac9cb] p.e.config.RequestLoggingFilter - HTTP GET /api/products?page=0&size=12&sort=name%2Casc -> 200 (375 ms) user=parsan6347@gmail.com
+2026-05-31 16:00:44.897 INFO  [http-nio-0.0.0.0-8080-exec-6] [1a1f0a7d-976a-4ee1-a22c-128dc603185e] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (31 ms) user=parsan6347@gmail.com
+2026-05-31 16:00:44.897 INFO  [http-nio-0.0.0.0-8080-exec-5] [af070d7e-07a7-472b-b12e-3df3e67e8d51] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (30 ms) user=parsan6347@gmail.com
+2026-05-31 16:00:44.948 INFO  [http-nio-0.0.0.0-8080-exec-3] [ac98e49d-1504-4a34-aa75-2d36fe558fe1] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (75 ms) user=parsan6347@gmail.com
+2026-05-31 16:00:48.881 INFO  [http-nio-0.0.0.0-8080-exec-7] [80b07476-8673-4a1d-8ed7-47ca98e5896b] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (17 ms) user=parsan6347@gmail.com
+2026-05-31 16:00:49.075 INFO  [http-nio-0.0.0.0-8080-exec-9] [db48f6b0-5ebf-484e-906a-95dff9303035] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (13 ms) user=parsan6347@gmail.com
+2026-05-31 16:00:49.081 INFO  [http-nio-0.0.0.0-8080-exec-8] [bd687282-0a38-4eaa-b296-6151d879dbd6] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (11 ms) user=parsan6347@gmail.com
+2026-05-31 16:00:49.103 INFO  [http-nio-0.0.0.0-8080-exec-4] [55415f1e-ab8d-4372-9eb7-6e33bc8182f7] p.e.config.RequestLoggingFilter - HTTP GET /api/shipping-addresses?page=0&size=10 -> 200 (38 ms) user=parsan6347@gmail.com
+2026-05-31 16:01:08.033 WARN  [http-nio-0.0.0.0-8080-exec-2] [f0c959da-6c79-40d8-bcc0-c532850f677d] p.e.exception.GlobalExceptionHandler - Validation failed for shippingAddressRequest: {zipCode=must not be blank, country=must not be blank, city=must not be blank, street=must not be blank}
+2026-05-31 16:01:08.051 INFO  [http-nio-0.0.0.0-8080-exec-2] [f0c959da-6c79-40d8-bcc0-c532850f677d] p.e.config.RequestLoggingFilter - HTTP POST /api/shipping-addresses -> 400 (5707 ms) user=parsan6347@gmail.com
+2026-05-31 16:01:09.706 INFO  [http-nio-0.0.0.0-8080-exec-5] [f4444fb7-b0aa-48cb-b683-a01074e475cc] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (11 ms) user=parsan6347@gmail.com
+2026-05-31 16:01:09.713 INFO  [http-nio-0.0.0.0-8080-exec-3] [96b5a855-b9fd-4461-913c-e6b18d366c3e] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (16 ms) user=parsan6347@gmail.com
+2026-05-31 16:01:09.713 INFO  [http-nio-0.0.0.0-8080-exec-6] [4235e1c7-ff62-4557-a21d-29706cd1bf26] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (18 ms) user=parsan6347@gmail.com
+2026-05-31 16:01:09.716 INFO  [http-nio-0.0.0.0-8080-exec-7] [8c722e34-fc8d-49f3-a808-c0b667980ce7] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (8 ms) user=parsan6347@gmail.com
+2026-05-31 16:01:09.731 INFO  [http-nio-0.0.0.0-8080-exec-1] [db8f0864-426b-4b8f-b588-32f0186c6d52] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (15 ms) user=parsan6347@gmail.com
+2026-05-31 16:01:10.033 INFO  [http-nio-0.0.0.0-8080-exec-9] [ddf59e44-d94a-47a9-bc7f-4418072416d0] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-31 16:01:15.170 INFO  [http-nio-0.0.0.0-8080-exec-2] [693852e3-b449-45c9-a30c-33d03b2d0b53] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-31 16:01:15.170 INFO  [http-nio-0.0.0.0-8080-exec-4] [2fbd9aab-15a7-46dc-893f-178d6b0cd7a2] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-31 16:01:15.176 INFO  [http-nio-0.0.0.0-8080-exec-8] [590dbaf0-9072-4428-b0d1-ab6f35c2d0d6] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (12 ms) user=parsan6347@gmail.com
+2026-05-31 16:01:29.140 INFO  [http-nio-0.0.0.0-8080-exec-10] [d2f70a6b-3758-4b7f-a3ef-6dbdd5085d2d] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/search?q=%D8%A7%D8%AE%D8%AA%DB%8C%D8%A7%D8%B1%DB%8C%D9%87 -> 200 (26795 ms) user=parsan6347@gmail.com
+2026-05-31 16:01:45.664 INFO  [http-nio-0.0.0.0-8080-exec-3] [5b57671a-74e2-4374-bcd7-3f21b5abd649] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-31 16:01:45.664 INFO  [http-nio-0.0.0.0-8080-exec-6] [1e51e4b1-168a-4325-a41e-afc09157abc2] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-31 16:01:45.670 INFO  [http-nio-0.0.0.0-8080-exec-5] [0c6ecb16-4516-4b40-8ffe-051bd2be5d14] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (12 ms) user=parsan6347@gmail.com
+2026-05-31 16:02:15.066 INFO  [http-nio-0.0.0.0-8080-exec-7] [a955d15b-f11e-4c7b-bfed-644a393dfd16] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (13 ms) user=parsan6347@gmail.com
+2026-05-31 16:02:15.364 INFO  [http-nio-0.0.0.0-8080-exec-9] [d2c470b1-e38e-4522-a371-ba6bb6d64e9d] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-31 16:02:15.367 INFO  [http-nio-0.0.0.0-8080-exec-8] [462e8d6e-4c5e-4527-87f6-2eb0855f1628] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-31 16:02:15.367 INFO  [http-nio-0.0.0.0-8080-exec-4] [a43a5776-cb5f-4f35-b386-35b9ed0a8a77] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-31 16:02:15.367 INFO  [http-nio-0.0.0.0-8080-exec-1] [880cd45a-ed9d-4177-94f4-6fe066d17e00] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-31 16:02:15.373 INFO  [http-nio-0.0.0.0-8080-exec-2] [47336005-774b-4fa4-9924-a814b138365a] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (13 ms) user=parsan6347@gmail.com
+2026-05-31 16:02:15.396 INFO  [http-nio-0.0.0.0-8080-exec-10] [6ab1325b-81be-4f42-be76-4b7ed8ac8966] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (12 ms) user=parsan6347@gmail.com
+2026-05-31 16:02:15.700 INFO  [http-nio-0.0.0.0-8080-exec-3] [299eb9c8-e0ce-4c66-9ba4-08d5ebdf308a] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-31 16:02:15.700 INFO  [http-nio-0.0.0.0-8080-exec-6] [483b6702-c669-4083-9a6a-bc6eab7acd18] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-31 16:02:18.310 WARN  [http-nio-0.0.0.0-8080-exec-7] [f78e296e-d2da-4a20-bf3b-659971fc9f4b] p.e.exception.GlobalExceptionHandler - Validation failed for shippingAddressRequest: {zipCode=must not be blank, country=must not be blank, city=must not be blank, street=must not be blank}
+2026-05-31 16:02:18.312 INFO  [http-nio-0.0.0.0-8080-exec-7] [f78e296e-d2da-4a20-bf3b-659971fc9f4b] p.e.config.RequestLoggingFilter - HTTP POST /api/shipping-addresses -> 400 (5 ms) user=parsan6347@gmail.com
+2026-05-31 16:02:18.897 INFO  [http-nio-0.0.0.0-8080-exec-5] [bd15a0e1-d22d-43a5-a7bf-322c4dacde7f] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/search?q=%D8%A7%D8%AE%D8%AA%DB%8C%D8%A7%D8%B1%DB%8C%D9%87 -> 200 (589 ms) user=parsan6347@gmail.com
+2026-05-31 16:02:45.020 INFO  [http-nio-0.0.0.0-8080-exec-11] [954b2107-b0cb-446f-a669-c9f6454a4cd5] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-31 16:02:45.023 INFO  [http-nio-0.0.0.0-8080-exec-5] [39dbf2c5-9da9-4d6b-88ff-5b4585fa33fa] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (10 ms) user=parsan6347@gmail.com
+2026-05-31 16:02:45.112 INFO  [http-nio-0.0.0.0-8080-exec-1] [6fc6e3aa-65c3-41dc-bcf6-f6b154557e7e] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/16/42134/25782.png -> 502 (19346 ms) user=anonymous
+2026-05-31 16:02:45.112 INFO  [http-nio-0.0.0.0-8080-exec-10] [76f5590e-daab-42a5-b713-80703cf36ece] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168545/103132.png -> 502 (5664 ms) user=anonymous
+2026-05-31 16:02:45.112 INFO  [http-nio-0.0.0.0-8080-exec-4] [250cc851-c167-4cc9-88f4-8ef9644a96fd] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/16/42134/25783.png -> 502 (19346 ms) user=anonymous
+2026-05-31 16:02:45.112 INFO  [http-nio-0.0.0.0-8080-exec-7] [c38098ab-e78f-4428-bb4c-7a746f973dcc] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168548/103135.png -> 502 (973 ms) user=anonymous
+2026-05-31 16:02:45.112 INFO  [http-nio-0.0.0.0-8080-exec-8] [afe1330e-7d1e-4a13-871b-7d7e5ada9cf9] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168546/103132.png -> 502 (5664 ms) user=anonymous
+2026-05-31 16:02:45.112 INFO  [http-nio-0.0.0.0-8080-exec-2] [e487bc6c-cb24-47b6-b571-9e0982408347] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168547/103132.png -> 502 (5664 ms) user=anonymous
+2026-05-31 16:02:45.113 INFO  [http-nio-0.0.0.0-8080-exec-3] [2509ae8a-f0c6-469c-97b1-24cb4d163d65] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168546/103135.png -> 502 (1285 ms) user=anonymous
+2026-05-31 16:02:45.112 INFO  [http-nio-0.0.0.0-8080-exec-6] [b569ea55-35e6-4d33-847f-3d416568e82d] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168548/103132.png -> 502 (5664 ms) user=anonymous
+2026-05-31 16:02:45.112 INFO  [http-nio-0.0.0.0-8080-exec-9] [101f52b8-0f79-4db3-b287-15564038e6ac] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/16/42135/25783.png -> 502 (19661 ms) user=anonymous
+2026-05-31 16:02:45.168 INFO  [http-nio-0.0.0.0-8080-exec-11] [c7d92d6a-b645-47b9-a2d4-44154cf1f6fa] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-31 16:02:47.393 INFO  [http-nio-0.0.0.0-8080-exec-1] [950a8bd3-078f-4838-82f1-cd51d67166b8] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168547/103135.png -> 200 (495 ms) user=anonymous
+2026-05-31 16:02:47.638 ERROR [http-nio-0.0.0.0-8080-exec-3] [becadc4c-734f-4cff-8378-c4f0e1f30763] p.e.exception.GlobalExceptionHandler - Unhandled exception: ServletResponse failed to flushBuffer: java.io.IOException: An established connection was aborted by the software in your host machine
+org.springframework.web.context.request.async.AsyncRequestNotUsableException: ServletResponse failed to flushBuffer: java.io.IOException: An established connection was aborted by the software in your host machine
+	at org.springframework.web.context.request.async.StandardServletAsyncWebRequest$LifecycleHttpServletResponse.handleIOException(StandardServletAsyncWebRequest.java:340)
+	at org.springframework.web.context.request.async.StandardServletAsyncWebRequest$LifecycleHttpServletResponse.flushBuffer(StandardServletAsyncWebRequest.java:319)
+	at org.springframework.http.server.ServletServerHttpResponse.flush(ServletServerHttpResponse.java:126)
+	at org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor.handleReturnValue(HttpEntityMethodProcessor.java:264)
+	at org.springframework.web.servlet.mvc.method.annotation.ResponseEntityReturnValueHandler.handleReturnValue(ResponseEntityReturnValueHandler.java:80)
+	at org.springframework.web.method.support.HandlerMethodReturnValueHandlerComposite.handleReturnValue(HandlerMethodReturnValueHandlerComposite.java:77)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:135)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at personal.ecommercebackend.config.RequestLoggingFilter.doFilterInternal(RequestLoggingFilter.java:38)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at personal.ecommercebackend.config.AuthRateLimitFilter.doFilterInternal(AuthRateLimitFilter.java:36)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:235)
+	at org.springframework.security.web.ObservationFilterChainDecorator$FilterObservation$SimpleFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:493)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:354)
+	at org.springframework.security.web.ObservationFilterChainDecorator.lambda$wrapSecured$0(ObservationFilterChainDecorator.java:86)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:132)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:101)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:132)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:86)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:181)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at personal.ecommercebackend.security.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:32)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:110)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:96)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$0(ObservationFilterChainDecorator.java:337)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:237)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:195)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.ServletRequestPathFilter.doFilter(ServletRequestPathFilter.java:52)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebSecurityConfiguration.java:317)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:355)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:272)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:110)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1801)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+Caused by: org.apache.catalina.connector.ClientAbortException: java.io.IOException: An established connection was aborted by the software in your host machine
+	at org.apache.catalina.connector.OutputBuffer.doFlush(OutputBuffer.java:290)
+	at org.apache.catalina.connector.OutputBuffer.flush(OutputBuffer.java:252)
+	at org.apache.catalina.connector.Response.flushBuffer(Response.java:432)
+	at org.apache.catalina.connector.ResponseFacade.flushBuffer(ResponseFacade.java:175)
+	at jakarta.servlet.ServletResponseWrapper.flushBuffer(ServletResponseWrapper.java:180)
+	at jakarta.servlet.ServletResponseWrapper.flushBuffer(ServletResponseWrapper.java:180)
+	at jakarta.servlet.ServletResponseWrapper.flushBuffer(ServletResponseWrapper.java:180)
+	at org.springframework.security.web.util.OnCommittedResponseWrapper.flushBuffer(OnCommittedResponseWrapper.java:195)
+	at org.springframework.web.context.request.async.StandardServletAsyncWebRequest$LifecycleHttpServletResponse.flushBuffer(StandardServletAsyncWebRequest.java:316)
+	... 128 common frames omitted
+Caused by: java.io.IOException: An established connection was aborted by the software in your host machine
+	at java.base/sun.nio.ch.SocketDispatcher.write0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.write(SocketDispatcher.java:54)
+	at java.base/sun.nio.ch.IOUtil.writeFromNativeBuffer(IOUtil.java:136)
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:101)
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:57)
+	at java.base/sun.nio.ch.SocketChannelImpl.write(SocketChannelImpl.java:542)
+	at org.apache.tomcat.util.net.NioChannel.write(NioChannel.java:129)
+	at org.apache.tomcat.util.net.NioEndpoint$NioSocketWrapper.doWrite(NioEndpoint.java:1441)
+	at org.apache.tomcat.util.net.SocketWrapperBase.doWrite(SocketWrapperBase.java:747)
+	at org.apache.tomcat.util.net.SocketWrapperBase.flushBlocking(SocketWrapperBase.java:713)
+	at org.apache.tomcat.util.net.SocketWrapperBase.flush(SocketWrapperBase.java:698)
+	at org.apache.coyote.http11.Http11OutputBuffer$SocketOutputBuffer.flush(Http11OutputBuffer.java:563)
+	at org.apache.coyote.http11.filters.IdentityOutputFilter.flush(IdentityOutputFilter.java:115)
+	at org.apache.coyote.http11.Http11OutputBuffer.flush(Http11OutputBuffer.java:216)
+	at org.apache.coyote.http11.Http11Processor.flush(Http11Processor.java:1271)
+	at org.apache.coyote.AbstractProcessor.action(AbstractProcessor.java:407)
+	at org.apache.coyote.Response.action(Response.java:197)
+	at org.apache.catalina.connector.OutputBuffer.doFlush(OutputBuffer.java:286)
+	... 136 common frames omitted
+2026-05-31 16:02:47.641 WARN  [http-nio-0.0.0.0-8080-exec-3] [becadc4c-734f-4cff-8378-c4f0e1f30763] o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Failure in @ExceptionHandler personal.ecommercebackend.exception.GlobalExceptionHandler#handleGeneric(Exception)
+org.springframework.http.converter.HttpMessageNotWritableException: No converter for [class org.springframework.http.ProblemDetail] with preset Content-Type 'image/png'
+	at org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodProcessor.writeWithMessageConverters(AbstractMessageConverterMethodProcessor.java:363)
+	at org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor.handleReturnValue(HttpEntityMethodProcessor.java:261)
+	at org.springframework.web.method.support.HandlerMethodReturnValueHandlerComposite.handleReturnValue(HandlerMethodReturnValueHandlerComposite.java:77)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:135)
+	at org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver.doResolveHandlerMethodException(ExceptionHandlerExceptionResolver.java:460)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodExceptionResolver.doResolveException(AbstractHandlerMethodExceptionResolver.java:72)
+	at org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver.resolveException(AbstractHandlerExceptionResolver.java:176)
+	at org.springframework.web.servlet.handler.HandlerExceptionResolverComposite.resolveException(HandlerExceptionResolverComposite.java:78)
+	at org.springframework.web.servlet.DispatcherServlet.processHandlerException(DispatcherServlet.java:1227)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1035)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:980)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at personal.ecommercebackend.config.RequestLoggingFilter.doFilterInternal(RequestLoggingFilter.java:38)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at personal.ecommercebackend.config.AuthRateLimitFilter.doFilterInternal(AuthRateLimitFilter.java:36)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:235)
+	at org.springframework.security.web.ObservationFilterChainDecorator$FilterObservation$SimpleFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:493)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:354)
+	at org.springframework.security.web.ObservationFilterChainDecorator.lambda$wrapSecured$0(ObservationFilterChainDecorator.java:86)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:132)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:101)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:132)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:86)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:181)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at personal.ecommercebackend.security.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:32)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:110)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:96)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$0(ObservationFilterChainDecorator.java:337)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:237)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:195)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.ServletRequestPathFilter.doFilter(ServletRequestPathFilter.java:52)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebSecurityConfiguration.java:317)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:355)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:272)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:110)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1801)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+2026-05-31 16:02:47.643 INFO  [http-nio-0.0.0.0-8080-exec-3] [becadc4c-734f-4cff-8378-c4f0e1f30763] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168548/103135.png -> 200 (440 ms) user=anonymous
+2026-05-31 16:02:51.140 INFO  [http-nio-0.0.0.0-8080-exec-2] [e8c3ebd4-13a5-435b-8778-a91078fc1200] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/reverse?lat=35.783926&lon=51.464374 -> 200 (577 ms) user=parsan6347@gmail.com
+2026-05-31 16:02:52.755 INFO  [http-nio-0.0.0.0-8080-exec-9] [92e71ab4-ed12-4acf-976b-d81ff3e6e412] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168545/103135.png -> 200 (5552 ms) user=anonymous
+2026-05-31 16:03:06.903 INFO  [http-nio-0.0.0.0-8080-exec-5] [08a93149-9bda-4406-8b30-395e93834e23] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/18/168546/103135.png -> 502 (20005 ms) user=anonymous
+2026-05-31 16:03:10.761 INFO  [http-nio-0.0.0.0-8080-exec-6] [0d1bb2c2-6dd8-40c1-a50d-f6d6cd126fd0] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/19/337096/206267.png -> 502 (20003 ms) user=anonymous
+2026-05-31 16:03:10.762 INFO  [http-nio-0.0.0.0-8080-exec-10] [01918ff1-a032-4837-9a5d-b2dc3902e756] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/19/337096/206269.png -> 502 (20004 ms) user=anonymous
+2026-05-31 16:03:10.762 INFO  [http-nio-0.0.0.0-8080-exec-7] [7ce15fa1-1517-46b2-9628-4f3ea1d52979] p.e.config.RequestLoggingFilter - HTTP GET /api/maps/tiles/19/337096/206268.png -> 502 (20004 ms) user=anonymous
+2026-05-31 16:03:15.418 INFO  [http-nio-0.0.0.0-8080-exec-8] [df171de4-215a-43bf-9ffc-11c474563116] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (31 ms) user=parsan6347@gmail.com
+2026-05-31 16:03:15.722 INFO  [http-nio-0.0.0.0-8080-exec-4] [d619f114-a061-4d57-ae6a-41191ca48d91] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (11 ms) user=parsan6347@gmail.com
+2026-05-31 16:03:15.724 INFO  [http-nio-0.0.0.0-8080-exec-11] [ecc25df8-0578-47b9-be82-188e5b88aa21] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (11 ms) user=parsan6347@gmail.com
