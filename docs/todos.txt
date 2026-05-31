@@ -1,3 +1,4 @@
 // todo 1) stripe dev key
-// todo 5) still having issue with email
-// todo 9) add location along with address (get it from google)
+// todo 2) still having issue with email
+// todo 3) can i get the address info from the location selected?
+// todo 4) improve location search to get a list with all it found so we can pick and then go to the spot

@@ -17,7 +17,7 @@ public class MailConfig {
             @Value("${spring.mail.port:1025}") int port) {
         return args -> {
             if (enabled) {
-                log.info("Email delivery ENABLED — SMTP {}:{} (view MailHog UI at http://localhost:8025)", host, port);
+                log.info("Email delivery ENABLED — SMTP {}:{} (if your on local-dev: view MailHog UI at http://localhost:8025)", host, port);
             } else {
                 log.warn("Email delivery DISABLED — set MAIL_ENABLED=true and run MailHog (docker compose up -d mailhog)");
             }
