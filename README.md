@@ -21,7 +21,7 @@ Full-stack e-commerce application with Spring Boot backend and React (Vite) fron
 
 - Java 17+
 - Node.js 18+
-- Docker (PostgreSQL + optional MailHog)
+- Docker (PostgreSQL; optional local SMTP capture service)
 - [Stripe test account](https://dashboard.stripe.com/register)
 
 ## Quick start
@@ -32,7 +32,7 @@ Full-stack e-commerce application with Spring Boot backend and React (Vite) fron
 docker compose up -d
 ```
 
-Starts **PostgreSQL** (`5432`) and **MailHog** (SMTP `1025`, UI `http://localhost:8025`).
+Starts **PostgreSQL** (`5432`). The compose file also includes an optional local SMTP capture service for development.
 
 ### 2. Configure Stripe & mail
 
@@ -71,7 +71,7 @@ Open `http://localhost:5173` — Vite proxies `/api` and `/uploads` to the backe
 - **Project valuation & cost estimate:** [docs/VALUATION.md](docs/VALUATION.md)
 - **API (Swagger):** http://localhost:8080/swagger-ui/index.html
 
-## Email (local dev)
+## Email
 
 | Card                  | Result   |
 | --------------------- | -------- |
@@ -104,7 +104,7 @@ Set `STRIPE_WEBHOOK_SECRET` from the CLI output.
 
 ## Email
 
-With `MAIL_ENABLED=true` and MailHog running, confirmation emails appear at **http://localhost:8025**.
+With `MAIL_ENABLED=true`, configure `MAIL_HOST`, `MAIL_PORT`, `MAIL_USERNAME`, `MAIL_PASSWORD`, SMTP auth, and TLS for your mail provider.
 
 With `MAIL_ENABLED=false` (default), email content is logged to the backend console.
 

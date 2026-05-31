@@ -11,7 +11,7 @@ This document estimates **development cost** (what it would cost to build) and *
 | **Backend** | Spring Boot REST API, JWT auth, JPA/PostgreSQL, Stripe + demo payments, email, file uploads, Swagger, structured logging, service interfaces |
 | **Features** | Catalog, cart, checkout (coupons, shipping methods, tax), orders, wishlist, reviews, notifications, addresses, admin dashboard, coupons, audit logs, CSV export |
 | **Frontend** | React 19, MUI, light/dark theme, responsive mobile UI, Stripe Elements |
-| **Ops** | Docker Compose (Postgres + MailHog), H2 option, actuator health |
+| **Ops** | Docker Compose (Postgres), SMTP email delivery, H2 option, actuator health |
 
 **Rough size:** ~120+ backend Java files, ~50 frontend components/pages, full-stack integration.
 

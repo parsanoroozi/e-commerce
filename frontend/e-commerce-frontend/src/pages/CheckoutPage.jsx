@@ -256,6 +256,10 @@ export default function CheckoutPage() {
                       value={{ latitude: form.shippingLatitude, longitude: form.shippingLongitude }}
                       onChange={(location) => setForm({
                         ...form,
+                        shippingStreet: location.street || form.shippingStreet,
+                        shippingCity: location.city || form.shippingCity,
+                        shippingZipCode: location.zipCode || form.shippingZipCode,
+                        shippingCountry: location.country || form.shippingCountry,
                         shippingLatitude: location.latitude,
                         shippingLongitude: location.longitude,
                       })}
@@ -348,12 +352,12 @@ export default function CheckoutPage() {
                 overflow: 'hidden',
               }}
             >
-              <Table size="small" aria-label="Checkout items">
-                <TableHead>
-                  <TableRow sx={{ bgcolor: 'action.hover' }}>
-                    <TableCell sx={{ px: 1.5, py: 1, color: 'text.secondary', fontSize: 12, fontWeight: 700 }}>Item</TableCell>
-                    <TableCell align="center" sx={{ px: 1, py: 1, color: 'text.secondary', fontSize: 12, fontWeight: 700 }}>Qty</TableCell>
-                    <TableCell align="right" sx={{ px: 1.5, py: 1, color: 'text.secondary', fontSize: 12, fontWeight: 700 }}>Total</TableCell>
+                <Table size="small" aria-label="Checkout items">
+                  <TableHead>
+                  <TableRow sx={{ bgcolor: 'primary.main' }}>
+                    <TableCell sx={{ px: 1.5, py: 1.15, color: 'primary.contrastText', fontSize: 12, fontWeight: 800, borderBottom: 0 }}>Item</TableCell>
+                    <TableCell align="center" sx={{ px: 1, py: 1.15, color: 'primary.contrastText', fontSize: 12, fontWeight: 800, borderBottom: 0 }}>Qty</TableCell>
+                    <TableCell align="right" sx={{ px: 1.5, py: 1.15, color: 'primary.contrastText', fontSize: 12, fontWeight: 800, borderBottom: 0 }}>Total</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>

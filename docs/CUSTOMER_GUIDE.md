@@ -18,7 +18,7 @@ Welcome to **ShopVerse**, a modern online store for browsing products, managing 
 ### Forgot password
 1. Click **Forgot password?** on the login page.
 2. Enter your email and submit.
-3. Check your inbox (or MailHog at `http://localhost:8025` in local dev).
+3. Check your inbox for the ShopVerse email.
 4. Open the reset link and set a new password.
 
 ---
@@ -143,7 +143,7 @@ You may receive emails for:
 - **Order shipped** when admin marks order as shipped
 - **Password reset** when you request a reset
 
-**Local development:** run `docker compose up -d mailhog` and open **http://localhost:8025** to view captured emails.
+**Local development:** use your configured SMTP provider for real delivery, or switch to a local SMTP capture service when you do not want to send real messages.
 
 ---
 

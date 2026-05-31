@@ -175,6 +175,10 @@ export default function ProfilePage() {
                       value={{ latitude: addressForm.latitude, longitude: addressForm.longitude }}
                       onChange={(location) => setAddressForm({
                         ...addressForm,
+                        street: location.street || addressForm.street,
+                        city: location.city || addressForm.city,
+                        zipCode: location.zipCode || addressForm.zipCode,
+                        country: location.country || addressForm.country,
                         latitude: location.latitude,
                         longitude: location.longitude,
                       })}

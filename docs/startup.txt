@@ -1,4 +1,4 @@
-docker compose up -d mailhog (for emails)
+Configure SMTP credentials for real email delivery.
 
 .\mvnw.cmd spring-boot:run (for backend)
 

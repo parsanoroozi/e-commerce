@@ -3,7 +3,6 @@ package personal.ecommercebackend.service.impl;
 import personal.ecommercebackend.service.*;
 
 
-import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -36,104 +35,151 @@ public class EmailServiceImpl implements EmailService {
     private String fromName;
 
     public void sendOrderConfirmation(Order order, User user) {
-        String subject = "Order confirmed - ShopVerse #" + order.getId();
-        String body = buildOrderConfirmationHtml(order, user);
-
-        if (!mailEnabled) {
-            log.info("Mail disabled - order confirmation for {} (order #{}):\n{}", user.getEmail(), order.getId(), body);
-            return;
-        }
-
+        String subject = "Your ShopVerse order is confirmed";
+        String body = wrapEmail(
+                "Order confirmed",
+                "Thanks for your purchase, " + escape(user.getFirstName()) + ".",
+                """
+                        <p>Your payment was received and your order is now confirmed.</p>
+                        %s
+                        %s
+                        """.formatted(orderSummary(order), shippingBlock(order)));
         sendHtml(user.getEmail(), subject, body, "order confirmation #" + order.getId());
     }
 
-    private String buildOrderConfirmationHtml(Order order, User user) {
-        StringBuilder items = new StringBuilder();
-        for (OrderItem item : order.getItems()) {
-            BigDecimal line = item.getUnitPrice().multiply(BigDecimal.valueOf(item.getQuantity()));
-            items.append("<tr><td>")
-                    .append(escape(item.getProductName()))
-                    .append("</td><td>")
-                    .append(item.getQuantity())
-                    .append("</td><td>$")
-                    .append(line)
-                    .append("</td></tr>");
-        }
-
-        String date = order.getCreatedAt() != null
-                ? DateTimeFormatter.ofPattern("MMM d, yyyy HH:mm")
-                .withZone(ZoneId.systemDefault())
-                .format(order.getCreatedAt())
-                : "";
-
-        return """
-                <html><body style="font-family:Segoe UI,sans-serif;color:#1a2332;">
-                <h2>Thank you for your order, %s!</h2>
-                <p>Your payment was received. Order <strong>#%d</strong> is confirmed.</p>
-                <p><strong>Placed:</strong> %s</p>
-                <h3>Shipping to</h3>
-                <p>%s<br>%s, %s<br>%s</p>
-                <h3>Items</h3>
-                <table border="1" cellpadding="8" cellspacing="0" style="border-collapse:collapse;">
-                <tr><th>Product</th><th>Qty</th><th>Total</th></tr>
-                %s
-                </table>
-                <p style="margin-top:16px;"><strong>Order total: $%s</strong></p>
-                <p style="color:#64748b;font-size:14px;">ShopVerse - happy shopping!</p>
-                </body></html>
-                """.formatted(
-                escape(user.getFirstName()),
-                order.getId(),
-                date,
-                escape(order.getShippingStreet()),
-                escape(order.getShippingCity()),
-                escape(order.getShippingZipCode()),
-                escape(order.getShippingCountry()),
-                items,
-                order.getTotalAmount());
-    }
-
     public void sendOrderShipped(Order order, User user) {
-        String subject = "Your order has shipped - ShopVerse #" + order.getId();
-        String body = "<p>Hi " + escape(user.getFirstName()) + ",</p>"
-                + "<p>Great news! Order <strong>#" + order.getId() + "</strong> has been shipped.</p>"
-                + "<p>Shipping to: " + escape(order.getShippingStreet()) + ", "
-                + escape(order.getShippingCity()) + "</p>";
-
-        sendHtml(user.getEmail(), subject, body, "shipped notification for order #" + order.getId());
+        String subject = "Your ShopVerse order is on the way";
+        String body = wrapEmail(
+                "Order shipped",
+                "Good news, " + escape(user.getFirstName()) + ".",
+                """
+                        <p>Your order has shipped. Here is what is on the way:</p>
+                        %s
+                        %s
+                        """.formatted(orderSummary(order), shippingBlock(order)));
+        sendHtml(user.getEmail(), subject, body, "shipment notification #" + order.getId());
     }
 
     public void sendPasswordReset(User user, String resetLink) {
         String subject = "Reset your ShopVerse password";
-        String body = """
-                <html><body style="font-family:Segoe UI,sans-serif;color:#1a2332;">
-                <h2>Password reset</h2>
-                <p>Hi %s,</p>
-                <p>We received a request to reset your password. Click the link below (valid for 1 hour):</p>
-                <p><a href="%s" style="color:#3d4de6;">Reset password</a></p>
-                <p style="color:#64748b;font-size:14px;">If you did not request this, you can ignore this email.</p>
-                </body></html>
-                """.formatted(escape(user.getFirstName()), escape(resetLink));
+        String body = wrapEmail(
+                "Reset your password",
+                "Hi " + escape(user.getFirstName()) + ",",
+                """
+                        <p>We received a request to reset your ShopVerse password. This link is valid for 1 hour.</p>
+                        <p style="margin:24px 0;">
+                          <a href="%s" style="display:inline-block;background:#ff5a1f;color:#ffffff;text-decoration:none;font-weight:700;padding:12px 18px;border-radius:8px;">Reset password</a>
+                        </p>
+                        <p style="color:#64748b;">If you did not request this, you can ignore this email.</p>
+                        """.formatted(escape(resetLink)));
         sendHtml(user.getEmail(), subject, body, "password reset for " + user.getEmail());
     }
 
     public void sendEmailVerificationCode(String email, String code) {
         String subject = "Your ShopVerse verification code";
-        String body = """
-                <html><body style="font-family:Segoe UI,sans-serif;color:#1a2332;">
-                <h2>Verify your email</h2>
-                <p>Use this code to finish creating your ShopVerse account:</p>
-                <p style="font-size:28px;font-weight:700;letter-spacing:6px;margin:20px 0;">%s</p>
-                <p>This code expires in 10 minutes.</p>
-                <p style="color:#64748b;font-size:14px;">If you did not request this, you can ignore this email.</p>
-                </body></html>
-                """.formatted(escape(code));
+        String body = wrapEmail(
+                "Verify your email",
+                "Use this code to finish creating your account.",
+                """
+                        <div style="font-size:32px;font-weight:800;letter-spacing:8px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:18px 20px;text-align:center;margin:22px 0;">%s</div>
+                        <p>This code expires in 10 minutes.</p>
+                        <p style="color:#64748b;">If you did not request this, you can ignore this email.</p>
+                        """.formatted(escape(code)));
         sendHtml(email, subject, body, "email verification for " + email);
+    }
+
+    private String orderSummary(Order order) {
+        return """
+                <div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+                  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+                    <strong>Order #%d</strong>
+                    <span style="float:right;">%s</span>
+                  </div>
+                  <table role="presentation" width="100%%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+                    <thead>
+                      <tr style="background:#f8fafc;">
+                        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+                        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+                        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      %s
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+                        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">%s</td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+                """.formatted(
+                order.getId(),
+                escape(formatDate(order)),
+                orderItemRows(order),
+                money(order.getTotalAmount()));
+    }
+
+    private String orderItemRows(Order order) {
+        StringBuilder rows = new StringBuilder();
+        for (OrderItem item : order.getItems()) {
+            BigDecimal line = item.getUnitPrice().multiply(BigDecimal.valueOf(item.getQuantity()));
+            rows.append("""
+                    <tr>
+                      <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">%s</td>
+                      <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">%d</td>
+                      <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">%s</td>
+                    </tr>
+                    """.formatted(
+                    escape(item.getProductName()),
+                    item.getQuantity(),
+                    money(line)));
+        }
+        return rows.toString();
+    }
+
+    private String shippingBlock(Order order) {
+        return """
+                <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+                  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+                  <div>%s</div>
+                  <div>%s, %s</div>
+                  <div>%s</div>
+                </div>
+                """.formatted(
+                escape(order.getShippingStreet()),
+                escape(order.getShippingCity()),
+                escape(order.getShippingZipCode()),
+                escape(order.getShippingCountry()));
+    }
+
+    private String wrapEmail(String title, String subtitle, String content) {
+        return """
+                <!doctype html>
+                <html>
+                <body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+                  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+                    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+                      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+                        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+                        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">%s</h1>
+                        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">%s</p>
+                      </div>
+                      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+                        %s
+                      </div>
+                    </div>
+                    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from %s.</p>
+                  </div>
+                </body>
+                </html>
+                """.formatted(escape(title), subtitle, content, escape(fromAddress));
     }
 
     private void sendHtml(String to, String subject, String htmlBody, String logContext) {
         if (!mailEnabled) {
-            log.info("Mail disabled - {}:\n{}", logContext, htmlBody);
+            log.info("Email disabled - {}:\n{}", logContext, htmlBody);
             return;
         }
         try {
@@ -149,6 +195,18 @@ public class EmailServiceImpl implements EmailService {
             log.error("Failed to send email to {} ({}) - {}", to, logContext, e.getMessage());
             throw new RuntimeException("Failed to send email", e);
         }
+    }
+
+    private String formatDate(Order order) {
+        return order.getCreatedAt() != null
+                ? DateTimeFormatter.ofPattern("MMM d, yyyy HH:mm")
+                .withZone(ZoneId.systemDefault())
+                .format(order.getCreatedAt())
+                : "";
+    }
+
+    private String money(BigDecimal value) {
+        return "$" + (value != null ? value.toPlainString() : "0.00");
     }
 
     private String escape(String value) {

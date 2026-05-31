@@ -1,4 +1,4 @@
-const API_BASE = import.meta.env.VITE_API_URL || '';
+export const API_BASE = import.meta.env.VITE_API_URL || '';
 const DEFAULT_CACHE_TTL_MS = 60_000;
 const responseCache = new Map();
 const SESSION_CACHE_PREFIX = 'shopverse:api-cache:';

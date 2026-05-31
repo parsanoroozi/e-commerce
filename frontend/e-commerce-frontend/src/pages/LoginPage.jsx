@@ -16,7 +16,7 @@ import PasswordField from '../components/PasswordField';
 import { useAuth } from '../context/AuthContext';
 
 export default function LoginPage() {
-  const { login } = useAuth();
+  const { login, lastLoggedOutUserKey } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const [form, setForm] = useState({ email: '', password: '' });
@@ -29,8 +29,11 @@ export default function LoginPage() {
     setError('');
     try {
       const user = await login(form);
-      const redirect = location.state?.from || (user.role === 'ADMIN' ? '/admin' : '/');
-      navigate(redirect);
+      const lastLoggedOutUserId = localStorage.getItem(lastLoggedOutUserKey);
+      const sameAccount = !lastLoggedOutUserId || String(user.id) === lastLoggedOutUserId;
+      const roleHome = user.role === 'ADMIN' ? '/admin/dashboard' : '/';
+      const previousPath = resolvePreviousPath(location.state?.from);
+      navigate(sameAccount && previousPath ? previousPath : roleHome, { replace: true });
     } catch (err) {
       setError(err.message);
     } finally {
@@ -83,4 +86,13 @@ export default function LoginPage() {
       </Box>
     </PageContainer>
   );
+}
+
+function resolvePreviousPath(from) {
+  if (!from) return null;
+  if (typeof from === 'string') return from;
+  if (typeof from.pathname === 'string') {
+    return `${from.pathname}${from.search || ''}${from.hash || ''}`;
+  }
+  return null;
 }

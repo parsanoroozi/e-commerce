@@ -3,6 +3,7 @@ import { authApi } from '../api/auth';
 import { clearApiCache, emitApiChange } from '../api/client';
 
 const AuthContext = createContext(null);
+const LAST_LOGGED_OUT_USER_KEY = 'shopverse:last-logged-out-user-id';
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
@@ -55,6 +56,9 @@ export function AuthProvider({ children }) {
   };
 
   const logout = () => {
+    if (user?.id != null) {
+      localStorage.setItem(LAST_LOGGED_OUT_USER_KEY, String(user.id));
+    }
     localStorage.removeItem('token');
     clearApiCache();
     emitApiChange({ method: 'POST', path: '/api/auth/logout', resources: ['auth', 'cart', 'wishlist', 'notifications', 'orders'] });
@@ -71,6 +75,7 @@ export function AuthProvider({ children }) {
       register,
       updateProfile,
       logout,
+      lastLoggedOutUserKey: LAST_LOGGED_OUT_USER_KEY,
     }),
     [user, loading],
   );
