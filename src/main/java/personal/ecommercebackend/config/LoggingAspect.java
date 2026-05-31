@@ -9,11 +9,15 @@ import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
+import java.util.regex.Pattern;
 
 @Slf4j
 @Aspect
 @Component
 public class LoggingAspect {
+
+    private static final Pattern SENSITIVE_FIELD_PATTERN =
+            Pattern.compile("(?i)(password|token|code)=([^,)]*)");
 
     @Around("within(personal.ecommercebackend.service..*)")
     public Object logService(ProceedingJoinPoint joinPoint) throws Throwable {
@@ -58,7 +62,7 @@ public class LoggingAspect {
                     if (name.contains("password") || name.contains("Password")) {
                         return name + "(***)";
                     }
-                    String text = arg.toString();
+                    String text = SENSITIVE_FIELD_PATTERN.matcher(arg.toString()).replaceAll("$1=***");
                     if (text.length() > 120) {
                         return name + "(" + text.substring(0, 117) + "...)";
                     }

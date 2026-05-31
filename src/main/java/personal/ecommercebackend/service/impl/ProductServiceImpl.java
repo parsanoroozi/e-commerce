@@ -21,6 +21,9 @@ import personal.ecommercebackend.repository.ProductReviewRepository;
 import personal.ecommercebackend.security.SecurityUtils;
 
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -40,13 +43,42 @@ public class ProductServiceImpl implements ProductService {
     public PageResponse<ProductResponse> search(Long categoryId, String search, Pageable pageable) {
         String normalizedSearch = (search == null || search.isBlank()) ? null : search.trim();
         Page<Product> page = resolveSearchPage(categoryId, normalizedSearch, pageable);
-        return PageResponse.from(page.map(this::toProductResponseWithReviews));
+        return toProductPageResponse(page);
     }
 
     private ProductResponse toProductResponseWithReviews(Product product) {
         return EntityMapper.toProductResponse(product,
                 productReviewRepository.averageRatingByProductId(product.getId()),
                 productReviewRepository.countByProductId(product.getId()));
+    }
+
+    private PageResponse<ProductResponse> toProductPageResponse(Page<Product> page) {
+        List<Product> products = page.getContent();
+        if (products.isEmpty()) {
+            return PageResponse.from(page.map(EntityMapper::toProductResponse));
+        }
+        Map<Long, ProductReviewRepository.ProductReviewSummary> summaries = productReviewRepository
+                .summarizeByProductIds(products.stream().map(Product::getId).toList())
+                .stream()
+                .collect(Collectors.toMap(ProductReviewRepository.ProductReviewSummary::getProductId, Function.identity()));
+
+        List<ProductResponse> responses = products.stream()
+                .map(product -> {
+                    ProductReviewRepository.ProductReviewSummary summary = summaries.get(product.getId());
+                    return EntityMapper.toProductResponse(
+                            product,
+                            summary == null ? 0D : summary.getAverageRating(),
+                            summary == null ? 0L : summary.getReviewCount());
+                })
+                .toList();
+
+        return new PageResponse<>(
+                responses,
+                page.getNumber(),
+                page.getSize(),
+                page.getTotalElements(),
+                page.getTotalPages(),
+                page.isLast());
     }
 
     private Page<Product> resolveSearchPage(Long categoryId, String search, Pageable pageable) {

@@ -3,12 +3,9 @@ package personal.ecommercebackend.service.impl;
 import personal.ecommercebackend.service.*;
 
 
-import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import personal.ecommercebackend.entity.Order;
 import personal.ecommercebackend.entity.OrderItem;
@@ -17,16 +14,14 @@ import personal.ecommercebackend.entity.User;
 import java.math.BigDecimal;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class EmailServiceImpl implements EmailService {
 
-    private final JavaMailSender mailSender;
-
-    @Value("${app.mail.enabled:false}")
-    private boolean mailEnabled;
+    private final AsyncEmailSender asyncEmailSender;
 
     @Value("${app.mail.from:noreply@shopverse.local}")
     private String fromAddress;
@@ -34,7 +29,7 @@ public class EmailServiceImpl implements EmailService {
     @Value("${app.mail.from-name:ShopVerse}")
     private String fromName;
 
-    public void sendOrderConfirmation(Order order, User user) {
+    public CompletableFuture<Boolean> sendOrderConfirmation(Order order, User user) {
         String subject = "Your ShopVerse order is confirmed";
         String body = wrapEmail(
                 "Order confirmed",
@@ -44,10 +39,10 @@ public class EmailServiceImpl implements EmailService {
                         %s
                         %s
                         """.formatted(orderSummary(order), shippingBlock(order)));
-        sendHtml(user.getEmail(), subject, body, "order confirmation #" + order.getId());
+        return asyncEmailSender.sendHtml(user.getEmail(), subject, body, "order confirmation #" + order.getId());
     }
 
-    public void sendOrderShipped(Order order, User user) {
+    public CompletableFuture<Boolean> sendOrderShipped(Order order, User user) {
         String subject = "Your ShopVerse order is on the way";
         String body = wrapEmail(
                 "Order shipped",
@@ -57,10 +52,10 @@ public class EmailServiceImpl implements EmailService {
                         %s
                         %s
                         """.formatted(orderSummary(order), shippingBlock(order)));
-        sendHtml(user.getEmail(), subject, body, "shipment notification #" + order.getId());
+        return asyncEmailSender.sendHtml(user.getEmail(), subject, body, "shipment notification #" + order.getId());
     }
 
-    public void sendPasswordReset(User user, String resetLink) {
+    public CompletableFuture<Boolean> sendPasswordReset(User user, String resetLink) {
         String subject = "Reset your ShopVerse password";
         String body = wrapEmail(
                 "Reset your password",
@@ -72,10 +67,10 @@ public class EmailServiceImpl implements EmailService {
                         </p>
                         <p style="color:#64748b;">If you did not request this, you can ignore this email.</p>
                         """.formatted(escape(resetLink)));
-        sendHtml(user.getEmail(), subject, body, "password reset for " + user.getEmail());
+        return asyncEmailSender.sendHtml(user.getEmail(), subject, body, "password reset for " + user.getEmail());
     }
 
-    public void sendEmailVerificationCode(String email, String code) {
+    public CompletableFuture<Boolean> sendEmailVerificationCode(String email, String code) {
         String subject = "Your ShopVerse verification code";
         String body = wrapEmail(
                 "Verify your email",
@@ -85,7 +80,7 @@ public class EmailServiceImpl implements EmailService {
                         <p>This code expires in 10 minutes.</p>
                         <p style="color:#64748b;">If you did not request this, you can ignore this email.</p>
                         """.formatted(escape(code)));
-        sendHtml(email, subject, body, "email verification for " + email);
+        return asyncEmailSender.sendHtml(email, subject, body, "email verification for " + email);
     }
 
     private String orderSummary(Order order) {
@@ -175,26 +170,6 @@ public class EmailServiceImpl implements EmailService {
                 </body>
                 </html>
                 """.formatted(escape(title), subtitle, content, escape(fromAddress));
-    }
-
-    private void sendHtml(String to, String subject, String htmlBody, String logContext) {
-        if (!mailEnabled) {
-            log.info("Email disabled - {}:\n{}", logContext, htmlBody);
-            return;
-        }
-        try {
-            MimeMessage message = mailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
-            helper.setFrom(fromAddress, fromName);
-            helper.setTo(to);
-            helper.setSubject(subject);
-            helper.setText(htmlBody, true);
-            mailSender.send(message);
-            log.info("Email sent to {} ({})", to, logContext);
-        } catch (Exception e) {
-            log.error("Failed to send email to {} ({}) - {}", to, logContext, e.getMessage());
-            throw new RuntimeException("Failed to send email", e);
-        }
     }
 
     private String formatDate(Order order) {

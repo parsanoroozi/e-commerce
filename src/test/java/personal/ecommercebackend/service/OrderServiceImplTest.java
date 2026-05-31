@@ -23,6 +23,7 @@ import personal.ecommercebackend.repository.CategoryRepository;
 import personal.ecommercebackend.repository.NotificationRepository;
 import personal.ecommercebackend.repository.OrderRepository;
 import personal.ecommercebackend.repository.ProductRepository;
+import personal.ecommercebackend.repository.ShippingAddressRepository;
 import personal.ecommercebackend.repository.UserRepository;
 import personal.ecommercebackend.security.UserPrincipal;
 
@@ -56,6 +57,9 @@ class OrderServiceImplTest {
     private NotificationRepository notificationRepository;
 
     @Autowired
+    private ShippingAddressRepository shippingAddressRepository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     private User user;
@@ -66,6 +70,7 @@ class OrderServiceImplTest {
         notificationRepository.deleteAll();
         orderRepository.deleteAll();
         cartRepository.deleteAll();
+        shippingAddressRepository.deleteAll();
         productRepository.deleteAll();
         categoryRepository.deleteAll();
         userRepository.deleteAll();
@@ -124,6 +129,19 @@ class OrderServiceImplTest {
         assertThat(reloadedProduct.getStockQuantity()).isEqualTo(1);
         assertThat(reloadedCart.getItems()).isEmpty();
         assertThat(notificationRepository.countByUserIdAndReadFalse(user.getId())).isEqualTo(1);
+    }
+
+    @Test
+    void cancellingConfirmedOrderRestoresStock() {
+        CheckoutInitResponse checkout = orderService.initiateCheckout(checkoutRequest());
+        orderService.confirmPayment(checkout.orderId());
+
+        var cancelled = orderService.cancelOrder(checkout.orderId());
+
+        Product reloadedProduct = productRepository.findById(product.getId()).orElseThrow();
+
+        assertThat(cancelled.status()).isEqualTo(OrderStatus.CANCELLED);
+        assertThat(reloadedProduct.getStockQuantity()).isEqualTo(3);
     }
 
     private CheckoutRequest checkoutRequest() {

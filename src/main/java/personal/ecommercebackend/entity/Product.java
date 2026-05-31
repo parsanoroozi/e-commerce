@@ -3,6 +3,7 @@ package personal.ecommercebackend.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
@@ -62,6 +63,7 @@ public class Product {
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     @OrderBy("sortOrder ASC")
+    @BatchSize(size = 50)
     @Builder.Default
     private List<ProductImage> images = new ArrayList<>();
 }

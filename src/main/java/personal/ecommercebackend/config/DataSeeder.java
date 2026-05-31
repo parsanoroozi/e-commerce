@@ -3,6 +3,8 @@ package personal.ecommercebackend.config;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -18,6 +20,7 @@ import java.util.List;
 
 @Slf4j
 @Component
+@ConditionalOnProperty(name = "app.seed.enabled", havingValue = "true")
 @RequiredArgsConstructor
 public class DataSeeder implements CommandLineRunner {
 
@@ -28,6 +31,12 @@ public class DataSeeder implements CommandLineRunner {
     private final ShopSettingRepository shopSettingRepository;
     private final PasswordEncoder passwordEncoder;
     private final JdbcTemplate jdbcTemplate;
+
+    @Value("${app.seed.admin-email:admin@shop.com}")
+    private String adminEmail;
+
+    @Value("${app.seed.admin-password:}")
+    private String adminPassword;
 
     @Override
     public void run(String... args) {
@@ -71,12 +80,16 @@ public class DataSeeder implements CommandLineRunner {
     }
 
     private void seedAdmin() {
-        if (userRepository.existsByEmail("admin@shop.com")) {
+        String email = adminEmail.trim().toLowerCase();
+        if (userRepository.existsByEmail(email)) {
             return;
         }
+        if (adminPassword == null || adminPassword.length() < 12) {
+            throw new IllegalStateException("app.seed.admin-password must be at least 12 characters when seed data is enabled");
+        }
         User admin = User.builder()
-                .email("admin@shop.com")
-                .password(passwordEncoder.encode("admin12345"))
+                .email(email)
+                .password(passwordEncoder.encode(adminPassword))
                 .firstName("Store")
                 .lastName("Admin")
                 .role(Role.ADMIN)

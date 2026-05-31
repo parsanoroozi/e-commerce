@@ -53,7 +53,8 @@ $env:MAIL_ENABLED="true"
 
 API: `http://localhost:8080`
 
-**Seeded admin:** `admin@shop.com` / `admin12345`
+Seed data is disabled by default. For a disposable local database only, set
+`APP_SEED_ENABLED=true` and provide `APP_SEED_ADMIN_PASSWORD` before starting the backend.
 
 ### 4. Run frontend
 
@@ -124,4 +125,5 @@ See `application.properties` and `.env.example` for:
 
 - `STRIPE_SECRET_KEY`, `STRIPE_PUBLISHABLE_KEY`, `STRIPE_WEBHOOK_SECRET`
 - `MAIL_ENABLED`, `MAIL_HOST`, `MAIL_PORT`, `MAIL_FROM`
+- `JWT_SECRET`, `APP_SEED_ENABLED`, `APP_SEED_ADMIN_EMAIL`, `APP_SEED_ADMIN_PASSWORD`
 - `app.storage.upload-dir`

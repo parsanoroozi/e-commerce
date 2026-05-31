@@ -13,18 +13,26 @@ import java.io.IOException;
 import java.time.Clock;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicLong;
 
 @Component
 public class AuthRateLimitFilter extends OncePerRequestFilter {
 
     private final Map<String, Window> windows = new ConcurrentHashMap<>();
     private final Clock clock = Clock.systemUTC();
+    private final AtomicLong limitedRequests = new AtomicLong();
 
     @Value("${app.rate-limit.auth.max-requests:20}")
     private int maxRequests;
 
     @Value("${app.rate-limit.auth.window-ms:900000}")
     private long windowMs;
+
+    @Value("${app.rate-limit.auth.max-windows:10000}")
+    private int maxWindows;
+
+    @Value("${app.proxy.trust-forwarded-headers:false}")
+    private boolean trustForwardedHeaders;
 
     @Override
     protected void doFilterInternal(
@@ -39,6 +47,13 @@ public class AuthRateLimitFilter extends OncePerRequestFilter {
 
         String key = clientIp(request) + ":" + request.getRequestURI();
         long now = clock.millis();
+        if (limitedRequests.incrementAndGet() % 100 == 0 || windows.size() > maxWindows) {
+            cleanupExpiredWindows(now);
+        }
+        if (windows.size() >= maxWindows && !windows.containsKey(key)) {
+            response.sendError(429, "Too many authentication attempts. Try again later.");
+            return;
+        }
         Window window = windows.compute(key, (ignored, existing) -> {
             if (existing == null || now >= existing.resetAt) {
                 return new Window(1, now + windowMs);
@@ -71,11 +86,15 @@ public class AuthRateLimitFilter extends OncePerRequestFilter {
     }
 
     private String clientIp(HttpServletRequest request) {
-        String forwardedFor = request.getHeader("X-Forwarded-For");
+        String forwardedFor = trustForwardedHeaders ? request.getHeader("X-Forwarded-For") : null;
         if (forwardedFor != null && !forwardedFor.isBlank()) {
             return forwardedFor.split(",")[0].trim();
         }
         return request.getRemoteAddr();
+    }
+
+    private void cleanupExpiredWindows(long now) {
+        windows.entrySet().removeIf(entry -> now >= entry.getValue().resetAt);
     }
 
     private static class Window {

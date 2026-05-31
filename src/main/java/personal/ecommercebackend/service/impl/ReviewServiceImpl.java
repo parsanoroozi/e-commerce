@@ -4,6 +4,7 @@ import personal.ecommercebackend.service.*;
 
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -52,7 +53,11 @@ public class ReviewServiceImpl implements ReviewService {
                 .rating(request.rating())
                 .comment(request.comment())
                 .build();
-        return EntityMapper.toReviewResponse(reviewRepository.save(review));
+        try {
+            return EntityMapper.toReviewResponse(reviewRepository.save(review));
+        } catch (DataIntegrityViolationException e) {
+            throw new ApiException(HttpStatus.CONFLICT, "You already reviewed this product");
+        }
     }
 
     public Double averageRating(Long productId) {

@@ -41,6 +41,10 @@ public class AdminUserServiceImpl implements AdminUserService {
         }
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, "User not found"));
+        if (orderRepository.existsByUserId(id)) {
+            throw new ApiException(HttpStatus.CONFLICT,
+                    "Users with order history cannot be deleted. Disable or anonymize the account instead.");
+        }
 
         notificationRepository.deleteByUserId(id);
         passwordResetTokenRepository.deleteByUserId(id);
@@ -48,7 +52,6 @@ public class AdminUserServiceImpl implements AdminUserService {
         wishlistItemRepository.deleteByUserId(id);
         shippingAddressRepository.deleteByUserId(id);
         cartRepository.deleteByUserId(id);
-        orderRepository.deleteAll(orderRepository.findByUserId(id));
         userRepository.delete(user);
     }
 }

@@ -46,23 +46,25 @@ public class MapController {
 
     @GetMapping("/search")
     public List<MapSearchResultResponse> search(@RequestParam String q) throws Exception {
-        List<MapSearchResultResponse> geoapifyResults = searchGeoapify(q);
+        String normalizedQuery = validateSearchQuery(q);
+        List<MapSearchResultResponse> geoapifyResults = searchGeoapify(normalizedQuery);
         if (!geoapifyResults.isEmpty()) {
             return geoapifyResults;
         }
 
-        List<MapSearchResultResponse> photonResults = searchPhoton(q);
+        List<MapSearchResultResponse> photonResults = searchPhoton(normalizedQuery);
         if (!photonResults.isEmpty()) {
             return photonResults;
         }
 
-        return searchNominatim(q);
+        return searchNominatim(normalizedQuery);
     }
 
     @GetMapping("/reverse")
     public ResponseEntity<MapSearchResultResponse> reverse(
             @RequestParam double lat,
             @RequestParam double lon) throws Exception {
+        validateCoordinates(lat, lon);
         MapSearchResultResponse geoapifyResult = reverseGeoapify(lat, lon);
         if (geoapifyResult != null) {
             return ResponseEntity.ok(geoapifyResult);
@@ -84,6 +86,10 @@ public class MapController {
     @GetMapping(value = "/tiles/{z}/{x}/{y}.png", produces = MediaType.IMAGE_PNG_VALUE)
     public ResponseEntity<byte[]> tile(@PathVariable int z, @PathVariable int x, @PathVariable int y) throws Exception {
         if (z < 0 || z > 19) {
+            return ResponseEntity.badRequest().build();
+        }
+        int maxTile = (1 << z) - 1;
+        if (x < 0 || y < 0 || x > maxTile || y > maxTile) {
             return ResponseEntity.badRequest().build();
         }
         URI uri = URI.create("https://tile.openstreetmap.org/%d/%d/%d.png".formatted(z, x, y));
@@ -253,6 +259,25 @@ public class MapController {
             return null;
         }
         return objectMapper.readTree(response.body());
+    }
+
+    private String validateSearchQuery(String q) {
+        if (q == null) {
+            throw new org.springframework.web.server.ResponseStatusException(HttpStatus.BAD_REQUEST, "Search query is required");
+        }
+        String normalized = q.trim();
+        if (normalized.length() < 2 || normalized.length() > 120) {
+            throw new org.springframework.web.server.ResponseStatusException(HttpStatus.BAD_REQUEST, "Search query length is invalid");
+        }
+        return normalized;
+    }
+
+    private void validateCoordinates(double lat, double lon) {
+        if (!Double.isFinite(lat) || !Double.isFinite(lon)
+                || lat < -90 || lat > 90
+                || lon < -180 || lon > 180) {
+            throw new org.springframework.web.server.ResponseStatusException(HttpStatus.BAD_REQUEST, "Coordinates are invalid");
+        }
     }
 
     private MapSearchResultResponse toNominatimResult(JsonNode item) {

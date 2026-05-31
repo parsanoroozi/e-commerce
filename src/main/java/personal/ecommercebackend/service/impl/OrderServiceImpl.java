@@ -214,12 +214,10 @@ public class OrderServiceImpl implements OrderService {
                 saved.getId(), saved.getUser().getId(), saved.getTotalAmount(), saved.getItems().size());
 
         if (!saved.isConfirmationEmailSent()) {
-            try {
-                emailService.sendOrderConfirmation(saved, saved.getUser());
-                saved.setConfirmationEmailSent(true);
-                orderRepository.save(saved);
-            } catch (RuntimeException ignored) {
-            }
+            Long orderId = saved.getId();
+            Long userId = saved.getUser().getId();
+            emailService.sendOrderConfirmation(saved, saved.getUser())
+                    .thenAccept(sent -> markConfirmationEmailSent(orderId, userId, sent));
         }
 
         notificationService.notifyUser(saved.getUser(), "Order confirmed",
@@ -228,12 +226,28 @@ public class OrderServiceImpl implements OrderService {
         return saved;
     }
 
+    private void markConfirmationEmailSent(Long orderId, Long userId, boolean sent) {
+        if (!sent) {
+            log.warn("Order confirmation email failed orderId={} userId={}", orderId, userId);
+            return;
+        }
+        orderRepository.findById(orderId).ifPresent(order -> {
+            order.setConfirmationEmailSent(true);
+            orderRepository.save(order);
+        });
+    }
+
     @Transactional
     public OrderResponse cancelOrder(Long orderId) {
-        Order order = orderRepository.findWithDetailsByIdAndUserId(orderId, SecurityUtils.currentUserId())
+        Order order = orderRepository.findWithDetailsByIdAndUserIdForUpdate(orderId, SecurityUtils.currentUserId())
                 .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, "Order not found"));
-        if (order.getStatus() != OrderStatus.CONFIRMED && order.getStatus() != OrderStatus.PENDING) {
+        if (order.getStatus() != OrderStatus.CONFIRMED
+                && order.getStatus() != OrderStatus.PENDING
+                && order.getStatus() != OrderStatus.AWAITING_PAYMENT) {
             throw new ApiException(HttpStatus.BAD_REQUEST, "Order cannot be cancelled at this stage");
+        }
+        if (order.getStatus() == OrderStatus.CONFIRMED) {
+            restoreStock(order);
         }
         order.setStatus(OrderStatus.CANCELLED);
         Order saved = orderRepository.save(order);
@@ -241,6 +255,14 @@ public class OrderServiceImpl implements OrderService {
         notificationService.notifyUser(saved.getUser(), "Order cancelled",
                 "Your order #" + saved.getId() + " was cancelled.", saved.getId());
         return EntityMapper.toOrderResponse(saved, false);
+    }
+
+    private void restoreStock(Order order) {
+        for (OrderItem item : order.getItems()) {
+            Product product = productRepository.findByIdForUpdate(item.getProduct().getId())
+                    .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, "Product not found"));
+            product.setStockQuantity(product.getStockQuantity() + item.getQuantity());
+        }
     }
 
     private ShippingMethod resolveShippingMethod(String value) {

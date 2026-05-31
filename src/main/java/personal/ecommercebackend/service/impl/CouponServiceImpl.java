@@ -61,6 +61,7 @@ public class CouponServiceImpl implements CouponService {
     }
 
     private Coupon map(Coupon coupon, CouponRequest request) {
+        validateDiscount(request);
         coupon.setCode(request.code().trim().toUpperCase());
         coupon.setDiscountPercent(request.discountPercent());
         coupon.setDiscountAmount(request.discountAmount());
@@ -70,5 +71,27 @@ public class CouponServiceImpl implements CouponService {
             coupon.setActive(request.active());
         }
         return coupon;
+    }
+
+    private void validateDiscount(CouponRequest request) {
+        boolean hasPercent = request.discountPercent() != null;
+        boolean hasAmount = request.discountAmount() != null;
+        if (hasPercent == hasAmount) {
+            throw new ApiException(HttpStatus.BAD_REQUEST,
+                    "Provide exactly one discount type: percent or amount");
+        }
+        if (hasPercent && (request.discountPercent().compareTo(BigDecimal.ZERO) <= 0
+                || request.discountPercent().compareTo(BigDecimal.valueOf(100)) > 0)) {
+            throw new ApiException(HttpStatus.BAD_REQUEST,
+                    "Discount percent must be greater than 0 and no more than 100");
+        }
+        if (hasAmount && request.discountAmount().compareTo(BigDecimal.ZERO) <= 0) {
+            throw new ApiException(HttpStatus.BAD_REQUEST,
+                    "Discount amount must be greater than 0");
+        }
+        if (request.minOrderAmount() != null && request.minOrderAmount().compareTo(BigDecimal.ZERO) < 0) {
+            throw new ApiException(HttpStatus.BAD_REQUEST,
+                    "Minimum order amount cannot be negative");
+        }
     }
 }
