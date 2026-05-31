@@ -173,15 +173,15 @@ export default function ProfilePage() {
                   <Grid size={{ xs: 12, md: 6 }}>
                     <LocationPicker
                       value={{ latitude: addressForm.latitude, longitude: addressForm.longitude }}
-                      onChange={(location) => setAddressForm({
-                        ...addressForm,
-                        street: location.street || addressForm.street,
-                        city: location.city || addressForm.city,
-                        zipCode: location.zipCode || addressForm.zipCode,
-                        country: location.country || addressForm.country,
+                      onChange={(location) => setAddressForm((current) => ({
+                        ...current,
+                        street: location.street ?? current.street,
+                        city: location.city ?? current.city,
+                        zipCode: location.zipCode ?? current.zipCode,
+                        country: location.country ?? current.country,
                         latitude: location.latitude,
                         longitude: location.longitude,
-                      })}
+                      }))}
                     />
                   </Grid>
                   <Grid size={{ xs: 12, sm: 6, md: 3 }}>

@@ -122,15 +122,15 @@ export default function AddressesPage() {
             <TextField label="Country" required value={form.country} onChange={(e) => setForm({ ...form, country: e.target.value })} />
             <LocationPicker
               value={{ latitude: form.latitude, longitude: form.longitude }}
-              onChange={(location) => setForm({
-                ...form,
-                street: location.street || form.street,
-                city: location.city || form.city,
-                zipCode: location.zipCode || form.zipCode,
-                country: location.country || form.country,
+              onChange={(location) => setForm((current) => ({
+                ...current,
+                street: location.street ?? current.street,
+                city: location.city ?? current.city,
+                zipCode: location.zipCode ?? current.zipCode,
+                country: location.country ?? current.country,
                 latitude: location.latitude,
                 longitude: location.longitude,
-              })}
+              }))}
             />
             <FormControlLabel
               control={<Checkbox checked={form.isDefault} onChange={(e) => setForm({ ...form, isDefault: e.target.checked })} />}

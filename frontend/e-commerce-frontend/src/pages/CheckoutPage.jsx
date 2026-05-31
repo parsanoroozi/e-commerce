@@ -254,15 +254,15 @@ export default function CheckoutPage() {
                     <TextField label="Country" required value={form.shippingCountry} onChange={(e) => setForm({ ...form, shippingCountry: e.target.value })} />
                     <LocationPicker
                       value={{ latitude: form.shippingLatitude, longitude: form.shippingLongitude }}
-                      onChange={(location) => setForm({
-                        ...form,
-                        shippingStreet: location.street || form.shippingStreet,
-                        shippingCity: location.city || form.shippingCity,
-                        shippingZipCode: location.zipCode || form.shippingZipCode,
-                        shippingCountry: location.country || form.shippingCountry,
+                      onChange={(location) => setForm((current) => ({
+                        ...current,
+                        shippingStreet: location.street ?? current.shippingStreet,
+                        shippingCity: location.city ?? current.shippingCity,
+                        shippingZipCode: location.zipCode ?? current.shippingZipCode,
+                        shippingCountry: location.country ?? current.shippingCountry,
                         shippingLatitude: location.latitude,
                         shippingLongitude: location.longitude,
-                      })}
+                      }))}
                     />
                   </Stack>
                 )}
@@ -388,4 +388,3 @@ export default function CheckoutPage() {
     </PageContainer>
   );
 }
-

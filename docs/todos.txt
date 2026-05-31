@@ -1,5 +1,3 @@
 // todo 1) stripe dev key
-// todo 2) i want this: when i select a spot on the map, it reads the Street, City, Country, PostalCode and automatically enter the feilds
-// todo 3) make the location search better (support farsi letters and locations) better search every where
-// todo 4) on Order Summary card the color of the top row of titles in light mode is a really bad blue make it lighter and better or at least make the text white (do the one is better)
-// todo 5) also when im on page x and logout then login with another account like admin it returns on page x, but if the account is not the same i want them to go to the: 1) shop page for normal users 2) admin panel for admins
+// todo 2) location search: improvement
+// todo 3) location autofill: sometimes not working
