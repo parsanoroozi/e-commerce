@@ -66,7 +66,12 @@ public class AuthServiceImpl implements AuthService {
                 .expiresAt(Instant.now().plusSeconds(600))
                 .used(false)
                 .build());
-        emailService.sendEmailVerificationCode(email, code);
+        try {
+            emailService.sendEmailVerificationCode(email, code);
+        } catch (RuntimeException e) {
+            throw new ApiException(HttpStatus.SERVICE_UNAVAILABLE,
+                    "Email service is unavailable. Start MailHog on localhost:1025 or configure SMTP settings.");
+        }
         log.info("Email verification code sent email={}", email);
     }
 

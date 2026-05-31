@@ -13,6 +13,7 @@ import { useState } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { authApi } from '../api/auth';
 import PageContainer from '../components/layout/PageContainer';
+import PasswordField from '../components/PasswordField';
 import { useAuth } from '../context/AuthContext';
 
 const initialForm = {
@@ -102,7 +103,7 @@ export default function RegisterPage() {
                     value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value, emailVerificationCode: '' })}
                   />
-                  <TextField label="Password (min 8 characters)" type="password" required fullWidth inputProps={{ minLength: 8 }} value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} />
+                  <PasswordField label="Password (min 8 characters)" required fullWidth inputProps={{ minLength: 8 }} value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} />
                   <Button type="submit" variant="contained" size="large" disabled={sendingCode || !emailValid} fullWidth>
                     {sendingCode ? 'Sending code...' : 'Continue'}
                   </Button>

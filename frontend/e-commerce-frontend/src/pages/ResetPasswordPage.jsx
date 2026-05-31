@@ -1,8 +1,9 @@
-import { Box, Button, Card, CardContent, Link, Stack, TextField, Typography } from '@mui/material';
+import { Box, Button, Card, CardContent, Link, Stack, Typography } from '@mui/material';
 import { useState } from 'react';
 import { Link as RouterLink, useNavigate, useSearchParams } from 'react-router-dom';
 import { authApi } from '../api/auth';
 import PageContainer from '../components/layout/PageContainer';
+import PasswordField from '../components/PasswordField';
 import { showError, showSuccess } from '../utils/toast';
 
 export default function ResetPasswordPage() {
@@ -34,7 +35,7 @@ export default function ResetPasswordPage() {
             <Typography variant="h4" gutterBottom>Set new password</Typography>
             <Box component="form" onSubmit={handleSubmit}>
               <Stack spacing={2}>
-                <TextField label="New password" type="password" required fullWidth inputProps={{ minLength: 8 }} value={password} onChange={(e) => setPassword(e.target.value)} />
+                <PasswordField label="New password" required fullWidth inputProps={{ minLength: 8 }} value={password} onChange={(e) => setPassword(e.target.value)} />
                 <Button type="submit" variant="contained" fullWidth>Reset password</Button>
                 <Link component={RouterLink} to="/login">Login</Link>
               </Stack>

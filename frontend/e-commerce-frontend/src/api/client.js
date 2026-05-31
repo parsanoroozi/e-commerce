@@ -63,7 +63,7 @@ export async function apiRequest(path, options = {}) {
     ...requestOptions,
     headers,
   }).then(async (response) => {
-    if (response.status === 204) {
+    if (response.status === 204 || response.status === 202 || response.headers.get('content-length') === '0') {
       return null;
     }
 
@@ -76,7 +76,8 @@ export async function apiRequest(path, options = {}) {
       throw new ApiError(response.status, message);
     }
 
-    return response.json();
+    const text = await response.text();
+    return text ? JSON.parse(text) : null;
   });
 
   const expiresAt = Date.now() + (cacheTtlMs ?? DEFAULT_CACHE_TTL_MS);

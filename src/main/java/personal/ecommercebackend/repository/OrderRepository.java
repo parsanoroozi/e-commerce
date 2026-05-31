@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 import personal.ecommercebackend.entity.Order;
 
 import jakarta.persistence.LockModeType;
+import java.util.List;
 import java.util.Optional;
 
 public interface OrderRepository extends JpaRepository<Order, Long> {
@@ -19,6 +20,9 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 
     @EntityGraph(attributePaths = {"items", "items.product"})
     Page<Order> findByUserIdOrderByCreatedAtDesc(Long userId, Pageable pageable);
+
+    @EntityGraph(attributePaths = {"items"})
+    List<Order> findByUserId(Long userId);
 
     @EntityGraph(attributePaths = {"items", "items.product", "user"})
     Optional<Order> findWithDetailsById(Long id);

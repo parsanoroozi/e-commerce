@@ -1,10 +1,3 @@
 // todo 1) stripe dev key
-// todo 2) better front caching for speed
-// todo 3) pagination for tables and lists
-// todo 4) make payment summary and order summary card, tabular not simple text
 // todo 5) still having issue with email
-// todo 6) add show less button like show more button for notifs
-// todo 7) place addresses in profile page
-// todo 8) add mobile-number too as the user info as a contact point
-// todo 9) add location along with address
-// todo 10) add postal code along with address
+// todo 9) add location along with address (get it from google)

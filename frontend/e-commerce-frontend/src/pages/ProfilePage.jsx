@@ -5,6 +5,7 @@ import { useAuth } from '../context/AuthContext';
 import { authApi } from '../api/auth';
 import { shippingAddressesApi } from '../api/shippingAddresses';
 import LocationPicker from '../components/LocationPicker';
+import PasswordField from '../components/PasswordField';
 import { showError, showSuccess } from '../utils/toast';
 
 const emptyAddress = {
@@ -140,8 +141,8 @@ export default function ProfilePage() {
             <CardContent>
               <Typography variant="h6" gutterBottom>Change password</Typography>
               <Stack spacing={2}>
-                <TextField label="Current password" type="password" fullWidth value={passwords.currentPassword} onChange={(e) => setPasswords({ ...passwords, currentPassword: e.target.value })} />
-                <TextField label="New password" type="password" fullWidth inputProps={{ minLength: 8 }} value={passwords.newPassword} onChange={(e) => setPasswords({ ...passwords, newPassword: e.target.value })} />
+                <PasswordField label="Current password" fullWidth value={passwords.currentPassword} onChange={(e) => setPasswords({ ...passwords, currentPassword: e.target.value })} />
+                <PasswordField label="New password" fullWidth inputProps={{ minLength: 8 }} value={passwords.newPassword} onChange={(e) => setPasswords({ ...passwords, newPassword: e.target.value })} />
                 <Button type="submit" variant="outlined" sx={{ alignSelf: 'flex-start' }}>Update password</Button>
               </Stack>
             </CardContent>
