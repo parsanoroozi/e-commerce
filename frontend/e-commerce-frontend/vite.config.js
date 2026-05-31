@@ -7,6 +7,8 @@ const backendProxyTarget = process.env.VITE_BACKEND_PROXY_TARGET || 'http://loca
 export default defineConfig({
   plugins: [react()],
   server: {
+    host: '0.0.0.0',
+    allowedHosts: true,
     proxy: {
       '/api': {
         target: backendProxyTarget,

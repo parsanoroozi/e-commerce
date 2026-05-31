@@ -51507,3 +51507,523 @@ org.springframework.http.converter.HttpMessageNotWritableException: No converter
 2026-05-31 16:03:15.418 INFO  [http-nio-0.0.0.0-8080-exec-8] [df171de4-215a-43bf-9ffc-11c474563116] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (31 ms) user=parsan6347@gmail.com
 2026-05-31 16:03:15.722 INFO  [http-nio-0.0.0.0-8080-exec-4] [d619f114-a061-4d57-ae6a-41191ca48d91] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (11 ms) user=parsan6347@gmail.com
 2026-05-31 16:03:15.724 INFO  [http-nio-0.0.0.0-8080-exec-11] [ecc25df8-0578-47b9-be82-188e5b88aa21] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (11 ms) user=parsan6347@gmail.com
+2026-05-31 16:03:45.659 INFO  [http-nio-0.0.0.0-8080-exec-3] [810d5e0f-5859-42c9-9a41-6f2a4ff46871] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-31 16:03:45.659 INFO  [http-nio-0.0.0.0-8080-exec-2] [2b9ec107-eb63-4480-beaf-3c1af880714e] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-31 16:03:45.663 INFO  [http-nio-0.0.0.0-8080-exec-1] [cd08f35b-a07a-4f13-b6a2-33d0bf9947cf] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (11 ms) user=parsan6347@gmail.com
+2026-05-31 16:04:47.692 INFO  [http-nio-0.0.0.0-8080-exec-10] [e72bc223-ae5e-49f3-86e4-b6e24e350616] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (9 ms) user=parsan6347@gmail.com
+2026-05-31 16:04:47.692 INFO  [http-nio-0.0.0.0-8080-exec-6] [c2a0aa9c-5d37-45b2-9b79-8abd80893968] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (9 ms) user=parsan6347@gmail.com
+2026-05-31 16:04:47.697 INFO  [http-nio-0.0.0.0-8080-exec-5] [29845aa6-8d47-4893-8fb7-81e0b42238fd] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (14 ms) user=parsan6347@gmail.com
+2026-05-31 16:05:47.363 INFO  [http-nio-0.0.0.0-8080-exec-7] [c57d4187-2127-4a7e-bac1-3becf8b135ae] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (10 ms) user=parsan6347@gmail.com
+2026-05-31 16:05:47.670 INFO  [http-nio-0.0.0.0-8080-exec-11] [bc46f100-72b7-495d-b84e-db8751dd0caa] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-31 16:05:47.672 INFO  [http-nio-0.0.0.0-8080-exec-8] [af479b79-4a02-4b23-a2e4-b394fcb8c58e] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-31 16:06:47.676 INFO  [http-nio-0.0.0.0-8080-exec-2] [7a36e290-6e41-4f93-99ad-8356a4b7c51e] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (9 ms) user=parsan6347@gmail.com
+2026-05-31 16:06:47.676 INFO  [http-nio-0.0.0.0-8080-exec-3] [7f053f26-0286-48bc-80a8-00a8af60d26b] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (9 ms) user=parsan6347@gmail.com
+2026-05-31 16:06:47.685 INFO  [http-nio-0.0.0.0-8080-exec-4] [2f401f57-e0e0-4db2-bb96-c135a2db6c91] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (18 ms) user=parsan6347@gmail.com
+2026-05-31 16:07:47.362 INFO  [http-nio-0.0.0.0-8080-exec-1] [18d25bb0-08e7-4acb-8194-0b12f305b410] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (9 ms) user=parsan6347@gmail.com
+2026-05-31 16:07:47.663 INFO  [http-nio-0.0.0.0-8080-exec-6] [519b15bc-b993-4d69-9fe3-7c2955d3b349] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-31 16:07:47.663 INFO  [http-nio-0.0.0.0-8080-exec-10] [88789d55-c0b6-479c-b850-523095c2764c] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-31 16:08:47.673 INFO  [http-nio-0.0.0.0-8080-exec-7] [b00555f3-735e-4d24-b63d-c8d742372977] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (8 ms) user=parsan6347@gmail.com
+2026-05-31 16:08:47.673 INFO  [http-nio-0.0.0.0-8080-exec-11] [ed46fbbf-19d1-48c7-9024-810bdfa7b177] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (8 ms) user=parsan6347@gmail.com
+2026-05-31 16:08:47.678 INFO  [http-nio-0.0.0.0-8080-exec-5] [25584d29-e1e2-42b8-a2f6-a2c89ef76118] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (13 ms) user=parsan6347@gmail.com
+2026-05-31 16:09:47.363 INFO  [http-nio-0.0.0.0-8080-exec-8] [40ee963c-c91f-4890-8abd-17f20a176b2c] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (8 ms) user=parsan6347@gmail.com
+2026-05-31 16:09:47.666 INFO  [http-nio-0.0.0.0-8080-exec-3] [d85b00c9-c80f-4676-976b-ef8530ac4e9a] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-31 16:09:47.667 INFO  [http-nio-0.0.0.0-8080-exec-2] [df991298-1d49-402b-b6ca-3fd000e80872] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=parsan6347@gmail.com
+2026-05-31 16:10:47.669 INFO  [http-nio-0.0.0.0-8080-exec-6] [0932b719-2857-4e0c-98fc-c926d9e77a03] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (10 ms) user=parsan6347@gmail.com
+2026-05-31 16:10:47.669 INFO  [http-nio-0.0.0.0-8080-exec-1] [c4eb7dd9-a4f6-44a2-894a-cbc069174372] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (9 ms) user=parsan6347@gmail.com
+2026-05-31 16:10:47.673 INFO  [http-nio-0.0.0.0-8080-exec-4] [4af54c08-0850-453e-9f73-7290f82d4210] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (14 ms) user=parsan6347@gmail.com
+2026-05-31 16:11:47.358 INFO  [http-nio-0.0.0.0-8080-exec-10] [06bfdad7-1064-443f-94be-49e2a79f065e] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (11 ms) user=parsan6347@gmail.com
+2026-05-31 16:11:47.664 INFO  [http-nio-0.0.0.0-8080-exec-11] [09a24df7-d7d4-4c9b-a222-900618b42717] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (8 ms) user=parsan6347@gmail.com
+2026-05-31 16:11:47.666 INFO  [http-nio-0.0.0.0-8080-exec-7] [926260ef-9175-4928-8004-19fc44016eb7] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (8 ms) user=parsan6347@gmail.com
+2026-05-31 16:12:47.672 INFO  [http-nio-0.0.0.0-8080-exec-8] [4f9e2147-12be-4a33-aa74-5e5347a98c70] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-31 16:12:47.672 INFO  [http-nio-0.0.0.0-8080-exec-3] [e85de3e0-0f2a-427e-8977-11984c5a7760] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-31 16:12:47.676 INFO  [http-nio-0.0.0.0-8080-exec-5] [a71d5403-aa9f-4c6a-aa41-8e90677fb877] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (11 ms) user=parsan6347@gmail.com
+2026-05-31 16:13:47.686 INFO  [http-nio-0.0.0.0-8080-exec-6] [d6597e67-e2ba-4872-80cb-6d6a58fffb82] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (8 ms) user=parsan6347@gmail.com
+2026-05-31 16:13:47.686 INFO  [http-nio-0.0.0.0-8080-exec-1] [380c8678-105d-4fa3-a790-f54812656c37] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (8 ms) user=parsan6347@gmail.com
+2026-05-31 16:13:47.694 INFO  [http-nio-0.0.0.0-8080-exec-2] [0f3a079c-0ddc-4a91-8925-48f2c389b25a] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (16 ms) user=parsan6347@gmail.com
+2026-05-31 16:14:47.353 INFO  [http-nio-0.0.0.0-8080-exec-4] [9425df27-0857-4a5d-b9de-d4292417a1d5] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (10 ms) user=parsan6347@gmail.com
+2026-05-31 16:14:47.655 INFO  [http-nio-0.0.0.0-8080-exec-11] [b481888a-e57c-407d-a0cd-c78c5895228c] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-31 16:14:47.655 INFO  [http-nio-0.0.0.0-8080-exec-10] [9f09c7bd-f24f-436f-b27f-4234175d4d53] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (7 ms) user=parsan6347@gmail.com
+2026-05-31 16:15:47.670 INFO  [http-nio-0.0.0.0-8080-exec-8] [7b1ee397-a91a-4d3d-93fd-81cc2fea7467] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (8 ms) user=parsan6347@gmail.com
+2026-05-31 16:15:47.670 INFO  [http-nio-0.0.0.0-8080-exec-3] [dfbdddfe-fbba-4537-90eb-61912f2ecbc2] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (8 ms) user=parsan6347@gmail.com
+2026-05-31 16:15:47.676 INFO  [http-nio-0.0.0.0-8080-exec-7] [c8759eb4-1168-4809-bc3c-a582d7e8b48f] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (14 ms) user=parsan6347@gmail.com
+2026-05-31 16:16:04.855 INFO  [http-nio-0.0.0.0-8080-exec-5] [5fe5790f-046e-4826-a59c-a933d47c707b] p.e.config.RequestLoggingFilter - HTTP GET /api/auth/me -> 200 (21 ms) user=parsan6347@gmail.com
+2026-05-31 16:16:05.845 INFO  [http-nio-0.0.0.0-8080-exec-2] [08f2a5e8-0726-480d-96ca-04c17e832224] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (10 ms) user=parsan6347@gmail.com
+2026-05-31 16:16:05.846 INFO  [http-nio-0.0.0.0-8080-exec-1] [7b037cc4-9e8b-44d3-834f-a1e483624a56] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (11 ms) user=parsan6347@gmail.com
+2026-05-31 16:16:05.859 INFO  [http-nio-0.0.0.0-8080-exec-6] [8a1d5557-4e91-45e9-be80-fc6d82cf1e31] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (24 ms) user=parsan6347@gmail.com
+2026-05-31 16:16:05.867 INFO  [http-nio-0.0.0.0-8080-exec-4] [9bd6dfea-219e-4207-b117-e425c2672b03] p.e.config.RequestLoggingFilter - HTTP GET /api/shipping-addresses?page=0&size=10 -> 200 (27 ms) user=parsan6347@gmail.com
+2026-05-31 16:16:32.326 WARN  [http-nio-0.0.0.0-8080-exec-11] [4ae6911a-21c2-482f-8bef-b43677c0ec5b] o.s.b.m.health.MailHealthIndicator - Mail health check failed
+org.eclipse.angus.mail.util.MailConnectException: Couldn't connect to host, port: smtp.gmail.com, 587; timeout -1;
+  nested exception is:
+	java.net.ConnectException: Connection timed out: connect
+	at org.eclipse.angus.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:2243)
+	at org.eclipse.angus.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:729)
+	at jakarta.mail.Service.connect(Service.java:345)
+	at org.springframework.mail.javamail.JavaMailSenderImpl.connectTransport(JavaMailSenderImpl.java:467)
+	at org.springframework.mail.javamail.JavaMailSenderImpl.testConnection(JavaMailSenderImpl.java:347)
+	at org.springframework.boot.mail.health.MailHealthIndicator.doHealthCheck(MailHealthIndicator.java:52)
+	at org.springframework.boot.health.contributor.AbstractHealthIndicator.health(AbstractHealthIndicator.java:80)
+	at org.springframework.boot.health.contributor.HealthIndicator.health(HealthIndicator.java:37)
+	at org.springframework.boot.health.actuate.endpoint.Contributor$Blocking.getDescriptor(Contributor.java:148)
+	at org.springframework.boot.health.actuate.endpoint.Contributor$Blocking.getDescriptor(Contributor.java:126)
+	at org.springframework.boot.health.actuate.endpoint.HealthEndpointSupport.getDescriptorAndLogIfSlow(HealthEndpointSupport.java:172)
+	at org.springframework.boot.health.actuate.endpoint.HealthEndpointSupport.getDescriptor(HealthEndpointSupport.java:145)
+	at org.springframework.boot.health.actuate.endpoint.HealthEndpointSupport.getAggregateDescriptor(HealthEndpointSupport.java:157)
+	at org.springframework.boot.health.actuate.endpoint.HealthEndpointSupport.getDescriptor(HealthEndpointSupport.java:141)
+	at org.springframework.boot.health.actuate.endpoint.HealthEndpointSupport.getResult(HealthEndpointSupport.java:110)
+	at org.springframework.boot.health.actuate.endpoint.HealthEndpointSupport.getResult(HealthEndpointSupport.java:82)
+	at org.springframework.boot.health.actuate.endpoint.HealthEndpointWebExtension.health(HealthEndpointWebExtension.java:85)
+	at org.springframework.boot.health.actuate.endpoint.HealthEndpointWebExtension.health(HealthEndpointWebExtension.java:73)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:281)
+	at org.springframework.boot.actuate.endpoint.invoke.reflect.ReflectiveOperationInvoker.invoke(ReflectiveOperationInvoker.java:76)
+	at org.springframework.boot.actuate.endpoint.annotation.AbstractDiscoveredOperation.invoke(AbstractDiscoveredOperation.java:62)
+	at org.springframework.boot.webmvc.actuate.endpoint.web.AbstractWebMvcEndpointHandlerMapping$ServletWebOperationAdapter.handle(AbstractWebMvcEndpointHandlerMapping.java:347)
+	at org.springframework.boot.webmvc.actuate.endpoint.web.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(AbstractWebMvcEndpointHandlerMapping.java:476)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at personal.ecommercebackend.config.RequestLoggingFilter.doFilterInternal(RequestLoggingFilter.java:38)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at personal.ecommercebackend.config.AuthRateLimitFilter.doFilterInternal(AuthRateLimitFilter.java:36)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:235)
+	at org.springframework.security.web.ObservationFilterChainDecorator$FilterObservation$SimpleFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:493)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:354)
+	at org.springframework.security.web.ObservationFilterChainDecorator.lambda$wrapSecured$0(ObservationFilterChainDecorator.java:86)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:132)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:101)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:132)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:86)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:181)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at personal.ecommercebackend.security.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:32)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:110)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:96)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$0(ObservationFilterChainDecorator.java:337)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:237)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:195)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.ServletRequestPathFilter.doFilter(ServletRequestPathFilter.java:52)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebSecurityConfiguration.java:317)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:355)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:272)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:110)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1801)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+Caused by: java.net.ConnectException: Connection timed out: connect
+	at java.base/sun.nio.ch.Net.connect0(Native Method)
+	at java.base/sun.nio.ch.Net.connect(Net.java:579)
+	at java.base/sun.nio.ch.Net.connect(Net.java:568)
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:576)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327)
+	at java.base/java.net.Socket.connect(Socket.java:666)
+	at java.base/java.net.Socket.connect(Socket.java:600)
+	at org.eclipse.angus.mail.util.SocketFetcher.createSocket(SocketFetcher.java:368)
+	at org.eclipse.angus.mail.util.SocketFetcher.getSocket(SocketFetcher.java:243)
+	at org.eclipse.angus.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:2193)
+	... 152 common frames omitted
+2026-05-31 16:16:32.333 WARN  [http-nio-0.0.0.0-8080-exec-11] [4ae6911a-21c2-482f-8bef-b43677c0ec5b] o.s.b.h.a.e.HealthEndpointSupport - Health contributor org.springframework.boot.mail.health.MailHealthIndicator (mail) took 21060ms to respond
+2026-05-31 16:16:36.676 INFO  [http-nio-0.0.0.0-8080-exec-3] [84c10861-ded7-4019-9df0-79023b378fe8] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (10 ms) user=parsan6347@gmail.com
+2026-05-31 16:16:36.676 INFO  [http-nio-0.0.0.0-8080-exec-8] [b360fa50-969a-43e4-8138-98d6261e14cf] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (10 ms) user=parsan6347@gmail.com
+2026-05-31 16:16:36.683 INFO  [http-nio-0.0.0.0-8080-exec-10] [55569533-5446-4732-8978-086bd18fda68] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (17 ms) user=parsan6347@gmail.com
+2026-05-31 16:16:56.230 INFO  [SpringApplicationShutdownHook] [no-request] o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-05-31 16:17:13.265 WARN  [http-nio-0.0.0.0-8080-exec-7] [8abbd205-3566-4c38-b5eb-141a48f8c603] o.s.b.m.health.MailHealthIndicator - Mail health check failed
+org.eclipse.angus.mail.util.MailConnectException: Couldn't connect to host, port: smtp.gmail.com, 587; timeout -1;
+  nested exception is:
+	java.net.ConnectException: Connection timed out: connect
+	at org.eclipse.angus.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:2243)
+	at org.eclipse.angus.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:729)
+	at jakarta.mail.Service.connect(Service.java:345)
+	at org.springframework.mail.javamail.JavaMailSenderImpl.connectTransport(JavaMailSenderImpl.java:467)
+	at org.springframework.mail.javamail.JavaMailSenderImpl.testConnection(JavaMailSenderImpl.java:347)
+	at org.springframework.boot.mail.health.MailHealthIndicator.doHealthCheck(MailHealthIndicator.java:52)
+	at org.springframework.boot.health.contributor.AbstractHealthIndicator.health(AbstractHealthIndicator.java:80)
+	at org.springframework.boot.health.contributor.HealthIndicator.health(HealthIndicator.java:37)
+	at org.springframework.boot.health.actuate.endpoint.Contributor$Blocking.getDescriptor(Contributor.java:148)
+	at org.springframework.boot.health.actuate.endpoint.Contributor$Blocking.getDescriptor(Contributor.java:126)
+	at org.springframework.boot.health.actuate.endpoint.HealthEndpointSupport.getDescriptorAndLogIfSlow(HealthEndpointSupport.java:172)
+	at org.springframework.boot.health.actuate.endpoint.HealthEndpointSupport.getDescriptor(HealthEndpointSupport.java:145)
+	at org.springframework.boot.health.actuate.endpoint.HealthEndpointSupport.getAggregateDescriptor(HealthEndpointSupport.java:157)
+	at org.springframework.boot.health.actuate.endpoint.HealthEndpointSupport.getDescriptor(HealthEndpointSupport.java:141)
+	at org.springframework.boot.health.actuate.endpoint.HealthEndpointSupport.getResult(HealthEndpointSupport.java:110)
+	at org.springframework.boot.health.actuate.endpoint.HealthEndpointSupport.getResult(HealthEndpointSupport.java:82)
+	at org.springframework.boot.health.actuate.endpoint.HealthEndpointWebExtension.health(HealthEndpointWebExtension.java:85)
+	at org.springframework.boot.health.actuate.endpoint.HealthEndpointWebExtension.health(HealthEndpointWebExtension.java:73)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:281)
+	at org.springframework.boot.actuate.endpoint.invoke.reflect.ReflectiveOperationInvoker.invoke(ReflectiveOperationInvoker.java:76)
+	at org.springframework.boot.actuate.endpoint.annotation.AbstractDiscoveredOperation.invoke(AbstractDiscoveredOperation.java:62)
+	at org.springframework.boot.webmvc.actuate.endpoint.web.AbstractWebMvcEndpointHandlerMapping$ServletWebOperationAdapter.handle(AbstractWebMvcEndpointHandlerMapping.java:347)
+	at org.springframework.boot.webmvc.actuate.endpoint.web.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(AbstractWebMvcEndpointHandlerMapping.java:476)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at personal.ecommercebackend.config.RequestLoggingFilter.doFilterInternal(RequestLoggingFilter.java:38)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at personal.ecommercebackend.config.AuthRateLimitFilter.doFilterInternal(AuthRateLimitFilter.java:36)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:235)
+	at org.springframework.security.web.ObservationFilterChainDecorator$FilterObservation$SimpleFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:493)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:354)
+	at org.springframework.security.web.ObservationFilterChainDecorator.lambda$wrapSecured$0(ObservationFilterChainDecorator.java:86)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:132)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:101)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:132)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:86)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:181)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at personal.ecommercebackend.security.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:32)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:110)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:96)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:244)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$0(ObservationFilterChainDecorator.java:337)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:141)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:237)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:195)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.ServletRequestPathFilter.doFilter(ServletRequestPathFilter.java:52)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebSecurityConfiguration.java:317)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:355)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:272)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:110)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1801)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+Caused by: java.net.ConnectException: Connection timed out: connect
+	at java.base/sun.nio.ch.Net.connect0(Native Method)
+	at java.base/sun.nio.ch.Net.connect(Net.java:579)
+	at java.base/sun.nio.ch.Net.connect(Net.java:568)
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:576)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327)
+	at java.base/java.net.Socket.connect(Socket.java:666)
+	at java.base/java.net.Socket.connect(Socket.java:600)
+	at org.eclipse.angus.mail.util.SocketFetcher.createSocket(SocketFetcher.java:368)
+	at org.eclipse.angus.mail.util.SocketFetcher.getSocket(SocketFetcher.java:243)
+	at org.eclipse.angus.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:2193)
+	... 152 common frames omitted
+2026-05-31 16:17:13.273 WARN  [http-nio-0.0.0.0-8080-exec-7] [8abbd205-3566-4c38-b5eb-141a48f8c603] o.s.b.h.a.e.HealthEndpointSupport - Health contributor org.springframework.boot.mail.health.MailHealthIndicator (mail) took 21037ms to respond
+2026-05-31 16:17:13.327 INFO  [tomcat-shutdown] [no-request] o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-05-31 16:17:13.397 INFO  [SpringApplicationShutdownHook] [no-request] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-31 16:17:13.425 INFO  [SpringApplicationShutdownHook] [no-request] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-05-31 16:17:13.440 INFO  [SpringApplicationShutdownHook] [no-request] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-05-31 16:20:38.115 INFO  [main] [no-request] p.e.ECommerceBackendApplication - Starting ECommerceBackendApplication using Java 17.0.8 with PID 22824 (C:\Users\God -01.11\Desktop\e-commerce-backend - codex\target\classes started by God -01.11 in C:\Users\God -01.11\Desktop\e-commerce-backend - codex)
+2026-05-31 16:20:38.125 INFO  [main] [no-request] p.e.ECommerceBackendApplication - No active profile set, falling back to 1 default profile: "default"
+2026-05-31 16:20:40.625 INFO  [main] [no-request] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-31 16:20:40.829 INFO  [main] [no-request] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 184 ms. Found 15 JPA repository interfaces.
+2026-05-31 16:20:42.755 INFO  [main] [no-request] o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-05-31 16:20:42.778 INFO  [main] [no-request] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-05-31 16:20:42.779 INFO  [main] [no-request] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.21]
+2026-05-31 16:20:42.952 INFO  [main] [no-request] o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 4712 ms
+2026-05-31 16:20:43.509 INFO  [main] [no-request] org.hibernate.orm.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-05-31 16:20:43.640 INFO  [main] [no-request] org.hibernate.orm.core - HHH000001: Hibernate ORM core version 7.2.12.Final
+2026-05-31 16:20:44.460 INFO  [main] [no-request] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-31 16:20:44.544 INFO  [main] [no-request] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-05-31 16:20:44.985 INFO  [main] [no-request] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@62f305bc
+2026-05-31 16:20:44.988 INFO  [main] [no-request] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-05-31 16:20:45.180 INFO  [main] [no-request] o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/ecommerce]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.2
+	Default catalog/schema: ecommerce/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-31 16:20:47.470 INFO  [main] [no-request] org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-31 16:20:47.682 INFO  [main] [no-request] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-31 16:20:47.871 INFO  [main] [no-request] o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-05-31 16:20:51.858 INFO  [main] [no-request] o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-05-31 16:20:51.859 WARN  [main] [no-request] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-05-31 16:20:54.354 INFO  [main] [no-request] o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2026-05-31 16:20:54.572 INFO  [main] [no-request] o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-05-31 16:20:54.602 INFO  [main] [no-request] p.e.ECommerceBackendApplication - Started ECommerceBackendApplication in 17.602 seconds (process running for 18.303)
+2026-05-31 16:20:54.716 INFO  [main] [no-request] p.ecommercebackend.config.MailConfig - Email delivery ENABLED - SMTP smtp.gmail.com:587
+2026-05-31 16:20:54.718 INFO  [main] [no-request] p.ecommercebackend.config.DataSeeder - Running database seed checks...
+2026-05-31 16:21:35.991 INFO  [http-nio-0.0.0.0-8080-exec-1] [no-request] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-31 16:21:35.992 INFO  [http-nio-0.0.0.0-8080-exec-1] [no-request] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-05-31 16:21:35.995 INFO  [http-nio-0.0.0.0-8080-exec-1] [no-request] o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+2026-05-31 16:48:08.881 INFO  [main] [no-request] p.e.ECommerceBackendApplication - Starting ECommerceBackendApplication using Java 19.0.2 with PID 14016 (C:\Users\God -01.11\Desktop\e-commerce-backend - codex\target\classes started by God -01.11 in C:\Users\God -01.11\Desktop\e-commerce-backend - codex)
+2026-05-31 16:48:08.890 INFO  [main] [no-request] p.e.ECommerceBackendApplication - No active profile set, falling back to 1 default profile: "default"
+2026-05-31 16:48:13.309 INFO  [main] [no-request] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-31 16:48:13.470 INFO  [main] [no-request] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 146 ms. Found 15 JPA repository interfaces.
+2026-05-31 16:48:14.917 INFO  [main] [no-request] o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-05-31 16:48:14.945 INFO  [main] [no-request] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-05-31 16:48:14.946 INFO  [main] [no-request] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.21]
+2026-05-31 16:48:15.084 INFO  [main] [no-request] o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 6076 ms
+2026-05-31 16:48:15.784 INFO  [main] [no-request] org.hibernate.orm.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-05-31 16:48:15.934 INFO  [main] [no-request] org.hibernate.orm.core - HHH000001: Hibernate ORM core version 7.2.12.Final
+2026-05-31 16:48:17.037 INFO  [main] [no-request] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-31 16:48:17.136 INFO  [main] [no-request] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-05-31 16:48:17.583 INFO  [main] [no-request] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@16b2d182
+2026-05-31 16:48:17.588 INFO  [main] [no-request] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-05-31 16:48:17.834 INFO  [main] [no-request] o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/ecommerce]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.2
+	Default catalog/schema: ecommerce/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-31 16:48:21.925 INFO  [main] [no-request] org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-31 16:48:22.155 INFO  [main] [no-request] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-31 16:48:22.296 INFO  [main] [no-request] o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-05-31 16:48:25.974 INFO  [main] [no-request] o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-05-31 16:48:25.976 WARN  [main] [no-request] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-05-31 16:48:29.036 INFO  [main] [no-request] o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2026-05-31 16:48:29.337 WARN  [main] [no-request] o.s.b.w.s.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2026-05-31 16:48:29.362 INFO  [main] [no-request] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-31 16:48:29.367 INFO  [main] [no-request] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-05-31 16:48:29.381 INFO  [main] [no-request] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-05-31 16:48:29.425 INFO  [main] [no-request] o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-05-31 16:48:29.465 ERROR [main] [no-request] o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2026-05-31 17:57:20.364 INFO  [main] [no-request] p.e.ECommerceBackendApplication - Starting ECommerceBackendApplication using Java 19.0.2 with PID 10948 (C:\Users\God -01.11\Desktop\e-commerce-backend - codex\target\classes started by God -01.11 in C:\Users\God -01.11\Desktop\e-commerce-backend - codex)
+2026-05-31 17:57:20.369 INFO  [main] [no-request] p.e.ECommerceBackendApplication - No active profile set, falling back to 1 default profile: "default"
+2026-05-31 17:57:24.121 INFO  [main] [no-request] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-31 17:57:24.293 INFO  [main] [no-request] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 157 ms. Found 15 JPA repository interfaces.
+2026-05-31 17:57:25.480 INFO  [main] [no-request] o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-05-31 17:57:25.495 INFO  [main] [no-request] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-05-31 17:57:25.496 INFO  [main] [no-request] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.21]
+2026-05-31 17:57:25.566 INFO  [main] [no-request] o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 5114 ms
+2026-05-31 17:57:25.904 INFO  [main] [no-request] org.hibernate.orm.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-05-31 17:57:25.979 INFO  [main] [no-request] org.hibernate.orm.core - HHH000001: Hibernate ORM core version 7.2.12.Final
+2026-05-31 17:57:26.601 INFO  [main] [no-request] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-31 17:57:26.641 INFO  [main] [no-request] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-05-31 17:57:26.902 INFO  [main] [no-request] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@28d97205
+2026-05-31 17:57:26.905 INFO  [main] [no-request] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-05-31 17:57:27.013 INFO  [main] [no-request] o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/ecommerce]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.2
+	Default catalog/schema: ecommerce/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-31 17:57:28.700 INFO  [main] [no-request] org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-31 17:57:28.845 INFO  [main] [no-request] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-31 17:57:28.938 INFO  [main] [no-request] o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-05-31 17:57:31.124 INFO  [main] [no-request] o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-05-31 17:57:31.125 WARN  [main] [no-request] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-05-31 17:57:33.026 INFO  [main] [no-request] o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2026-05-31 17:57:33.149 INFO  [main] [no-request] o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-05-31 17:57:33.162 INFO  [main] [no-request] p.e.ECommerceBackendApplication - Started ECommerceBackendApplication in 13.757 seconds (process running for 25.905)
+2026-05-31 17:57:33.171 INFO  [main] [no-request] p.ecommercebackend.config.MailConfig - Email delivery ENABLED - SMTP smtp.gmail.com:587
+2026-05-31 17:57:33.171 INFO  [main] [no-request] p.ecommercebackend.config.DataSeeder - Running database seed checks...
