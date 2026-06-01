@@ -9,10 +9,14 @@ import java.math.BigDecimal;
 import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 import com.stripe.model.PaymentIntent;
+import com.stripe.model.Refund;
+
+import java.math.BigDecimal;
 
 public interface StripePaymentService {
     PaymentIntent createPaymentIntent(Order order, User user);
     PaymentIntent retrievePaymentIntent(String paymentIntentId);
+    Refund refundPayment(String paymentIntentId, BigDecimal amount, String reason);
     boolean isPaymentSucceeded(PaymentIntent intent);
     String publishableKey();
     boolean isConfigured();

@@ -41,6 +41,16 @@ public class User {
     @Column(nullable = false)
     private Role role;
 
+    @Column(nullable = false)
+    @Builder.Default
+    private boolean blocked = false;
+
+    @Column(length = 2000)
+    private String customerNotes;
+
+    @Column(length = 80)
+    private String customerSegment;
+
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Cart cart;
 

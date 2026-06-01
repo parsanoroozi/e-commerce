@@ -13,7 +13,7 @@ export const cartApi = {
     return result;
   },
   updateItem: async (productId, data) => {
-    const result = await apiRequest(`/api/cart/items/${productId}`, {
+    const result = await apiRequest(data.id ? `/api/cart/line-items/${data.id}` : `/api/cart/items/${productId}`, {
       method: 'PUT',
       body: JSON.stringify(data),
     });
@@ -30,6 +30,11 @@ export const cartApi = {
       productId: Number(productId),
       totalItems: result?.totalItems,
     });
+    return result;
+  },
+  removeLineItem: async (itemId) => {
+    const result = await apiRequest(`/api/cart/line-items/${itemId}`, { method: 'DELETE' });
+    emitAppAction('cart:item-removed', { totalItems: result?.totalItems });
     return result;
   },
   clear: async () => {

@@ -87,9 +87,42 @@ public class Order {
     @Builder.Default
     private boolean confirmationEmailSent = false;
 
+    @Column(length = 120)
+    private String trackingNumber;
+
+    @Column(length = 100)
+    private String shippingCarrier;
+
+    @Column(length = 2000)
+    private String adminNotes;
+
+    private Instant packedAt;
+
+    private Instant shippedAt;
+
+    private Instant deliveredAt;
+
+    @Column(nullable = false)
+    @Builder.Default
+    private boolean shipmentEmailSent = false;
+
+    @Column(nullable = false, precision = 12, scale = 2)
+    @Builder.Default
+    private BigDecimal refundedAmount = BigDecimal.ZERO;
+
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
     private List<OrderItem> items = new ArrayList<>();
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OrderBy("createdAt ASC")
+    @Builder.Default
+    private List<OrderTimelineEvent> timelineEvents = new ArrayList<>();
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OrderBy("createdAt DESC")
+    @Builder.Default
+    private List<OrderRefund> refunds = new ArrayList<>();
 
     @CreationTimestamp
     @Column(nullable = false, updatable = false)

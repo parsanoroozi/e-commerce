@@ -3726,3 +3726,2922 @@ Identify and stop the process that's listening on port 8080 or configure this ap
 2026-06-01 02:27:30.271 INFO  [http-nio-0.0.0.0-8080-exec-3] [d2356603-ff81-4220-bc22-0c89e5f174e8] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (291 ms) user=parsan6347@gmail.com
 2026-06-01 02:27:30.278 INFO  [http-nio-0.0.0.0-8080-exec-5] [a3013a71-94be-4611-b7d3-68735ab2ffb7] p.e.config.RequestLoggingFilter - HTTP GET /api/cart -> 200 (323 ms) user=parsan6347@gmail.com
 2026-06-01 02:27:30.281 INFO  [http-nio-0.0.0.0-8080-exec-2] [6eaae86f-ea39-4a84-829a-2e34e7a34d5d] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (173 ms) user=parsan6347@gmail.com
+2026-06-01 02:27:36.859 INFO  [http-nio-0.0.0.0-8080-exec-7] [ea3e421f-cc29-460b-8dff-ed5a5dba1943] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (21 ms) user=parsan6347@gmail.com
+2026-06-01 02:27:36.861 INFO  [http-nio-0.0.0.0-8080-exec-6] [2bd72126-8dc2-4407-ad4c-e36a4fac21c0] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (26 ms) user=parsan6347@gmail.com
+2026-06-01 02:27:36.875 INFO  [http-nio-0.0.0.0-8080-exec-9] [66ff8476-9723-4a16-9639-ec6533af2bcc] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (35 ms) user=parsan6347@gmail.com
+2026-06-01 02:27:36.917 INFO  [http-nio-0.0.0.0-8080-exec-10] [8abfed18-e540-4fa3-a82b-c87cea95b68a] p.e.config.RequestLoggingFilter - HTTP GET /api/categories -> 200 (65 ms) user=parsan6347@gmail.com
+2026-06-01 02:27:36.976 INFO  [http-nio-0.0.0.0-8080-exec-4] [b8d9b7fe-e0b2-4a09-ae65-a7216ca1e2e2] p.e.config.RequestLoggingFilter - HTTP GET /api/products?page=0&size=12&sort=name%2Casc -> 200 (120 ms) user=parsan6347@gmail.com
+2026-06-01 02:27:36.976 INFO  [http-nio-0.0.0.0-8080-exec-1] [c9b8d8b5-581d-40dd-8b85-83fab66da477] p.e.config.RequestLoggingFilter - HTTP GET /api/products?page=0&size=12&sort=name%2Casc -> 200 (94 ms) user=parsan6347@gmail.com
+2026-06-01 02:28:26.022 INFO  [http-nio-0.0.0.0-8080-exec-8] [190b05d9-c544-4b48-bcc0-b351e7666903] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (18 ms) user=parsan6347@gmail.com
+2026-06-01 02:28:26.024 INFO  [http-nio-0.0.0.0-8080-exec-3] [d1bc27e5-fd87-4a83-be48-168f43cc2e06] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (17 ms) user=parsan6347@gmail.com
+2026-06-01 02:28:26.027 INFO  [http-nio-0.0.0.0-8080-exec-7] [4b66b787-b04e-4266-9aab-ef16df0a4123] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (30 ms) user=parsan6347@gmail.com
+2026-06-01 02:28:26.050 INFO  [http-nio-0.0.0.0-8080-exec-2] [8add2ccc-79a0-4d70-8d10-e3abffdfa9dc] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications?page=0&size=5 -> 200 (31 ms) user=parsan6347@gmail.com
+2026-06-01 02:28:31.611 INFO  [http-nio-0.0.0.0-8080-exec-6] [0af81d14-17e5-4d36-9b05-5bcc83fbb524] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications?page=1&size=5 -> 200 (11 ms) user=parsan6347@gmail.com
+2026-06-01 02:28:35.179 INFO  [http-nio-0.0.0.0-8080-exec-9] [ba353780-7a70-435e-a7e2-9d1bf56e2470] p.e.config.RequestLoggingFilter - HTTP PATCH /api/notifications/read-all -> 200 (12 ms) user=parsan6347@gmail.com
+2026-06-01 02:28:35.214 INFO  [http-nio-0.0.0.0-8080-exec-10] [228435fe-7121-4c47-a7d6-867077ae3863] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications?page=0&size=5 -> 200 (11 ms) user=parsan6347@gmail.com
+2026-06-01 02:28:36.525 INFO  [http-nio-0.0.0.0-8080-exec-1] [94aacecd-f56e-4e3f-85f6-03708a45b94f] p.e.config.RequestLoggingFilter - HTTP DELETE /api/notifications -> 200 (17 ms) user=parsan6347@gmail.com
+2026-06-01 02:28:37.917 INFO  [http-nio-0.0.0.0-8080-exec-4] [526d868b-91fe-4256-b08e-8f59c6ea987d] p.e.config.RequestLoggingFilter - HTTP POST /api/auth/logout -> 204 (11 ms) user=parsan6347@gmail.com
+2026-06-01 02:28:46.976 INFO  [http-nio-0.0.0.0-8080-exec-7] [08b6e0c6-8d92-4735-867a-45f4ed04a3e5] p.e.service.impl.AuthServiceImpl - User logged in userId=1 email=admin@shop.com
+2026-06-01 02:28:46.979 INFO  [http-nio-0.0.0.0-8080-exec-7] [08b6e0c6-8d92-4735-867a-45f4ed04a3e5] p.e.config.RequestLoggingFilter - HTTP POST /api/auth/login -> 200 (208 ms) user=anonymous
+2026-06-01 02:28:47.043 INFO  [http-nio-0.0.0.0-8080-exec-6] [86eafe0e-8188-4591-b2cf-0ab8fdf41952] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=admin@shop.com
+2026-06-01 02:28:47.043 INFO  [http-nio-0.0.0.0-8080-exec-9] [96ee9741-e4a5-46c0-a5d7-5ed4148a50ae] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=admin@shop.com
+2026-06-01 02:28:47.045 INFO  [http-nio-0.0.0.0-8080-exec-2] [d0788f9e-aa30-4aba-8528-839a2ce7ea58] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (10 ms) user=admin@shop.com
+2026-06-01 02:28:47.202 INFO  [http-nio-0.0.0.0-8080-exec-1] [021999fe-f24b-4455-8f73-4187a8add840] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (10 ms) user=admin@shop.com
+2026-06-01 02:28:47.202 INFO  [http-nio-0.0.0.0-8080-exec-4] [d0a404bf-93e8-4f1a-9f54-0108bb840770] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (10 ms) user=admin@shop.com
+2026-06-01 02:28:47.205 INFO  [http-nio-0.0.0.0-8080-exec-10] [79a93423-da36-486f-9d06-05eb6fce91fa] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (17 ms) user=admin@shop.com
+2026-06-01 02:28:47.240 WARN  [http-nio-0.0.0.0-8080-exec-3] [451400f5-c404-4ada-bda2-692ed087990b] org.hibernate.orm.query - HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+2026-06-01 02:28:47.286 INFO  [http-nio-0.0.0.0-8080-exec-3] [451400f5-c404-4ada-bda2-692ed087990b] p.e.config.RequestLoggingFilter - HTTP GET /api/admin/dashboard -> 200 (92 ms) user=admin@shop.com
+2026-06-01 02:28:49.035 INFO  [http-nio-0.0.0.0-8080-exec-7] [1f887b3e-f74d-4a20-84ac-828f30dacc13] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (7 ms) user=admin@shop.com
+2026-06-01 02:28:49.035 INFO  [http-nio-0.0.0.0-8080-exec-5] [e89a3629-6930-461b-9a6a-4504a06902d1] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (7 ms) user=admin@shop.com
+2026-06-01 02:28:49.038 INFO  [http-nio-0.0.0.0-8080-exec-8] [abb841d6-4870-4076-8608-262df17c15b0] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (12 ms) user=admin@shop.com
+2026-06-01 02:28:50.349 INFO  [http-nio-0.0.0.0-8080-exec-2] [f5c3fd25-db1a-4561-aee5-59d59b98c3c5] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=admin@shop.com
+2026-06-01 02:28:50.349 INFO  [http-nio-0.0.0.0-8080-exec-9] [225f68d0-59ef-429b-b234-9a92b5164921] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=admin@shop.com
+2026-06-01 02:28:50.350 INFO  [http-nio-0.0.0.0-8080-exec-6] [b331cb4d-aeb3-4816-855f-2f04e17da02f] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (9 ms) user=admin@shop.com
+2026-06-01 02:28:53.979 INFO  [http-nio-0.0.0.0-8080-exec-1] [69b7e79c-cdbe-41c5-b294-bf4841fb57ae] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (11 ms) user=admin@shop.com
+2026-06-01 02:28:53.979 INFO  [http-nio-0.0.0.0-8080-exec-10] [ed1ef185-1ef5-413e-a441-726a4710d600] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (6 ms) user=admin@shop.com
+2026-06-01 02:28:53.979 INFO  [http-nio-0.0.0.0-8080-exec-4] [954484ab-9f75-41a1-aaa3-97e210c6ecdf] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (6 ms) user=admin@shop.com
+2026-06-01 02:28:53.993 INFO  [http-nio-0.0.0.0-8080-exec-3] [dd28690a-8198-4ea9-b9de-ea1c3469eb5c] p.e.config.RequestLoggingFilter - HTTP GET /api/admin/users?page=0&size=20 -> 200 (20 ms) user=admin@shop.com
+2026-06-01 02:29:08.377 WARN  [http-nio-0.0.0.0-8080-exec-5] [6c5fe51a-8a28-4966-b74c-694c31b3fe24] p.e.config.LoggingAspect - SERVICE AdminUserServiceImpl.delete - failed (11 ms): Users with order history cannot be deleted. Disable or anonymize the account instead.
+2026-06-01 02:29:08.384 WARN  [http-nio-0.0.0.0-8080-exec-5] [6c5fe51a-8a28-4966-b74c-694c31b3fe24] p.e.config.LoggingAspect - CONTROLLER AdminController.deleteUser - failed (18 ms): Users with order history cannot be deleted. Disable or anonymize the account instead.
+2026-06-01 02:29:08.385 WARN  [http-nio-0.0.0.0-8080-exec-5] [6c5fe51a-8a28-4966-b74c-694c31b3fe24] p.e.exception.GlobalExceptionHandler - API error [409]: Users with order history cannot be deleted. Disable or anonymize the account instead.
+2026-06-01 02:29:08.392 INFO  [http-nio-0.0.0.0-8080-exec-5] [6c5fe51a-8a28-4966-b74c-694c31b3fe24] p.e.config.RequestLoggingFilter - HTTP DELETE /api/admin/users/7 -> 409 (28 ms) user=admin@shop.com
+2026-06-01 02:32:13.291 INFO  [http-nio-0.0.0.0-8080-exec-8] [6db69bd1-7903-4ba2-a25e-c6163c512c46] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (13 ms) user=admin@shop.com
+2026-06-01 02:32:13.291 INFO  [http-nio-0.0.0.0-8080-exec-7] [6f6acb41-95b7-4347-9806-7758143d134d] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (18 ms) user=admin@shop.com
+2026-06-01 02:32:13.294 INFO  [http-nio-0.0.0.0-8080-exec-9] [fddfc550-22f8-4035-9eb4-308b0e99cd0f] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (13 ms) user=admin@shop.com
+2026-06-01 02:32:13.326 INFO  [http-nio-0.0.0.0-8080-exec-2] [672fc4ca-87c7-4303-9669-226d3f8cf3f1] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (16 ms) user=admin@shop.com
+2026-06-01 02:32:13.329 INFO  [http-nio-0.0.0.0-8080-exec-6] [0c8051b5-cb7d-4891-9569-53122eb769c8] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (9 ms) user=admin@shop.com
+2026-06-01 02:32:13.331 INFO  [http-nio-0.0.0.0-8080-exec-1] [7349c1aa-7cff-4b61-aafb-e9e265e71156] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (9 ms) user=admin@shop.com
+2026-06-01 02:36:39.896 INFO  [http-nio-0.0.0.0-8080-exec-4] [2cd9ff48-438a-4e95-9972-c27192910d00] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (11 ms) user=admin@shop.com
+2026-06-01 02:36:39.896 INFO  [http-nio-0.0.0.0-8080-exec-10] [04edd7aa-b5e7-4606-b3c8-8946ea432617] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (21 ms) user=admin@shop.com
+2026-06-01 02:36:39.917 INFO  [http-nio-0.0.0.0-8080-exec-7] [d371c5ce-13db-44a7-891f-1a7d3d9e4940] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (11 ms) user=admin@shop.com
+2026-06-01 02:36:39.919 INFO  [http-nio-0.0.0.0-8080-exec-5] [e096194d-606c-4426-95b9-e8cc55c38d91] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (18 ms) user=admin@shop.com
+2026-06-01 02:36:39.929 INFO  [http-nio-0.0.0.0-8080-exec-3] [3a6ff238-0855-46e8-86a5-55d6aded1148] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (23 ms) user=admin@shop.com
+2026-06-01 02:36:39.929 INFO  [http-nio-0.0.0.0-8080-exec-8] [2414e6d7-fdf0-4910-a18a-6d51dc81f3ce] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (14 ms) user=admin@shop.com
+2026-06-01 02:36:42.704 INFO  [http-nio-0.0.0.0-8080-exec-2] [a9c941f6-5561-4220-822b-6506fbcaec0e] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (9 ms) user=admin@shop.com
+2026-06-01 02:36:42.704 INFO  [http-nio-0.0.0.0-8080-exec-6] [e905f22a-c6a9-40eb-9266-f7b2f0233e18] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (9 ms) user=admin@shop.com
+2026-06-01 02:36:42.708 INFO  [http-nio-0.0.0.0-8080-exec-9] [7d5870fc-e732-4877-9f26-47abd472d387] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (15 ms) user=admin@shop.com
+2026-06-01 02:37:21.033 INFO  [http-nio-0.0.0.0-8080-exec-4] [76089a66-2c06-454e-b196-21076ff1d7c5] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (11 ms) user=admin@shop.com
+2026-06-01 02:37:21.045 INFO  [http-nio-0.0.0.0-8080-exec-5] [da211007-60f1-4b2c-b6fc-85a4ad002bb5] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (13 ms) user=admin@shop.com
+2026-06-01 02:37:21.045 INFO  [http-nio-0.0.0.0-8080-exec-10] [fde969fa-4e06-42a5-9255-d6893c591170] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (13 ms) user=admin@shop.com
+2026-06-01 02:37:21.045 INFO  [http-nio-0.0.0.0-8080-exec-1] [10df3327-f8e3-45c3-a69c-b4af49a87856] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (23 ms) user=admin@shop.com
+2026-06-01 02:37:21.047 INFO  [http-nio-0.0.0.0-8080-exec-3] [ad7551e0-202a-4abb-9c2c-99162b3569ec] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (11 ms) user=admin@shop.com
+2026-06-01 02:37:21.051 INFO  [http-nio-0.0.0.0-8080-exec-7] [2bad638e-0a63-43e4-b8bf-0bd987dbb863] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (19 ms) user=admin@shop.com
+2026-06-01 02:37:51.204 INFO  [http-nio-0.0.0.0-8080-exec-2] [afb3849e-eebb-4a70-8942-f8b75557e5e5] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (10 ms) user=admin@shop.com
+2026-06-01 02:37:51.208 INFO  [http-nio-0.0.0.0-8080-exec-8] [ed9950bc-ea26-4074-b4af-3e32552e2239] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (15 ms) user=admin@shop.com
+2026-06-01 02:37:51.208 INFO  [http-nio-0.0.0.0-8080-exec-6] [40a2aa6c-8244-4eac-895c-2359af0502d8] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (10 ms) user=admin@shop.com
+2026-06-01 02:38:05.456 INFO  [http-nio-0.0.0.0-8080-exec-9] [b4dd33de-ccc1-4bf7-9562-05db0313aa56] p.e.config.RequestLoggingFilter - HTTP GET /api/auth/me -> 200 (8 ms) user=admin@shop.com
+2026-06-01 02:38:05.663 INFO  [http-nio-0.0.0.0-8080-exec-5] [dcf9bdd9-d625-4bc1-b398-377b94ae6c30] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (5 ms) user=admin@shop.com
+2026-06-01 02:38:05.663 INFO  [http-nio-0.0.0.0-8080-exec-1] [7e3f909e-9b9d-47c4-9ea5-c400ef8ef743] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (5 ms) user=admin@shop.com
+2026-06-01 02:38:05.667 INFO  [http-nio-0.0.0.0-8080-exec-4] [cf2c7153-4888-4cb4-b88a-f09562150367] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (9 ms) user=admin@shop.com
+2026-06-01 02:38:05.973 INFO  [http-nio-0.0.0.0-8080-exec-10] [370e2347-b8bb-416f-ba27-08063b34ddcc] p.e.config.RequestLoggingFilter - HTTP GET /api/admin/users?page=0&size=20 -> 200 (19 ms) user=admin@shop.com
+2026-06-01 02:38:08.684 WARN  [http-nio-0.0.0.0-8080-exec-3] [3fe19505-b94a-48b6-a6ee-4d35725bb0f1] p.e.config.LoggingAspect - SERVICE AuthServiceImpl.me - failed (0 ms): Not authenticated
+2026-06-01 02:38:08.685 WARN  [http-nio-0.0.0.0-8080-exec-3] [3fe19505-b94a-48b6-a6ee-4d35725bb0f1] p.e.config.LoggingAspect - CONTROLLER AuthController.me - failed (4 ms): Not authenticated
+2026-06-01 02:38:08.686 WARN  [http-nio-0.0.0.0-8080-exec-3] [3fe19505-b94a-48b6-a6ee-4d35725bb0f1] p.e.exception.GlobalExceptionHandler - API error [401]: Not authenticated
+2026-06-01 02:38:08.687 INFO  [http-nio-0.0.0.0-8080-exec-3] [3fe19505-b94a-48b6-a6ee-4d35725bb0f1] p.e.config.RequestLoggingFilter - HTTP GET /api/auth/me -> 401 (6 ms) user=anonymous
+2026-06-01 02:38:08.994 INFO  [http-nio-0.0.0.0-8080-exec-7] [6024d139-f099-4bf5-bd67-49e81f1455b0] p.e.config.RequestLoggingFilter - HTTP GET /api/categories -> 200 (11 ms) user=anonymous
+2026-06-01 02:38:09.012 INFO  [http-nio-0.0.0.0-8080-exec-2] [6e96bc82-ddcd-42e1-a48c-a80a5efc7865] p.e.config.RequestLoggingFilter - HTTP GET /api/products?page=0&size=12&sort=name%2Casc -> 200 (29 ms) user=anonymous
+2026-06-01 02:38:17.009 INFO  [http-nio-0.0.0.0-8080-exec-2] [915dbb6d-ac47-484f-b0c6-70186d520fa7] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (11 ms) user=admin@shop.com
+2026-06-01 02:38:17.009 INFO  [http-nio-0.0.0.0-8080-exec-7] [d0bab40e-7ecd-4a99-9ae2-553acc83b068] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (11 ms) user=admin@shop.com
+2026-06-01 02:38:17.012 INFO  [http-nio-0.0.0.0-8080-exec-3] [3094076b-f224-4f6e-9eb6-179bd800c1b9] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (13 ms) user=admin@shop.com
+2026-06-01 02:38:46.698 INFO  [http-nio-0.0.0.0-8080-exec-8] [fc90c518-7f54-47e5-bc85-ff8fbfb34291] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (17 ms) user=admin@shop.com
+2026-06-01 02:38:46.699 INFO  [http-nio-0.0.0.0-8080-exec-9] [9ff8af96-74cc-4c18-8eaa-39558bdae7ae] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (23 ms) user=admin@shop.com
+2026-06-01 02:38:46.702 INFO  [http-nio-0.0.0.0-8080-exec-5] [a864bd11-89d0-4023-ae0e-103005f14784] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (12 ms) user=admin@shop.com
+2026-06-01 02:38:46.703 INFO  [http-nio-0.0.0.0-8080-exec-6] [3b4bf44c-67fc-4e98-91bb-2a950926634a] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (12 ms) user=admin@shop.com
+2026-06-01 02:38:46.712 INFO  [http-nio-0.0.0.0-8080-exec-10] [27c1247f-66e9-4b9f-88ff-bda7fae1da54] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (16 ms) user=admin@shop.com
+2026-06-01 02:38:46.713 INFO  [http-nio-0.0.0.0-8080-exec-1] [ec435229-9a83-4add-bb0b-2e68b232e7f2] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (21 ms) user=admin@shop.com
+2026-06-01 02:38:49.771 INFO  [http-nio-0.0.0.0-8080-exec-2] [0ce97506-2a0c-4a31-ab12-9f5593146365] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (7 ms) user=admin@shop.com
+2026-06-01 02:38:49.772 INFO  [http-nio-0.0.0.0-8080-exec-7] [a524f579-0f5b-4e87-9d41-927974643e61] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (7 ms) user=admin@shop.com
+2026-06-01 02:38:49.773 INFO  [http-nio-0.0.0.0-8080-exec-3] [6d6d78a7-82db-4ee2-bbc7-63e8d67b6b5f] p.e.config.RequestLoggingFilter - HTTP GET /api/categories -> 200 (7 ms) user=admin@shop.com
+2026-06-01 02:38:49.775 INFO  [http-nio-0.0.0.0-8080-exec-4] [4fa8971f-5919-4338-9df8-0828c1697a67] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (11 ms) user=admin@shop.com
+2026-06-01 02:38:49.798 INFO  [http-nio-0.0.0.0-8080-exec-8] [081ebf5f-f633-4afa-9825-7e767c33b3f5] p.e.config.RequestLoggingFilter - HTTP GET /api/products?page=0&size=12&sort=name%2Casc -> 200 (33 ms) user=admin@shop.com
+2026-06-01 02:38:49.822 INFO  [http-nio-0.0.0.0-8080-exec-9] [15b4799f-4a04-4a93-8f1a-1213b84cf343] p.e.config.RequestLoggingFilter - HTTP GET /api/products?page=0&size=12&sort=name%2Casc -> 200 (31 ms) user=admin@shop.com
+2026-06-01 02:41:33.105 WARN  [http-nio-0.0.0.0-8080-exec-10] [1cb65002-c67a-4944-beea-5c30af8c27bd] p.e.config.LoggingAspect - SERVICE AuthServiceImpl.me - failed (0 ms): Not authenticated
+2026-06-01 02:41:33.106 WARN  [http-nio-0.0.0.0-8080-exec-10] [1cb65002-c67a-4944-beea-5c30af8c27bd] p.e.config.LoggingAspect - CONTROLLER AuthController.me - failed (4 ms): Not authenticated
+2026-06-01 02:41:33.106 WARN  [http-nio-0.0.0.0-8080-exec-10] [1cb65002-c67a-4944-beea-5c30af8c27bd] p.e.exception.GlobalExceptionHandler - API error [401]: Not authenticated
+2026-06-01 02:41:33.107 INFO  [http-nio-0.0.0.0-8080-exec-10] [1cb65002-c67a-4944-beea-5c30af8c27bd] p.e.config.RequestLoggingFilter - HTTP GET /api/auth/me -> 401 (6 ms) user=anonymous
+2026-06-01 02:41:33.431 INFO  [http-nio-0.0.0.0-8080-exec-6] [de843869-38c9-4119-924a-05d688596a0b] p.e.config.RequestLoggingFilter - HTTP GET /api/categories -> 200 (8 ms) user=anonymous
+2026-06-01 02:41:33.447 INFO  [http-nio-0.0.0.0-8080-exec-2] [a48f1b6e-8b10-49a9-a013-7dd90940261e] p.e.config.RequestLoggingFilter - HTTP GET /api/products?page=0&size=12&sort=name%2Casc -> 200 (22 ms) user=anonymous
+2026-06-01 02:43:41.619 WARN  [http-nio-0.0.0.0-8080-exec-8] [5a00940f-5294-4213-ad31-600e0976100d] p.e.config.LoggingAspect - SERVICE AuthServiceImpl.me - failed (0 ms): Not authenticated
+2026-06-01 02:43:41.620 WARN  [http-nio-0.0.0.0-8080-exec-8] [5a00940f-5294-4213-ad31-600e0976100d] p.e.config.LoggingAspect - CONTROLLER AuthController.me - failed (3 ms): Not authenticated
+2026-06-01 02:43:41.620 WARN  [http-nio-0.0.0.0-8080-exec-8] [5a00940f-5294-4213-ad31-600e0976100d] p.e.exception.GlobalExceptionHandler - API error [401]: Not authenticated
+2026-06-01 02:43:41.621 INFO  [http-nio-0.0.0.0-8080-exec-8] [5a00940f-5294-4213-ad31-600e0976100d] p.e.config.RequestLoggingFilter - HTTP GET /api/auth/me -> 401 (5 ms) user=anonymous
+2026-06-01 02:43:41.955 INFO  [http-nio-0.0.0.0-8080-exec-4] [51e91394-7f28-4ebc-861c-67f288082663] p.e.config.RequestLoggingFilter - HTTP GET /api/categories -> 200 (8 ms) user=anonymous
+2026-06-01 02:43:41.969 INFO  [http-nio-0.0.0.0-8080-exec-9] [09d240e2-7443-435b-b73c-922fca2e1a98] p.e.config.RequestLoggingFilter - HTTP GET /api/products?page=0&size=12&sort=name%2Casc -> 200 (20 ms) user=anonymous
+2026-06-01 07:32:06.575 WARN  [http-nio-0.0.0.0-8080-exec-4] [0286a8df-43f1-4cda-ad49-55bac42c73d6] p.e.config.LoggingAspect - SERVICE AuthServiceImpl.me - failed (1 ms): Not authenticated
+2026-06-01 07:32:06.575 WARN  [http-nio-0.0.0.0-8080-exec-4] [0286a8df-43f1-4cda-ad49-55bac42c73d6] p.e.config.LoggingAspect - CONTROLLER AuthController.me - failed (3 ms): Not authenticated
+2026-06-01 07:32:06.576 WARN  [http-nio-0.0.0.0-8080-exec-4] [0286a8df-43f1-4cda-ad49-55bac42c73d6] p.e.exception.GlobalExceptionHandler - API error [401]: Not authenticated
+2026-06-01 07:32:06.577 INFO  [http-nio-0.0.0.0-8080-exec-4] [0286a8df-43f1-4cda-ad49-55bac42c73d6] p.e.config.RequestLoggingFilter - HTTP GET /api/auth/me -> 401 (6 ms) user=anonymous
+2026-06-01 07:32:06.890 INFO  [http-nio-0.0.0.0-8080-exec-9] [3488a69b-d4b9-416e-a0c6-99f680ce52c0] p.e.config.RequestLoggingFilter - HTTP GET /api/categories -> 200 (10 ms) user=anonymous
+2026-06-01 07:32:06.909 INFO  [http-nio-0.0.0.0-8080-exec-5] [360fe726-fe11-459e-8181-a0aaf743d03b] p.e.config.RequestLoggingFilter - HTTP GET /api/products?page=0&size=12&sort=name%2Casc -> 200 (29 ms) user=anonymous
+2026-06-01 07:38:36.726 INFO  [http-nio-0.0.0.0-8080-exec-4] [4db40806-f62a-4ecd-85b8-c67b6e5382c0] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (14 ms) user=admin@shop.com
+2026-06-01 07:38:36.734 INFO  [http-nio-0.0.0.0-8080-exec-9] [fbb37b14-6e4e-457a-9c96-0a158c941cfa] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (16 ms) user=admin@shop.com
+2026-06-01 07:38:36.738 INFO  [http-nio-0.0.0.0-8080-exec-5] [b6e180c2-b8f9-4f75-a6fb-7d2331de7c7b] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (19 ms) user=admin@shop.com
+2026-06-01 07:38:36.738 INFO  [http-nio-0.0.0.0-8080-exec-10] [ea376366-895e-4510-9e49-e28bfc7d25f6] p.e.config.RequestLoggingFilter - HTTP GET /api/notifications/unread-count -> 200 (13 ms) user=admin@shop.com
+2026-06-01 07:38:36.738 INFO  [http-nio-0.0.0.0-8080-exec-6] [860791e9-a4b4-4763-b78f-ea5b8473fae7] p.e.config.RequestLoggingFilter - HTTP GET /api/wishlist/count -> 200 (13 ms) user=admin@shop.com
+2026-06-01 07:38:36.738 INFO  [http-nio-0.0.0.0-8080-exec-8] [7e9891c9-9031-48ea-8b1c-b1a4501da12e] p.e.config.RequestLoggingFilter - HTTP GET /api/cart/summary -> 200 (26 ms) user=admin@shop.com
+2026-06-01 08:16:55.456 INFO  [SpringApplicationShutdownHook] [no-request] o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-06-01 08:16:56.537 INFO  [tomcat-shutdown] [no-request] o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-06-01 08:16:56.556 INFO  [SpringApplicationShutdownHook] [no-request] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-01 08:16:56.563 INFO  [SpringApplicationShutdownHook] [no-request] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-06-01 08:16:56.568 INFO  [SpringApplicationShutdownHook] [no-request] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-06-01 08:24:56.395 INFO  [main] [no-request] p.e.ECommerceBackendApplicationTests - Starting ECommerceBackendApplicationTests using Java 17.0.8 with PID 6044 (started by God -01.11 in C:\Users\God -01.11\Desktop\e-commerce-backend - codex)
+2026-06-01 08:24:56.399 INFO  [main] [no-request] p.e.ECommerceBackendApplicationTests - The following 1 profile is active: "test"
+2026-06-01 08:25:10.381 INFO  [main] [no-request] o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-06-01 08:25:10.382 WARN  [main] [no-request] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-06-01 08:25:13.681 INFO  [main] [no-request] p.e.ECommerceBackendApplicationTests - Started ECommerceBackendApplicationTests in 18.268 seconds (process running for 21.055)
+2026-06-01 08:25:13.784 WARN  [main] [no-request] p.ecommercebackend.config.MailConfig - Email delivery DISABLED - set MAIL_ENABLED=true and configure SMTP settings
+2026-06-01 08:25:13.785 INFO  [main] [no-request] p.ecommercebackend.config.DataSeeder - Running database seed checks...
+2026-06-01 08:25:14.502 INFO  [main] [no-request] p.ecommercebackend.config.DataSeeder - Default shop settings seeded (low stock threshold: 10)
+2026-06-01 08:25:15.933 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=1 userId=2 subtotal=50.00 total=60.47 devMode=true
+2026-06-01 08:25:16.113 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=1 userId=2 total=60.47 itemCount=1
+2026-06-01 08:25:16.138 INFO  [email-1] [no-request] p.e.service.impl.AsyncEmailSender - Email disabled - order confirmation #1:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order confirmed</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Thanks for your purchase, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your payment was received and your order is now confirmed.</p>
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #1</strong>
+    <span style="float:right;">Jun 1, 2026 08:25</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from noreply@shopverse.local.</p>
+  </div>
+</body>
+</html>
+
+2026-06-01 08:25:16.169 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order cancelled orderId=1 userId=2
+2026-06-01 08:25:16.467 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=2 userId=3 subtotal=50.00 total=60.47 devMode=true
+2026-06-01 08:25:16.484 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=2 userId=3 total=60.47 itemCount=1
+2026-06-01 08:25:16.486 INFO  [email-2] [no-request] p.e.service.impl.AsyncEmailSender - Email disabled - order confirmation #2:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order confirmed</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Thanks for your purchase, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your payment was received and your order is now confirmed.</p>
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #2</strong>
+    <span style="float:right;">Jun 1, 2026 08:25</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from noreply@shopverse.local.</p>
+  </div>
+</body>
+</html>
+
+2026-06-01 08:25:16.496 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Payment confirmation ignored for already confirmed orderId=2
+2026-06-01 08:32:00.502 INFO  [main] [no-request] p.e.ECommerceBackendApplicationTests - Starting ECommerceBackendApplicationTests using Java 17.0.8 with PID 16952 (started by God -01.11 in C:\Users\God -01.11\Desktop\e-commerce-backend - codex)
+2026-06-01 08:32:00.508 INFO  [main] [no-request] p.e.ECommerceBackendApplicationTests - The following 1 profile is active: "test"
+2026-06-01 08:32:14.309 INFO  [main] [no-request] o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-06-01 08:32:14.310 WARN  [main] [no-request] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-06-01 08:32:17.479 INFO  [main] [no-request] p.e.ECommerceBackendApplicationTests - Started ECommerceBackendApplicationTests in 18.088 seconds (process running for 20.847)
+2026-06-01 08:32:17.555 WARN  [main] [no-request] p.ecommercebackend.config.MailConfig - Email delivery DISABLED - set MAIL_ENABLED=true and configure SMTP settings
+2026-06-01 08:32:17.556 INFO  [main] [no-request] p.ecommercebackend.config.DataSeeder - Running database seed checks...
+2026-06-01 08:32:18.207 INFO  [main] [no-request] p.ecommercebackend.config.DataSeeder - Default shop settings seeded (low stock threshold: 10)
+2026-06-01 08:32:19.476 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=1 userId=2 subtotal=50.00 total=60.47 devMode=true
+2026-06-01 08:32:19.608 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=1 userId=2 total=60.47 itemCount=1
+2026-06-01 08:32:19.632 INFO  [email-1] [no-request] p.e.service.impl.AsyncEmailSender - Email disabled - order confirmation #1:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order confirmed</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Thanks for your purchase, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your payment was received and your order is now confirmed.</p>
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #1</strong>
+    <span style="float:right;">Jun 1, 2026 08:32</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from noreply@shopverse.local.</p>
+  </div>
+</body>
+</html>
+
+2026-06-01 08:32:19.677 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order cancelled orderId=1 userId=2
+2026-06-01 08:32:20.067 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=2 userId=3 subtotal=50.00 total=60.47 devMode=true
+2026-06-01 08:32:20.097 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=2 userId=3 total=60.47 itemCount=1
+2026-06-01 08:32:20.099 INFO  [email-2] [no-request] p.e.service.impl.AsyncEmailSender - Email disabled - order confirmation #2:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order confirmed</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Thanks for your purchase, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your payment was received and your order is now confirmed.</p>
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #2</strong>
+    <span style="float:right;">Jun 1, 2026 08:32</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from noreply@shopverse.local.</p>
+  </div>
+</body>
+</html>
+
+2026-06-01 08:32:20.114 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Payment confirmation ignored for already confirmed orderId=2
+2026-06-01 08:33:49.364 INFO  [main] [no-request] p.e.ECommerceBackendApplicationTests - Starting ECommerceBackendApplicationTests using Java 17.0.8 with PID 24072 (started by God -01.11 in C:\Users\God -01.11\Desktop\e-commerce-backend - codex)
+2026-06-01 08:33:49.369 INFO  [main] [no-request] p.e.ECommerceBackendApplicationTests - The following 1 profile is active: "test"
+2026-06-01 08:34:03.233 INFO  [main] [no-request] o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-06-01 08:34:03.234 WARN  [main] [no-request] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-06-01 08:34:06.729 INFO  [main] [no-request] p.e.ECommerceBackendApplicationTests - Started ECommerceBackendApplicationTests in 18.202 seconds (process running for 21.232)
+2026-06-01 08:34:06.797 INFO  [main] [no-request] p.ecommercebackend.config.DataSeeder - Running database seed checks...
+2026-06-01 08:34:07.516 INFO  [main] [no-request] p.ecommercebackend.config.DataSeeder - Default shop settings seeded (low stock threshold: 10)
+2026-06-01 08:34:07.568 WARN  [main] [no-request] p.ecommercebackend.config.MailConfig - Email delivery DISABLED - set MAIL_ENABLED=true and configure SMTP settings
+2026-06-01 08:34:08.959 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=1 userId=2 subtotal=50.00 total=60.47 devMode=true
+2026-06-01 08:34:09.051 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=1 userId=2 total=60.47 itemCount=1
+2026-06-01 08:34:09.068 INFO  [email-1] [no-request] p.e.service.impl.AsyncEmailSender - Email disabled - order confirmation #1:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order confirmed</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Thanks for your purchase, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your payment was received and your order is now confirmed.</p>
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #1</strong>
+    <span style="float:right;">Jun 1, 2026 08:34</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from noreply@shopverse.local.</p>
+  </div>
+</body>
+</html>
+
+2026-06-01 08:34:09.112 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order cancelled orderId=1 userId=2
+2026-06-01 08:34:09.358 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=2 userId=3 subtotal=50.00 total=60.47 devMode=true
+2026-06-01 08:34:09.381 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=2 userId=3 total=60.47 itemCount=1
+2026-06-01 08:34:09.382 INFO  [email-2] [no-request] p.e.service.impl.AsyncEmailSender - Email disabled - order confirmation #2:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order confirmed</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Thanks for your purchase, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your payment was received and your order is now confirmed.</p>
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #2</strong>
+    <span style="float:right;">Jun 1, 2026 08:34</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from noreply@shopverse.local.</p>
+  </div>
+</body>
+</html>
+
+2026-06-01 08:34:09.394 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Payment confirmation ignored for already confirmed orderId=2
+2026-06-01 08:36:06.784 INFO  [main] [no-request] p.e.ECommerceBackendApplicationTests - Starting ECommerceBackendApplicationTests using Java 17.0.8 with PID 22268 (started by God -01.11 in C:\Users\God -01.11\Desktop\e-commerce-backend - codex)
+2026-06-01 08:36:06.789 INFO  [main] [no-request] p.e.ECommerceBackendApplicationTests - The following 1 profile is active: "test"
+2026-06-01 08:36:20.221 INFO  [main] [no-request] o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-06-01 08:36:20.223 WARN  [main] [no-request] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-06-01 08:36:24.077 INFO  [main] [no-request] p.e.ECommerceBackendApplicationTests - Started ECommerceBackendApplicationTests in 18.456 seconds (process running for 21.131)
+2026-06-01 08:36:24.172 INFO  [main] [no-request] p.ecommercebackend.config.DataSeeder - Running database seed checks...
+2026-06-01 08:36:25.019 INFO  [main] [no-request] p.ecommercebackend.config.DataSeeder - Default shop settings seeded (low stock threshold: 10)
+2026-06-01 08:36:25.091 WARN  [main] [no-request] p.ecommercebackend.config.MailConfig - Email delivery DISABLED - set MAIL_ENABLED=true and configure SMTP settings
+2026-06-01 08:36:26.642 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=1 userId=2 subtotal=50.00 total=60.47 devMode=true
+2026-06-01 08:36:26.721 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=1 userId=2 total=60.47 itemCount=1
+2026-06-01 08:36:26.742 INFO  [email-1] [no-request] p.e.service.impl.AsyncEmailSender - Email disabled - order confirmation #1:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order confirmed</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Thanks for your purchase, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your payment was received and your order is now confirmed.</p>
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #1</strong>
+    <span style="float:right;">Jun 1, 2026 08:36</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from noreply@shopverse.local.</p>
+  </div>
+</body>
+</html>
+
+2026-06-01 08:36:26.799 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order cancelled orderId=1 userId=2
+2026-06-01 08:36:27.197 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=2 userId=3 subtotal=50.00 total=60.47 devMode=true
+2026-06-01 08:36:27.224 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=2 userId=3 total=60.47 itemCount=1
+2026-06-01 08:36:27.226 INFO  [email-2] [no-request] p.e.service.impl.AsyncEmailSender - Email disabled - order confirmation #2:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order confirmed</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Thanks for your purchase, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your payment was received and your order is now confirmed.</p>
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #2</strong>
+    <span style="float:right;">Jun 1, 2026 08:36</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from noreply@shopverse.local.</p>
+  </div>
+</body>
+</html>
+
+2026-06-01 08:36:27.239 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Payment confirmation ignored for already confirmed orderId=2
+2026-06-01 08:36:27.472 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=3 userId=4 subtotal=50.00 total=60.47 devMode=true
+2026-06-01 08:36:27.503 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=3 userId=4 total=60.47 itemCount=1
+2026-06-01 08:36:27.504 INFO  [email-1] [no-request] p.e.service.impl.AsyncEmailSender - Email disabled - order confirmation #3:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order confirmed</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Thanks for your purchase, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your payment was received and your order is now confirmed.</p>
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #3</strong>
+    <span style="float:right;">Jun 1, 2026 08:36</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from noreply@shopverse.local.</p>
+  </div>
+</body>
+</html>
+
+2026-06-01 08:36:58.481 INFO  [main] [no-request] p.e.ECommerceBackendApplicationTests - Starting ECommerceBackendApplicationTests using Java 17.0.8 with PID 16352 (started by God -01.11 in C:\Users\God -01.11\Desktop\e-commerce-backend - codex)
+2026-06-01 08:36:58.486 INFO  [main] [no-request] p.e.ECommerceBackendApplicationTests - The following 1 profile is active: "test"
+2026-06-01 08:37:11.029 INFO  [main] [no-request] o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-06-01 08:37:11.030 WARN  [main] [no-request] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-06-01 08:37:14.020 INFO  [main] [no-request] p.e.ECommerceBackendApplicationTests - Started ECommerceBackendApplicationTests in 16.332 seconds (process running for 18.997)
+2026-06-01 08:37:14.108 INFO  [main] [no-request] p.ecommercebackend.config.DataSeeder - Running database seed checks...
+2026-06-01 08:37:14.754 INFO  [main] [no-request] p.ecommercebackend.config.DataSeeder - Default shop settings seeded (low stock threshold: 10)
+2026-06-01 08:37:14.795 WARN  [main] [no-request] p.ecommercebackend.config.MailConfig - Email delivery DISABLED - set MAIL_ENABLED=true and configure SMTP settings
+2026-06-01 08:37:16.113 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=1 userId=2 subtotal=50.00 total=60.47 devMode=true
+2026-06-01 08:37:16.227 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=1 userId=2 total=60.47 itemCount=1
+2026-06-01 08:37:16.247 INFO  [email-1] [no-request] p.e.service.impl.AsyncEmailSender - Email disabled - order confirmation #1:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order confirmed</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Thanks for your purchase, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your payment was received and your order is now confirmed.</p>
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #1</strong>
+    <span style="float:right;">Jun 1, 2026 08:37</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from noreply@shopverse.local.</p>
+  </div>
+</body>
+</html>
+
+2026-06-01 08:37:16.289 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order cancelled orderId=1 userId=2
+2026-06-01 08:37:16.556 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=2 userId=3 subtotal=50.00 total=60.47 devMode=true
+2026-06-01 08:37:16.573 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=2 userId=3 total=60.47 itemCount=1
+2026-06-01 08:37:16.574 INFO  [email-2] [no-request] p.e.service.impl.AsyncEmailSender - Email disabled - order confirmation #2:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order confirmed</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Thanks for your purchase, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your payment was received and your order is now confirmed.</p>
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #2</strong>
+    <span style="float:right;">Jun 1, 2026 08:37</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from noreply@shopverse.local.</p>
+  </div>
+</body>
+</html>
+
+2026-06-01 08:37:16.583 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Payment confirmation ignored for already confirmed orderId=2
+2026-06-01 08:37:16.794 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=3 userId=4 subtotal=50.00 total=60.47 devMode=true
+2026-06-01 08:37:16.825 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=3 userId=4 total=60.47 itemCount=1
+2026-06-01 08:37:16.827 INFO  [email-1] [no-request] p.e.service.impl.AsyncEmailSender - Email disabled - order confirmation #3:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order confirmed</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Thanks for your purchase, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your payment was received and your order is now confirmed.</p>
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #3</strong>
+    <span style="float:right;">Jun 1, 2026 08:37</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from noreply@shopverse.local.</p>
+  </div>
+</body>
+</html>
+
+2026-06-01 08:37:16.853 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order cancelled orderId=3 userId=4
+2026-06-01 08:48:32.212 INFO  [main] [no-request] p.e.ECommerceBackendApplicationTests - Starting ECommerceBackendApplicationTests using Java 17.0.8 with PID 8460 (started by God -01.11 in C:\Users\God -01.11\Desktop\e-commerce-backend - codex)
+2026-06-01 08:48:32.216 INFO  [main] [no-request] p.e.ECommerceBackendApplicationTests - The following 1 profile is active: "test"
+2026-06-01 08:48:44.751 INFO  [main] [no-request] o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-06-01 08:48:44.752 WARN  [main] [no-request] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-06-01 08:48:47.962 INFO  [main] [no-request] p.e.ECommerceBackendApplicationTests - Started ECommerceBackendApplicationTests in 16.877 seconds (process running for 19.509)
+2026-06-01 08:48:48.041 INFO  [main] [no-request] p.ecommercebackend.config.DataSeeder - Running database seed checks...
+2026-06-01 08:48:48.800 INFO  [main] [no-request] p.ecommercebackend.config.DataSeeder - Default shop settings seeded (low stock threshold: 10)
+2026-06-01 08:48:48.847 WARN  [main] [no-request] p.ecommercebackend.config.MailConfig - Email delivery DISABLED - set MAIL_ENABLED=true and configure SMTP settings
+2026-06-01 08:48:50.076 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=1 userId=2 subtotal=50.00 total=60.47 devMode=true
+2026-06-01 08:48:50.176 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=1 userId=2 total=60.47 itemCount=1
+2026-06-01 08:48:50.199 INFO  [email-1] [no-request] p.e.service.impl.AsyncEmailSender - Email disabled - order confirmation #1:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order confirmed</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Thanks for your purchase, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your payment was received and your order is now confirmed.</p>
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #1</strong>
+    <span style="float:right;">Jun 1, 2026 08:48</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from noreply@shopverse.local.</p>
+  </div>
+</body>
+</html>
+
+2026-06-01 08:48:50.252 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order cancelled orderId=1 userId=2
+2026-06-01 08:48:50.581 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=2 userId=3 subtotal=50.00 total=60.47 devMode=true
+2026-06-01 08:48:50.615 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=2 userId=3 total=60.47 itemCount=1
+2026-06-01 08:48:50.617 INFO  [email-2] [no-request] p.e.service.impl.AsyncEmailSender - Email disabled - order confirmation #2:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order confirmed</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Thanks for your purchase, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your payment was received and your order is now confirmed.</p>
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #2</strong>
+    <span style="float:right;">Jun 1, 2026 08:48</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from noreply@shopverse.local.</p>
+  </div>
+</body>
+</html>
+
+2026-06-01 08:48:50.634 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Payment confirmation ignored for already confirmed orderId=2
+2026-06-01 08:48:50.907 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=3 userId=4 subtotal=50.00 total=60.47 devMode=true
+2026-06-01 08:48:50.945 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=3 userId=4 total=60.47 itemCount=1
+2026-06-01 08:48:50.946 INFO  [email-1] [no-request] p.e.service.impl.AsyncEmailSender - Email disabled - order confirmation #3:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order confirmed</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Thanks for your purchase, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your payment was received and your order is now confirmed.</p>
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #3</strong>
+    <span style="float:right;">Jun 1, 2026 08:48</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from noreply@shopverse.local.</p>
+  </div>
+</body>
+</html>
+
+2026-06-01 08:48:50.975 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order cancelled orderId=3 userId=4
+2026-06-01 08:50:50.001 INFO  [main] [no-request] p.e.ECommerceBackendApplicationTests - Starting ECommerceBackendApplicationTests using Java 17.0.8 with PID 24572 (started by God -01.11 in C:\Users\God -01.11\Desktop\e-commerce-backend - codex)
+2026-06-01 08:50:50.006 INFO  [main] [no-request] p.e.ECommerceBackendApplicationTests - The following 1 profile is active: "test"
+2026-06-01 08:51:03.773 INFO  [main] [no-request] o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-06-01 08:51:03.775 WARN  [main] [no-request] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-06-01 08:51:07.357 INFO  [main] [no-request] p.e.ECommerceBackendApplicationTests - Started ECommerceBackendApplicationTests in 18.369 seconds (process running for 20.892)
+2026-06-01 08:51:07.427 INFO  [main] [no-request] p.ecommercebackend.config.DataSeeder - Running database seed checks...
+2026-06-01 08:51:08.098 INFO  [main] [no-request] p.ecommercebackend.config.DataSeeder - Default shop settings seeded (low stock threshold: 10)
+2026-06-01 08:51:08.133 WARN  [main] [no-request] p.ecommercebackend.config.MailConfig - Email delivery DISABLED - set MAIL_ENABLED=true and configure SMTP settings
+2026-06-01 08:51:09.422 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=1 userId=2 subtotal=50.00 total=60.47 devMode=true
+2026-06-01 08:51:09.537 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=1 userId=2 total=60.47 itemCount=1
+2026-06-01 08:51:09.562 INFO  [email-1] [no-request] p.e.service.impl.AsyncEmailSender - Email disabled - order confirmation #1:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order confirmed</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Thanks for your purchase, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your payment was received and your order is now confirmed.</p>
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #1</strong>
+    <span style="float:right;">Jun 1, 2026 08:51</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from noreply@shopverse.local.</p>
+  </div>
+</body>
+</html>
+
+2026-06-01 08:51:09.618 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order cancelled orderId=1 userId=2
+2026-06-01 08:51:09.985 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=2 userId=3 subtotal=50.00 total=60.47 devMode=true
+2026-06-01 08:51:10.017 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=2 userId=3 total=60.47 itemCount=1
+2026-06-01 08:51:10.019 INFO  [email-2] [no-request] p.e.service.impl.AsyncEmailSender - Email disabled - order confirmation #2:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order confirmed</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Thanks for your purchase, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your payment was received and your order is now confirmed.</p>
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #2</strong>
+    <span style="float:right;">Jun 1, 2026 08:51</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from noreply@shopverse.local.</p>
+  </div>
+</body>
+</html>
+
+2026-06-01 08:51:10.030 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Payment confirmation ignored for already confirmed orderId=2
+2026-06-01 08:51:10.271 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=3 userId=4 subtotal=50.00 total=60.47 devMode=true
+2026-06-01 08:51:10.311 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=3 userId=4 total=60.47 itemCount=1
+2026-06-01 08:51:10.312 INFO  [email-1] [no-request] p.e.service.impl.AsyncEmailSender - Email disabled - order confirmation #3:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order confirmed</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Thanks for your purchase, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your payment was received and your order is now confirmed.</p>
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #3</strong>
+    <span style="float:right;">Jun 1, 2026 08:51</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from noreply@shopverse.local.</p>
+  </div>
+</body>
+</html>
+
+2026-06-01 08:51:10.347 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order cancelled orderId=3 userId=4
+2026-06-01 08:51:10.560 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=4 userId=5 subtotal=50.00 total=60.47 devMode=true
+2026-06-01 08:51:10.592 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=4 userId=5 total=60.47 itemCount=1
+2026-06-01 08:51:10.594 INFO  [email-2] [no-request] p.e.service.impl.AsyncEmailSender - Email disabled - order confirmation #4:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order confirmed</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Thanks for your purchase, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your payment was received and your order is now confirmed.</p>
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #4</strong>
+    <span style="float:right;">Jun 1, 2026 08:51</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from noreply@shopverse.local.</p>
+  </div>
+</body>
+</html>
+
+2026-06-01 08:51:10.725 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Admin updated order status orderId=4 from=CONFIRMED to=PACKED
+2026-06-01 08:51:10.743 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Admin updated order status orderId=4 from=PACKED to=SHIPPED
+2026-06-01 08:51:10.745 INFO  [email-1] [no-request] p.e.service.impl.AsyncEmailSender - Email disabled - shipment notification #4:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order shipped</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Good news, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your order has shipped. Here is what is on the way:</p>
+<div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Tracking</div>
+  <div>UPS: <strong>1Z999AA10123456784</strong></div>
+  <p style="margin:14px 0 0;">
+    <a href="https://www.ups.com/track?tracknum=1Z999AA10123456784" style="display:inline-block;background:#ff5a1f;color:#ffffff;text-decoration:none;font-weight:700;padding:10px 14px;border-radius:8px;">Track shipment</a>
+  </p>
+</div>
+
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #4</strong>
+    <span style="float:right;">Jun 1, 2026 08:51</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from noreply@shopverse.local.</p>
+  </div>
+</body>
+</html>
+
+2026-06-01 09:49:27.515 INFO  [main] [no-request] p.e.ECommerceBackendApplicationTests - Starting ECommerceBackendApplicationTests using Java 17.0.8 with PID 16028 (started by God -01.11 in C:\Users\God -01.11\Desktop\e-commerce-backend - codex)
+2026-06-01 09:49:27.520 INFO  [main] [no-request] p.e.ECommerceBackendApplicationTests - The following 1 profile is active: "test"
+2026-06-01 09:49:41.014 INFO  [main] [no-request] o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-06-01 09:49:41.015 WARN  [main] [no-request] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-06-01 09:49:44.509 INFO  [main] [no-request] p.e.ECommerceBackendApplicationTests - Started ECommerceBackendApplicationTests in 17.937 seconds (process running for 20.828)
+2026-06-01 09:49:44.647 INFO  [main] [no-request] p.ecommercebackend.config.DataSeeder - Running database seed checks...
+2026-06-01 09:49:45.381 INFO  [main] [no-request] p.ecommercebackend.config.DataSeeder - Default shop settings seeded (low stock threshold: 10)
+2026-06-01 09:49:45.459 WARN  [main] [no-request] p.ecommercebackend.config.MailConfig - Email delivery DISABLED - set MAIL_ENABLED=true and configure SMTP settings
+2026-06-01 09:49:47.279 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=1 userId=2 subtotal=50.00 total=60.47 devMode=true
+2026-06-01 09:49:47.418 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=1 userId=2 total=60.47 itemCount=1
+2026-06-01 09:49:47.448 INFO  [email-1] [no-request] p.e.service.impl.AsyncEmailSender - Email disabled - order confirmation #1:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order confirmed</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Thanks for your purchase, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your payment was received and your order is now confirmed.</p>
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #1</strong>
+    <span style="float:right;">Jun 1, 2026 09:49</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from noreply@shopverse.local.</p>
+  </div>
+</body>
+</html>
+
+2026-06-01 09:49:47.517 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order cancelled orderId=1 userId=2
+2026-06-01 09:49:48.053 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=2 userId=3 subtotal=50.00 total=60.47 devMode=true
+2026-06-01 09:49:48.098 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=2 userId=3 total=60.47 itemCount=1
+2026-06-01 09:49:48.101 INFO  [email-2] [no-request] p.e.service.impl.AsyncEmailSender - Email disabled - order confirmation #2:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order confirmed</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Thanks for your purchase, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your payment was received and your order is now confirmed.</p>
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #2</strong>
+    <span style="float:right;">Jun 1, 2026 09:49</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from noreply@shopverse.local.</p>
+  </div>
+</body>
+</html>
+
+2026-06-01 09:49:48.128 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Payment confirmation ignored for already confirmed orderId=2
+2026-06-01 09:49:48.435 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=3 userId=4 subtotal=50.00 total=60.47 devMode=true
+2026-06-01 09:49:48.467 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=3 userId=4 total=60.47 itemCount=1
+2026-06-01 09:49:48.469 INFO  [email-1] [no-request] p.e.service.impl.AsyncEmailSender - Email disabled - order confirmation #3:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order confirmed</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Thanks for your purchase, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your payment was received and your order is now confirmed.</p>
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #3</strong>
+    <span style="float:right;">Jun 1, 2026 09:49</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from noreply@shopverse.local.</p>
+  </div>
+</body>
+</html>
+
+2026-06-01 09:49:48.497 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order cancelled orderId=3 userId=4
+2026-06-01 09:49:48.683 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=4 userId=5 subtotal=50.00 total=60.47 devMode=true
+2026-06-01 09:49:48.705 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=4 userId=5 total=60.47 itemCount=1
+2026-06-01 09:49:48.706 INFO  [email-2] [no-request] p.e.service.impl.AsyncEmailSender - Email disabled - order confirmation #4:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order confirmed</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Thanks for your purchase, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your payment was received and your order is now confirmed.</p>
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #4</strong>
+    <span style="float:right;">Jun 1, 2026 09:49</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from noreply@shopverse.local.</p>
+  </div>
+</body>
+</html>
+
+2026-06-01 09:49:48.812 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Admin updated order status orderId=4 from=CONFIRMED to=PACKED
+2026-06-01 09:49:48.826 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Admin updated order status orderId=4 from=PACKED to=SHIPPED
+2026-06-01 09:49:48.828 INFO  [email-1] [no-request] p.e.service.impl.AsyncEmailSender - Email disabled - shipment notification #4:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order shipped</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Good news, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your order has shipped. Here is what is on the way:</p>
+<div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Tracking</div>
+  <div>UPS: <strong>1Z999AA10123456784</strong></div>
+  <p style="margin:14px 0 0;">
+    <a href="https://www.ups.com/track?tracknum=1Z999AA10123456784" style="display:inline-block;background:#ff5a1f;color:#ffffff;text-decoration:none;font-weight:700;padding:10px 14px;border-radius:8px;">Track shipment</a>
+  </p>
+</div>
+
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #4</strong>
+    <span style="float:right;">Jun 1, 2026 09:49</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from noreply@shopverse.local.</p>
+  </div>
+</body>
+</html>
+
+2026-06-01 09:49:48.997 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=5 userId=7 subtotal=50.00 total=60.47 devMode=true
+2026-06-01 09:49:49.016 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=5 userId=7 total=60.47 itemCount=1
+2026-06-01 09:49:49.017 INFO  [email-2] [no-request] p.e.service.impl.AsyncEmailSender - Email disabled - order confirmation #5:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order confirmed</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Thanks for your purchase, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your payment was received and your order is now confirmed.</p>
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #5</strong>
+    <span style="float:right;">Jun 1, 2026 09:49</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from noreply@shopverse.local.</p>
+  </div>
+</body>
+</html>
+
+2026-06-01 09:49:49.130 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Admin refunded order orderId=5 amount=10.00 status=SUCCEEDED
+2026-06-01 09:52:07.710 INFO  [main] [no-request] p.e.ECommerceBackendApplicationTests - Starting ECommerceBackendApplicationTests using Java 17.0.8 with PID 24504 (started by God -01.11 in C:\Users\God -01.11\Desktop\e-commerce-backend - codex)
+2026-06-01 09:52:07.716 INFO  [main] [no-request] p.e.ECommerceBackendApplicationTests - The following 1 profile is active: "test"
+2026-06-01 09:52:22.768 INFO  [main] [no-request] o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-06-01 09:52:22.769 WARN  [main] [no-request] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-06-01 09:52:26.842 INFO  [main] [no-request] p.e.ECommerceBackendApplicationTests - Started ECommerceBackendApplicationTests in 20.337 seconds (process running for 23.025)
+2026-06-01 09:52:26.938 INFO  [main] [no-request] p.ecommercebackend.config.DataSeeder - Running database seed checks...
+2026-06-01 09:52:27.715 INFO  [main] [no-request] p.ecommercebackend.config.DataSeeder - Default shop settings seeded (low stock threshold: 10)
+2026-06-01 09:52:27.762 WARN  [main] [no-request] p.ecommercebackend.config.MailConfig - Email delivery DISABLED - set MAIL_ENABLED=true and configure SMTP settings
+2026-06-01 09:52:29.427 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=1 userId=2 subtotal=50.00 total=60.47 devMode=true
+2026-06-01 09:52:29.606 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=1 userId=2 total=60.47 itemCount=1
+2026-06-01 09:52:29.635 INFO  [email-1] [no-request] p.e.service.impl.AsyncEmailSender - Email disabled - order confirmation #1:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order confirmed</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Thanks for your purchase, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your payment was received and your order is now confirmed.</p>
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #1</strong>
+    <span style="float:right;">Jun 1, 2026 09:52</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from noreply@shopverse.local.</p>
+  </div>
+</body>
+</html>
+
+2026-06-01 09:52:29.694 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order cancelled orderId=1 userId=2
+2026-06-01 09:52:30.113 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=2 userId=3 subtotal=50.00 total=60.47 devMode=true
+2026-06-01 09:52:30.144 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=2 userId=3 total=60.47 itemCount=1
+2026-06-01 09:52:30.145 INFO  [email-2] [no-request] p.e.service.impl.AsyncEmailSender - Email disabled - order confirmation #2:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order confirmed</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Thanks for your purchase, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your payment was received and your order is now confirmed.</p>
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #2</strong>
+    <span style="float:right;">Jun 1, 2026 09:52</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from noreply@shopverse.local.</p>
+  </div>
+</body>
+</html>
+
+2026-06-01 09:52:30.166 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Payment confirmation ignored for already confirmed orderId=2
+2026-06-01 09:52:30.409 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=3 userId=4 subtotal=50.00 total=60.47 devMode=true
+2026-06-01 09:52:30.456 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=3 userId=4 total=60.47 itemCount=1
+2026-06-01 09:52:30.458 INFO  [email-1] [no-request] p.e.service.impl.AsyncEmailSender - Email disabled - order confirmation #3:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order confirmed</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Thanks for your purchase, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your payment was received and your order is now confirmed.</p>
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #3</strong>
+    <span style="float:right;">Jun 1, 2026 09:52</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from noreply@shopverse.local.</p>
+  </div>
+</body>
+</html>
+
+2026-06-01 09:52:30.489 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order cancelled orderId=3 userId=4
+2026-06-01 09:52:30.711 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=4 userId=5 subtotal=50.00 total=60.47 devMode=true
+2026-06-01 09:52:30.743 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=4 userId=5 total=60.47 itemCount=1
+2026-06-01 09:52:30.744 INFO  [email-2] [no-request] p.e.service.impl.AsyncEmailSender - Email disabled - order confirmation #4:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order confirmed</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Thanks for your purchase, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your payment was received and your order is now confirmed.</p>
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #4</strong>
+    <span style="float:right;">Jun 1, 2026 09:52</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from noreply@shopverse.local.</p>
+  </div>
+</body>
+</html>
+
+2026-06-01 09:52:30.871 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Admin updated order status orderId=4 from=CONFIRMED to=PACKED
+2026-06-01 09:52:30.887 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Admin updated order status orderId=4 from=PACKED to=SHIPPED
+2026-06-01 09:52:30.889 INFO  [email-1] [no-request] p.e.service.impl.AsyncEmailSender - Email disabled - shipment notification #4:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order shipped</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Good news, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your order has shipped. Here is what is on the way:</p>
+<div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Tracking</div>
+  <div>UPS: <strong>1Z999AA10123456784</strong></div>
+  <p style="margin:14px 0 0;">
+    <a href="https://www.ups.com/track?tracknum=1Z999AA10123456784" style="display:inline-block;background:#ff5a1f;color:#ffffff;text-decoration:none;font-weight:700;padding:10px 14px;border-radius:8px;">Track shipment</a>
+  </p>
+</div>
+
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #4</strong>
+    <span style="float:right;">Jun 1, 2026 09:52</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from noreply@shopverse.local.</p>
+  </div>
+</body>
+</html>
+
+2026-06-01 09:52:31.061 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=5 userId=7 subtotal=50.00 total=60.47 devMode=true
+2026-06-01 09:52:31.078 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=5 userId=7 total=60.47 itemCount=1
+2026-06-01 09:52:31.079 INFO  [email-2] [no-request] p.e.service.impl.AsyncEmailSender - Email disabled - order confirmation #5:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order confirmed</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Thanks for your purchase, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your payment was received and your order is now confirmed.</p>
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #5</strong>
+    <span style="float:right;">Jun 1, 2026 09:52</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from noreply@shopverse.local.</p>
+  </div>
+</body>
+</html>
+
+2026-06-01 09:52:31.173 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Admin refunded order orderId=5 amount=10.00 status=SUCCEEDED
+2026-06-01 13:32:51.532 INFO  [main] [no-request] p.e.ECommerceBackendApplicationTests - Starting ECommerceBackendApplicationTests using Java 17.0.8 with PID 19336 (started by God -01.11 in C:\Users\God -01.11\Desktop\e-commerce-backend - codex)
+2026-06-01 13:32:51.535 INFO  [main] [no-request] p.e.ECommerceBackendApplicationTests - The following 1 profile is active: "test"
+2026-06-01 13:33:07.450 INFO  [main] [no-request] o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-06-01 13:33:07.453 WARN  [main] [no-request] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-06-01 13:33:11.903 INFO  [main] [no-request] p.e.ECommerceBackendApplicationTests - Started ECommerceBackendApplicationTests in 21.496 seconds (process running for 24.477)
+2026-06-01 13:33:11.999 INFO  [main] [no-request] p.ecommercebackend.config.DataSeeder - Running database seed checks...
+2026-06-01 13:33:12.785 INFO  [main] [no-request] p.ecommercebackend.config.DataSeeder - Default shop settings seeded (low stock threshold: 10)
+2026-06-01 13:33:12.841 WARN  [main] [no-request] p.ecommercebackend.config.MailConfig - Email delivery DISABLED - set MAIL_ENABLED=true and configure SMTP settings
+2026-06-01 13:33:14.188 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=1 userId=2 subtotal=50.00 total=60.47 devMode=true
+2026-06-01 13:33:14.315 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=1 userId=2 total=60.47 itemCount=1
+2026-06-01 13:33:14.337 INFO  [email-1] [no-request] p.e.service.impl.AsyncEmailSender - Email disabled - order confirmation #1:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order confirmed</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Thanks for your purchase, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your payment was received and your order is now confirmed.</p>
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #1</strong>
+    <span style="float:right;">Jun 1, 2026 13:33</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from noreply@shopverse.local.</p>
+  </div>
+</body>
+</html>
+
+2026-06-01 13:33:14.388 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order cancelled orderId=1 userId=2
+2026-06-01 13:33:14.705 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=2 userId=3 subtotal=50.00 total=60.47 devMode=true
+2026-06-01 13:33:14.738 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=2 userId=3 total=60.47 itemCount=1
+2026-06-01 13:33:14.740 INFO  [email-2] [no-request] p.e.service.impl.AsyncEmailSender - Email disabled - order confirmation #2:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order confirmed</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Thanks for your purchase, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your payment was received and your order is now confirmed.</p>
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #2</strong>
+    <span style="float:right;">Jun 1, 2026 13:33</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from noreply@shopverse.local.</p>
+  </div>
+</body>
+</html>
+
+2026-06-01 13:33:14.760 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Payment confirmation ignored for already confirmed orderId=2
+2026-06-01 13:33:14.999 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=3 userId=4 subtotal=50.00 total=60.47 devMode=true
+2026-06-01 13:33:15.032 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=3 userId=4 total=60.47 itemCount=1
+2026-06-01 13:33:15.033 INFO  [email-1] [no-request] p.e.service.impl.AsyncEmailSender - Email disabled - order confirmation #3:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order confirmed</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Thanks for your purchase, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your payment was received and your order is now confirmed.</p>
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #3</strong>
+    <span style="float:right;">Jun 1, 2026 13:33</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from noreply@shopverse.local.</p>
+  </div>
+</body>
+</html>
+
+2026-06-01 13:33:15.058 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order cancelled orderId=3 userId=4
+2026-06-01 13:33:15.212 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=4 userId=5 subtotal=50.00 total=60.47 devMode=true
+2026-06-01 13:33:15.230 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=4 userId=5 total=60.47 itemCount=1
+2026-06-01 13:33:15.231 INFO  [email-2] [no-request] p.e.service.impl.AsyncEmailSender - Email disabled - order confirmation #4:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order confirmed</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Thanks for your purchase, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your payment was received and your order is now confirmed.</p>
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #4</strong>
+    <span style="float:right;">Jun 1, 2026 13:33</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from noreply@shopverse.local.</p>
+  </div>
+</body>
+</html>
+
+2026-06-01 13:33:15.322 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Admin updated order status orderId=4 from=CONFIRMED to=PACKED
+2026-06-01 13:33:15.335 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Admin updated order status orderId=4 from=PACKED to=SHIPPED
+2026-06-01 13:33:15.337 INFO  [email-1] [no-request] p.e.service.impl.AsyncEmailSender - Email disabled - shipment notification #4:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order shipped</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Good news, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your order has shipped. Here is what is on the way:</p>
+<div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Tracking</div>
+  <div>UPS: <strong>1Z999AA10123456784</strong></div>
+  <p style="margin:14px 0 0;">
+    <a href="https://www.ups.com/track?tracknum=1Z999AA10123456784" style="display:inline-block;background:#ff5a1f;color:#ffffff;text-decoration:none;font-weight:700;padding:10px 14px;border-radius:8px;">Track shipment</a>
+  </p>
+</div>
+
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #4</strong>
+    <span style="float:right;">Jun 1, 2026 13:33</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from noreply@shopverse.local.</p>
+  </div>
+</body>
+</html>
+
+2026-06-01 13:33:15.494 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=5 userId=7 subtotal=50.00 total=60.47 devMode=true
+2026-06-01 13:33:15.508 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=5 userId=7 total=60.47 itemCount=1
+2026-06-01 13:33:15.508 INFO  [email-2] [no-request] p.e.service.impl.AsyncEmailSender - Email disabled - order confirmation #5:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order confirmed</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Thanks for your purchase, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your payment was received and your order is now confirmed.</p>
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #5</strong>
+    <span style="float:right;">Jun 1, 2026 13:33</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from noreply@shopverse.local.</p>
+  </div>
+</body>
+</html>
+
+2026-06-01 13:33:15.598 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Admin refunded order orderId=5 amount=10.00 status=SUCCEEDED
+2026-06-01 13:40:40.913 INFO  [main] [no-request] p.e.ECommerceBackendApplicationTests - Starting ECommerceBackendApplicationTests using Java 17.0.8 with PID 16604 (started by God -01.11 in C:\Users\God -01.11\Desktop\e-commerce-backend - codex)
+2026-06-01 13:40:40.926 INFO  [main] [no-request] p.e.ECommerceBackendApplicationTests - The following 1 profile is active: "test"
+2026-06-01 13:40:55.629 INFO  [main] [no-request] o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-06-01 13:40:55.631 WARN  [main] [no-request] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-06-01 13:41:00.078 INFO  [main] [no-request] p.e.ECommerceBackendApplicationTests - Started ECommerceBackendApplicationTests in 20.118 seconds (process running for 22.902)
+2026-06-01 13:41:00.211 WARN  [main] [no-request] p.ecommercebackend.config.MailConfig - Email delivery DISABLED - set MAIL_ENABLED=true and configure SMTP settings
+2026-06-01 13:41:00.212 INFO  [main] [no-request] p.ecommercebackend.config.DataSeeder - Running database seed checks...
+2026-06-01 13:41:01.080 INFO  [main] [no-request] p.ecommercebackend.config.DataSeeder - Default shop settings seeded (low stock threshold: 10)
+2026-06-01 13:41:02.611 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=1 userId=2 subtotal=50.00 total=60.47 devMode=true
+2026-06-01 13:41:02.714 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=1 userId=2 total=60.47 itemCount=1
+2026-06-01 13:41:02.740 INFO  [email-1] [no-request] p.e.service.impl.AsyncEmailSender - Email disabled - order confirmation #1:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order confirmed</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Thanks for your purchase, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your payment was received and your order is now confirmed.</p>
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #1</strong>
+    <span style="float:right;">Jun 1, 2026 13:41</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from noreply@shopverse.local.</p>
+  </div>
+</body>
+</html>
+
+2026-06-01 13:41:02.787 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order cancelled orderId=1 userId=2
+2026-06-01 13:41:03.052 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=2 userId=3 subtotal=50.00 total=60.47 devMode=true
+2026-06-01 13:41:03.072 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=2 userId=3 total=60.47 itemCount=1
+2026-06-01 13:41:03.073 INFO  [email-2] [no-request] p.e.service.impl.AsyncEmailSender - Email disabled - order confirmation #2:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order confirmed</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Thanks for your purchase, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your payment was received and your order is now confirmed.</p>
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #2</strong>
+    <span style="float:right;">Jun 1, 2026 13:41</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from noreply@shopverse.local.</p>
+  </div>
+</body>
+</html>
+
+2026-06-01 13:41:03.087 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Payment confirmation ignored for already confirmed orderId=2
+2026-06-01 13:41:03.334 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=3 userId=4 subtotal=50.00 total=60.47 devMode=true
+2026-06-01 13:41:03.371 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=3 userId=4 total=60.47 itemCount=1
+2026-06-01 13:41:03.372 INFO  [email-1] [no-request] p.e.service.impl.AsyncEmailSender - Email disabled - order confirmation #3:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order confirmed</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Thanks for your purchase, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your payment was received and your order is now confirmed.</p>
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #3</strong>
+    <span style="float:right;">Jun 1, 2026 13:41</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from noreply@shopverse.local.</p>
+  </div>
+</body>
+</html>
+
+2026-06-01 13:41:03.401 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order cancelled orderId=3 userId=4
+2026-06-01 13:41:03.559 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=4 userId=5 subtotal=50.00 total=60.47 devMode=true
+2026-06-01 13:41:03.577 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=4 userId=5 total=60.47 itemCount=1
+2026-06-01 13:41:03.578 INFO  [email-2] [no-request] p.e.service.impl.AsyncEmailSender - Email disabled - order confirmation #4:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order confirmed</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Thanks for your purchase, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your payment was received and your order is now confirmed.</p>
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #4</strong>
+    <span style="float:right;">Jun 1, 2026 13:41</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from noreply@shopverse.local.</p>
+  </div>
+</body>
+</html>
+
+2026-06-01 13:41:03.674 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Admin updated order status orderId=4 from=CONFIRMED to=PACKED
+2026-06-01 13:41:03.692 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Admin updated order status orderId=4 from=PACKED to=SHIPPED
+2026-06-01 13:41:03.694 INFO  [email-1] [no-request] p.e.service.impl.AsyncEmailSender - Email disabled - shipment notification #4:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order shipped</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Good news, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your order has shipped. Here is what is on the way:</p>
+<div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Tracking</div>
+  <div>UPS: <strong>1Z999AA10123456784</strong></div>
+  <p style="margin:14px 0 0;">
+    <a href="https://www.ups.com/track?tracknum=1Z999AA10123456784" style="display:inline-block;background:#ff5a1f;color:#ffffff;text-decoration:none;font-weight:700;padding:10px 14px;border-radius:8px;">Track shipment</a>
+  </p>
+</div>
+
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #4</strong>
+    <span style="float:right;">Jun 1, 2026 13:41</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from noreply@shopverse.local.</p>
+  </div>
+</body>
+</html>
+
+2026-06-01 13:41:03.889 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Checkout initiated orderId=5 userId=7 subtotal=50.00 total=60.47 devMode=true
+2026-06-01 13:41:03.906 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Order fulfilled orderId=5 userId=7 total=60.47 itemCount=1
+2026-06-01 13:41:03.907 INFO  [email-2] [no-request] p.e.service.impl.AsyncEmailSender - Email disabled - order confirmation #5:
+<!doctype html>
+<html>
+<body style="margin:0;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif;color:#1e293b;">
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+      <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
+        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+        <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">Order confirmed</h1>
+        <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">Thanks for your purchase, Test.</p>
+      </div>
+      <div style="padding:26px 28px;font-size:15px;line-height:1.65;">
+        <p>Your payment was received and your order is now confirmed.</p>
+<div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">
+  <div style="background:#0f172a;color:#ffffff;padding:14px 16px;">
+    <strong>Order #5</strong>
+    <span style="float:right;">Jun 1, 2026 13:41</span>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f8fafc;">
+        <th align="left" style="padding:12px 16px;color:#64748b;font-size:13px;">Item</th>
+        <th align="center" style="padding:12px 16px;color:#64748b;font-size:13px;">Qty</th>
+        <th align="right" style="padding:12px 16px;color:#64748b;font-size:13px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+  <td style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:600;">Limited Product</td>
+  <td align="center" style="padding:13px 16px;border-top:1px solid #e2e8f0;color:#64748b;">2</td>
+  <td align="right" style="padding:13px 16px;border-top:1px solid #e2e8f0;font-weight:700;">$50.00</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;">Order total</td>
+        <td align="right" style="padding:14px 16px;border-top:1px solid #e2e8f0;font-weight:800;color:#ff5a1f;">$60.47</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:20px 0;">
+  <div style="font-weight:800;margin-bottom:8px;">Shipping address</div>
+  <div>123 Test Street</div>
+  <div>Test City, 12345</div>
+  <div>USA</div>
+</div>
+
+
+      </div>
+    </div>
+    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from noreply@shopverse.local.</p>
+  </div>
+</body>
+</html>
+
+2026-06-01 13:41:04.005 INFO  [main] [no-request] p.e.service.impl.OrderServiceImpl - Admin refunded order orderId=5 amount=10.00 status=SUCCEEDED

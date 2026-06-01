@@ -51,19 +51,26 @@ export default function CartPage() {
     });
   }, [loadCart]);
 
-  const updateQty = async (productId, quantity) => {
+  const updateQty = async (item, quantity) => {
     if (quantity < 1) return;
     try {
-      const updated = await cartApi.updateItem(productId, { productId, quantity });
+      const updated = await cartApi.updateItem(item.productId, {
+        id: item.id,
+        productId: item.productId,
+        variantId: item.variantId,
+        quantity,
+      });
       setCart(updated);
     } catch (err) {
       setError(err.message);
     }
   };
 
-  const remove = async (productId) => {
+  const remove = async (item) => {
     try {
-      const updated = await cartApi.removeItem(productId);
+      const updated = item.id
+        ? await cartApi.removeLineItem(item.id)
+        : await cartApi.removeItem(item.productId);
       setCart(updated);
     } catch (err) {
       setError(err.message);
@@ -98,7 +105,7 @@ export default function CartPage() {
           <Grid size={{ xs: 12, md: 8 }}>
             <Stack spacing={2}>
               {cart.items.map((item) => (
-                <Card key={item.productId} sx={{ p: { xs: 1.5, sm: 2 } }}>
+                <Card key={item.id || `${item.productId}-${item.variantId || 'base'}`} sx={{ p: { xs: 1.5, sm: 2 } }}>
                   <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} alignItems={{ sm: 'center' }}>
                     <Box
                       component="img"
@@ -108,15 +115,21 @@ export default function CartPage() {
                     />
                     <Box sx={{ flex: 1, minWidth: 0 }}>
                       <Typography variant="subtitle1" fontWeight={600}>{item.productName}</Typography>
+                      {item.variantName && (
+                        <Typography variant="body2" color="text.secondary">{item.variantName}</Typography>
+                      )}
+                      {item.sku && (
+                        <Typography variant="caption" color="text.secondary">SKU: {item.sku}</Typography>
+                      )}
                       <Typography variant="body2" color="text.secondary">
                         ${Number(item.unitPrice).toFixed(2)} each
                       </Typography>
                       <Stack direction="row" alignItems="center" spacing={0.5} sx={{ mt: 1 }}>
-                        <IconButton size="small" onClick={() => updateQty(item.productId, item.quantity - 1)}>
+                        <IconButton size="small" onClick={() => updateQty(item, item.quantity - 1)}>
                           <RemoveIcon fontSize="small" />
                         </IconButton>
                         <Typography sx={{ minWidth: 24, textAlign: 'center' }}>{item.quantity}</Typography>
-                        <IconButton size="small" onClick={() => updateQty(item.productId, item.quantity + 1)}>
+                        <IconButton size="small" onClick={() => updateQty(item, item.quantity + 1)}>
                           <AddIcon fontSize="small" />
                         </IconButton>
                       </Stack>
@@ -125,7 +138,7 @@ export default function CartPage() {
                       <Typography variant="h6" color="primary">
                         ${Number(item.lineTotal).toFixed(2)}
                       </Typography>
-                      <Button size="small" color="error" startIcon={<DeleteOutlineOutlinedIcon />} onClick={() => remove(item.productId)}>
+                      <Button size="small" color="error" startIcon={<DeleteOutlineOutlinedIcon />} onClick={() => remove(item)}>
                         Remove
                       </Button>
                     </Stack>

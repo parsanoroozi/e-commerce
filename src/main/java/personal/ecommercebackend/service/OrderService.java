@@ -20,4 +20,6 @@ public interface OrderService {
     PageResponse<OrderResponse> allOrders(Pageable pageable);
     OrderResponse findById(Long id);
     OrderResponse updateStatus(Long id, OrderStatusUpdateRequest request);
+    OrderResponse refundOrder(Long id, RefundRequest request);
+    int cancelAbandonedOrders();
 }

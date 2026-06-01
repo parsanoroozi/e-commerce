@@ -10,6 +10,14 @@ public record AdminDashboardResponse(
         int lowStockThreshold,
         BigDecimal revenueToday,
         BigDecimal revenueTotal,
+        BigDecimal averageOrderValue,
+        List<AnalyticsPointResponse> revenueByDay,
+        List<AnalyticsPointResponse> revenueByWeek,
+        List<AnalyticsPointResponse> revenueByMonth,
+        List<ProductAnalyticsResponse> bestSellingProducts,
+        List<ProductAnalyticsResponse> lowStockHighDemandProducts,
+        List<AnalyticsPointResponse> newCustomersByDay,
+        List<FunnelStepResponse> conversionFunnel,
         List<ProductResponse> lowStockItems,
         List<OrderResponse> recentOrders
 ) {}

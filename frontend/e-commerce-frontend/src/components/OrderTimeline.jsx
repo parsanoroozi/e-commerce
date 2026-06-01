@@ -1,11 +1,12 @@
 import { Chip, Step, StepLabel, Stepper, Typography } from '@mui/material';
 
-const STEPS = ['AWAITING_PAYMENT', 'CONFIRMED', 'SHIPPED', 'DELIVERED'];
+const STEPS = ['AWAITING_PAYMENT', 'CONFIRMED', 'PACKED', 'SHIPPED', 'DELIVERED'];
 
 const LABELS = {
   AWAITING_PAYMENT: 'Payment',
   PENDING: 'Processing',
   CONFIRMED: 'Confirmed',
+  PACKED: 'Packed',
   SHIPPED: 'Shipped',
   DELIVERED: 'Delivered',
   CANCELLED: 'Cancelled',

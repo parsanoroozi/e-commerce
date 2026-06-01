@@ -4,8 +4,10 @@ import personal.ecommercebackend.service.*;
 
 
 import com.stripe.model.PaymentIntent;
+import com.stripe.model.Refund;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -14,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import personal.ecommercebackend.dto.ResolvedShipping;
 import personal.ecommercebackend.dto.request.CheckoutRequest;
 import personal.ecommercebackend.dto.request.OrderStatusUpdateRequest;
+import personal.ecommercebackend.dto.request.RefundRequest;
 import personal.ecommercebackend.dto.response.CheckoutInitResponse;
 import personal.ecommercebackend.dto.response.OrderResponse;
 import personal.ecommercebackend.dto.response.PageResponse;
@@ -24,10 +27,14 @@ import personal.ecommercebackend.mapper.EntityMapper;
 import personal.ecommercebackend.repository.CartRepository;
 import personal.ecommercebackend.repository.OrderRepository;
 import personal.ecommercebackend.repository.ProductRepository;
+import personal.ecommercebackend.repository.ProductVariantRepository;
 import personal.ecommercebackend.repository.UserRepository;
 import personal.ecommercebackend.security.SecurityUtils;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +47,7 @@ public class OrderServiceImpl implements OrderService {
     private final CartRepository cartRepository;
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
+    private final ProductVariantRepository productVariantRepository;
     private final ProductService productService;
     private final StripePaymentService stripePaymentService;
     private final PaymentModeService paymentModeService;
@@ -47,6 +55,9 @@ public class OrderServiceImpl implements OrderService {
     private final ShippingAddressService shippingAddressService;
     private final CheckoutPricingService checkoutPricingService;
     private final NotificationService notificationService;
+
+    @Value("${app.orders.abandoned-timeout-minutes:30}")
+    private long abandonedTimeoutMinutes;
 
     public PaymentConfigResponse paymentConfig() {
         return new PaymentConfigResponse(
@@ -81,11 +92,15 @@ public class OrderServiceImpl implements OrderService {
 
         for (CartItem cartItem : cart.getItems()) {
             Product product = productService.getProduct(cartItem.getProduct().getId());
-            validateProductAvailability(product, cartItem.getQuantity());
+            ProductVariant variant = cartItem.getVariant();
+            validateProductAvailability(product, variant, cartItem.getQuantity());
 
             OrderItem orderItem = OrderItem.builder()
                     .product(product)
+                    .variant(variant)
                     .productName(product.getName())
+                    .variantName(variant == null ? null : variant.displayName())
+                    .sku(variant != null && variant.getSku() != null ? variant.getSku() : product.getSku())
                     .quantity(cartItem.getQuantity())
                     .unitPrice(product.getPrice())
                     .build();
@@ -199,16 +214,26 @@ public class OrderServiceImpl implements OrderService {
         for (OrderItem item : order.getItems()) {
             Product product = productRepository.findByIdForUpdate(item.getProduct().getId())
                     .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, "Product not found"));
-            if (product.getStockQuantity() < item.getQuantity()) {
+            ProductVariant variant = lockVariant(item);
+            int available = variant == null ? product.getStockQuantity() : variant.getStockQuantity();
+            if (available < item.getQuantity()) {
                 throw new ApiException(HttpStatus.CONFLICT,
                         "Insufficient stock for '" + product.getName() + "'");
             }
-            product.setStockQuantity(product.getStockQuantity() - item.getQuantity());
+            if (variant == null) {
+                product.setStockQuantity(product.getStockQuantity() - item.getQuantity());
+            } else {
+                variant.setStockQuantity(variant.getStockQuantity() - item.getQuantity());
+                syncAggregateStock(product);
+            }
         }
 
         cartRepository.findByUserId(order.getUser().getId()).ifPresent(cart -> cart.getItems().clear());
 
+        OrderStatus previous = order.getStatus();
         order.setStatus(OrderStatus.CONFIRMED);
+        appendTimeline(order, null, "PAYMENT_CONFIRMED", previous, OrderStatus.CONFIRMED,
+                null, null, "Payment confirmed and stock deducted.");
         Order saved = orderRepository.save(order);
         log.info("Order fulfilled orderId={} userId={} total={} itemCount={}",
                 saved.getId(), saved.getUser().getId(), saved.getTotalAmount(), saved.getItems().size());
@@ -249,7 +274,10 @@ public class OrderServiceImpl implements OrderService {
         if (order.getStatus() == OrderStatus.CONFIRMED) {
             restoreStock(order);
         }
+        OrderStatus previous = order.getStatus();
         order.setStatus(OrderStatus.CANCELLED);
+        appendTimeline(order, null, "ORDER_CANCELLED", previous, OrderStatus.CANCELLED,
+                null, null, "Order cancelled by customer.");
         Order saved = orderRepository.save(order);
         log.info("Order cancelled orderId={} userId={}", saved.getId(), saved.getUser().getId());
         notificationService.notifyUser(saved.getUser(), "Order cancelled",
@@ -261,7 +289,13 @@ public class OrderServiceImpl implements OrderService {
         for (OrderItem item : order.getItems()) {
             Product product = productRepository.findByIdForUpdate(item.getProduct().getId())
                     .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, "Product not found"));
-            product.setStockQuantity(product.getStockQuantity() + item.getQuantity());
+            ProductVariant variant = lockVariant(item);
+            if (variant == null) {
+                product.setStockQuantity(product.getStockQuantity() + item.getQuantity());
+            } else {
+                variant.setStockQuantity(variant.getStockQuantity() + item.getQuantity());
+                syncAggregateStock(product);
+            }
         }
     }
 
@@ -303,34 +337,236 @@ public class OrderServiceImpl implements OrderService {
 
     @Transactional
     public OrderResponse updateStatus(Long id, OrderStatusUpdateRequest request) {
-        Order order = orderRepository.findWithDetailsById(id)
+        Order order = orderRepository.findWithDetailsByIdForUpdate(id)
                 .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, "Order not found"));
         if (order.getStatus() == OrderStatus.AWAITING_PAYMENT) {
             throw new ApiException(HttpStatus.BAD_REQUEST, "Cannot update status until payment is completed");
         }
+        if (request.status() == OrderStatus.AWAITING_PAYMENT) {
+            throw new ApiException(HttpStatus.BAD_REQUEST, "Cannot move an order back to awaiting payment");
+        }
         OrderStatus previous = order.getStatus();
+        User admin = userRepository.findById(SecurityUtils.currentUserId()).orElse(null);
+        String carrier = normalizeOptional(request.shippingCarrier());
+        String trackingNumber = normalizeOptional(request.trackingNumber());
+        String adminNotes = normalizeOptional(request.adminNotes());
+        String timelineNote = normalizeOptional(request.timelineNote());
+
+        if (carrier != null) {
+            order.setShippingCarrier(carrier);
+        }
+        if (trackingNumber != null) {
+            order.setTrackingNumber(trackingNumber);
+        }
+        if (request.adminNotes() != null) {
+            order.setAdminNotes(adminNotes);
+        }
+        if (request.status() == OrderStatus.CANCELLED
+                && (previous == OrderStatus.CONFIRMED || previous == OrderStatus.PACKED)) {
+            restoreStock(order);
+        }
         order.setStatus(request.status());
+        applyFulfillmentTimestamps(order, request.status());
+        appendTimeline(order, admin, "FULFILLMENT_UPDATED", previous, request.status(),
+                carrier, trackingNumber, timelineNote);
         Order saved = orderRepository.save(order);
         log.info("Admin updated order status orderId={} from={} to={}",
                 saved.getId(), previous, request.status());
 
-        if (request.status() == OrderStatus.SHIPPED && previous != OrderStatus.SHIPPED) {
-            emailService.sendOrderShipped(saved, saved.getUser());
+        if (request.status() == OrderStatus.SHIPPED && !saved.isShipmentEmailSent()) {
+            Long orderId = saved.getId();
+            Long userId = saved.getUser().getId();
+            emailService.sendOrderShipped(saved, saved.getUser())
+                    .thenAccept(sent -> markShipmentEmailSent(orderId, userId, sent));
             notificationService.notifyUser(saved.getUser(), "Order shipped",
                     "Your order #" + saved.getId() + " is on the way!", saved.getId());
+        }
+        if (request.status() == OrderStatus.DELIVERED && previous != OrderStatus.DELIVERED) {
+            notificationService.notifyUser(saved.getUser(), "Order delivered",
+                    "Your order #" + saved.getId() + " has been delivered.", saved.getId());
         }
 
         return EntityMapper.toOrderResponse(saved, true);
     }
 
-    private void validateProductAvailability(Product product, int quantity) {
+    @Transactional
+    public OrderResponse refundOrder(Long id, RefundRequest request) {
+        Order order = orderRepository.findWithDetailsByIdForUpdate(id)
+                .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, "Order not found"));
+        if (order.getStatus() == OrderStatus.AWAITING_PAYMENT || order.getStatus() == OrderStatus.CANCELLED) {
+            throw new ApiException(HttpStatus.BAD_REQUEST, "Only paid orders can be refunded");
+        }
+        if (order.getStripePaymentIntentId() == null) {
+            throw new ApiException(HttpStatus.BAD_REQUEST, "Order has no payment to refund");
+        }
+        BigDecimal amount = request.amount().setScale(2, RoundingMode.HALF_UP);
+        BigDecimal refunded = order.getRefundedAmount() == null ? BigDecimal.ZERO : order.getRefundedAmount();
+        BigDecimal refundable = order.getTotalAmount().subtract(refunded);
+        if (amount.compareTo(refundable) > 0) {
+            throw new ApiException(HttpStatus.BAD_REQUEST, "Refund amount exceeds refundable balance");
+        }
+
+        User admin = userRepository.findById(SecurityUtils.currentUserId()).orElse(null);
+        OrderRefund refund = OrderRefund.builder()
+                .order(order)
+                .adminUser(admin)
+                .amount(amount)
+                .reason(request.reason().trim())
+                .status(RefundStatus.PENDING)
+                .build();
+        order.getRefunds().add(refund);
+
+        try {
+            if (paymentModeService.isDevPaymentIntent(order.getStripePaymentIntentId())) {
+                refund.setProviderRefundId("dev-refund-" + order.getId() + "-" + (order.getRefunds().size()));
+                refund.setStatus(RefundStatus.SUCCEEDED);
+                refund.setProviderMessage("Simulated development refund");
+            } else {
+                Refund stripeRefund = stripePaymentService.refundPayment(
+                        order.getStripePaymentIntentId(),
+                        amount,
+                        request.reason().trim());
+                refund.setProviderRefundId(stripeRefund.getId());
+                refund.setStatus(mapRefundStatus(stripeRefund.getStatus()));
+                refund.setProviderMessage(stripeRefund.getStatus());
+            }
+        } catch (RuntimeException e) {
+            refund.setStatus(RefundStatus.FAILED);
+            refund.setProviderMessage(e.getMessage());
+            appendTimeline(order, admin, "REFUND_FAILED", order.getStatus(), order.getStatus(),
+                    null, null, "Refund failed: " + e.getMessage());
+        }
+
+        if (refund.getStatus() == RefundStatus.SUCCEEDED) {
+            order.setRefundedAmount(refunded.add(amount));
+            if (order.getRefundedAmount().compareTo(order.getTotalAmount()) >= 0) {
+                order.setStatus(OrderStatus.REFUNDED);
+            }
+        }
+        appendTimeline(order, admin, "REFUND_" + refund.getStatus(), order.getStatus(), order.getStatus(),
+                null, null, "Refund " + amount + ": " + request.reason().trim());
+        Order saved = orderRepository.save(order);
+        log.info("Admin refunded order orderId={} amount={} status={}", saved.getId(), amount, refund.getStatus());
+        return EntityMapper.toOrderResponse(saved, true);
+    }
+
+    @Transactional
+    public int cancelAbandonedOrders() {
+        Instant cutoff = Instant.now().minus(abandonedTimeoutMinutes, ChronoUnit.MINUTES);
+        List<Order> abandoned = orderRepository.findByStatusAndCreatedAtBefore(OrderStatus.AWAITING_PAYMENT, cutoff);
+        for (Order order : abandoned) {
+            order.setStatus(OrderStatus.CANCELLED);
+            appendTimeline(order, null, "AUTO_CANCELLED", OrderStatus.AWAITING_PAYMENT, OrderStatus.CANCELLED,
+                    null, null, "Unpaid checkout expired after " + abandonedTimeoutMinutes + " minutes.");
+        }
+        if (!abandoned.isEmpty()) {
+            orderRepository.saveAll(abandoned);
+            log.info("Auto-cancelled abandoned unpaid orders count={}", abandoned.size());
+        }
+        return abandoned.size();
+    }
+
+    private void applyFulfillmentTimestamps(Order order, OrderStatus status) {
+        Instant now = Instant.now();
+        if (status == OrderStatus.PACKED && order.getPackedAt() == null) {
+            order.setPackedAt(now);
+        }
+        if (status == OrderStatus.SHIPPED) {
+            if (order.getPackedAt() == null) {
+                order.setPackedAt(now);
+            }
+            if (order.getShippedAt() == null) {
+                order.setShippedAt(now);
+            }
+        }
+        if (status == OrderStatus.DELIVERED) {
+            if (order.getPackedAt() == null) {
+                order.setPackedAt(now);
+            }
+            if (order.getShippedAt() == null) {
+                order.setShippedAt(now);
+            }
+            if (order.getDeliveredAt() == null) {
+                order.setDeliveredAt(now);
+            }
+        }
+    }
+
+    private void appendTimeline(Order order, User admin, String action, OrderStatus from, OrderStatus to,
+                                String carrier, String trackingNumber, String note) {
+        OrderTimelineEvent event = OrderTimelineEvent.builder()
+                .order(order)
+                .adminUser(admin)
+                .action(action)
+                .fromStatus(from)
+                .toStatus(to)
+                .shippingCarrier(carrier)
+                .trackingNumber(trackingNumber)
+                .note(note)
+                .build();
+        order.getTimelineEvents().add(event);
+    }
+
+    private void markShipmentEmailSent(Long orderId, Long userId, boolean sent) {
+        if (!sent) {
+            log.warn("Shipment email failed orderId={} userId={}", orderId, userId);
+            return;
+        }
+        orderRepository.findById(orderId).ifPresent(order -> {
+            order.setShipmentEmailSent(true);
+            orderRepository.save(order);
+        });
+    }
+
+    private String normalizeOptional(String value) {
+        return value == null || value.isBlank() ? null : value.trim();
+    }
+
+    private RefundStatus mapRefundStatus(String status) {
+        if (status == null) {
+            return RefundStatus.PENDING;
+        }
+        return switch (status.toLowerCase()) {
+            case "succeeded" -> RefundStatus.SUCCEEDED;
+            case "failed" -> RefundStatus.FAILED;
+            case "canceled", "cancelled" -> RefundStatus.CANCELLED;
+            default -> RefundStatus.PENDING;
+        };
+    }
+
+    private void validateProductAvailability(Product product, ProductVariant variant, int quantity) {
         if (!product.isActive()) {
             throw new ApiException(HttpStatus.BAD_REQUEST,
                     "Product '" + product.getName() + "' is no longer available");
         }
-        if (product.getStockQuantity() < quantity) {
+        if (variant == null && !product.getVariants().isEmpty()) {
+            throw new ApiException(HttpStatus.BAD_REQUEST,
+                    "Select a variant for '" + product.getName() + "'");
+        }
+        if (variant != null && !variant.isActive()) {
+            throw new ApiException(HttpStatus.BAD_REQUEST,
+                    "Variant for '" + product.getName() + "' is no longer available");
+        }
+        int available = variant == null ? product.getStockQuantity() : variant.getStockQuantity();
+        if (available < quantity) {
             throw new ApiException(HttpStatus.BAD_REQUEST,
                     "Insufficient stock for '" + product.getName() + "'");
         }
+    }
+
+    private ProductVariant lockVariant(OrderItem item) {
+        if (item.getVariant() == null) {
+            return null;
+        }
+        return productVariantRepository.findByIdForUpdate(item.getVariant().getId())
+                .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, "Product variant not found"));
+    }
+
+    private void syncAggregateStock(Product product) {
+        int total = product.getVariants().stream()
+                .filter(ProductVariant::isActive)
+                .mapToInt(ProductVariant::getStockQuantity)
+                .sum();
+        product.setStockQuantity(total);
     }
 }

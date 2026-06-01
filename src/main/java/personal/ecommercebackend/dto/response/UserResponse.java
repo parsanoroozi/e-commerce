@@ -8,5 +8,7 @@ public record UserResponse(
         String firstName,
         String lastName,
         String mobileNumber,
-        Role role
+        Role role,
+        boolean blocked,
+        String customerSegment
 ) {}

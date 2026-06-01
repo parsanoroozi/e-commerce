@@ -10,12 +10,15 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
 import personal.ecommercebackend.dto.request.CheckoutRequest;
+import personal.ecommercebackend.dto.request.OrderStatusUpdateRequest;
+import personal.ecommercebackend.dto.request.RefundRequest;
 import personal.ecommercebackend.dto.response.CheckoutInitResponse;
 import personal.ecommercebackend.entity.Cart;
 import personal.ecommercebackend.entity.CartItem;
 import personal.ecommercebackend.entity.Category;
 import personal.ecommercebackend.entity.OrderStatus;
 import personal.ecommercebackend.entity.Product;
+import personal.ecommercebackend.entity.ProductVariant;
 import personal.ecommercebackend.entity.Role;
 import personal.ecommercebackend.entity.User;
 import personal.ecommercebackend.repository.CartRepository;
@@ -23,6 +26,7 @@ import personal.ecommercebackend.repository.CategoryRepository;
 import personal.ecommercebackend.repository.NotificationRepository;
 import personal.ecommercebackend.repository.OrderRepository;
 import personal.ecommercebackend.repository.ProductRepository;
+import personal.ecommercebackend.repository.ProductVariantRepository;
 import personal.ecommercebackend.repository.ShippingAddressRepository;
 import personal.ecommercebackend.repository.UserRepository;
 import personal.ecommercebackend.security.UserPrincipal;
@@ -46,6 +50,9 @@ class OrderServiceImplTest {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private ProductVariantRepository productVariantRepository;
 
     @Autowired
     private CartRepository cartRepository;
@@ -142,6 +149,112 @@ class OrderServiceImplTest {
 
         assertThat(cancelled.status()).isEqualTo(OrderStatus.CANCELLED);
         assertThat(reloadedProduct.getStockQuantity()).isEqualTo(3);
+    }
+
+    @Test
+    void variantCheckoutDeductsAndRestoresVariantStock() {
+        ProductVariant variant = productVariantRepository.save(ProductVariant.builder()
+                .product(product)
+                .size("M")
+                .color("Black")
+                .sku("LIMITED-M-BLACK")
+                .stockQuantity(2)
+                .active(true)
+                .build());
+        product.setStockQuantity(2);
+        productRepository.save(product);
+
+        Cart cart = cartRepository.findByUserId(user.getId()).orElseThrow();
+        cart.getItems().clear();
+        cart.getItems().add(CartItem.builder()
+                .cart(cart)
+                .product(product)
+                .variant(variant)
+                .quantity(2)
+                .build());
+        cartRepository.save(cart);
+
+        CheckoutInitResponse checkout = orderService.initiateCheckout(checkoutRequest());
+        orderService.confirmPayment(checkout.orderId());
+
+        Product afterFulfillment = productRepository.findById(product.getId()).orElseThrow();
+        ProductVariant afterVariantFulfillment = productVariantRepository.findById(variant.getId()).orElseThrow();
+        assertThat(afterVariantFulfillment.getStockQuantity()).isZero();
+        assertThat(afterFulfillment.getStockQuantity()).isZero();
+
+        orderService.cancelOrder(checkout.orderId());
+
+        Product afterCancel = productRepository.findById(product.getId()).orElseThrow();
+        ProductVariant afterVariantCancel = productVariantRepository.findById(variant.getId()).orElseThrow();
+        assertThat(afterVariantCancel.getStockQuantity()).isEqualTo(2);
+        assertThat(afterCancel.getStockQuantity()).isEqualTo(2);
+    }
+
+    @Test
+    void adminCanPackShipAndTrackOrderWithInternalTimeline() {
+        CheckoutInitResponse checkout = orderService.initiateCheckout(checkoutRequest());
+        orderService.confirmPayment(checkout.orderId());
+
+        User admin = userRepository.save(User.builder()
+                .email("admin@example.com")
+                .password(passwordEncoder.encode("password123"))
+                .firstName("Admin")
+                .lastName("User")
+                .role(Role.ADMIN)
+                .build());
+        authenticate(admin);
+
+        var packed = orderService.updateStatus(checkout.orderId(), new OrderStatusUpdateRequest(
+                OrderStatus.PACKED,
+                null,
+                null,
+                "Packed carefully.",
+                "Items packed and ready for pickup."));
+
+        var shipped = orderService.updateStatus(checkout.orderId(), new OrderStatusUpdateRequest(
+                OrderStatus.SHIPPED,
+                "UPS",
+                "1Z999AA10123456784",
+                "Packed carefully.",
+                "Handed to carrier."));
+
+        assertThat(packed.status()).isEqualTo(OrderStatus.PACKED);
+        assertThat(packed.packedAt()).isNotNull();
+        assertThat(packed.adminNotes()).isEqualTo("Packed carefully.");
+        assertThat(shipped.status()).isEqualTo(OrderStatus.SHIPPED);
+        assertThat(shipped.shippingCarrier()).isEqualTo("UPS");
+        assertThat(shipped.trackingNumber()).isEqualTo("1Z999AA10123456784");
+        assertThat(shipped.trackingUrl()).contains("ups.com");
+        assertThat(shipped.shippedAt()).isNotNull();
+        assertThat(shipped.staffTimeline())
+                .extracting("action")
+                .contains("PAYMENT_CONFIRMED", "FULFILLMENT_UPDATED");
+    }
+
+    @Test
+    void adminCanPartiallyRefundOrderAndTrackRefundStatus() {
+        CheckoutInitResponse checkout = orderService.initiateCheckout(checkoutRequest());
+        orderService.confirmPayment(checkout.orderId());
+
+        User admin = userRepository.save(User.builder()
+                .email("refund-admin@example.com")
+                .password(passwordEncoder.encode("password123"))
+                .firstName("Refund")
+                .lastName("Admin")
+                .role(Role.ADMIN)
+                .build());
+        authenticate(admin);
+
+        var refunded = orderService.refundOrder(checkout.orderId(), new RefundRequest(
+                new BigDecimal("10.00"),
+                "Customer requested partial refund"));
+
+        assertThat(refunded.status()).isEqualTo(OrderStatus.CONFIRMED);
+        assertThat(refunded.refundedAmount()).isEqualByComparingTo("10.00");
+        assertThat(refunded.refundableAmount()).isEqualByComparingTo("50.47");
+        assertThat(refunded.refunds()).hasSize(1);
+        assertThat(refunded.refunds().get(0).status().name()).isEqualTo("SUCCEEDED");
+        assertThat(refunded.refunds().get(0).reason()).isEqualTo("Customer requested partial refund");
     }
 
     private CheckoutRequest checkoutRequest() {

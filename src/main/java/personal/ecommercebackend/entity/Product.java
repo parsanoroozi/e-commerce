@@ -14,7 +14,8 @@ import java.util.List;
 @Entity
 @Table(name = "products", indexes = {
         @Index(name = "idx_products_active_category", columnList = "active, category_id"),
-        @Index(name = "idx_products_active_stock", columnList = "active, stock_quantity")
+        @Index(name = "idx_products_active_stock", columnList = "active, stock_quantity"),
+        @Index(name = "idx_products_sku", columnList = "sku")
 })
 @Getter
 @Setter
@@ -41,6 +42,9 @@ public class Product {
     @Column(nullable = false, precision = 12, scale = 2)
     private BigDecimal price;
 
+    @Column(length = 100)
+    private String sku;
+
     @Column(nullable = false)
     private Integer stockQuantity;
 
@@ -66,4 +70,10 @@ public class Product {
     @BatchSize(size = 50)
     @Builder.Default
     private List<ProductImage> images = new ArrayList<>();
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OrderBy("id ASC")
+    @BatchSize(size = 50)
+    @Builder.Default
+    private List<ProductVariant> variants = new ArrayList<>();
 }

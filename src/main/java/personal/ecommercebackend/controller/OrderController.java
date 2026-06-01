@@ -10,6 +10,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import personal.ecommercebackend.dto.request.CheckoutRequest;
 import personal.ecommercebackend.dto.request.OrderStatusUpdateRequest;
+import personal.ecommercebackend.dto.request.RefundRequest;
 import personal.ecommercebackend.dto.response.CheckoutInitResponse;
 import personal.ecommercebackend.dto.response.OrderResponse;
 import personal.ecommercebackend.dto.response.PageResponse;
@@ -68,5 +69,14 @@ public class OrderController {
             @PathVariable Long id,
             @Valid @RequestBody OrderStatusUpdateRequest request) {
         return orderService.updateStatus(id, request);
+    }
+
+    @PostMapping("/{id}/refunds")
+    @PreAuthorize("hasRole('ADMIN')")
+    @ResponseStatus(HttpStatus.CREATED)
+    public OrderResponse refund(
+            @PathVariable Long id,
+            @Valid @RequestBody RefundRequest request) {
+        return orderService.refundOrder(id, request);
     }
 }

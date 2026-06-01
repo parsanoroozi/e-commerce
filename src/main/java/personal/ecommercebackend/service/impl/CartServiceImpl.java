@@ -13,6 +13,7 @@ import personal.ecommercebackend.dto.response.CartSummaryResponse;
 import personal.ecommercebackend.entity.Cart;
 import personal.ecommercebackend.entity.CartItem;
 import personal.ecommercebackend.entity.Product;
+import personal.ecommercebackend.entity.ProductVariant;
 import personal.ecommercebackend.entity.User;
 import personal.ecommercebackend.exception.ApiException;
 import personal.ecommercebackend.mapper.EntityMapper;
@@ -44,29 +45,37 @@ public class CartServiceImpl implements CartService {
     public CartResponse addItem(CartItemRequest request) {
         Cart cart = getOrCreateCart();
         Product product = productService.getProduct(request.productId());
+        ProductVariant variant = productService.getVariant(product.getId(), request.variantId());
 
         if (!product.isActive()) {
             throw new ApiException(HttpStatus.BAD_REQUEST, "Product is not available");
         }
-        if (product.getStockQuantity() < request.quantity()) {
+        if (variant == null && !product.getVariants().isEmpty()) {
+            throw new ApiException(HttpStatus.BAD_REQUEST, "Select a product variant");
+        }
+        validateStock(product, variant, request.quantity());
+        if (variant != null && !variant.isActive()) {
+            throw new ApiException(HttpStatus.BAD_REQUEST, "Product variant is not available");
+        }
+        if (availableStock(product, variant) < request.quantity()) {
             throw new ApiException(HttpStatus.BAD_REQUEST, "Insufficient stock");
         }
 
         CartItem existing = cart.getItems().stream()
                 .filter(i -> i.getProduct().getId().equals(product.getId()))
+                .filter(i -> sameVariant(i.getVariant(), variant))
                 .findFirst()
                 .orElse(null);
 
         if (existing != null) {
             int newQty = existing.getQuantity() + request.quantity();
-            if (product.getStockQuantity() < newQty) {
-                throw new ApiException(HttpStatus.BAD_REQUEST, "Insufficient stock");
-            }
+            validateStock(product, variant, newQty);
             existing.setQuantity(newQty);
         } else {
             cart.getItems().add(CartItem.builder()
                     .cart(cart)
                     .product(product)
+                    .variant(variant)
                     .quantity(request.quantity())
                     .build());
         }
@@ -81,12 +90,11 @@ public class CartServiceImpl implements CartService {
 
         CartItem item = cart.getItems().stream()
                 .filter(i -> i.getProduct().getId().equals(productId))
+                .filter(i -> request.variantId() == null || (i.getVariant() != null && i.getVariant().getId().equals(request.variantId())))
                 .findFirst()
                 .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, "Item not in cart"));
 
-        if (product.getStockQuantity() < request.quantity()) {
-            throw new ApiException(HttpStatus.BAD_REQUEST, "Insufficient stock");
-        }
+        validateStock(product, item.getVariant(), request.quantity());
         item.setQuantity(request.quantity());
         return EntityMapper.toCartResponse(cartRepository.save(cart));
     }
@@ -95,6 +103,25 @@ public class CartServiceImpl implements CartService {
     public CartResponse removeItem(Long productId) {
         Cart cart = getOrCreateCart();
         cart.getItems().removeIf(i -> i.getProduct().getId().equals(productId));
+        return EntityMapper.toCartResponse(cartRepository.save(cart));
+    }
+
+    @Transactional
+    public CartResponse updateItemById(Long itemId, CartItemRequest request) {
+        Cart cart = getOrCreateCart();
+        CartItem item = cart.getItems().stream()
+                .filter(i -> i.getId().equals(itemId))
+                .findFirst()
+                .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, "Item not in cart"));
+        validateStock(item.getProduct(), item.getVariant(), request.quantity());
+        item.setQuantity(request.quantity());
+        return EntityMapper.toCartResponse(cartRepository.save(cart));
+    }
+
+    @Transactional
+    public CartResponse removeItemById(Long itemId) {
+        Cart cart = getOrCreateCart();
+        cart.getItems().removeIf(i -> i.getId().equals(itemId));
         return EntityMapper.toCartResponse(cartRepository.save(cart));
     }
 
@@ -114,5 +141,22 @@ public class CartServiceImpl implements CartService {
             user.setCart(cart);
             return cartRepository.save(cart);
         });
+    }
+
+    private void validateStock(Product product, ProductVariant variant, int quantity) {
+        if (availableStock(product, variant) < quantity) {
+            throw new ApiException(HttpStatus.BAD_REQUEST, "Insufficient stock");
+        }
+    }
+
+    private int availableStock(Product product, ProductVariant variant) {
+        return variant == null ? product.getStockQuantity() : variant.getStockQuantity();
+    }
+
+    private boolean sameVariant(ProductVariant left, ProductVariant right) {
+        if (left == null || right == null) {
+            return left == right;
+        }
+        return left.getId().equals(right.getId());
     }
 }

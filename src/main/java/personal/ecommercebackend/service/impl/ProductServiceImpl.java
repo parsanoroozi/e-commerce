@@ -10,10 +10,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import personal.ecommercebackend.dto.request.ProductRequest;
+import personal.ecommercebackend.dto.request.ProductVariantRequest;
 import personal.ecommercebackend.dto.response.PageResponse;
 import personal.ecommercebackend.dto.response.ProductResponse;
 import personal.ecommercebackend.entity.Category;
 import personal.ecommercebackend.entity.Product;
+import personal.ecommercebackend.entity.ProductVariant;
 import personal.ecommercebackend.exception.ApiException;
 import personal.ecommercebackend.mapper.EntityMapper;
 import personal.ecommercebackend.repository.ProductRepository;
@@ -22,6 +24,7 @@ import personal.ecommercebackend.security.SecurityUtils;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -144,12 +147,78 @@ public class ProductServiceImpl implements ProductService {
         product.setName(request.name().trim());
         product.setDescription(request.description());
         product.setPrice(request.price());
+        product.setSku(normalizeOptional(request.sku()));
         product.setStockQuantity(request.stockQuantity());
         product.setImageUrl(request.imageUrl());
         product.setCategory(category);
         if (request.active() != null) {
             product.setActive(request.active());
         }
+        syncVariants(product, request.variants());
+        syncAggregateStock(product);
         return product;
+    }
+
+    private void syncVariants(Product product, List<ProductVariantRequest> requests) {
+        if (requests == null) {
+            return;
+        }
+        product.getVariants().stream()
+                .filter(existing -> requests.stream()
+                        .map(ProductVariantRequest::id)
+                        .filter(Objects::nonNull)
+                        .noneMatch(id -> id.equals(existing.getId())))
+                .forEach(existing -> existing.setActive(false));
+
+        for (ProductVariantRequest request : requests) {
+            ProductVariant variant = request.id() == null
+                    ? null
+                    : product.getVariants().stream()
+                    .filter(existing -> request.id().equals(existing.getId()))
+                    .findFirst()
+                    .orElse(null);
+            if (variant == null) {
+                variant = ProductVariant.builder()
+                        .product(product)
+                        .stockQuantity(0)
+                        .active(true)
+                        .build();
+                product.getVariants().add(variant);
+            }
+            variant.setProduct(product);
+            variant.setSku(normalizeOptional(request.sku()));
+            variant.setSize(normalizeOptional(request.size()));
+            variant.setColor(normalizeOptional(request.color()));
+            variant.setMaterial(normalizeOptional(request.material()));
+            variant.setStockQuantity(request.stockQuantity() == null ? 0 : request.stockQuantity());
+            variant.setActive(request.active() == null || request.active());
+        }
+    }
+
+    private void syncAggregateStock(Product product) {
+        if (product.getVariants() == null || product.getVariants().isEmpty()) {
+            return;
+        }
+        int total = product.getVariants().stream()
+                .filter(ProductVariant::isActive)
+                .mapToInt(ProductVariant::getStockQuantity)
+                .sum();
+        product.setStockQuantity(total);
+    }
+
+    private String normalizeOptional(String value) {
+        return value == null || value.isBlank() ? null : value.trim();
+    }
+
+    @Override
+    public ProductVariant getVariant(Long productId, Long variantId) {
+        if (variantId == null) {
+            return null;
+        }
+        Product product = getProduct(productId);
+        return product.getVariants().stream()
+                .filter(variant -> variant.getId().equals(variantId))
+                .findFirst()
+                .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, "Product variant not found"));
     }
 }

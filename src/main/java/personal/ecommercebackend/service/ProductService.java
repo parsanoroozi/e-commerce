@@ -20,4 +20,5 @@ public interface ProductService {
     void delete(Long id);
 
     Product getProduct(Long id);
+    ProductVariant getVariant(Long productId, Long variantId);
 }

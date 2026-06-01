@@ -17,7 +17,9 @@ public final class EntityMapper {
                 user.getFirstName(),
                 user.getLastName(),
                 user.getMobileNumber(),
-                user.getRole()
+                user.getRole(),
+                user.isBlocked(),
+                user.getCustomerSegment()
         );
     }
 
@@ -42,20 +44,46 @@ public final class EntityMapper {
             });
         }
         String primaryImage = images.isEmpty() ? product.getImageUrl() : images.get(0);
+        List<ProductVariantResponse> variants = product.getVariants() == null
+                ? List.of()
+                : product.getVariants().stream()
+                .map(EntityMapper::toProductVariantResponse)
+                .toList();
+        int stockQuantity = variants.isEmpty()
+                ? product.getStockQuantity()
+                : variants.stream()
+                .filter(ProductVariantResponse::active)
+                .mapToInt(ProductVariantResponse::stockQuantity)
+                .sum();
 
         return new ProductResponse(
                 product.getId(),
                 product.getName(),
                 product.getDescription(),
                 product.getPrice(),
-                product.getStockQuantity(),
+                product.getSku(),
+                stockQuantity,
                 primaryImage,
                 images,
+                variants,
                 product.getCategory().getId(),
                 product.getCategory().getName(),
                 product.isActive(),
                 avgRating,
                 reviewCount
+        );
+    }
+
+    public static ProductVariantResponse toProductVariantResponse(ProductVariant variant) {
+        return new ProductVariantResponse(
+                variant.getId(),
+                variant.getSku(),
+                variant.getSize(),
+                variant.getColor(),
+                variant.getMaterial(),
+                variant.getStockQuantity(),
+                variant.isActive(),
+                variant.displayName()
         );
     }
 
@@ -74,8 +102,14 @@ public final class EntityMapper {
         BigDecimal lineTotal = item.getProduct().getPrice()
                 .multiply(BigDecimal.valueOf(item.getQuantity()));
         return new CartItemResponse(
+                item.getId(),
                 item.getProduct().getId(),
+                item.getVariant() == null ? null : item.getVariant().getId(),
                 item.getProduct().getName(),
+                item.getVariant() == null ? null : item.getVariant().displayName(),
+                item.getVariant() != null && item.getVariant().getSku() != null
+                        ? item.getVariant().getSku()
+                        : item.getProduct().getSku(),
                 item.getProduct().getImageUrl(),
                 item.getProduct().getPrice(),
                 item.getQuantity(),
@@ -89,6 +123,20 @@ public final class EntityMapper {
                 .toList();
         UserResponse customer = includeCustomer ? toUserResponse(order.getUser()) : null;
         BigDecimal subtotal = order.getSubtotalAmount() != null ? order.getSubtotalAmount() : order.getTotalAmount();
+        List<OrderTimelineEventResponse> staffTimeline = includeCustomer
+                ? order.getTimelineEvents().stream()
+                .map(EntityMapper::toOrderTimelineEventResponse)
+                .toList()
+                : List.of();
+        BigDecimal refundedAmount = order.getRefundedAmount() != null ? order.getRefundedAmount() : BigDecimal.ZERO;
+        BigDecimal refundableAmount = order.getTotalAmount() == null
+                ? BigDecimal.ZERO
+                : order.getTotalAmount().subtract(refundedAmount).max(BigDecimal.ZERO);
+        List<RefundResponse> refunds = order.getRefunds() == null
+                ? List.of()
+                : order.getRefunds().stream()
+                .map(refund -> toRefundResponse(refund, includeCustomer))
+                .toList();
         return new OrderResponse(
                 order.getId(),
                 order.getStatus(),
@@ -105,9 +153,48 @@ public final class EntityMapper {
                 order.getShippingCountry(),
                 order.getShippingLatitude(),
                 order.getShippingLongitude(),
+                order.getTrackingNumber(),
+                order.getShippingCarrier(),
+                trackingUrl(order.getShippingCarrier(), order.getTrackingNumber()),
+                includeCustomer ? order.getAdminNotes() : null,
+                order.getPackedAt(),
+                order.getShippedAt(),
+                order.getDeliveredAt(),
+                includeCustomer ? order.isShipmentEmailSent() : null,
+                refundedAmount,
+                refundableAmount,
+                refunds,
                 order.getCreatedAt(),
                 items,
+                staffTimeline,
                 customer
+        );
+    }
+
+    public static OrderTimelineEventResponse toOrderTimelineEventResponse(OrderTimelineEvent event) {
+        return new OrderTimelineEventResponse(
+                event.getId(),
+                event.getAction(),
+                event.getFromStatus(),
+                event.getToStatus(),
+                event.getShippingCarrier(),
+                event.getTrackingNumber(),
+                event.getNote(),
+                event.getAdminUser() == null ? null : event.getAdminUser().getEmail(),
+                event.getCreatedAt()
+        );
+    }
+
+    public static RefundResponse toRefundResponse(OrderRefund refund, boolean includeAdmin) {
+        return new RefundResponse(
+                refund.getId(),
+                refund.getAmount(),
+                refund.getReason(),
+                refund.getStatus(),
+                refund.getProviderRefundId(),
+                refund.getProviderMessage(),
+                includeAdmin && refund.getAdminUser() != null ? refund.getAdminUser().getEmail() : null,
+                refund.getCreatedAt()
         );
     }
 
@@ -115,7 +202,10 @@ public final class EntityMapper {
         BigDecimal lineTotal = item.getUnitPrice().multiply(BigDecimal.valueOf(item.getQuantity()));
         return new OrderItemResponse(
                 item.getProduct().getId(),
+                item.getVariant() == null ? null : item.getVariant().getId(),
                 item.getProductName(),
+                item.getVariantName(),
+                item.getSku(),
                 item.getQuantity(),
                 item.getUnitPrice(),
                 lineTotal
@@ -143,5 +233,26 @@ public final class EntityMapper {
                 coupon.getExpiresAt(),
                 coupon.isActive()
         );
+    }
+
+    private static String trackingUrl(String carrier, String trackingNumber) {
+        if (trackingNumber == null || trackingNumber.isBlank()) {
+            return null;
+        }
+        String encoded = trackingNumber.trim().replace(" ", "%20");
+        String normalizedCarrier = carrier == null ? "" : carrier.trim().toLowerCase();
+        if (normalizedCarrier.contains("ups")) {
+            return "https://www.ups.com/track?tracknum=" + encoded;
+        }
+        if (normalizedCarrier.contains("fedex")) {
+            return "https://www.fedex.com/fedextrack/?trknbr=" + encoded;
+        }
+        if (normalizedCarrier.contains("dhl")) {
+            return "https://www.dhl.com/global-en/home/tracking.html?tracking-id=" + encoded;
+        }
+        if (normalizedCarrier.contains("usps")) {
+            return "https://tools.usps.com/go/TrackConfirmAction?tLabels=" + encoded;
+        }
+        return "https://www.google.com/search?q=" + encoded + "%20tracking";
     }
 }

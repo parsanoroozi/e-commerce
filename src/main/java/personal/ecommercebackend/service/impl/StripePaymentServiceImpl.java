@@ -5,7 +5,9 @@ import personal.ecommercebackend.service.*;
 
 import com.stripe.exception.StripeException;
 import com.stripe.model.PaymentIntent;
+import com.stripe.model.Refund;
 import com.stripe.param.PaymentIntentCreateParams;
+import com.stripe.param.RefundCreateParams;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -50,6 +52,21 @@ public class StripePaymentServiceImpl implements StripePaymentService {
             return PaymentIntent.retrieve(paymentIntentId);
         } catch (StripeException e) {
             throw new ApiException(HttpStatus.BAD_GATEWAY, "Payment provider error: " + e.getMessage());
+        }
+    }
+
+    public Refund refundPayment(String paymentIntentId, BigDecimal amount, String reason) {
+        ensureConfigured();
+        try {
+            RefundCreateParams params = RefundCreateParams.builder()
+                    .setPaymentIntent(paymentIntentId)
+                    .setAmount(toCents(amount))
+                    .setReason(RefundCreateParams.Reason.REQUESTED_BY_CUSTOMER)
+                    .putMetadata("reason", reason)
+                    .build();
+            return Refund.create(params);
+        } catch (StripeException e) {
+            throw new ApiException(HttpStatus.BAD_GATEWAY, "Refund provider error: " + e.getMessage());
         }
     }
 

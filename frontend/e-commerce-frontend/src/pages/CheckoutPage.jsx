@@ -374,7 +374,12 @@ export default function CheckoutPage() {
                 <TableBody>
                   {cart.items.map((item) => (
                     <TableRow key={item.productId} sx={{ '&:last-child td': { borderBottom: 0 } }}>
-                      <TableCell sx={{ px: 1.5, py: 1.25, fontWeight: 600 }}>{item.productName}</TableCell>
+                      <TableCell sx={{ px: 1.5, py: 1.25, fontWeight: 600 }}>
+                        {item.productName}
+                        {item.variantName && (
+                          <Typography variant="caption" display="block" color="text.secondary">{item.variantName}</Typography>
+                        )}
+                      </TableCell>
                       <TableCell align="center" sx={{ px: 1, py: 1.25, color: 'text.secondary' }}>{item.quantity}</TableCell>
                       <TableCell align="right" sx={{ px: 1.5, py: 1.25, fontWeight: 700 }}>${Number(item.lineTotal).toFixed(2)}</TableCell>
                     </TableRow>

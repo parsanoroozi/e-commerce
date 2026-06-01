@@ -1,6 +1,7 @@
 import {
   Alert,
   Box,
+  Button,
   Chip,
   FormControl,
   InputAdornment,
@@ -24,7 +25,8 @@ import { Link as RouterLink } from 'react-router-dom';
 import { subscribeToApiChanges } from '../../api/client';
 import { ordersApi } from '../../api/orders';
 
-const STATUSES = ['AWAITING_PAYMENT', 'PENDING', 'CONFIRMED', 'SHIPPED', 'DELIVERED', 'CANCELLED'];
+const STATUSES = ['AWAITING_PAYMENT', 'PENDING', 'CONFIRMED', 'PACKED', 'SHIPPED', 'DELIVERED', 'CANCELLED', 'REFUNDED'];
+const FULFILLMENT_STATUSES = ['CONFIRMED', 'PACKED', 'SHIPPED', 'DELIVERED', 'CANCELLED', 'REFUNDED'];
 
 export default function AdminOrdersPage() {
   const [orders, setOrders] = useState([]);
@@ -33,6 +35,8 @@ export default function AdminOrdersPage() {
   const [error, setError] = useState('');
   const [statusFilter, setStatusFilter] = useState('ALL');
   const [search, setSearch] = useState('');
+  const [drafts, setDrafts] = useState({});
+  const [refundDrafts, setRefundDrafts] = useState({});
 
   const load = useCallback(() =>
     ordersApi.adminAll(page).then((data) => {
@@ -52,14 +56,76 @@ export default function AdminOrdersPage() {
     });
   }, [load]);
 
-  const updateStatus = async (id, status) => {
+  const initialDraft = (order) => ({
+    status: order.status,
+    shippingCarrier: order.shippingCarrier || '',
+    trackingNumber: order.trackingNumber || '',
+    adminNotes: order.adminNotes || '',
+    timelineNote: '',
+  });
+
+  const draftFor = (order) => drafts[order.id] || initialDraft(order);
+
+  const updateDraft = (order, patch) => {
+    setDrafts((current) => ({
+      ...current,
+      [order.id]: {
+        ...(current[order.id] || initialDraft(order)),
+        ...patch,
+      },
+    }));
+  };
+
+  const updateStatus = async (order, status) => {
+    const draft = draftFor(order);
     try {
-      await ordersApi.updateStatus(id, status);
+      await ordersApi.updateStatus(order.id, {
+        status,
+        shippingCarrier: draft.shippingCarrier || null,
+        trackingNumber: draft.trackingNumber || null,
+        adminNotes: draft.adminNotes,
+        timelineNote: draft.timelineNote || null,
+      });
+      setDrafts((current) => ({ ...current, [order.id]: { ...draft, status, timelineNote: '' } }));
       await load();
     } catch (err) {
       setError(err.message);
     }
   };
+
+  const refundDraftFor = (order) => refundDrafts[order.id] || {
+    amount: order.refundableAmount ? String(Number(order.refundableAmount).toFixed(2)) : '',
+    reason: '',
+  };
+
+  const updateRefundDraft = (order, patch) => {
+    setRefundDrafts((current) => ({
+      ...current,
+      [order.id]: {
+        ...refundDraftFor(order),
+        ...patch,
+      },
+    }));
+  };
+
+  const refundOrder = async (order) => {
+    const draft = refundDraftFor(order);
+    try {
+      await ordersApi.refund(order.id, {
+        amount: Number(draft.amount),
+        reason: draft.reason,
+      });
+      setRefundDrafts((current) => ({ ...current, [order.id]: { amount: '', reason: '' } }));
+      await load();
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  const canRefund = (order) => (
+    Number(order.refundableAmount || 0) > 0
+    && !['AWAITING_PAYMENT', 'CANCELLED', 'REFUNDED'].includes(order.status)
+  );
 
   const filteredOrders = useMemo(() => {
     const needle = search.trim().toLowerCase();
@@ -151,15 +217,115 @@ export default function AdminOrdersPage() {
                   {new Date(order.createdAt).toLocaleString()}
                 </TableCell>
                 <TableCell>${Number(order.totalAmount).toFixed(2)}</TableCell>
-                <TableCell>{order.status}</TableCell>
                 <TableCell>
-                  <FormControl size="small" sx={{ minWidth: 140 }}>
-                    <Select value={order.status} onChange={(e) => updateStatus(order.id, e.target.value)}>
-                      {STATUSES.map((s) => (
-                        <MenuItem key={s} value={s}>{s}</MenuItem>
+                  <Stack spacing={0.5}>
+                    <Chip label={order.status} size="small" />
+                    {order.shippingCarrier && (
+                      <Typography variant="caption" color="text.secondary">{order.shippingCarrier}</Typography>
+                    )}
+                    {order.trackingNumber && (
+                      <Typography variant="caption" color="text.secondary">{order.trackingNumber}</Typography>
+                    )}
+                  </Stack>
+                </TableCell>
+                <TableCell>
+                  <Stack spacing={1} sx={{ minWidth: { xs: 240, md: 360 } }}>
+                    <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+                      {['PACKED', 'SHIPPED', 'DELIVERED'].map((status) => (
+                        <Button
+                          key={status}
+                          size="small"
+                          variant={order.status === status ? 'contained' : 'outlined'}
+                          disabled={order.status === 'AWAITING_PAYMENT'}
+                          onClick={() => updateStatus(order, status)}
+                        >
+                          {status}
+                        </Button>
                       ))}
-                    </Select>
-                  </FormControl>
+                    </Stack>
+                    <Stack direction={{ xs: 'column', md: 'row' }} spacing={1}>
+                      <FormControl size="small" sx={{ minWidth: 140 }}>
+                        <Select
+                          value={draftFor(order).status}
+                          onChange={(e) => updateDraft(order, { status: e.target.value })}
+                        >
+                          {FULFILLMENT_STATUSES.map((s) => (
+                            <MenuItem key={s} value={s}>{s}</MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+                      <TextField
+                        size="small"
+                        label="Carrier"
+                        value={draftFor(order).shippingCarrier}
+                        onChange={(e) => updateDraft(order, { shippingCarrier: e.target.value })}
+                      />
+                      <TextField
+                        size="small"
+                        label="Tracking"
+                        value={draftFor(order).trackingNumber}
+                        onChange={(e) => updateDraft(order, { trackingNumber: e.target.value })}
+                      />
+                    </Stack>
+                    <TextField
+                      size="small"
+                      label="Admin notes"
+                      multiline
+                      minRows={2}
+                      value={draftFor(order).adminNotes}
+                      onChange={(e) => updateDraft(order, { adminNotes: e.target.value })}
+                    />
+                    <TextField
+                      size="small"
+                      label="Timeline note"
+                      value={draftFor(order).timelineNote}
+                      onChange={(e) => updateDraft(order, { timelineNote: e.target.value })}
+                    />
+                    <Button
+                      size="small"
+                      variant="contained"
+                      disabled={order.status === 'AWAITING_PAYMENT'}
+                      onClick={() => updateStatus(order, draftFor(order).status)}
+                    >
+                      Save fulfillment
+                    </Button>
+                    <Box sx={{ borderTop: '1px solid', borderColor: 'divider', pt: 1 }}>
+                      <Typography variant="caption" color="text.secondary" display="block">
+                        Refunded ${Number(order.refundedAmount || 0).toFixed(2)} / refundable ${Number(order.refundableAmount || 0).toFixed(2)}
+                      </Typography>
+                      {order.refunds?.length > 0 && (
+                        <Typography variant="caption" color="text.secondary" display="block">
+                          Last refund: {order.refunds[0].status} ${Number(order.refunds[0].amount).toFixed(2)}
+                        </Typography>
+                      )}
+                      <Stack direction={{ xs: 'column', md: 'row' }} spacing={1} sx={{ mt: 1 }}>
+                        <TextField
+                          size="small"
+                          label="Refund amount"
+                          type="number"
+                          inputProps={{ min: 0.01, step: 0.01, max: Number(order.refundableAmount || 0) }}
+                          value={refundDraftFor(order).amount}
+                          onChange={(e) => updateRefundDraft(order, { amount: e.target.value })}
+                        />
+                        <TextField
+                          size="small"
+                          label="Refund reason"
+                          value={refundDraftFor(order).reason}
+                          onChange={(e) => updateRefundDraft(order, { reason: e.target.value })}
+                          sx={{ flex: 1 }}
+                        />
+                        <Button
+                          size="small"
+                          color="warning"
+                          variant="outlined"
+                          disabled={!canRefund(order) || Number(refundDraftFor(order).amount) <= 0 || !refundDraftFor(order).reason.trim()}
+                          onClick={() => refundOrder(order)}
+                        >
+                          Refund
+                        </Button>
+                      </Stack>
+                    </Box>
+                  </Stack>
                 </TableCell>
               </TableRow>
             ))}

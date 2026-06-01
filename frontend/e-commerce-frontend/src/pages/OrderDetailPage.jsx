@@ -8,6 +8,7 @@ import {
   Chip,
   CircularProgress,
   Grid,
+  Link as MuiLink,
   Stack,
   Table,
   TableBody,
@@ -138,6 +139,22 @@ export default function OrderDetailPage() {
                   Method: {order.shippingMethod}
                 </Typography>
               )}
+              {(order.shippingCarrier || order.trackingNumber) && (
+                <Box sx={{ mt: 2, p: 2, border: '1px solid', borderColor: 'divider', borderRadius: 1 }}>
+                  <Typography variant="subtitle2" gutterBottom>Shipment tracking</Typography>
+                  {order.shippingCarrier && (
+                    <Typography variant="body2" color="text.secondary">Carrier: {order.shippingCarrier}</Typography>
+                  )}
+                  {order.trackingNumber && (
+                    <Typography variant="body2" color="text.secondary">Tracking: {order.trackingNumber}</Typography>
+                  )}
+                  {order.trackingUrl && (
+                    <MuiLink href={order.trackingUrl} target="_blank" rel="noreferrer" variant="body2">
+                      Track shipment
+                    </MuiLink>
+                  )}
+                </Box>
+              )}
               <Typography variant="h6" sx={{ mt: 2, mb: 1 }}>Items</Typography>
               <TableContainer sx={{ overflowX: 'auto' }}>
                 <Table size="small">
@@ -152,7 +169,15 @@ export default function OrderDetailPage() {
                   <TableBody>
                     {order.items.map((item) => (
                       <TableRow key={item.productId}>
-                        <TableCell>{item.productName}</TableCell>
+                        <TableCell>
+                          {item.productName}
+                          {item.variantName && (
+                            <Typography variant="caption" display="block" color="text.secondary">{item.variantName}</Typography>
+                          )}
+                          {item.sku && (
+                            <Typography variant="caption" display="block" color="text.secondary">SKU: {item.sku}</Typography>
+                          )}
+                        </TableCell>
                         <TableCell align="right">{item.quantity}</TableCell>
                         <TableCell align="right">${Number(item.unitPrice).toFixed(2)}</TableCell>
                         <TableCell align="right">${Number(item.lineTotal).toFixed(2)}</TableCell>
@@ -176,7 +201,65 @@ export default function OrderDetailPage() {
               couponCode={order.couponCode}
               shippingMethod={order.shippingMethod}
             />
+            {Number(order.refundedAmount || 0) > 0 && (
+              <Box sx={{ mt: 2, pt: 2, borderTop: '1px solid', borderColor: 'divider' }}>
+                <Typography variant="subtitle2">Refunds</Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Refunded: ${Number(order.refundedAmount).toFixed(2)}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Remaining refundable: ${Number(order.refundableAmount || 0).toFixed(2)}
+                </Typography>
+                <Stack spacing={1} sx={{ mt: 1 }}>
+                  {(order.refunds || []).map((refund) => (
+                    <Box key={refund.id}>
+                      <Typography variant="caption" display="block">
+                        {refund.status} - ${Number(refund.amount).toFixed(2)}
+                      </Typography>
+                      <Typography variant="caption" color="text.secondary" display="block">
+                        {refund.reason}
+                      </Typography>
+                    </Box>
+                  ))}
+                </Stack>
+              </Box>
+            )}
           </Card>
+          {(order.adminNotes || order.staffTimeline?.length > 0) && (
+            <Card sx={{ p: 2.5, mt: 2 }}>
+              <Typography variant="h6" gutterBottom>Staff timeline</Typography>
+              {order.adminNotes && (
+                <Box sx={{ mb: 2 }}>
+                  <Typography variant="subtitle2">Admin notes</Typography>
+                  <Typography variant="body2" color="text.secondary" sx={{ whiteSpace: 'pre-wrap' }}>
+                    {order.adminNotes}
+                  </Typography>
+                </Box>
+              )}
+              <Stack spacing={1.5}>
+                {(order.staffTimeline || []).map((event) => (
+                  <Box key={event.id} sx={{ borderLeft: '3px solid', borderColor: 'primary.main', pl: 1.5 }}>
+                    <Typography variant="subtitle2">
+                      {event.action} {event.fromStatus ? `${event.fromStatus} to ${event.toStatus}` : event.toStatus}
+                    </Typography>
+                    <Typography variant="caption" color="text.secondary" display="block">
+                      {new Date(event.createdAt).toLocaleString()} {event.adminEmail ? `by ${event.adminEmail}` : ''}
+                    </Typography>
+                    {(event.shippingCarrier || event.trackingNumber) && (
+                      <Typography variant="caption" color="text.secondary" display="block">
+                        {[event.shippingCarrier, event.trackingNumber].filter(Boolean).join(' - ')}
+                      </Typography>
+                    )}
+                    {event.note && (
+                      <Typography variant="body2" color="text.secondary" sx={{ whiteSpace: 'pre-wrap' }}>
+                        {event.note}
+                      </Typography>
+                    )}
+                  </Box>
+                ))}
+              </Stack>
+            </Card>
+          )}
         </Grid>
       </Grid>
     </PageContainer>

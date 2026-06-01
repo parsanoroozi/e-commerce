@@ -51,7 +51,8 @@ public class EmailServiceImpl implements EmailService {
                         <p>Your order has shipped. Here is what is on the way:</p>
                         %s
                         %s
-                        """.formatted(orderSummary(order), shippingBlock(order)));
+                        %s
+                        """.formatted(trackingBlock(order), orderSummary(order), shippingBlock(order)));
         return asyncEmailSender.sendHtml(user.getEmail(), subject, body, "shipment notification #" + order.getId());
     }
 
@@ -149,6 +150,25 @@ public class EmailServiceImpl implements EmailService {
                 escape(order.getShippingCountry()));
     }
 
+    private String trackingBlock(Order order) {
+        if (order.getTrackingNumber() == null || order.getTrackingNumber().isBlank()) {
+            return "";
+        }
+        String url = trackingUrl(order.getShippingCarrier(), order.getTrackingNumber());
+        String carrier = order.getShippingCarrier() == null || order.getShippingCarrier().isBlank()
+                ? "Carrier"
+                : order.getShippingCarrier();
+        return """
+                <div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;padding:16px;margin:20px 0;">
+                  <div style="font-weight:800;margin-bottom:8px;">Tracking</div>
+                  <div>%s: <strong>%s</strong></div>
+                  <p style="margin:14px 0 0;">
+                    <a href="%s" style="display:inline-block;background:#ff5a1f;color:#ffffff;text-decoration:none;font-weight:700;padding:10px 14px;border-radius:8px;">Track shipment</a>
+                  </p>
+                </div>
+                """.formatted(escape(carrier), escape(order.getTrackingNumber()), escape(url));
+    }
+
     private String wrapEmail(String title, String subtitle, String content) {
         return """
                 <!doctype html>
@@ -187,5 +207,23 @@ public class EmailServiceImpl implements EmailService {
     private String escape(String value) {
         if (value == null) return "";
         return value.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
+    }
+
+    private String trackingUrl(String carrier, String trackingNumber) {
+        String encoded = trackingNumber.trim().replace(" ", "%20");
+        String normalizedCarrier = carrier == null ? "" : carrier.trim().toLowerCase();
+        if (normalizedCarrier.contains("ups")) {
+            return "https://www.ups.com/track?tracknum=" + encoded;
+        }
+        if (normalizedCarrier.contains("fedex")) {
+            return "https://www.fedex.com/fedextrack/?trknbr=" + encoded;
+        }
+        if (normalizedCarrier.contains("dhl")) {
+            return "https://www.dhl.com/global-en/home/tracking.html?tracking-id=" + encoded;
+        }
+        if (normalizedCarrier.contains("usps")) {
+            return "https://tools.usps.com/go/TrackConfirmAction?tLabels=" + encoded;
+        }
+        return "https://www.google.com/search?q=" + encoded + "%20tracking";
     }
 }

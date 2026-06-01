@@ -8,8 +8,10 @@ import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import personal.ecommercebackend.entity.Order;
+import personal.ecommercebackend.entity.OrderStatus;
 
 import jakarta.persistence.LockModeType;
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,16 +20,27 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     @EntityGraph(attributePaths = {"items", "items.product", "user"})
     Page<Order> findAllByOrderByCreatedAtDesc(Pageable pageable);
 
+    @EntityGraph(attributePaths = {"items", "items.product", "user"})
+    @Query("SELECT DISTINCT o FROM Order o")
+    List<Order> findAllWithItemsAndRefunds();
+
     @EntityGraph(attributePaths = {"items", "items.product"})
     Page<Order> findByUserIdOrderByCreatedAtDesc(Long userId, Pageable pageable);
 
-    @EntityGraph(attributePaths = {"items"})
+    @EntityGraph(attributePaths = {"items", "items.product", "user"})
     List<Order> findByUserId(Long userId);
 
     boolean existsByUserId(Long userId);
 
+    List<Order> findByStatusAndCreatedAtBefore(OrderStatus status, Instant createdBefore);
+
     @EntityGraph(attributePaths = {"items", "items.product", "user"})
     Optional<Order> findWithDetailsById(Long id);
+
+    @Lock(LockModeType.PESSIMISTIC_WRITE)
+    @EntityGraph(attributePaths = {"items", "items.product", "user"})
+    @Query("SELECT o FROM Order o WHERE o.id = :id")
+    Optional<Order> findWithDetailsByIdForUpdate(@Param("id") Long id);
 
     @EntityGraph(attributePaths = {"items", "items.product", "user"})
     Optional<Order> findWithDetailsByStripePaymentIntentId(String stripePaymentIntentId);

@@ -13,14 +13,20 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 import personal.ecommercebackend.dto.request.UpdateLowStockThresholdRequest;
+import personal.ecommercebackend.dto.request.CustomerManagementRequest;
+import personal.ecommercebackend.dto.request.InventoryAdjustmentRequest;
 import personal.ecommercebackend.dto.response.AdminDashboardResponse;
 import personal.ecommercebackend.dto.response.AdminSettingsResponse;
 import personal.ecommercebackend.dto.response.AuditLogResponse;
+import personal.ecommercebackend.dto.response.CustomerDetailResponse;
+import personal.ecommercebackend.dto.response.CustomerSummaryResponse;
+import personal.ecommercebackend.dto.response.InventoryAdjustmentResponse;
 import personal.ecommercebackend.dto.response.OrderResponse;
 import personal.ecommercebackend.dto.response.PageResponse;
 import personal.ecommercebackend.service.AdminDashboardService;
 import personal.ecommercebackend.service.AdminUserService;
 import personal.ecommercebackend.service.AuditService;
+import personal.ecommercebackend.service.InventoryService;
 import personal.ecommercebackend.service.OrderService;
 import personal.ecommercebackend.service.ShopSettingsService;
 
@@ -35,6 +41,7 @@ public class AdminController {
     private final AuditService auditService;
     private final OrderService orderService;
     private final ShopSettingsService shopSettingsService;
+    private final InventoryService inventoryService;
 
     @GetMapping("/dashboard")
     public AdminDashboardResponse dashboard() {
@@ -47,9 +54,30 @@ public class AdminController {
     }
 
     @GetMapping("/users")
-    public PageResponse<personal.ecommercebackend.dto.response.UserResponse> users(
+    public PageResponse<CustomerSummaryResponse> users(
             @PageableDefault(size = 20, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
         return adminUserService.list(pageable);
+    }
+
+    @GetMapping("/users/{id}")
+    public CustomerDetailResponse user(@PathVariable Long id) {
+        return adminUserService.detail(id);
+    }
+
+    @PatchMapping("/users/{id}")
+    public CustomerDetailResponse updateUser(
+            @PathVariable Long id,
+            @Valid @RequestBody CustomerManagementRequest request) {
+        CustomerDetailResponse response = adminUserService.updateCustomer(id, request);
+        auditService.log("UPDATE", "USER", String.valueOf(id), "Customer management fields updated");
+        return response;
+    }
+
+    @PostMapping("/users/{id}/password-reset")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void sendUserPasswordReset(@PathVariable Long id) {
+        adminUserService.sendPasswordReset(id);
+        auditService.log("PASSWORD_RESET", "USER", String.valueOf(id), null);
     }
 
     @DeleteMapping("/users/{id}")
@@ -68,6 +96,20 @@ public class AdminController {
     public PageResponse<AuditLogResponse> auditLogs(
             @PageableDefault(size = 20, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
         return auditService.list(pageable);
+    }
+
+    @PostMapping("/inventory/adjustments")
+    @ResponseStatus(HttpStatus.CREATED)
+    public InventoryAdjustmentResponse adjustInventory(@Valid @RequestBody InventoryAdjustmentRequest request) {
+        InventoryAdjustmentResponse response = inventoryService.adjust(request);
+        auditService.log("ADJUST", "INVENTORY", String.valueOf(response.productId()), request.reason());
+        return response;
+    }
+
+    @GetMapping("/inventory/adjustments")
+    public PageResponse<InventoryAdjustmentResponse> inventoryHistory(
+            @PageableDefault(size = 20, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
+        return inventoryService.history(pageable);
     }
 
     @GetMapping("/orders/export")

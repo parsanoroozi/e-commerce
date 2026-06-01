@@ -42,6 +42,18 @@ public class CartController {
         return cartService.removeItem(productId);
     }
 
+    @PutMapping("/line-items/{itemId}")
+    public CartResponse updateLineItem(
+            @PathVariable Long itemId,
+            @Valid @RequestBody CartItemRequest request) {
+        return cartService.updateItemById(itemId, request);
+    }
+
+    @DeleteMapping("/line-items/{itemId}")
+    public CartResponse removeLineItem(@PathVariable Long itemId) {
+        return cartService.removeItemById(itemId);
+    }
+
     @DeleteMapping
     public CartResponse clearCart() {
         return cartService.clearCart();

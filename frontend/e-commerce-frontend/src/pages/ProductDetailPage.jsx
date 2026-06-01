@@ -49,6 +49,7 @@ export default function ProductDetailPage() {
   const [reviews, setReviews] = useState([]);
   const [activeImage, setActiveImage] = useState('');
   const [quantity, setQuantity] = useState(1);
+  const [variantId, setVariantId] = useState('');
   const [inWishlist, setInWishlist] = useState(false);
   const [reviewForm, setReviewForm] = useState({ rating: 5, comment: '' });
   const [loading, setLoading] = useState(true);
@@ -73,6 +74,9 @@ export default function ProductDetailPage() {
         setReviews(reviewsResult.status === 'fulfilled' ? reviewsResult.value : []);
         const imgs = prod.images?.length ? prod.images : prod.imageUrl ? [prod.imageUrl] : [];
         setActiveImage(imgs[0] || '');
+        const firstAvailableVariant = prod.variants?.find((v) => v.active && v.stockQuantity > 0);
+        setVariantId(firstAvailableVariant ? String(firstAvailableVariant.id) : '');
+        setQuantity(1);
         trackRecent(id);
       })
       .catch((err) => {
@@ -97,6 +101,9 @@ export default function ProductDetailPage() {
     : product?.imageUrl
       ? [product.imageUrl]
       : [];
+  const activeVariants = product?.variants?.filter((v) => v.active) || [];
+  const selectedVariant = activeVariants.find((v) => String(v.id) === String(variantId));
+  const availableStock = selectedVariant ? selectedVariant.stockQuantity : product?.stockQuantity || 0;
 
   const addToCart = async () => {
     if (!isAuthenticated) {
@@ -104,7 +111,11 @@ export default function ProductDetailPage() {
       return;
     }
     try {
-      await cartApi.addItem({ productId: Number(id), quantity });
+      await cartApi.addItem({
+        productId: Number(id),
+        variantId: selectedVariant ? selectedVariant.id : null,
+        quantity,
+      });
       showSuccess('Added to cart');
     } catch (err) {
       showError(err.message);
@@ -214,14 +225,34 @@ export default function ProductDetailPage() {
           </Typography>
           <Typography color="text.secondary" paragraph>{product.description}</Typography>
           <Typography variant="body2" color="text.secondary" gutterBottom>
-            In stock: {product.stockQuantity}
+            In stock: {availableStock}
           </Typography>
+          {activeVariants.length > 0 && (
+            <FormControl size="small" fullWidth sx={{ maxWidth: 360, my: 1 }}>
+              <InputLabel>Variant</InputLabel>
+              <Select
+                value={variantId}
+                label="Variant"
+                onChange={(e) => {
+                  const next = activeVariants.find((v) => String(v.id) === String(e.target.value));
+                  setVariantId(e.target.value);
+                  setQuantity((current) => Math.min(Math.max(1, current), next?.stockQuantity || 1));
+                }}
+              >
+                {activeVariants.map((variant) => (
+                  <MenuItem key={variant.id} value={String(variant.id)} disabled={variant.stockQuantity < 1}>
+                    {variant.displayName || variant.sku || `Variant #${variant.id}`} - {variant.stockQuantity} left
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          )}
           <TextField
             label="Quantity"
             type="number"
             size="small"
             sx={{ width: 100, my: 2 }}
-            inputProps={{ min: 1, max: product.stockQuantity }}
+            inputProps={{ min: 1, max: availableStock }}
             value={quantity}
             onChange={(e) => {
               const next = Number(e.target.value);
@@ -229,11 +260,11 @@ export default function ProductDetailPage() {
                 setQuantity(1);
                 return;
               }
-              setQuantity(Math.min(product.stockQuantity, Math.max(1, Math.floor(next))));
+              setQuantity(Math.min(availableStock, Math.max(1, Math.floor(next))));
             }}
           />
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1}>
-            <Button variant="contained" disabled={product.stockQuantity < 1} onClick={addToCart}>
+            <Button variant="contained" disabled={availableStock < 1 || (activeVariants.length > 0 && !selectedVariant)} onClick={addToCart}>
               Add to cart
             </Button>
             <Button
