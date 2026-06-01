@@ -19,6 +19,7 @@ public record OrderResponse(
         ShippingMethod shippingMethod,
         String shippingStreet,
         String shippingCity,
+        String shippingState,
         String shippingZipCode,
         String shippingCountry,
         Double shippingLatitude,

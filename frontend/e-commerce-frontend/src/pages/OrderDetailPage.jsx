@@ -127,7 +127,7 @@ export default function OrderDetailPage() {
             <CardContent>
               <Typography variant="h6" gutterBottom>Shipping</Typography>
               <Typography variant="body2" paragraph>
-                {order.shippingStreet}, {order.shippingCity}, {order.shippingZipCode}, {order.shippingCountry}
+                {[order.shippingStreet, order.shippingCity, order.shippingState, order.shippingZipCode, order.shippingCountry].filter(Boolean).join(', ')}
               </Typography>
               {order.shippingLatitude != null && order.shippingLongitude != null && (
                 <Typography variant="body2" color="text.secondary" gutterBottom>

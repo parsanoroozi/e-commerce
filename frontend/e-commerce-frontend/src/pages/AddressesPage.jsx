@@ -10,22 +10,23 @@ import {
   FormControlLabel,
   Pagination,
   Stack,
-  TextField,
   Typography,
 } from '@mui/material';
 import { useCallback, useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { shippingAddressesApi } from '../api/shippingAddresses';
+import AddressFormFields from '../components/AddressFormFields';
 import PageContainer from '../components/layout/PageContainer';
-import LocationPicker from '../components/LocationPicker';
 import { useConfirm } from '../context/ConfirmDialogContext';
+import { formatAddressLine, validatePostalCode } from '../utils/address';
 
 const emptyForm = {
   label: '',
   street: '',
   city: '',
+  state: '',
   zipCode: '',
-  country: '',
+  country: 'United States',
   latitude: '',
   longitude: '',
   isDefault: false,
@@ -39,6 +40,7 @@ export default function AddressesPage() {
   const [editingId, setEditingId] = useState(null);
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
+  const [fieldErrors, setFieldErrors] = useState({});
   const confirm = useConfirm();
 
   const load = useCallback(() =>
@@ -55,6 +57,12 @@ export default function AddressesPage() {
     e.preventDefault();
     setError('');
     setMessage('');
+    const nextErrors = validateAddressForm(form);
+    setFieldErrors(nextErrors);
+    if (Object.keys(nextErrors).length > 0) {
+      setError('Fix the highlighted address fields before saving.');
+      return;
+    }
     try {
       if (editingId) {
         await shippingAddressesApi.update(editingId, normalizeAddressPayload(form));
@@ -64,6 +72,7 @@ export default function AddressesPage() {
         setMessage('Address saved');
       }
       setForm(emptyForm);
+      setFieldErrors({});
       setEditingId(null);
       await load();
     } catch (err) {
@@ -77,6 +86,7 @@ export default function AddressesPage() {
       label: addr.label || '',
       street: addr.street,
       city: addr.city,
+      state: addr.state || '',
       zipCode: addr.zipCode,
       country: addr.country,
       latitude: addr.latitude ?? '',
@@ -121,23 +131,7 @@ export default function AddressesPage() {
         <CardContent>
           <Typography variant="h6" gutterBottom>{editingId ? 'Edit address' : 'Add address'}</Typography>
           <Stack spacing={2}>
-            <TextField label="Label (optional)" placeholder="Home, Work..." value={form.label} onChange={(e) => setForm({ ...form, label: e.target.value })} />
-            <TextField label="Street" required value={form.street} onChange={(e) => setForm({ ...form, street: e.target.value })} />
-            <TextField label="City" required value={form.city} onChange={(e) => setForm({ ...form, city: e.target.value })} />
-            <TextField label="Postal code" required value={form.zipCode} onChange={(e) => setForm({ ...form, zipCode: e.target.value })} />
-            <TextField label="Country" required value={form.country} onChange={(e) => setForm({ ...form, country: e.target.value })} />
-            <LocationPicker
-              value={{ latitude: form.latitude, longitude: form.longitude }}
-              onChange={(location) => setForm((current) => ({
-                ...current,
-                street: location.street ?? current.street,
-                city: location.city ?? current.city,
-                zipCode: location.zipCode ?? current.zipCode,
-                country: location.country ?? current.country,
-                latitude: location.latitude,
-                longitude: location.longitude,
-              }))}
-            />
+            <AddressFormFields form={form} setForm={setForm} errors={fieldErrors} />
             <FormControlLabel
               control={<Checkbox checked={form.isDefault} onChange={(e) => setForm({ ...form, isDefault: e.target.checked })} />}
               label="Set as default"
@@ -145,7 +139,7 @@ export default function AddressesPage() {
             <Stack direction="row" spacing={1}>
               <Button type="submit" variant="contained">{editingId ? 'Update' : 'Save'}</Button>
               {editingId && (
-                <Button type="button" variant="outlined" onClick={() => { setEditingId(null); setForm(emptyForm); }}>
+                <Button type="button" variant="outlined" onClick={() => { setEditingId(null); setForm(emptyForm); setFieldErrors({}); }}>
                   Cancel
                 </Button>
               )}
@@ -163,9 +157,7 @@ export default function AddressesPage() {
                   {addr.label || 'Address'}
                   {addr.isDefault && <Chip label="Default" size="small" color="primary" sx={{ ml: 1 }} />}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {addr.street}, {addr.city}, {addr.zipCode}, {addr.country}
-                </Typography>
+                <Typography variant="body2" color="text.secondary">{formatAddressLine(addr)}</Typography>
                 {addr.latitude != null && addr.longitude != null && (
                   <Typography variant="body2" color="text.secondary">
                     Map: {Number(addr.latitude).toFixed(5)}, {Number(addr.longitude).toFixed(5)}
@@ -208,4 +200,13 @@ function normalizeAddressPayload(form) {
     latitude: form.latitude === '' ? null : Number(form.latitude),
     longitude: form.longitude === '' ? null : Number(form.longitude),
   };
+}
+
+function validateAddressForm(form) {
+  const errors = {};
+  if (!form.street.trim()) errors.street = 'Street address is required.';
+  if (!form.city.trim()) errors.city = 'City is required.';
+  const postalError = validatePostalCode(form.country, form.zipCode);
+  if (postalError) errors.zipCode = postalError;
+  return errors;
 }

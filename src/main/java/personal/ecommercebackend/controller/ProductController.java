@@ -18,6 +18,7 @@ import personal.ecommercebackend.service.AuditService;
 import personal.ecommercebackend.service.ProductService;
 
 import java.util.List;
+import java.math.BigDecimal;
 
 @RestController
 @RequestMapping("/api/products")
@@ -38,8 +39,12 @@ public class ProductController {
     public PageResponse<ProductResponse> search(
             @RequestParam(required = false) Long categoryId,
             @RequestParam(required = false) String search,
+            @RequestParam(required = false) BigDecimal minPrice,
+            @RequestParam(required = false) BigDecimal maxPrice,
+            @RequestParam(required = false) Boolean inStock,
+            @RequestParam(required = false) Integer minRating,
             @PageableDefault(size = 12, sort = "name", direction = Sort.Direction.ASC) Pageable pageable) {
-        return productService.search(categoryId, search, pageable);
+        return productService.search(categoryId, search, minPrice, maxPrice, inStock, minRating, pageable);
     }
 
     @GetMapping("/featured")
@@ -50,6 +55,11 @@ public class ProductController {
     @GetMapping("/{id}")
     public ProductResponse findById(@PathVariable Long id) {
         return productService.findById(id);
+    }
+
+    @GetMapping("/slug/{slug}")
+    public ProductResponse findBySlug(@PathVariable String slug) {
+        return productService.findBySlug(slug);
     }
 
     @GetMapping("/{id}/related")

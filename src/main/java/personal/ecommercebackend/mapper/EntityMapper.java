@@ -177,6 +177,7 @@ public final class EntityMapper {
                 order.getShippingMethod(),
                 order.getShippingStreet(),
                 order.getShippingCity(),
+                order.getShippingState(),
                 order.getShippingZipCode(),
                 order.getShippingCountry(),
                 order.getShippingLatitude(),

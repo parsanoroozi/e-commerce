@@ -65,6 +65,7 @@ public class ShippingAddressServiceImpl implements ShippingAddressService {
         address.setLabel(normalizeLabel(request.label()));
         address.setStreet(request.street().trim());
         address.setCity(request.city().trim());
+        address.setState(normalizeLabel(request.state()));
         address.setZipCode(request.zipCode().trim());
         address.setCountry(request.country().trim());
         address.setLatitude(request.latitude());
@@ -120,6 +121,7 @@ public class ShippingAddressServiceImpl implements ShippingAddressService {
                 request.label(),
                 request.shippingStreet().trim(),
                 request.shippingCity().trim(),
+                normalizeLabel(request.shippingState()),
                 request.shippingZipCode().trim(),
                 request.shippingCountry().trim(),
                 request.shippingLatitude(),
@@ -145,6 +147,7 @@ public class ShippingAddressServiceImpl implements ShippingAddressService {
                     if (request.label() != null && !request.label().isBlank()) {
                         existing.setLabel(normalizeLabel(request.label()));
                     }
+                    existing.setState(normalizeLabel(request.state()));
                     existing.setLatitude(request.latitude());
                     existing.setLongitude(request.longitude());
                     return shippingAddressRepository.save(existing);
@@ -156,6 +159,7 @@ public class ShippingAddressServiceImpl implements ShippingAddressService {
                             .label(normalizeLabel(request.label()))
                             .street(street)
                             .city(city)
+                            .state(normalizeLabel(request.state()))
                             .zipCode(zip)
                             .country(country)
                             .latitude(request.latitude())
@@ -197,6 +201,7 @@ public class ShippingAddressServiceImpl implements ShippingAddressService {
         return new ResolvedShipping(
                 address.getStreet(),
                 address.getCity(),
+                address.getState(),
                 address.getZipCode(),
                 address.getCountry(),
                 address.getLatitude(),
@@ -209,6 +214,7 @@ public class ShippingAddressServiceImpl implements ShippingAddressService {
                 address.getLabel(),
                 address.getStreet(),
                 address.getCity(),
+                address.getState(),
                 address.getZipCode(),
                 address.getCountry(),
                 address.getLatitude(),

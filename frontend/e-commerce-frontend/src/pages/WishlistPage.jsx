@@ -1,8 +1,9 @@
-import { Button, Card, Grid, Pagination, Stack, Typography } from '@mui/material';
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import { Grid, Pagination, Stack, Typography } from '@mui/material';
 import { useCallback, useEffect, useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
 import { subscribeToApiChanges } from '../api/client';
 import { wishlistApi } from '../api/wishlist';
+import EmptyState from '../components/common/EmptyState';
 import PageContainer from '../components/layout/PageContainer';
 import ProductCard from '../components/ProductCard';
 import { ProductGridSkeleton } from '../components/Skeleton';
@@ -13,16 +14,23 @@ export default function WishlistPage() {
   const [page, setPage] = useState(0);
   const [pageData, setPageData] = useState({ page: 0, totalPages: 0 });
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
-  const load = useCallback(() =>
-    wishlistApi
+  const load = useCallback(() => {
+    setLoading(true);
+    setError('');
+    return wishlistApi
       .list(page)
       .then((data) => {
         setItems(data.content);
         setPageData(data);
       })
-      .catch((err) => showError(err.message))
-      .finally(() => setLoading(false)), [page]);
+      .catch((err) => {
+        setError(err.message);
+        showError(err.message);
+      })
+      .finally(() => setLoading(false));
+  }, [page]);
 
   useEffect(() => {
     load();
@@ -47,11 +55,22 @@ export default function WishlistPage() {
       <Typography variant="h4" gutterBottom>Wishlist</Typography>
       {loading ? (
         <ProductGridSkeleton />
+      ) : error ? (
+        <EmptyState
+          severity="error"
+          icon={<FavoriteBorderOutlinedIcon />}
+          title="Wishlist could not load"
+          message={error}
+          onRetry={load}
+        />
       ) : items.length === 0 ? (
-        <Card sx={{ p: 4, textAlign: 'center' }}>
-          <Typography color="text.secondary" gutterBottom>Your wishlist is empty.</Typography>
-          <Button component={RouterLink} to="/" variant="contained" sx={{ mt: 2 }}>Browse products</Button>
-        </Card>
+        <EmptyState
+          icon={<FavoriteBorderOutlinedIcon />}
+          title="Your wishlist is empty"
+          message="Save products you are considering so you can compare and return to them quickly."
+          actionLabel="Browse products"
+          actionTo="/"
+        />
       ) : (
         <Grid container spacing={2}>
           {items.map((p) => (

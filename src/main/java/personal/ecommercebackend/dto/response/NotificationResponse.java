@@ -8,5 +8,7 @@ public record NotificationResponse(
         String message,
         boolean read,
         Long relatedOrderId,
+        Long relatedProductId,
+        String targetUrl,
         Instant createdAt
 ) {}

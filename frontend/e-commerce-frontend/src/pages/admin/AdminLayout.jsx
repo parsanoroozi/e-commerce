@@ -8,6 +8,7 @@ const tabs = [
   { path: '/admin/categories', label: 'Categories' },
   { path: '/admin/orders', label: 'Orders' },
   { path: '/admin/users', label: 'Users' },
+  { path: '/admin/reports', label: 'Reports' },
   { path: '/admin/coupons', label: 'Coupons' },
   { path: '/admin/settings', label: 'Settings' },
   { path: '/admin/audit-logs', label: 'Audit logs' },

@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 import personal.ecommercebackend.dto.request.UpdateLowStockThresholdRequest;
 import personal.ecommercebackend.dto.request.ShopSettingsRequest;
@@ -22,14 +21,15 @@ import personal.ecommercebackend.dto.response.AuditLogResponse;
 import personal.ecommercebackend.dto.response.CustomerDetailResponse;
 import personal.ecommercebackend.dto.response.CustomerSummaryResponse;
 import personal.ecommercebackend.dto.response.InventoryAdjustmentResponse;
-import personal.ecommercebackend.dto.response.OrderResponse;
 import personal.ecommercebackend.dto.response.PageResponse;
 import personal.ecommercebackend.service.AdminDashboardService;
 import personal.ecommercebackend.service.AdminUserService;
 import personal.ecommercebackend.service.AuditService;
 import personal.ecommercebackend.service.InventoryService;
-import personal.ecommercebackend.service.OrderService;
+import personal.ecommercebackend.service.ReportExportService;
 import personal.ecommercebackend.service.ShopSettingsService;
+
+import java.time.Instant;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -40,9 +40,9 @@ public class AdminController {
     private final AdminDashboardService dashboardService;
     private final AdminUserService adminUserService;
     private final AuditService auditService;
-    private final OrderService orderService;
     private final ShopSettingsService shopSettingsService;
     private final InventoryService inventoryService;
+    private final ReportExportService reportExportService;
 
     @GetMapping("/dashboard")
     public AdminDashboardResponse dashboard() {
@@ -128,21 +128,61 @@ public class AdminController {
         return inventoryService.history(pageable);
     }
 
-    @GetMapping("/orders/export")
+    @GetMapping("/reports/orders.csv")
     @PreAuthorize("hasAuthority('MANAGE_ORDERS')")
-    public ResponseEntity<String> exportOrders() {
-        PageResponse<OrderResponse> orders = orderService.allOrders(PageRequest.of(0, 1000));
-        StringBuilder csv = new StringBuilder("id,status,total,email,createdAt\n");
-        for (OrderResponse o : orders.content()) {
-            csv.append(o.id()).append(',')
-                    .append(o.status()).append(',')
-                    .append(o.totalAmount()).append(',')
-                    .append(o.customer() != null ? o.customer().email() : "").append(',')
-                    .append(o.createdAt()).append('\n');
-        }
+    public ResponseEntity<String> exportOrders(
+            @RequestParam(required = false) Instant from,
+            @RequestParam(required = false) Instant to,
+            @RequestParam(required = false) personal.ecommercebackend.entity.OrderStatus status) {
+        String csv = reportExportService.exportOrdersCsv(from, to, status);
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=orders.csv")
                 .contentType(MediaType.parseMediaType("text/csv"))
-                .body(csv.toString());
+                .body(csv);
+    }
+
+    @GetMapping("/orders/export")
+    @PreAuthorize("hasAuthority('MANAGE_ORDERS')")
+    public ResponseEntity<String> legacyExportOrders(
+            @RequestParam(required = false) Instant from,
+            @RequestParam(required = false) Instant to,
+            @RequestParam(required = false) personal.ecommercebackend.entity.OrderStatus status) {
+        return exportOrders(from, to, status);
+    }
+
+    @GetMapping("/reports/customers.csv")
+    @PreAuthorize("hasAuthority('MANAGE_USERS')")
+    public ResponseEntity<String> exportCustomers(
+            @RequestParam(required = false) Instant from,
+            @RequestParam(required = false) Instant to,
+            @RequestParam(required = false) String status) {
+        String csv = reportExportService.exportCustomersCsv(from, to, status);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=customers.csv")
+                .contentType(MediaType.parseMediaType("text/csv"))
+                .body(csv);
+    }
+
+    @GetMapping("/reports/products.csv")
+    @PreAuthorize("hasAuthority('MANAGE_CATALOG')")
+    public ResponseEntity<String> exportProducts(
+            @RequestParam(required = false) Instant from,
+            @RequestParam(required = false) Instant to,
+            @RequestParam(required = false) String status) {
+        String csv = reportExportService.exportProductsCsv(from, to, status);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=products-inventory.csv")
+                .contentType(MediaType.parseMediaType("text/csv"))
+                .body(csv);
+    }
+
+    @GetMapping("/reports/orders/{id}/invoice.pdf")
+    @PreAuthorize("hasAuthority('MANAGE_ORDERS')")
+    public ResponseEntity<byte[]> invoice(@PathVariable Long id) {
+        byte[] pdf = reportExportService.invoicePdf(id);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=invoice-" + id + ".pdf")
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(pdf);
     }
 }

@@ -33,6 +33,9 @@ public class ShippingAddress {
     @Column(nullable = false)
     private String city;
 
+    @Column(length = 100)
+    private String state;
+
     @Column(nullable = false)
     private String zipCode;
 

@@ -30,10 +30,12 @@ import { resolveImageUrl } from '../utils/imageUrl';
 import { showError, showSuccess } from '../utils/toast';
 
 function trackRecent(id) {
+  const numericId = Number(id);
+  if (!Number.isFinite(numericId)) return;
   try {
     const raw = localStorage.getItem('shopverse_recent');
     const ids = raw ? JSON.parse(raw) : [];
-    const next = [Number(id), ...ids.filter((x) => x !== Number(id))].slice(0, 6);
+    const next = [numericId, ...ids.filter((x) => x !== numericId)].slice(0, 6);
     localStorage.setItem('shopverse_recent', JSON.stringify(next));
   } catch {
     /* ignore */
@@ -59,16 +61,12 @@ export default function ProductDetailPage() {
     const controller = new AbortController();
     setLoading(true);
     setError('');
-    Promise.allSettled([
-      productsApi.get(id, { signal: controller.signal }),
-      productsApi.related(id, { signal: controller.signal }),
-      reviewsApi.list(id, 0, { signal: controller.signal }).then((p) => p.content ?? p),
-    ])
-      .then(([productResult, relatedResult, reviewsResult]) => {
-        if (productResult.status === 'rejected') {
-          throw productResult.reason;
-        }
-        const prod = productResult.value;
+    productsApi.get(id, { signal: controller.signal })
+      .then(async (prod) => {
+        const [relatedResult, reviewsResult] = await Promise.allSettled([
+          productsApi.related(prod.id, { signal: controller.signal }),
+          reviewsApi.list(prod.id, 0, { signal: controller.signal }).then((p) => p.content ?? p),
+        ]);
         setProduct(prod);
         setRelated(relatedResult.status === 'fulfilled' ? relatedResult.value : []);
         setReviews(reviewsResult.status === 'fulfilled' ? reviewsResult.value : []);
@@ -78,7 +76,7 @@ export default function ProductDetailPage() {
         const firstAvailableVariant = prod.variants?.find((v) => v.active && v.stockQuantity > 0);
         setVariantId(firstAvailableVariant ? String(firstAvailableVariant.id) : '');
         setQuantity(1);
-        trackRecent(id);
+        trackRecent(prod.id);
       })
       .catch((err) => {
         if (err.name !== 'AbortError') setError(err.message);
@@ -93,9 +91,9 @@ export default function ProductDetailPage() {
     if (!isAuthenticated) return;
     wishlistApi
       .list()
-      .then((items) => setInWishlist(items.some((p) => p.id === Number(id))))
+      .then((items) => setInWishlist(items.some((p) => p.id === product?.id)))
       .catch(() => {});
-  }, [id, isAuthenticated]);
+  }, [id, isAuthenticated, product?.id]);
 
   const gallery = product?.imageDetails?.length
     ? product.imageDetails
@@ -110,12 +108,12 @@ export default function ProductDetailPage() {
 
   const addToCart = async () => {
     if (!isAuthenticated) {
-      navigate('/login', { state: { from: `/products/${id}` } });
+      navigate('/login', { state: { from: `/products/${product?.slug || id}` } });
       return;
     }
     try {
       await cartApi.addItem({
-        productId: Number(id),
+        productId: product.id,
         variantId: selectedVariant ? selectedVariant.id : null,
         quantity,
       });
@@ -127,16 +125,16 @@ export default function ProductDetailPage() {
 
   const toggleWishlist = async () => {
     if (!isAuthenticated) {
-      navigate('/login', { state: { from: `/products/${id}` } });
+      navigate('/login', { state: { from: `/products/${product?.slug || id}` } });
       return;
     }
     try {
       if (inWishlist) {
-        await wishlistApi.remove(id);
+        await wishlistApi.remove(product.id);
         setInWishlist(false);
         showSuccess('Removed from wishlist');
       } else {
-        await wishlistApi.add(id);
+        await wishlistApi.add(product.id);
         setInWishlist(true);
         showSuccess('Added to wishlist');
       }
@@ -148,15 +146,15 @@ export default function ProductDetailPage() {
   const submitReview = async (e) => {
     e.preventDefault();
     if (!isAuthenticated) {
-      navigate('/login', { state: { from: `/products/${id}` } });
+      navigate('/login', { state: { from: `/products/${product?.slug || id}` } });
       return;
     }
     try {
-      const created = await reviewsApi.create(id, reviewForm);
+      const created = await reviewsApi.create(product.id, reviewForm);
       setReviews((prev) => [created, ...prev]);
       setReviewForm({ rating: 5, comment: '' });
       showSuccess('Review submitted');
-      setProduct(await productsApi.get(id));
+      setProduct(await productsApi.get(product.id));
     } catch (err) {
       showError(err.message);
     }

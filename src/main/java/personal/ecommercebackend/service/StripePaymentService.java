@@ -15,6 +15,7 @@ import java.math.BigDecimal;
 
 public interface StripePaymentService {
     PaymentIntent createPaymentIntent(Order order, User user);
+    PaymentIntent updatePaymentIntentAmount(String paymentIntentId, BigDecimal amount);
     PaymentIntent retrievePaymentIntent(String paymentIntentId);
     Refund refundPayment(String paymentIntentId, BigDecimal amount, String reason);
     boolean isPaymentSucceeded(PaymentIntent intent);

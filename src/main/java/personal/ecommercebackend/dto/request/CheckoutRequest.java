@@ -7,6 +7,7 @@ public record CheckoutRequest(
         @Size(max = 50) String label,
         @Size(max = 200) String shippingStreet,
         @Size(max = 100) String shippingCity,
+        @Size(max = 100) String shippingState,
         @Size(max = 20) String shippingZipCode,
         @Size(max = 100) String shippingCountry,
         Double shippingLatitude,

@@ -37,6 +37,13 @@ public class OrderController {
         return orderService.initiateCheckout(request);
     }
 
+    @PatchMapping("/checkout/{id}")
+    public CheckoutInitResponse updateCheckout(
+            @PathVariable Long id,
+            @Valid @RequestBody CheckoutRequest request) {
+        return orderService.updateCheckout(id, request);
+    }
+
     @PostMapping("/{id}/confirm-payment")
     public OrderResponse confirmPayment(@PathVariable Long id) {
         return orderService.confirmPayment(id);

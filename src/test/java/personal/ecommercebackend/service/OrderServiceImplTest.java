@@ -263,6 +263,7 @@ class OrderServiceImplTest {
                 "Home",
                 "123 Test Street",
                 "Test City",
+                "California",
                 "12345",
                 "USA",
                 null,

@@ -7,6 +7,7 @@ public record ShippingAddressResponse(
         String label,
         String street,
         String city,
+        String state,
         String zipCode,
         String country,
         Double latitude,

@@ -12,10 +12,13 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
 import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { categoriesApi } from '../api/categories';
 import { productsApi } from '../api/products';
 import { storefrontApi } from '../api/storefront';
+import EmptyState from '../components/common/EmptyState';
 import PageContainer from '../components/layout/PageContainer';
 import ProductCard from '../components/ProductCard';
 import { ProductGridSkeleton } from '../components/Skeleton';
@@ -31,17 +34,25 @@ function useDebounce(value, delay = 400) {
 }
 
 export default function HomePage() {
+  const navigate = useNavigate();
+  const { categoryId: categoryParam } = useParams();
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
   const [featured, setFeatured] = useState([]);
   const [settings, setSettings] = useState(null);
-  const [categoryId, setCategoryId] = useState('');
+  const [categoryId, setCategoryId] = useState(categoryParam || '');
   const [search, setSearch] = useState('');
+  const [minPrice, setMinPrice] = useState('');
+  const [maxPrice, setMaxPrice] = useState('');
+  const [inStock, setInStock] = useState(false);
+  const [minRating, setMinRating] = useState('');
   const [sort, setSort] = useState('name,asc');
   const debouncedSearch = useDebounce(search);
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [productsError, setProductsError] = useState('');
+  const [reloadKey, setReloadKey] = useState(0);
 
   useEffect(() => {
     categoriesApi.list().then(setCategories).catch(() => {});
@@ -50,13 +61,23 @@ export default function HomePage() {
   }, []);
 
   useEffect(() => {
+    setCategoryId(categoryParam || '');
+    setPage(0);
+  }, [categoryParam]);
+
+  useEffect(() => {
     const controller = new AbortController();
     setLoading(true);
+    setProductsError('');
     const [sortField, sortDir] = sort.split(',');
     productsApi
       .list({
         categoryId: categoryId || undefined,
         search: debouncedSearch || undefined,
+        minPrice: minPrice || undefined,
+        maxPrice: maxPrice || undefined,
+        inStock,
+        minRating: minRating || undefined,
         page,
         size: 12,
         sort: `${sortField},${sortDir}`,
@@ -66,13 +87,16 @@ export default function HomePage() {
         setTotalPages(data.totalPages);
       })
       .catch((err) => {
-        if (err.name !== 'AbortError') showError(err.message);
+        if (err.name !== 'AbortError') {
+          setProductsError(err.message);
+          showError(err.message);
+        }
       })
       .finally(() => {
         if (!controller.signal.aborted) setLoading(false);
       });
     return () => controller.abort();
-  }, [categoryId, debouncedSearch, page, sort]);
+  }, [categoryId, debouncedSearch, inStock, maxPrice, minPrice, minRating, page, reloadKey, sort]);
 
   return (
     <PageContainer>
@@ -118,7 +142,7 @@ export default function HomePage() {
       )}
 
       <Card sx={{ mb: 3, p: { xs: 2, sm: 2.5 } }}>
-        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} flexWrap="wrap" useFlexGap>
           <TextField
             fullWidth
             size="small"
@@ -132,12 +156,60 @@ export default function HomePage() {
           <FormControl size="small" sx={{ minWidth: { sm: 180 }, width: { xs: '100%', sm: 'auto' } }}>
             <InputLabel>Category</InputLabel>
             <Select value={categoryId} label="Category" onChange={(e) => {
-              setCategoryId(e.target.value);
+              const next = e.target.value;
+              setCategoryId(next);
               setPage(0);
+              navigate(next ? `/categories/${next}` : '/');
             }}>
               <MenuItem value="">All categories</MenuItem>
               {categories.map((c) => (
-                <MenuItem key={c.id} value={c.id}>{c.name}</MenuItem>
+                <MenuItem key={c.id} value={String(c.id)}>{c.name}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <TextField
+            size="small"
+            label="Min price"
+            type="number"
+            value={minPrice}
+            inputProps={{ min: 0, step: 1 }}
+            onChange={(e) => {
+              setMinPrice(e.target.value);
+              setPage(0);
+            }}
+            sx={{ width: { xs: '100%', sm: 130 } }}
+          />
+          <TextField
+            size="small"
+            label="Max price"
+            type="number"
+            value={maxPrice}
+            inputProps={{ min: 0, step: 1 }}
+            onChange={(e) => {
+              setMaxPrice(e.target.value);
+              setPage(0);
+            }}
+            sx={{ width: { xs: '100%', sm: 130 } }}
+          />
+          <FormControl size="small" sx={{ minWidth: { sm: 150 }, width: { xs: '100%', sm: 'auto' } }}>
+            <InputLabel>Stock</InputLabel>
+            <Select value={inStock ? 'IN_STOCK' : 'ALL'} label="Stock" onChange={(e) => {
+              setInStock(e.target.value === 'IN_STOCK');
+              setPage(0);
+            }}>
+              <MenuItem value="ALL">All stock</MenuItem>
+              <MenuItem value="IN_STOCK">In stock</MenuItem>
+            </Select>
+          </FormControl>
+          <FormControl size="small" sx={{ minWidth: { sm: 150 }, width: { xs: '100%', sm: 'auto' } }}>
+            <InputLabel>Rating</InputLabel>
+            <Select value={minRating} label="Rating" onChange={(e) => {
+              setMinRating(e.target.value);
+              setPage(0);
+            }}>
+              <MenuItem value="">Any rating</MenuItem>
+              {[4, 3, 2, 1].map((rating) => (
+                <MenuItem key={rating} value={rating}>{rating}+ stars</MenuItem>
               ))}
             </Select>
           </FormControl>
@@ -158,11 +230,31 @@ export default function HomePage() {
 
       {loading ? (
         <ProductGridSkeleton />
+      ) : productsError ? (
+        <EmptyState
+          severity="error"
+          icon={<Inventory2OutlinedIcon />}
+          title="Products could not load"
+          message={productsError}
+          onRetry={() => setReloadKey((value) => value + 1)}
+        />
       ) : products.length === 0 ? (
-        <Card sx={{ p: 4, textAlign: 'center' }}>
-          <Typography variant="h6" gutterBottom>No products found</Typography>
-          <Typography color="text.secondary">Try a different search or category.</Typography>
-        </Card>
+        <EmptyState
+          icon={<Inventory2OutlinedIcon />}
+          title="No products found"
+          message="Try clearing filters, widening your price range, or checking another category."
+          actionLabel="Clear filters"
+          onAction={() => {
+            setSearch('');
+            setMinPrice('');
+            setMaxPrice('');
+            setInStock(false);
+            setMinRating('');
+            setCategoryId('');
+            setPage(0);
+            navigate('/');
+          }}
+        />
       ) : (
         <>
           <Grid container spacing={2}>

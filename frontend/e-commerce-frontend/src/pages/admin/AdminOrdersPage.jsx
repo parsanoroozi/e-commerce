@@ -2,6 +2,8 @@ import {
   Alert,
   Box,
   Button,
+  Card,
+  CardContent,
   Chip,
   FormControl,
   InputAdornment,
@@ -18,17 +20,23 @@ import {
   TableRow,
   TextField,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
+import { adminApi } from '../../api/admin';
 import { subscribeToApiChanges } from '../../api/client';
 import { ordersApi } from '../../api/orders';
+import { showError, showSuccess } from '../../utils/toast';
 
 const STATUSES = ['AWAITING_PAYMENT', 'PENDING', 'CONFIRMED', 'PACKED', 'SHIPPED', 'DELIVERED', 'CANCELLED', 'REFUNDED'];
 const FULFILLMENT_STATUSES = ['CONFIRMED', 'PACKED', 'SHIPPED', 'DELIVERED', 'CANCELLED', 'REFUNDED'];
 
 export default function AdminOrdersPage() {
+  const theme = useTheme();
+  const isSmall = useMediaQuery(theme.breakpoints.down('md'));
   const [orders, setOrders] = useState([]);
   const [page, setPage] = useState(0);
   const [pageData, setPageData] = useState({ page: 0, totalPages: 0 });
@@ -122,6 +130,15 @@ export default function AdminOrdersPage() {
     }
   };
 
+  const downloadInvoice = async (order) => {
+    try {
+      await adminApi.downloadInvoicePdf(order.id);
+      showSuccess(`Invoice #${order.id} downloaded`);
+    } catch (err) {
+      showError(err.message);
+    }
+  };
+
   const canRefund = (order) => (
     Number(order.refundableAmount || 0) > 0
     && !['AWAITING_PAYMENT', 'CANCELLED', 'REFUNDED'].includes(order.status)
@@ -147,6 +164,121 @@ export default function AdminOrdersPage() {
     acc[order.status] = (acc[order.status] || 0) + 1;
     return acc;
   }, {}), [orders]);
+
+  const renderOrderControls = (order, compact = false) => (
+    <Stack spacing={1} sx={{ minWidth: compact ? 0 : { xs: 240, md: 360 } }}>
+      <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+        {['PACKED', 'SHIPPED', 'DELIVERED'].map((status) => (
+          <Button
+            key={status}
+            size={compact ? 'medium' : 'small'}
+            sx={{ minHeight: compact ? 44 : 36, flex: compact ? '1 1 110px' : '0 0 auto' }}
+            variant={order.status === status ? 'contained' : 'outlined'}
+            disabled={order.status === 'AWAITING_PAYMENT'}
+            onClick={() => updateStatus(order, status)}
+          >
+            {status}
+          </Button>
+        ))}
+      </Stack>
+      <Stack direction={{ xs: 'column', md: 'row' }} spacing={1}>
+        <FormControl size="small" sx={{ minWidth: 140 }}>
+          <Select
+            value={draftFor(order).status}
+            onChange={(e) => updateDraft(order, { status: e.target.value })}
+          >
+            {FULFILLMENT_STATUSES.map((s) => (
+              <MenuItem key={s} value={s}>{s}</MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        <TextField
+          size="small"
+          label="Carrier"
+          value={draftFor(order).shippingCarrier}
+          onChange={(e) => updateDraft(order, { shippingCarrier: e.target.value })}
+        />
+        <TextField
+          size="small"
+          label="Tracking"
+          value={draftFor(order).trackingNumber}
+          onChange={(e) => updateDraft(order, { trackingNumber: e.target.value })}
+        />
+      </Stack>
+      <TextField
+        size="small"
+        label="Admin notes"
+        multiline
+        minRows={2}
+        value={draftFor(order).adminNotes}
+        onChange={(e) => updateDraft(order, { adminNotes: e.target.value })}
+      />
+      <TextField
+        size="small"
+        label="Timeline note"
+        value={draftFor(order).timelineNote}
+        onChange={(e) => updateDraft(order, { timelineNote: e.target.value })}
+      />
+      <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1}>
+        <Button
+          size={compact ? 'medium' : 'small'}
+          fullWidth={compact}
+          sx={{ minHeight: compact ? 44 : 36 }}
+          variant="contained"
+          disabled={order.status === 'AWAITING_PAYMENT'}
+          onClick={() => updateStatus(order, draftFor(order).status)}
+        >
+          Save fulfillment
+        </Button>
+        <Button
+          size={compact ? 'medium' : 'small'}
+          fullWidth={compact}
+          sx={{ minHeight: compact ? 44 : 36 }}
+          variant="outlined"
+          onClick={() => downloadInvoice(order)}
+        >
+          Invoice PDF
+        </Button>
+      </Stack>
+      <Box sx={{ borderTop: '1px solid', borderColor: 'divider', pt: 1 }}>
+        <Typography variant="caption" color="text.secondary" display="block">
+          Refunded ${Number(order.refundedAmount || 0).toFixed(2)} / refundable ${Number(order.refundableAmount || 0).toFixed(2)}
+        </Typography>
+        {order.refunds?.length > 0 && (
+          <Typography variant="caption" color="text.secondary" display="block">
+            Last refund: {order.refunds[0].status} ${Number(order.refunds[0].amount).toFixed(2)}
+          </Typography>
+        )}
+        <Stack direction={{ xs: 'column', md: 'row' }} spacing={1} sx={{ mt: 1 }}>
+          <TextField
+            size="small"
+            label="Refund amount"
+            type="number"
+            inputProps={{ min: 0.01, step: 0.01, max: Number(order.refundableAmount || 0) }}
+            value={refundDraftFor(order).amount}
+            onChange={(e) => updateRefundDraft(order, { amount: e.target.value })}
+          />
+          <TextField
+            size="small"
+            label="Refund reason"
+            value={refundDraftFor(order).reason}
+            onChange={(e) => updateRefundDraft(order, { reason: e.target.value })}
+            sx={{ flex: 1 }}
+          />
+          <Button
+            size={compact ? 'medium' : 'small'}
+            sx={{ minHeight: compact ? 44 : 36 }}
+            color="warning"
+            variant="outlined"
+            disabled={!canRefund(order) || Number(refundDraftFor(order).amount) <= 0 || !refundDraftFor(order).reason.trim()}
+            onClick={() => refundOrder(order)}
+          >
+            Refund
+          </Button>
+        </Stack>
+      </Box>
+    </Stack>
+  );
 
   return (
     <Box>
@@ -192,155 +324,100 @@ export default function AdminOrdersPage() {
           />
         ))}
       </Stack>
-      <TableContainer sx={{ overflowX: 'auto' }}>
-        <Table size="small">
-          <TableHead>
-            <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell>Customer</TableCell>
-              <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' } }}>Date</TableCell>
-              <TableCell>Total</TableCell>
-              <TableCell>Status</TableCell>
-              <TableCell>Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {filteredOrders.map((order) => (
-              <TableRow key={order.id}>
-                <TableCell>
-                  <Link component={RouterLink} to={`/orders/${order.id}`}>#{order.id}</Link>
-                </TableCell>
-                <TableCell>
-                  {order.customer ? `${order.customer.firstName} ${order.customer.lastName}` : '-'}
-                </TableCell>
-                <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' } }}>
-                  {new Date(order.createdAt).toLocaleString()}
-                </TableCell>
-                <TableCell>${Number(order.totalAmount).toFixed(2)}</TableCell>
-                <TableCell>
-                  <Stack spacing={0.5}>
-                    <Chip label={order.status} size="small" />
-                    {order.shippingCarrier && (
-                      <Typography variant="caption" color="text.secondary">{order.shippingCarrier}</Typography>
-                    )}
-                    {order.trackingNumber && (
-                      <Typography variant="caption" color="text.secondary">{order.trackingNumber}</Typography>
-                    )}
-                  </Stack>
-                </TableCell>
-                <TableCell>
-                  <Stack spacing={1} sx={{ minWidth: { xs: 240, md: 360 } }}>
-                    <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
-                      {['PACKED', 'SHIPPED', 'DELIVERED'].map((status) => (
-                        <Button
-                          key={status}
-                          size="small"
-                          variant={order.status === status ? 'contained' : 'outlined'}
-                          disabled={order.status === 'AWAITING_PAYMENT'}
-                          onClick={() => updateStatus(order, status)}
-                        >
-                          {status}
-                        </Button>
-                      ))}
-                    </Stack>
-                    <Stack direction={{ xs: 'column', md: 'row' }} spacing={1}>
-                      <FormControl size="small" sx={{ minWidth: 140 }}>
-                        <Select
-                          value={draftFor(order).status}
-                          onChange={(e) => updateDraft(order, { status: e.target.value })}
-                        >
-                          {FULFILLMENT_STATUSES.map((s) => (
-                            <MenuItem key={s} value={s}>{s}</MenuItem>
-                          ))}
-                        </Select>
-                      </FormControl>
-                      <TextField
-                        size="small"
-                        label="Carrier"
-                        value={draftFor(order).shippingCarrier}
-                        onChange={(e) => updateDraft(order, { shippingCarrier: e.target.value })}
-                      />
-                      <TextField
-                        size="small"
-                        label="Tracking"
-                        value={draftFor(order).trackingNumber}
-                        onChange={(e) => updateDraft(order, { trackingNumber: e.target.value })}
-                      />
-                    </Stack>
-                    <TextField
-                      size="small"
-                      label="Admin notes"
-                      multiline
-                      minRows={2}
-                      value={draftFor(order).adminNotes}
-                      onChange={(e) => updateDraft(order, { adminNotes: e.target.value })}
-                    />
-                    <TextField
-                      size="small"
-                      label="Timeline note"
-                      value={draftFor(order).timelineNote}
-                      onChange={(e) => updateDraft(order, { timelineNote: e.target.value })}
-                    />
-                    <Button
-                      size="small"
-                      variant="contained"
-                      disabled={order.status === 'AWAITING_PAYMENT'}
-                      onClick={() => updateStatus(order, draftFor(order).status)}
-                    >
-                      Save fulfillment
-                    </Button>
-                    <Box sx={{ borderTop: '1px solid', borderColor: 'divider', pt: 1 }}>
-                      <Typography variant="caption" color="text.secondary" display="block">
-                        Refunded ${Number(order.refundedAmount || 0).toFixed(2)} / refundable ${Number(order.refundableAmount || 0).toFixed(2)}
+      {isSmall ? (
+        <Stack spacing={1.5}>
+          {filteredOrders.map((order) => (
+            <Card key={order.id} variant="outlined">
+              <CardContent>
+                <Stack spacing={1.5}>
+                  <Stack direction="row" justifyContent="space-between" alignItems="flex-start" spacing={1}>
+                    <Box>
+                      <Link component={RouterLink} to={`/admin/orders/${order.id}`} fontWeight={800}>Order #{order.id}</Link>
+                      <Typography variant="body2" color="text.secondary">
+                        {order.customer ? `${order.customer.firstName} ${order.customer.lastName}` : '-'}
                       </Typography>
-                      {order.refunds?.length > 0 && (
-                        <Typography variant="caption" color="text.secondary" display="block">
-                          Last refund: {order.refunds[0].status} ${Number(order.refunds[0].amount).toFixed(2)}
-                        </Typography>
-                      )}
-                      <Stack direction={{ xs: 'column', md: 'row' }} spacing={1} sx={{ mt: 1 }}>
-                        <TextField
-                          size="small"
-                          label="Refund amount"
-                          type="number"
-                          inputProps={{ min: 0.01, step: 0.01, max: Number(order.refundableAmount || 0) }}
-                          value={refundDraftFor(order).amount}
-                          onChange={(e) => updateRefundDraft(order, { amount: e.target.value })}
-                        />
-                        <TextField
-                          size="small"
-                          label="Refund reason"
-                          value={refundDraftFor(order).reason}
-                          onChange={(e) => updateRefundDraft(order, { reason: e.target.value })}
-                          sx={{ flex: 1 }}
-                        />
-                        <Button
-                          size="small"
-                          color="warning"
-                          variant="outlined"
-                          disabled={!canRefund(order) || Number(refundDraftFor(order).amount) <= 0 || !refundDraftFor(order).reason.trim()}
-                          onClick={() => refundOrder(order)}
-                        >
-                          Refund
-                        </Button>
-                      </Stack>
+                      <Typography variant="caption" color="text.secondary">
+                        {new Date(order.createdAt).toLocaleString()}
+                      </Typography>
                     </Box>
+                    <Stack alignItems="flex-end" spacing={0.5}>
+                      <Typography fontWeight={800}>${Number(order.totalAmount).toFixed(2)}</Typography>
+                      <Chip label={order.status} size="small" />
+                    </Stack>
                   </Stack>
-                </TableCell>
-              </TableRow>
-            ))}
-            {filteredOrders.length === 0 && (
+                  {(order.shippingCarrier || order.trackingNumber) && (
+                    <Typography variant="caption" color="text.secondary">
+                      {[order.shippingCarrier, order.trackingNumber].filter(Boolean).join(' - ')}
+                    </Typography>
+                  )}
+                  {renderOrderControls(order, true)}
+                </Stack>
+              </CardContent>
+            </Card>
+          ))}
+          {filteredOrders.length === 0 && (
+            <Card variant="outlined">
+              <CardContent>
+                <Typography color="text.secondary" sx={{ textAlign: 'center' }}>
+                  No orders match the current filters.
+                </Typography>
+              </CardContent>
+            </Card>
+          )}
+        </Stack>
+      ) : (
+        <TableContainer sx={{ overflowX: 'auto' }}>
+          <Table size="small">
+            <TableHead>
               <TableRow>
-                <TableCell colSpan={6}>
-                  <Typography color="text.secondary" sx={{ py: 3, textAlign: 'center' }}>
-                    No orders match the current filters.
-                  </Typography>
-                </TableCell>
+                <TableCell>ID</TableCell>
+                <TableCell>Customer</TableCell>
+                <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' } }}>Date</TableCell>
+                <TableCell>Total</TableCell>
+                <TableCell>Status</TableCell>
+                <TableCell>Actions</TableCell>
               </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+            <TableBody>
+              {filteredOrders.map((order) => (
+                <TableRow key={order.id}>
+                  <TableCell>
+                    <Link component={RouterLink} to={`/admin/orders/${order.id}`}>#{order.id}</Link>
+                  </TableCell>
+                  <TableCell>
+                    {order.customer ? `${order.customer.firstName} ${order.customer.lastName}` : '-'}
+                  </TableCell>
+                  <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' } }}>
+                    {new Date(order.createdAt).toLocaleString()}
+                  </TableCell>
+                  <TableCell>${Number(order.totalAmount).toFixed(2)}</TableCell>
+                  <TableCell>
+                    <Stack spacing={0.5}>
+                      <Chip label={order.status} size="small" />
+                      {order.shippingCarrier && (
+                        <Typography variant="caption" color="text.secondary">{order.shippingCarrier}</Typography>
+                      )}
+                      {order.trackingNumber && (
+                        <Typography variant="caption" color="text.secondary">{order.trackingNumber}</Typography>
+                      )}
+                    </Stack>
+                  </TableCell>
+                  <TableCell>{renderOrderControls(order)}</TableCell>
+                </TableRow>
+              ))}
+              {filteredOrders.length === 0 && (
+                <TableRow>
+                  <TableCell colSpan={6}>
+                    <Typography color="text.secondary" sx={{ py: 3, textAlign: 'center' }}>
+                      No orders match the current filters.
+                    </Typography>
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
       {pageData.totalPages > 1 && (
         <Stack alignItems="center" sx={{ mt: 3 }}>
           <Pagination

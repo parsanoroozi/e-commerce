@@ -24,6 +24,19 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     @Query("SELECT DISTINCT o FROM Order o")
     List<Order> findAllWithItemsAndRefunds();
 
+    @EntityGraph(attributePaths = {"items", "items.product", "user"})
+    @Query("""
+            SELECT DISTINCT o FROM Order o
+            WHERE (:from IS NULL OR o.createdAt >= :from)
+              AND (:to IS NULL OR o.createdAt <= :to)
+              AND (:status IS NULL OR o.status = :status)
+            ORDER BY o.createdAt DESC
+            """)
+    List<Order> findForReport(
+            @Param("from") Instant from,
+            @Param("to") Instant to,
+            @Param("status") OrderStatus status);
+
     @EntityGraph(attributePaths = {"items", "items.product"})
     Page<Order> findByUserIdOrderByCreatedAtDesc(Long userId, Pageable pageable);
 

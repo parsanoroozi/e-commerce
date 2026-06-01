@@ -4,6 +4,7 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 import MenuIcon from '@mui/icons-material/Menu';
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
 import ReceiptLongOutlinedIcon from '@mui/icons-material/ReceiptLongOutlined';
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import StorefrontOutlinedIcon from '@mui/icons-material/StorefrontOutlined';
 import {
@@ -13,6 +14,7 @@ import {
   Button,
   Divider,
   Drawer,
+  FormControlLabel,
   IconButton,
   List,
   ListItemButton,
@@ -21,19 +23,23 @@ import {
   Menu,
   MenuItem,
   Stack,
+  Switch,
   Toolbar,
   Typography,
   useMediaQuery,
   useTheme,
 } from '@mui/material';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { Link as RouterLink, useLocation } from 'react-router-dom';
+import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
 import { subscribeToApiChanges } from '../../api/client';
 import { cartApi } from '../../api/cart';
 import { notificationsApi } from '../../api/notifications';
+import { storefrontApi } from '../../api/storefront';
 import { wishlistApi } from '../../api/wishlist';
 import { useAuth } from '../../context/AuthContext';
 import { subscribeToAppActions } from '../../utils/appEvents';
+import { resolveImageUrl } from '../../utils/imageUrl';
+import EmptyState from '../common/EmptyState';
 import ThemeToggle from '../common/ThemeToggle';
 
 const navItems = [
@@ -50,6 +56,7 @@ export default function AppNavbar() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const location = useLocation();
+  const navigate = useNavigate();
   const { user, isAuthenticated, isAdmin, logout } = useAuth();
   const [cartCount, setCartCount] = useState(0);
   const [wishCount, setWishCount] = useState(0);
@@ -60,7 +67,13 @@ export default function AppNavbar() {
   const [notificationPage, setNotificationPage] = useState(0);
   const [notificationLastPage, setNotificationLastPage] = useState(true);
   const [notificationLoading, setNotificationLoading] = useState(false);
+  const [notificationError, setNotificationError] = useState('');
+  const [notificationSettingsOpen, setNotificationSettingsOpen] = useState(false);
+  const [notificationSettings, setNotificationSettings] = useState(null);
+  const [storeSettings, setStoreSettings] = useState(null);
   const notificationClearStartedAt = useRef(0);
+  const brandName = storeSettings?.brandName || 'ShopVerse';
+  const logoUrl = storeSettings?.logoUrl ? resolveImageUrl(storeSettings.logoUrl) : null;
 
   const refreshCounts = useCallback(async () => {
     if (!isAuthenticated) {
@@ -68,6 +81,9 @@ export default function AppNavbar() {
       setWishCount(0);
       setUnread(0);
       setNotifications([]);
+      setNotificationError('');
+      setNotificationSettings(null);
+      setNotificationSettingsOpen(false);
       return;
     }
     await Promise.all([
@@ -81,6 +97,10 @@ export default function AppNavbar() {
     refreshCounts();
     setDrawerOpen(false);
   }, [isAuthenticated, location.pathname, refreshCounts]);
+
+  useEffect(() => {
+    storefrontApi.settings().then(setStoreSettings).catch(() => {});
+  }, []);
 
   useEffect(() => {
     const unsubscribe = subscribeToApiChanges((change) => {
@@ -150,6 +170,34 @@ export default function AppNavbar() {
 
   useEffect(() => {
     if (!isAuthenticated) return undefined;
+    let closed = false;
+    const source = new EventSource(notificationsApi.streamUrl(), { withCredentials: true });
+    source.addEventListener('notification', (event) => {
+      if (closed) return;
+      try {
+        const notification = JSON.parse(event.data);
+        setNotifications((items) => [
+          notification,
+          ...items.filter((item) => item.id !== notification.id),
+        ].slice(0, Math.max(INITIAL_VISIBLE_NOTIFICATIONS, items.length)));
+        if (!notification.read) {
+          setUnread((count) => count + 1);
+        }
+      } catch {
+        refreshCounts();
+      }
+    });
+    source.onerror = () => {
+      refreshCounts();
+    };
+    return () => {
+      closed = true;
+      source.close();
+    };
+  }, [isAuthenticated, refreshCounts]);
+
+  useEffect(() => {
+    if (!isAuthenticated) return undefined;
     const refreshOnFocus = () => {
       if (!document.hidden) refreshCounts();
     };
@@ -169,11 +217,14 @@ export default function AppNavbar() {
 
   const loadNotificationsPage = async (page, append = false) => {
     setNotificationLoading(true);
+    setNotificationError('');
     try {
       const data = await notificationsApi.list(page, INITIAL_VISIBLE_NOTIFICATIONS);
       setNotifications((items) => append ? [...items, ...(data.content || [])] : (data.content || []));
       setNotificationPage(data.page ?? page);
       setNotificationLastPage(Boolean(data.last));
+    } catch (err) {
+      setNotificationError(err.message);
     } finally {
       setNotificationLoading(false);
     }
@@ -182,6 +233,45 @@ export default function AppNavbar() {
   const openNotifications = async (e) => {
     setNotifAnchor(e.currentTarget);
     await loadNotificationsPage(0, false);
+  };
+
+  const loadNotificationSettings = async () => {
+    const settings = await notificationsApi.settings();
+    setNotificationSettings(settings);
+  };
+
+  const toggleNotificationSettings = async () => {
+    const nextOpen = !notificationSettingsOpen;
+    setNotificationSettingsOpen(nextOpen);
+    if (nextOpen && !notificationSettings) {
+      await loadNotificationSettings();
+    }
+  };
+
+  const updateNotificationSetting = async (key, checked) => {
+    const optimistic = {
+      ...(notificationSettings || {}),
+      [key]: checked,
+    };
+    setNotificationSettings(optimistic);
+    const saved = await notificationsApi.updateSettings({ [key]: checked });
+    setNotificationSettings(saved);
+  };
+
+  const openNotificationTarget = async (notification) => {
+    if (!notification.read) {
+      setNotifications((items) => items.map((item) => (
+        item.id === notification.id ? { ...item, read: true } : item
+      )));
+      await notificationsApi.markRead(notification.id);
+    }
+    setNotifAnchor(null);
+    const targetUrl = notification.targetUrl
+      || (notification.relatedOrderId ? `/orders/${notification.relatedOrderId}` : null)
+      || (notification.relatedProductId ? `/products/${notification.relatedProductId}` : null);
+    if (targetUrl) {
+      navigate(targetUrl);
+    }
   };
 
   const markAllRead = async () => {
@@ -248,7 +338,7 @@ export default function AppNavbar() {
   const drawer = (
     <Box sx={{ width: 280, pt: 1 }} role="navigation">
       <Typography variant="h6" sx={{ px: 2, py: 1.5, fontFamily: '"Instrument Serif", serif' }}>
-        ShopVerse
+        {brandName}
       </Typography>
       <Divider sx={{ mb: 1 }} />
       <List>{visibleItems.map((item) => navLink(item, () => setDrawerOpen(false)))}</List>
@@ -292,6 +382,9 @@ export default function AppNavbar() {
             to="/"
             variant="h6"
             sx={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 1,
               fontFamily: '"Instrument Serif", serif',
               color: 'text.primary',
               textDecoration: 'none',
@@ -299,7 +392,15 @@ export default function AppNavbar() {
               mr: { md: 3 },
             }}
           >
-            ShopVerse
+            {logoUrl && (
+              <Box
+                component="img"
+                src={logoUrl}
+                alt={`${brandName} logo`}
+                sx={{ width: 30, height: 30, objectFit: 'contain', borderRadius: 1 }}
+              />
+            )}
+            {brandName}
           </Typography>
 
           {!isMobile && (
@@ -361,6 +462,9 @@ export default function AppNavbar() {
                   <Box sx={{ px: 2, py: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 1 }}>
                     <Typography variant="subtitle2">Notifications</Typography>
                     <Stack direction="row" spacing={0.5}>
+                      <Button size="small" startIcon={<SettingsOutlinedIcon />} onClick={toggleNotificationSettings}>
+                        Settings
+                      </Button>
                       {notifications.length > 0 && (
                         <Button size="small" color="error" startIcon={<DeleteSweepOutlinedIcon />} onClick={clearNotifications}>
                           Clear
@@ -371,12 +475,76 @@ export default function AppNavbar() {
                       )}
                     </Stack>
                   </Box>
-                  {notifications.length === 0 ? (
-                    <MenuItem disabled>No notifications</MenuItem>
+                  {notificationSettingsOpen && (
+                    <Box sx={{ px: 2, pb: 1 }}>
+                      <Stack spacing={0.25}>
+                        <FormControlLabel
+                          control={(
+                            <Switch
+                              size="small"
+                              checked={notificationSettings?.orderNotificationsEnabled ?? true}
+                              onChange={(e) => updateNotificationSetting('orderNotificationsEnabled', e.target.checked)}
+                            />
+                          )}
+                          label={<Typography variant="body2">Order updates</Typography>}
+                        />
+                        <FormControlLabel
+                          control={(
+                            <Switch
+                              size="small"
+                              checked={notificationSettings?.productNotificationsEnabled ?? true}
+                              onChange={(e) => updateNotificationSetting('productNotificationsEnabled', e.target.checked)}
+                            />
+                          )}
+                          label={<Typography variant="body2">Product updates</Typography>}
+                        />
+                        <FormControlLabel
+                          control={(
+                            <Switch
+                              size="small"
+                              checked={notificationSettings?.realtimeNotificationsEnabled ?? true}
+                              onChange={(e) => updateNotificationSetting('realtimeNotificationsEnabled', e.target.checked)}
+                            />
+                          )}
+                          label={<Typography variant="body2">Real-time alerts</Typography>}
+                        />
+                      </Stack>
+                      <Divider sx={{ mt: 1 }} />
+                    </Box>
+                  )}
+                  {notificationError ? (
+                    <Box sx={{ px: 1.5, pb: 1.5 }}>
+                      <EmptyState
+                        severity="error"
+                        icon={<NotificationsOutlinedIcon />}
+                        title="Notifications could not load"
+                        message={notificationError}
+                        onRetry={() => loadNotificationsPage(0, false)}
+                      />
+                    </Box>
+                  ) : notifications.length === 0 ? (
+                    <Box sx={{ px: 1.5, pb: 1.5 }}>
+                      <EmptyState
+                        icon={<NotificationsOutlinedIcon />}
+                        title="No notifications"
+                        message="Order and product updates will appear here as they happen."
+                      />
+                    </Box>
                   ) : (
                     <Box sx={{ maxHeight: 360, overflowY: 'auto' }}>
                       {notifications.map((n) => (
-                        <MenuItem key={n.id} onClick={() => setNotifAnchor(null)} sx={{ flexDirection: 'column', alignItems: 'stretch', whiteSpace: 'normal', gap: 0.25 }}>
+                        <MenuItem
+                          key={n.id}
+                          onClick={() => openNotificationTarget(n)}
+                          sx={{
+                            flexDirection: 'column',
+                            alignItems: 'stretch',
+                            whiteSpace: 'normal',
+                            gap: 0.25,
+                            minHeight: 64,
+                            bgcolor: n.read ? 'transparent' : 'action.hover',
+                          }}
+                        >
                           <Stack direction="row" justifyContent="space-between" alignItems="baseline" spacing={1}>
                             <Typography variant="body2" fontWeight={n.read ? 500 : 800}>{n.title}</Typography>
                             <Typography variant="caption" color="text.secondary" sx={{ flexShrink: 0 }}>

@@ -8,6 +8,7 @@ export default function StripePaymentForm({ orderId, totalAmount, onSuccess }) {
   const elements = useElements();
   const [error, setError] = useState('');
   const [processing, setProcessing] = useState(false);
+  const [declined, setDeclined] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,6 +16,7 @@ export default function StripePaymentForm({ orderId, totalAmount, onSuccess }) {
 
     setProcessing(true);
     setError('');
+    setDeclined(false);
 
     const { error: stripeError } = await stripe.confirmPayment({
       elements,
@@ -22,7 +24,9 @@ export default function StripePaymentForm({ orderId, totalAmount, onSuccess }) {
     });
 
     if (stripeError) {
-      setError(stripeError.message || 'Payment failed');
+      const paymentFailed = stripeError.type === 'card_error' || stripeError.code === 'card_declined';
+      setDeclined(paymentFailed);
+      setError(stripeError.message || 'Payment failed. Check your card details or try another payment method.');
       setProcessing(false);
       return;
     }
@@ -49,7 +53,19 @@ export default function StripePaymentForm({ orderId, totalAmount, onSuccess }) {
           <Typography variant="caption" color="text.secondary">
             We accept Visa, Mastercard, Amex, and more. Use any future expiry and CVC in test mode.
           </Typography>
-          {error && <Alert severity="error">{error}</Alert>}
+          {error && (
+            <Alert severity="error">
+              <Typography variant="body2" fontWeight={700}>
+                {declined ? 'Payment was declined' : 'Payment could not be completed'}
+              </Typography>
+              <Typography variant="body2">{error}</Typography>
+              {declined && (
+                <Typography variant="body2" sx={{ mt: 0.5 }}>
+                  No charge was captured. Use a different card, fix the card details, or return to cart if you need to change the order.
+                </Typography>
+              )}
+            </Alert>
+          )}
           <Button type="submit" variant="contained" size="large" fullWidth disabled={!stripe || processing}>
             {processing ? 'Processing payment...' : 'Pay now'}
           </Button>

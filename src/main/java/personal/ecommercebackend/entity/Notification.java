@@ -37,6 +37,11 @@ public class Notification {
 
     private Long relatedOrderId;
 
+    private Long relatedProductId;
+
+    @Column(length = 180)
+    private String targetUrl;
+
     @CreationTimestamp
     private Instant createdAt;
 }

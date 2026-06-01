@@ -7,12 +7,13 @@ export default function ProductCard({product, onRemove}) {
     const image = product.imageDetails?.find((entry) => entry.primaryImage) || product.imageDetails?.[0];
     const imageUrl = image?.url || product.imageUrl;
     const altText = image?.altText || product.name;
+    const productPath = `/products/${product.slug || product.id}`;
 
     return (
         <Card sx={{height: '100%', display: 'flex', flexDirection: 'column'}}>
             <CardMedia
                 component={RouterLink}
-                to={`/products/${product.id}`}
+                to={productPath}
                 sx={{textDecoration: 'none'}}
             >
                 <Box
@@ -29,7 +30,7 @@ export default function ProductCard({product, onRemove}) {
                 </Typography>
                 <Typography
                     component={RouterLink}
-                    to={`/products/${product.id}`}
+                    to={productPath}
                     variant="subtitle1"
                     fontWeight={600}
                     color="text.primary"
@@ -49,7 +50,7 @@ export default function ProductCard({product, onRemove}) {
             <CardActions sx={{px: 2, pb: 2}}>
                 <Button
                     component={RouterLink}
-                    to={`/products/${product.id}`}
+                    to={productPath}
                     variant="outlined"
                     size="small"
                     fullWidth

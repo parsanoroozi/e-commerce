@@ -14,9 +14,16 @@ export class ApiError extends Error {
 async function parseError(response) {
   try {
     const body = await response.json();
-    return body.detail || body.title || 'Request failed';
+    if (body.detail || body.title || body.message) {
+      return body.detail || body.title || body.message;
+    }
+    if (body.errors && typeof body.errors === 'object') {
+      const first = Object.values(body.errors).flat().find(Boolean);
+      if (first) return String(first);
+    }
+    return fallbackErrorMessage(response.status);
   } catch {
-    return 'Request failed';
+    return fallbackErrorMessage(response.status);
   }
 }
 
@@ -54,6 +61,11 @@ export async function apiRequest(path, options = {}) {
     headers,
     signal,
     credentials: 'include',
+  }).catch((error) => {
+    if (error?.name === 'AbortError') {
+      throw error;
+    }
+    throw new ApiError(0, 'We could not reach the store server. Check your connection and try again.');
   }).then(async (response) => {
     if (response.status === 204 || response.status === 202 || response.headers.get('content-length') === '0') {
       return null;
@@ -177,4 +189,15 @@ function inferMutation(path, method) {
     return 'orders:update';
   }
   return null;
+}
+
+function fallbackErrorMessage(status) {
+  if (status === 400) return 'Some submitted details need attention. Review the form and try again.';
+  if (status === 401) return 'Please sign in to continue.';
+  if (status === 403) return 'You do not have permission to do that.';
+  if (status === 404) return 'We could not find the requested item.';
+  if (status === 409) return 'This item changed since you loaded it. Refresh and try again.';
+  if (status === 422) return 'Some submitted details are invalid. Review the highlighted fields.';
+  if (status >= 500) return 'The store server had a problem. Try again in a moment.';
+  return 'The request could not be completed. Try again.';
 }

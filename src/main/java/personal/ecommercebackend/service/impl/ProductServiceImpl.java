@@ -31,6 +31,7 @@ import personal.ecommercebackend.storage.FileStorageService;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.text.Normalizer;
 import java.util.function.Function;
@@ -54,8 +55,22 @@ public class ProductServiceImpl implements ProductService {
 
     @Transactional(readOnly = true)
     public PageResponse<ProductResponse> search(Long categoryId, String search, Pageable pageable) {
+        return search(categoryId, search, null, null, null, null, pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public PageResponse<ProductResponse> search(Long categoryId, String search, BigDecimal minPrice, BigDecimal maxPrice,
+                                                Boolean inStock, Integer minRating, Pageable pageable) {
         String normalizedSearch = (search == null || search.isBlank()) ? null : search.trim();
-        Page<Product> page = resolveSearchPage(categoryId, normalizedSearch, pageable);
+        Page<Product> page = productRepository.searchVisible(
+                categoryId,
+                normalizedSearch,
+                minPrice,
+                maxPrice,
+                inStock,
+                minRating,
+                Instant.now(),
+                pageable);
         return toProductPageResponse(page);
     }
 
@@ -110,6 +125,16 @@ public class ProductServiceImpl implements ProductService {
     @Transactional(readOnly = true)
     public ProductResponse findById(Long id) {
         Product product = getProduct(id);
+        if ((!product.isActive() || !isVisibleNow(product)) && !SecurityUtils.isAdmin()) {
+            throw new ApiException(HttpStatus.NOT_FOUND, "Product not found");
+        }
+        return toProductResponseWithReviews(product);
+    }
+
+    @Transactional(readOnly = true)
+    public ProductResponse findBySlug(String slug) {
+        Product product = productRepository.findBySlugIgnoreCase(slug)
+                .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, "Product not found"));
         if ((!product.isActive() || !isVisibleNow(product)) && !SecurityUtils.isAdmin()) {
             throw new ApiException(HttpStatus.NOT_FOUND, "Product not found");
         }

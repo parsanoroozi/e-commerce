@@ -68,6 +68,9 @@ public class Order {
     @Column(nullable = false)
     private String shippingCity;
 
+    @Column(length = 100)
+    private String shippingState;
+
     @Column(nullable = false)
     private String shippingZipCode;
 

@@ -13,6 +13,7 @@ import com.stripe.model.PaymentIntent;
 public interface OrderService {
     PaymentConfigResponse paymentConfig();
     CheckoutInitResponse initiateCheckout(CheckoutRequest request);
+    CheckoutInitResponse updateCheckout(Long orderId, CheckoutRequest request);
     OrderResponse confirmPayment(Long orderId);
     void fulfillByPaymentIntentId(String paymentIntentId);
     OrderResponse cancelOrder(Long orderId);

@@ -55,6 +55,18 @@ public class User {
     @Column(length = 80)
     private String customerSegment;
 
+    @Column(nullable = false)
+    @Builder.Default
+    private boolean orderNotificationsEnabled = true;
+
+    @Column(nullable = false)
+    @Builder.Default
+    private boolean productNotificationsEnabled = true;
+
+    @Column(nullable = false)
+    @Builder.Default
+    private boolean realtimeNotificationsEnabled = true;
+
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Cart cart;
 

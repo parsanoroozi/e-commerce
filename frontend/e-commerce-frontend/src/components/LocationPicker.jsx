@@ -319,6 +319,11 @@ function LeafletLocationMap({ location, onPick, dialogOpen, onResolvingAddressCh
       <Typography variant="body2" color="text.secondary">
         Selected: {selected.latitude.toFixed(5)}, {selected.longitude.toFixed(5)}
       </Typography>
+      {selected.address?.displayName && (
+        <Alert severity="success" variant="outlined">
+          Address found: {selected.address.displayName}
+        </Alert>
+      )}
     </Stack>
   );
 }

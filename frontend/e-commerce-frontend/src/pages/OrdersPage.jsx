@@ -1,8 +1,11 @@
+import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
+import ReceiptLongOutlinedIcon from '@mui/icons-material/ReceiptLongOutlined';
 import { Box, Card, Chip, CircularProgress, Pagination, Stack, Typography } from '@mui/material';
 import { useCallback, useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { subscribeToApiChanges } from '../api/client';
 import { ordersApi } from '../api/orders';
+import EmptyState from '../components/common/EmptyState';
 import PageContainer from '../components/layout/PageContainer';
 
 const STATUS_COLOR = {
@@ -24,6 +27,7 @@ export default function OrdersPage() {
 
   const loadOrders = useCallback(() => {
     setLoading(true);
+    setError('');
     ordersApi
       .myOrders(page)
       .then((data) => {
@@ -59,11 +63,22 @@ export default function OrdersPage() {
   return (
     <PageContainer>
       <Typography variant="h4" gutterBottom>My orders</Typography>
-      {error && <Typography color="error" sx={{ mb: 2 }}>{error}</Typography>}
-      {orders.length === 0 ? (
-        <Card sx={{ p: 4, textAlign: 'center' }}>
-          <Typography color="text.secondary">You have no orders yet.</Typography>
-        </Card>
+      {error ? (
+        <EmptyState
+          severity="error"
+          icon={<ReceiptLongOutlinedIcon />}
+          title="Orders could not load"
+          message={error}
+          onRetry={loadOrders}
+        />
+      ) : orders.length === 0 ? (
+        <EmptyState
+          icon={<Inventory2OutlinedIcon />}
+          title="No orders yet"
+          message="When you place an order, tracking, invoices, and delivery updates will appear here."
+          actionLabel="Start shopping"
+          actionTo="/"
+        />
       ) : (
         <Stack spacing={1.5}>
           {orders.map((order) => (

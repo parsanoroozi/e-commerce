@@ -21,6 +21,8 @@ import {
   TableRow,
   TextField,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from '@mui/material';
 import { useCallback, useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
@@ -30,6 +32,8 @@ import { useConfirm } from '../../context/ConfirmDialogContext';
 import { showError, showSuccess } from '../../utils/toast';
 
 export default function AdminUsersPage() {
+  const theme = useTheme();
+  const isSmall = useMediaQuery(theme.breakpoints.down('md'));
   const { user } = useAuth();
   const confirm = useConfirm();
   const [users, setUsers] = useState([]);
@@ -113,67 +117,115 @@ export default function AdminUsersPage() {
     <Box>
       <Typography variant="h5" gutterBottom>Users</Typography>
       {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
-      <TableContainer sx={{ overflowX: 'auto' }}>
-        <Table size="small">
-          <TableHead>
-            <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell>Email</TableCell>
-              <TableCell>Mobile</TableCell>
-              <TableCell>Role</TableCell>
-              <TableCell>Segment</TableCell>
-              <TableCell align="right">Lifetime</TableCell>
-              <TableCell align="right">Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {users.map((item) => (
-              <TableRow key={item.id}>
-                <TableCell>{item.firstName} {item.lastName}</TableCell>
-                <TableCell>{item.email}</TableCell>
-                <TableCell>{item.mobileNumber || '-'}</TableCell>
-                <TableCell>
-                  <Stack direction="row" spacing={0.5} flexWrap="wrap" useFlexGap>
+      {isSmall ? (
+        <Stack spacing={1.5}>
+          {users.map((item) => (
+            <Card key={item.id} variant="outlined">
+              <CardContent>
+                <Stack spacing={1}>
+                  <Box>
+                    <Typography fontWeight={800}>{item.firstName} {item.lastName}</Typography>
+                    <Typography variant="body2" color="text.secondary">{item.email}</Typography>
+                    <Typography variant="caption" color="text.secondary">{item.mobileNumber || 'No mobile number'}</Typography>
+                  </Box>
+                  <Stack direction="row" spacing={0.75} flexWrap="wrap" useFlexGap>
                     <Chip label={item.role} size="small" />
                     {item.blocked && <Chip label="Blocked" size="small" color="error" />}
-                  </Stack>
-                </TableCell>
-                <TableCell>
-                  <Stack direction="row" spacing={0.5} flexWrap="wrap" useFlexGap>
                     {item.customerSegment && <Chip label={item.customerSegment} size="small" variant="outlined" />}
                     {(item.computedSegments || []).map((segment) => (
                       <Chip key={segment} label={segment} size="small" />
                     ))}
+                    <Chip label={`Lifetime $${Number(item.lifetimeSpend || 0).toFixed(2)}`} size="small" color="primary" variant="outlined" />
                   </Stack>
-                </TableCell>
-                <TableCell align="right">${Number(item.lifetimeSpend || 0).toFixed(2)}</TableCell>
-                <TableCell align="right">
-                  <Stack direction="row" spacing={1} justifyContent="flex-end">
-                    <Button size="small" onClick={() => selectUser(item)}>Manage</Button>
+                  <Stack direction="row" spacing={1}>
+                    <Button fullWidth variant="contained" sx={{ minHeight: 44 }} onClick={() => selectUser(item)}>Manage</Button>
                     <Button
-                      size="small"
+                      fullWidth
+                      variant="outlined"
                       color="error"
+                      sx={{ minHeight: 44 }}
                       disabled={item.id === user?.id}
                       onClick={() => deleteUser(item)}
                     >
                       Delete
                     </Button>
                   </Stack>
-                </TableCell>
-              </TableRow>
-            ))}
-            {users.length === 0 && (
+                </Stack>
+              </CardContent>
+            </Card>
+          ))}
+          {users.length === 0 && (
+            <Card variant="outlined">
+              <CardContent>
+                <Typography color="text.secondary" sx={{ textAlign: 'center' }}>No users found.</Typography>
+              </CardContent>
+            </Card>
+          )}
+        </Stack>
+      ) : (
+        <TableContainer sx={{ overflowX: 'auto' }}>
+          <Table size="small">
+            <TableHead>
               <TableRow>
-                <TableCell colSpan={7}>
-                  <Typography color="text.secondary" sx={{ py: 3, textAlign: 'center' }}>
-                    No users found.
-                  </Typography>
-                </TableCell>
+                <TableCell>Name</TableCell>
+                <TableCell>Email</TableCell>
+                <TableCell>Mobile</TableCell>
+                <TableCell>Role</TableCell>
+                <TableCell>Segment</TableCell>
+                <TableCell align="right">Lifetime</TableCell>
+                <TableCell align="right">Actions</TableCell>
               </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+            <TableBody>
+              {users.map((item) => (
+                <TableRow key={item.id}>
+                  <TableCell>{item.firstName} {item.lastName}</TableCell>
+                  <TableCell>{item.email}</TableCell>
+                  <TableCell>{item.mobileNumber || '-'}</TableCell>
+                  <TableCell>
+                    <Stack direction="row" spacing={0.5} flexWrap="wrap" useFlexGap>
+                      <Chip label={item.role} size="small" />
+                      {item.blocked && <Chip label="Blocked" size="small" color="error" />}
+                    </Stack>
+                  </TableCell>
+                  <TableCell>
+                    <Stack direction="row" spacing={0.5} flexWrap="wrap" useFlexGap>
+                      {item.customerSegment && <Chip label={item.customerSegment} size="small" variant="outlined" />}
+                      {(item.computedSegments || []).map((segment) => (
+                        <Chip key={segment} label={segment} size="small" />
+                      ))}
+                    </Stack>
+                  </TableCell>
+                  <TableCell align="right">${Number(item.lifetimeSpend || 0).toFixed(2)}</TableCell>
+                  <TableCell align="right">
+                    <Stack direction="row" spacing={1} justifyContent="flex-end">
+                      <Button size="small" sx={{ minHeight: 40 }} onClick={() => selectUser(item)}>Manage</Button>
+                      <Button
+                        size="small"
+                        sx={{ minHeight: 40 }}
+                        color="error"
+                        disabled={item.id === user?.id}
+                        onClick={() => deleteUser(item)}
+                      >
+                        Delete
+                      </Button>
+                    </Stack>
+                  </TableCell>
+                </TableRow>
+              ))}
+              {users.length === 0 && (
+                <TableRow>
+                  <TableCell colSpan={7}>
+                    <Typography color="text.secondary" sx={{ py: 3, textAlign: 'center' }}>
+                      No users found.
+                    </Typography>
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
 
       {selected && (
         <Card sx={{ mt: 3 }}>

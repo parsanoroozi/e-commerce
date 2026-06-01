@@ -123,6 +123,7 @@ public class OrderServiceImpl implements OrderService {
                 .shippingMethod(shippingMethod)
                 .shippingStreet(shipping.street())
                 .shippingCity(shipping.city())
+                .shippingState(shipping.state())
                 .shippingZipCode(shipping.zipCode())
                 .shippingCountry(shipping.country())
                 .shippingLatitude(shipping.latitude())
@@ -162,6 +163,58 @@ public class OrderServiceImpl implements OrderService {
                 stripePaymentService.publishableKey(),
                 saved.getTotalAmount(),
                 false);
+    }
+
+    @Transactional
+    public CheckoutInitResponse updateCheckout(Long orderId, CheckoutRequest request) {
+        Order order = orderRepository.findWithDetailsByIdAndUserIdForUpdate(orderId, SecurityUtils.currentUserId())
+                .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, "Order not found"));
+        if (order.getStatus() != OrderStatus.AWAITING_PAYMENT) {
+            throw new ApiException(HttpStatus.BAD_REQUEST, "Only unpaid checkout orders can be edited");
+        }
+
+        ResolvedShipping shipping = shippingAddressService.resolveForCheckout(request);
+        ShippingMethod shippingMethod = resolveShippingMethod(request.shippingMethod());
+        BigDecimal subtotal = order.getItems().stream()
+                .map(item -> item.getUnitPrice().multiply(BigDecimal.valueOf(item.getQuantity())))
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        var totals = checkoutPricingService.calculate(subtotal, request.couponCode(), shippingMethod);
+
+        order.setSubtotalAmount(totals.subtotal());
+        order.setDiscountAmount(totals.discount());
+        order.setShippingCost(totals.shipping());
+        order.setTaxAmount(totals.tax());
+        order.setTotalAmount(totals.total());
+        order.setCouponCode(totals.couponCode());
+        order.setShippingMethod(shippingMethod);
+        order.setShippingStreet(shipping.street());
+        order.setShippingCity(shipping.city());
+        order.setShippingState(shipping.state());
+        order.setShippingZipCode(shipping.zipCode());
+        order.setShippingCountry(shipping.country());
+        order.setShippingLatitude(shipping.latitude());
+        order.setShippingLongitude(shipping.longitude());
+
+        if (!paymentModeService.isDevModeActive() && order.getStripePaymentIntentId() != null) {
+            PaymentIntent intent = stripePaymentService.updatePaymentIntentAmount(
+                    order.getStripePaymentIntentId(),
+                    order.getTotalAmount());
+            orderRepository.save(order);
+            return new CheckoutInitResponse(
+                    order.getId(),
+                    intent.getClientSecret(),
+                    stripePaymentService.publishableKey(),
+                    order.getTotalAmount(),
+                    false);
+        }
+
+        orderRepository.save(order);
+        return new CheckoutInitResponse(
+                order.getId(),
+                null,
+                null,
+                order.getTotalAmount(),
+                true);
     }
 
     @Transactional

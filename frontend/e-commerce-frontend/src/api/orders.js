@@ -7,6 +7,11 @@ export const ordersApi = {
       method: 'POST',
       body: JSON.stringify(data),
     }),
+  updateCheckout: (orderId, data) =>
+    apiRequest(`/api/orders/checkout/${orderId}`, {
+      method: 'PATCH',
+      body: JSON.stringify(data),
+    }),
   confirmPayment: (orderId) =>
     apiRequest(`/api/orders/${orderId}/confirm-payment`, { method: 'POST' }),
   myOrders: (page = 0) => apiRequest(`/api/orders?page=${page}&size=10`),

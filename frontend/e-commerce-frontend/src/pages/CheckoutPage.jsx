@@ -7,6 +7,7 @@ import {
   Card,
   CardContent,
   CircularProgress,
+  Divider,
   FormControlLabel,
   Grid,
   Link,
@@ -36,53 +37,85 @@ import { couponsApi } from '../api/coupons';
 import { ordersApi } from '../api/orders';
 import { shippingAddressesApi } from '../api/shippingAddresses';
 import { storefrontApi } from '../api/storefront';
+import AddressFormFields from '../components/AddressFormFields';
 import DevPaymentForm from '../components/DevPaymentForm';
-import LocationPicker from '../components/LocationPicker';
 import PricingSummary from '../components/PricingSummary';
 import StripePaymentForm from '../components/StripePaymentForm';
+import { formatAddressLine, validatePostalCode } from '../utils/address';
 import { estimateCheckout, SHIPPING_OPTIONS } from '../utils/checkoutPricing';
 import { showError, showSuccess } from '../utils/toast';
+
+const CHECKOUT_DRAFT_KEY = 'shopverse:checkout-draft:v2';
+const steps = ['Cart', 'Shipping', 'Payment', 'Confirmation'];
 
 const emptyForm = {
   label: '',
   shippingStreet: '',
   shippingCity: '',
+  shippingState: '',
   shippingZipCode: '',
-  shippingCountry: '',
+  shippingCountry: 'United States',
   shippingLatitude: '',
   shippingLongitude: '',
 };
 
-function formatAddress(addr) {
-  const parts = [addr.street, addr.city, addr.zipCode, addr.country].filter(Boolean);
-  return parts.join(', ');
+function cartSignature(cart) {
+  return (cart?.items || [])
+    .map((item) => `${item.id || item.productId}:${item.productId}:${item.variantId || ''}:${item.quantity}:${item.lineTotal}`)
+    .sort()
+    .join('|');
+}
+
+function loadDraft() {
+  try {
+    const draft = JSON.parse(localStorage.getItem(CHECKOUT_DRAFT_KEY) || 'null');
+    return draft && typeof draft === 'object' ? draft : null;
+  } catch {
+    return null;
+  }
+}
+
+function saveDraft(draft) {
+  localStorage.setItem(CHECKOUT_DRAFT_KEY, JSON.stringify({
+    ...draft,
+    savedAt: new Date().toISOString(),
+  }));
+}
+
+function clearDraft() {
+  localStorage.removeItem(CHECKOUT_DRAFT_KEY);
 }
 
 export default function CheckoutPage() {
   const navigate = useNavigate();
   const { mode } = useColorMode();
+  const restoredDraft = useMemo(() => loadDraft(), []);
   const [cart, setCart] = useState(null);
   const [savedAddresses, setSavedAddresses] = useState([]);
-  const [addressMode, setAddressMode] = useState('saved');
-  const [selectedAddressId, setSelectedAddressId] = useState(null);
-  const [form, setForm] = useState(emptyForm);
-  const [couponCode, setCouponCode] = useState('');
-  const [appliedDiscount, setAppliedDiscount] = useState(0);
-  const [appliedFreeShipping, setAppliedFreeShipping] = useState(false);
-  const [couponMessage, setCouponMessage] = useState('');
-  const [shippingMethod, setShippingMethod] = useState('STANDARD');
-  const [checkout, setCheckout] = useState(null);
+  const [addressMode, setAddressMode] = useState(restoredDraft?.addressMode || 'saved');
+  const [selectedAddressId, setSelectedAddressId] = useState(restoredDraft?.selectedAddressId || null);
+  const [form, setForm] = useState(restoredDraft?.form || emptyForm);
+  const [couponCode, setCouponCode] = useState(restoredDraft?.couponCode || '');
+  const [appliedDiscount, setAppliedDiscount] = useState(restoredDraft?.appliedDiscount || 0);
+  const [appliedFreeShipping, setAppliedFreeShipping] = useState(Boolean(restoredDraft?.appliedFreeShipping));
+  const [couponMessage, setCouponMessage] = useState(restoredDraft?.couponMessage || '');
+  const [shippingMethod, setShippingMethod] = useState(restoredDraft?.shippingMethod || 'STANDARD');
+  const [checkout, setCheckout] = useState(restoredDraft?.orderId ? { orderId: restoredDraft.orderId } : null);
   const [orderBreakdown, setOrderBreakdown] = useState(null);
   const [storeSettings, setStoreSettings] = useState(null);
   const [stripePromise, setStripePromise] = useState(null);
   const [error, setError] = useState('');
+  const [cartWarning, setCartWarning] = useState('');
+  const [paymentWarning, setPaymentWarning] = useState('');
+  const [fieldErrors, setFieldErrors] = useState({});
   const [loading, setLoading] = useState(false);
-  const [step, setStep] = useState('shipping');
+  const [step, setStep] = useState(restoredDraft?.orderId ? 'payment' : 'shipping');
+  const [cartSnapshot, setCartSnapshot] = useState(restoredDraft?.cartSignature || '');
 
   useEffect(() => {
     const controller = new AbortController();
     Promise.all([
-      cartApi.get({ signal: controller.signal }),
+      cartApi.get({ signal: controller.signal, cache: false }),
       shippingAddressesApi.listAll({ signal: controller.signal }),
       storefrontApi.settings(),
     ])
@@ -90,24 +123,76 @@ export default function CheckoutPage() {
         setCart(cartData);
         setSavedAddresses(addresses);
         setStoreSettings(settings);
-        if (addresses.length > 0) {
-          const defaultAddr = addresses.find((a) => a.isDefault) || addresses[0];
-          setSelectedAddressId(defaultAddr.id);
-          setAddressMode('saved');
-        } else {
-          setAddressMode('new');
+        if (!restoredDraft) {
+          if (addresses.length > 0) {
+            const defaultAddr = addresses.find((a) => a.isDefault) || addresses[0];
+            setSelectedAddressId(defaultAddr.id);
+            setAddressMode('saved');
+          } else {
+            setAddressMode('new');
+          }
+        }
+        if (restoredDraft?.cartSignature && restoredDraft.cartSignature !== cartSignature(cartData)) {
+          setCartWarning('Your cart changed since checkout started. Return to cart to review items before paying.');
         }
       })
       .catch((err) => {
         if (err.name !== 'AbortError') setError(err.message);
       });
     return () => controller.abort();
-  }, []);
+  }, [restoredDraft]);
+
+  useEffect(() => {
+    if (!cart) return;
+    saveDraft({
+      addressMode,
+      selectedAddressId,
+      form,
+      couponCode,
+      appliedDiscount,
+      appliedFreeShipping,
+      couponMessage,
+      shippingMethod,
+      orderId: checkout?.orderId || null,
+      cartSignature: cartSnapshot || cartSignature(cart),
+    });
+  }, [
+    addressMode,
+    selectedAddressId,
+    form,
+    couponCode,
+    appliedDiscount,
+    appliedFreeShipping,
+    couponMessage,
+    shippingMethod,
+    checkout?.orderId,
+    cart,
+    cartSnapshot,
+  ]);
+
+  useEffect(() => {
+    if (!checkout?.orderId || checkout.clientSecret || checkout.devMode === true) return;
+    ordersApi.get(checkout.orderId)
+      .then((order) => {
+        if (order.status !== 'AWAITING_PAYMENT') {
+          setPaymentWarning('This checkout is no longer waiting for payment. Review your order history before paying.');
+          return;
+        }
+        setOrderBreakdown(order);
+      })
+      .catch(() => {
+        setPaymentWarning('Your previous checkout could not be resumed. Review your cart and start checkout again.');
+      });
+  }, [checkout?.orderId, checkout?.clientSecret, checkout?.devMode]);
 
   const estimate = useMemo(() => {
     if (!cart) return null;
     return estimateCheckout(cart.totalAmount, appliedDiscount, shippingMethod, appliedFreeShipping, storeSettings || {});
   }, [cart, appliedDiscount, shippingMethod, appliedFreeShipping, storeSettings]);
+
+  const selectedAddress = savedAddresses.find((a) => a.id === selectedAddressId);
+  const summary = orderBreakdown || estimate;
+  const activeStep = step === 'shipping' ? 1 : step === 'payment' ? 2 : 3;
 
   const buildCheckoutPayload = () => {
     const base =
@@ -117,6 +202,7 @@ export default function CheckoutPage() {
             label: form.label || null,
             shippingStreet: form.shippingStreet,
             shippingCity: form.shippingCity,
+            shippingState: form.shippingState,
             shippingZipCode: form.shippingZipCode,
             shippingCountry: form.shippingCountry,
             shippingLatitude: form.shippingLatitude === '' ? null : Number(form.shippingLatitude),
@@ -127,6 +213,20 @@ export default function CheckoutPage() {
       couponCode: couponCode.trim() || null,
       shippingMethod,
     };
+  };
+
+  const refreshCartStatus = async () => {
+    const latestCart = await cartApi.get({ cache: false });
+    setCart(latestCart);
+    if (!latestCart.items?.length) {
+      setCartWarning('Your cart is empty. This checkout cannot continue.');
+      return false;
+    }
+    if (cartSnapshot && cartSnapshot !== cartSignature(latestCart)) {
+      setCartWarning('Your cart changed since checkout started. Return to cart to review items before paying.');
+      return false;
+    }
+    return true;
   };
 
   const applyCoupon = async () => {
@@ -153,17 +253,38 @@ export default function CheckoutPage() {
 
   const handleShippingSubmit = async (e) => {
     e.preventDefault();
-    if (checkout) {
-      setStep('payment');
-      return;
-    }
     setLoading(true);
     setError('');
+    setPaymentWarning('');
+    const nextErrors = addressMode === 'new' ? validateCheckoutAddress(form) : {};
+    setFieldErrors(nextErrors);
+    if (Object.keys(nextErrors).length > 0) {
+      setError('Fix the highlighted shipping fields before continuing.');
+      setLoading(false);
+      return;
+    }
     try {
-      const init = await ordersApi.initiateCheckout(buildCheckoutPayload());
+      const latestCart = await cartApi.get({ cache: false });
+      setCart(latestCart);
+      if (!latestCart.items?.length) {
+        setCartWarning('Your cart is empty. Add items before continuing checkout.');
+        return;
+      }
+
+      const existingSnapshot = cartSnapshot || cartSignature(latestCart);
+      if (cartSnapshot && cartSnapshot !== cartSignature(latestCart)) {
+        setCartWarning('Your cart changed since checkout started. Return to cart to review items before paying.');
+        return;
+      }
+
+      const init = checkout?.orderId
+        ? await ordersApi.updateCheckout(checkout.orderId, buildCheckoutPayload())
+        : await ordersApi.initiateCheckout(buildCheckoutPayload());
+      setCartSnapshot(existingSnapshot);
       setCheckout(init);
       const order = await ordersApi.get(init.orderId);
       setOrderBreakdown(order);
+      setFieldErrors({});
       if (!init.devMode && init.publishableKey) {
         setStripePromise(loadStripe(init.publishableKey));
       }
@@ -175,8 +296,48 @@ export default function CheckoutPage() {
     }
   };
 
+  const editShipping = () => {
+    setPaymentWarning('');
+    setStep('shipping');
+  };
+
+  const returnToCart = async () => {
+    setLoading(true);
+    setError('');
+    try {
+      if (checkout?.orderId) {
+        await ordersApi.cancel(checkout.orderId);
+      }
+      clearDraft();
+      navigate('/cart', {
+        state: {
+          checkoutReturned: true,
+        },
+      });
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const makeCheckoutDefault = async (addressId) => {
+    try {
+      await shippingAddressesApi.setDefault(addressId);
+      const addresses = await shippingAddressesApi.listAll({ cache: false });
+      setSavedAddresses(addresses);
+      setSelectedAddressId(addressId);
+      showSuccess('Default address updated');
+    } catch (err) {
+      showError(err.message);
+    }
+  };
+
   const handlePaymentSuccess = async () => {
+    const stillValid = await refreshCartStatus();
+    if (!stillValid) return;
     const order = await ordersApi.confirmPayment(checkout.orderId);
+    clearDraft();
     navigate(`/orders/${order.id}`, { state: { paymentSuccess: true } });
   };
 
@@ -194,7 +355,10 @@ export default function CheckoutPage() {
     return (
       <PageContainer>
         <Card sx={{ p: 4, textAlign: 'center' }}>
-          <Typography gutterBottom>Your cart is empty.</Typography>
+          <Typography variant="h5" gutterBottom>Your cart is empty</Typography>
+          <Typography color="text.secondary">
+            Checkout cannot continue because there are no items to reserve or pay for.
+          </Typography>
           <Button component={RouterLink} to="/" variant="contained" sx={{ mt: 2 }}>
             Continue shopping
           </Button>
@@ -203,24 +367,44 @@ export default function CheckoutPage() {
     );
   }
 
-  const selectedAddress = savedAddresses.find((a) => a.id === selectedAddressId);
-  const summary = orderBreakdown || estimate;
-  const activeStep = step === 'shipping' ? 0 : 1;
-
   return (
     <PageContainer>
       <Typography variant="h4" gutterBottom>Checkout</Typography>
       <Stepper activeStep={activeStep} sx={{ mb: 3, display: { xs: 'none', sm: 'flex' } }}>
-        <Step><StepLabel>Shipping</StepLabel></Step>
-        <Step><StepLabel>Payment</StepLabel></Step>
+        {steps.map((label) => (
+          <Step key={label}>
+            <StepLabel>{label}</StepLabel>
+          </Step>
+        ))}
       </Stepper>
 
       <Grid container spacing={3}>
         <Grid size={{ xs: 12, md: 8 }}>
+          {(cartWarning || paymentWarning) && (
+            <Alert
+              severity={cartWarning ? 'warning' : 'info'}
+              sx={{ mb: 2 }}
+              action={cartWarning ? (
+                <Button color="inherit" size="small" onClick={returnToCart}>
+                  Return to cart
+                </Button>
+              ) : null}
+            >
+              {cartWarning || paymentWarning}
+            </Alert>
+          )}
+
           {step === 'shipping' && (
             <Card component="form" onSubmit={handleShippingSubmit}>
               <CardContent>
-                <Typography variant="h6" gutterBottom>Shipping address</Typography>
+                <Typography variant="h6" gutterBottom>
+                  {checkout?.orderId ? 'Edit shipping details' : 'Shipping address'}
+                </Typography>
+                {checkout?.orderId && (
+                  <Alert severity="info" sx={{ mb: 2 }}>
+                    Updating shipping recalculates the unpaid order total before payment. No payment has been captured yet.
+                  </Alert>
+                )}
                 {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
 
                 {savedAddresses.length > 0 && (
@@ -238,7 +422,7 @@ export default function CheckoutPage() {
                 )}
 
                 {addressMode === 'saved' && savedAddresses.length > 0 && (
-                  <RadioGroup value={selectedAddressId} onChange={(e) => setSelectedAddressId(Number(e.target.value))}>
+                  <RadioGroup value={selectedAddressId || ''} onChange={(e) => setSelectedAddressId(Number(e.target.value))}>
                     {savedAddresses.map((addr) => (
                       <Card key={addr.id} variant="outlined" sx={{ mb: 1, p: 1.5 }}>
                         <FormControlLabel
@@ -254,7 +438,19 @@ export default function CheckoutPage() {
                                   </Typography>
                                 )}
                               </Typography>
-                              <Typography variant="body2" color="text.secondary">{formatAddress(addr)}</Typography>
+                              <Typography variant="body2" color="text.secondary">{formatAddressLine(addr)}</Typography>
+                              {!addr.isDefault && (
+                                <Button
+                                  size="small"
+                                  sx={{ mt: 0.5 }}
+                                  onClick={(event) => {
+                                    event.preventDefault();
+                                    makeCheckoutDefault(addr.id);
+                                  }}
+                                >
+                                  Make default
+                                </Button>
+                              )}
                             </Box>
                           }
                         />
@@ -266,29 +462,13 @@ export default function CheckoutPage() {
                 {addressMode === 'new' && (
                   <Stack spacing={2} sx={{ mb: 2 }}>
                     <Typography variant="body2" color="text.secondary">Saved automatically for your next orders.</Typography>
-                    <TextField label="Label (optional)" placeholder="Home, Work..." value={form.label} onChange={(e) => setForm({ ...form, label: e.target.value })} />
-                    <TextField label="Street address" required value={form.shippingStreet} onChange={(e) => setForm({ ...form, shippingStreet: e.target.value })} />
-                    <TextField label="City" required value={form.shippingCity} onChange={(e) => setForm({ ...form, shippingCity: e.target.value })} />
-                    <TextField label="Postal code" required value={form.shippingZipCode} onChange={(e) => setForm({ ...form, shippingZipCode: e.target.value })} />
-                    <TextField label="Country" required value={form.shippingCountry} onChange={(e) => setForm({ ...form, shippingCountry: e.target.value })} />
-                    <LocationPicker
-                      value={{ latitude: form.shippingLatitude, longitude: form.shippingLongitude }}
-                      onChange={(location) => setForm((current) => ({
-                        ...current,
-                        shippingStreet: location.street ?? current.shippingStreet,
-                        shippingCity: location.city ?? current.shippingCity,
-                        shippingZipCode: location.zipCode ?? current.shippingZipCode,
-                        shippingCountry: location.country ?? current.shippingCountry,
-                        shippingLatitude: location.latitude,
-                        shippingLongitude: location.longitude,
-                      }))}
-                    />
+                    <AddressFormFields form={form} setForm={setForm} fieldPrefix="shipping" errors={fieldErrors} />
                   </Stack>
                 )}
 
                 {addressMode === 'saved' && selectedAddress && (
                   <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-                    Shipping to: <strong>{formatAddress(selectedAddress)}</strong>
+                    Shipping to: <strong>{formatAddressLine(selectedAddress)}</strong>
                   </Typography>
                 )}
 
@@ -316,9 +496,17 @@ export default function CheckoutPage() {
                 </Stack>
                 {couponMessage && <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>{couponMessage}</Typography>}
 
-                <Button type="submit" variant="contained" disabled={loading} fullWidth>
-                  {loading ? 'Preparing payment...' : 'Continue to payment'}
-                </Button>
+                <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1}>
+                  <Button type="submit" variant="contained" disabled={loading || Boolean(cartWarning)} fullWidth>
+                    {loading ? 'Updating checkout...' : checkout?.orderId ? 'Save shipping and return to payment' : 'Continue to payment'}
+                  </Button>
+                  <Button type="button" variant="outlined" color="warning" disabled={loading} onClick={returnToCart}>
+                    Return to cart
+                  </Button>
+                </Stack>
+                <Typography variant="caption" color="text.secondary" display="block" sx={{ mt: 1 }}>
+                  Returning to cart cancels this unpaid checkout order. Your cart items remain available for review.
+                </Typography>
                 <Link component={RouterLink} to="/addresses" variant="body2" display="block" sx={{ mt: 2 }}>
                   Manage saved addresses
                 </Link>
@@ -329,34 +517,46 @@ export default function CheckoutPage() {
           {step === 'payment' && checkout && (
             <Card>
               <CardContent>
-                <Typography variant="h6" gutterBottom>Payment</Typography>
-                {checkout.devMode ? (
-                  <DevPaymentForm orderId={checkout.orderId} totalAmount={checkout.totalAmount} onSuccess={handlePaymentSuccess} />
+                <Stack direction={{ xs: 'column', sm: 'row' }} justifyContent="space-between" spacing={1} sx={{ mb: 2 }}>
+                  <Box>
+                    <Typography variant="h6">Payment</Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      Order #{checkout.orderId} {summary?.totalAmount || checkout.totalAmount ? `- $${Number(summary?.totalAmount || checkout.totalAmount).toFixed(2)}` : ''}
+                    </Typography>
+                  </Box>
+                  <Button variant="outlined" onClick={editShipping}>Edit shipping</Button>
+                </Stack>
+                <Divider sx={{ mb: 2 }} />
+                {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
+                {cartWarning ? (
+                  <Alert severity="warning">
+                    Payment is paused until you review the cart changes.
+                  </Alert>
+                ) : checkout.devMode ? (
+                  <DevPaymentForm orderId={checkout.orderId} totalAmount={summary?.totalAmount || checkout.totalAmount} onSuccess={handlePaymentSuccess} />
                 ) : (
                   stripePromise &&
                   checkout.clientSecret && (
-                    <>
-                      <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-                        Order #{checkout.orderId} — ${Number(checkout.totalAmount).toFixed(2)}
-                      </Typography>
-                      <Elements
-                        stripe={stripePromise}
-                        options={{
-                          clientSecret: checkout.clientSecret,
-                          appearance: { theme: mode === 'dark' ? 'night' : 'stripe' },
-                        }}
-                      >
-                        <StripePaymentForm
+                    <Elements
+                      stripe={stripePromise}
+                      options={{
+                        clientSecret: checkout.clientSecret,
+                        appearance: { theme: mode === 'dark' ? 'night' : 'stripe' },
+                      }}
+                    >
+                      <StripePaymentForm
                         orderId={checkout.orderId}
-                        totalAmount={checkout.totalAmount}
+                        totalAmount={summary?.totalAmount || checkout.totalAmount}
                         onSuccess={handlePaymentSuccess}
                       />
-                      </Elements>
-                    </>
+                    </Elements>
                   )
                 )}
-                <Typography variant="body2" color="text.secondary" sx={{ mt: 2 }}>
-                  To change shipping details, return to the cart and start checkout again.
+                <Button color="warning" sx={{ mt: 2 }} onClick={returnToCart} disabled={loading}>
+                  Return to cart
+                </Button>
+                <Typography variant="caption" color="text.secondary" display="block" sx={{ mt: 1 }}>
+                  Returning to cart cancels this unpaid checkout order and stops the current payment attempt.
                 </Typography>
               </CardContent>
             </Card>
@@ -364,7 +564,18 @@ export default function CheckoutPage() {
         </Grid>
 
         <Grid size={{ xs: 12, md: 4 }}>
-          <Card sx={{ p: 2.5, position: { md: 'sticky' }, top: { md: 88 } }}>
+          <Card
+            sx={{
+              p: 2.5,
+              position: 'sticky',
+              top: { xs: 'auto', md: 88 },
+              bottom: { xs: 0, md: 'auto' },
+              zIndex: { xs: 9, md: 1 },
+              mx: { xs: -2, sm: 0 },
+              borderRadius: { xs: '16px 16px 0 0', sm: 2 },
+              boxShadow: { xs: 6, md: 1 },
+            }}
+          >
             <Typography variant="h6" gutterBottom>Order summary</Typography>
             <TableContainer
               sx={{
@@ -376,8 +587,8 @@ export default function CheckoutPage() {
                 overflow: 'hidden',
               }}
             >
-                <Table size="small" aria-label="Checkout items">
-                  <TableHead>
+              <Table size="small" aria-label="Checkout items">
+                <TableHead>
                   <TableRow sx={{ bgcolor: 'primary.main' }}>
                     <TableCell sx={{ px: 1.5, py: 1.15, color: 'primary.contrastText', fontSize: 12, fontWeight: 800, borderBottom: 0 }}>Item</TableCell>
                     <TableCell align="center" sx={{ px: 1, py: 1.15, color: 'primary.contrastText', fontSize: 12, fontWeight: 800, borderBottom: 0 }}>Qty</TableCell>
@@ -386,7 +597,7 @@ export default function CheckoutPage() {
                 </TableHead>
                 <TableBody>
                   {cart.items.map((item) => (
-                    <TableRow key={item.productId} sx={{ '&:last-child td': { borderBottom: 0 } }}>
+                    <TableRow key={item.id || `${item.productId}-${item.variantId || 'base'}`} sx={{ '&:last-child td': { borderBottom: 0 } }}>
                       <TableCell sx={{ px: 1.5, py: 1.25, fontWeight: 600 }}>
                         {item.productName}
                         {item.variantName && (
@@ -416,4 +627,13 @@ export default function CheckoutPage() {
       </Grid>
     </PageContainer>
   );
+}
+
+function validateCheckoutAddress(form) {
+  const errors = {};
+  if (!form.shippingStreet.trim()) errors.shippingStreet = 'Street address is required.';
+  if (!form.shippingCity.trim()) errors.shippingCity = 'City is required.';
+  const postalError = validatePostalCode(form.shippingCountry, form.shippingZipCode);
+  if (postalError) errors.shippingZipCode = postalError;
+  return errors;
 }

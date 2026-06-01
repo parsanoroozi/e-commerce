@@ -7,9 +7,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import personal.ecommercebackend.dto.response.AdminSettingsResponse;
 import personal.ecommercebackend.entity.Order;
 import personal.ecommercebackend.entity.OrderItem;
 import personal.ecommercebackend.entity.User;
+import personal.ecommercebackend.service.ShopSettingsService;
 
 import java.math.BigDecimal;
 import java.time.ZoneId;
@@ -22,6 +24,7 @@ import java.util.concurrent.CompletableFuture;
 public class EmailServiceImpl implements EmailService {
 
     private final AsyncEmailSender asyncEmailSender;
+    private final ShopSettingsService shopSettingsService;
 
     @Value("${app.mail.from:noreply@shopverse.local}")
     private String fromAddress;
@@ -184,6 +187,20 @@ public class EmailServiceImpl implements EmailService {
     }
 
     private String wrapEmail(String title, String subtitle, String content) {
+        AdminSettingsResponse settings = shopSettingsService.getSettings();
+        String brandName = settings.brandName() == null || settings.brandName().isBlank()
+                ? fromName
+                : settings.brandName();
+        String contactEmail = settings.contactEmail() == null || settings.contactEmail().isBlank()
+                ? fromAddress
+                : settings.contactEmail();
+        String logo = settings.logoUrl() == null || settings.logoUrl().isBlank()
+                ? """
+                        <div style="width:44px;height:44px;border-radius:12px;background:#ff5a1f;color:#ffffff;display:inline-block;text-align:center;line-height:44px;font-size:20px;font-weight:900;margin-right:12px;vertical-align:middle;">%s</div>
+                        """.formatted(escape(monogram(brandName)))
+                : """
+                        <img src="%s" alt="%s logo" width="48" height="48" style="width:48px;height:48px;object-fit:contain;border-radius:12px;margin-right:12px;vertical-align:middle;">
+                        """.formatted(escape(settings.logoUrl()), escape(brandName));
         return """
                 <!doctype html>
                 <html>
@@ -191,7 +208,7 @@ public class EmailServiceImpl implements EmailService {
                   <div style="max-width:640px;margin:0 auto;padding:28px 16px;">
                     <div style="background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
                       <div style="background:#0f172a;color:#ffffff;padding:24px 28px;">
-                        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">ShopVerse</div>
+                        <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ffb199;">%s%s</div>
                         <h1 style="margin:10px 0 0;font-size:26px;line-height:1.25;">%s</h1>
                         <p style="margin:8px 0 0;color:#cbd5e1;font-size:15px;">%s</p>
                       </div>
@@ -199,11 +216,11 @@ public class EmailServiceImpl implements EmailService {
                         %s
                       </div>
                     </div>
-                    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">ShopVerse customer emails are sent from %s.</p>
+                    <p style="text-align:center;color:#64748b;font-size:12px;margin:16px 0 0;">%s customer emails are sent from %s.</p>
                   </div>
                 </body>
                 </html>
-                """.formatted(escape(title), subtitle, content, escape(fromAddress));
+                """.formatted(logo, escape(brandName), escape(title), subtitle, content, escape(brandName), escape(contactEmail));
     }
 
     private String formatDate(Order order) {
@@ -221,6 +238,15 @@ public class EmailServiceImpl implements EmailService {
     private String escape(String value) {
         if (value == null) return "";
         return value.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
+    }
+
+    private String monogram(String value) {
+        if (value == null || value.isBlank()) return "S";
+        String[] parts = value.trim().split("\\s+");
+        if (parts.length == 1) {
+            return parts[0].substring(0, 1).toUpperCase();
+        }
+        return (parts[0].substring(0, 1) + parts[1].substring(0, 1)).toUpperCase();
     }
 
     private String trackingUrl(String carrier, String trackingNumber) {

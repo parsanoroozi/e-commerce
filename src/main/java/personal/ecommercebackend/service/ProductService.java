@@ -13,8 +13,10 @@ import com.stripe.model.PaymentIntent;
 public interface ProductService {
     PageResponse<ProductResponse> findAllForAdmin(Pageable pageable);
     PageResponse<ProductResponse> search(Long categoryId, String search, Pageable pageable);
+    PageResponse<ProductResponse> search(Long categoryId, String search, BigDecimal minPrice, BigDecimal maxPrice, Boolean inStock, Integer minRating, Pageable pageable);
     List<ProductResponse> featured(Pageable pageable);
     ProductResponse findById(Long id);
+    ProductResponse findBySlug(String slug);
     List<ProductResponse> findRelated(Long id, Pageable pageable);
     ProductResponse create(ProductRequest request);
     ProductResponse update(Long id, ProductRequest request);
