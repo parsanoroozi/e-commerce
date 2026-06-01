@@ -84,6 +84,20 @@ public class EmailServiceImpl implements EmailService {
         return asyncEmailSender.sendHtml(email, subject, body, "email verification for " + email);
     }
 
+    public CompletableFuture<Boolean> sendAdminTwoFactorCode(User user, String code) {
+        String subject = "Your ShopVerse admin sign-in code";
+        String body = wrapEmail(
+                "Admin sign-in code",
+                "Hi " + escape(user.getFirstName()) + ",",
+                """
+                        <p>Use this code to finish signing in to the admin area.</p>
+                        <div style="font-size:32px;font-weight:800;letter-spacing:8px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:18px 20px;text-align:center;margin:22px 0;">%s</div>
+                        <p>This code expires in 10 minutes.</p>
+                        <p style="color:#64748b;">If this was not you, change your password immediately.</p>
+                        """.formatted(escape(code)));
+        return asyncEmailSender.sendHtml(user.getEmail(), subject, body, "admin 2FA for " + user.getEmail());
+    }
+
     private String orderSummary(Order order) {
         return """
                 <div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:20px 0;">

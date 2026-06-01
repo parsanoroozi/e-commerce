@@ -12,5 +12,7 @@ import com.stripe.model.PaymentIntent;
 
 public interface CheckoutPricingService {
     CheckoutTotals calculate(BigDecimal subtotal, String couponCode, ShippingMethod shippingMethod);
+    CheckoutTotals calculate(BigDecimal subtotal, String couponCode, ShippingMethod shippingMethod, Long userId, List<CartItem> items);
     BigDecimal previewDiscount(BigDecimal subtotal, String couponCode);
+    BigDecimal previewDiscount(BigDecimal subtotal, String couponCode, Long userId, List<CartItem> items);
 }

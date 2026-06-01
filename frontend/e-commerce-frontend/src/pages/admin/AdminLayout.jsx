@@ -9,6 +9,8 @@ const tabs = [
   { path: '/admin/orders', label: 'Orders' },
   { path: '/admin/users', label: 'Users' },
   { path: '/admin/coupons', label: 'Coupons' },
+  { path: '/admin/settings', label: 'Settings' },
+  { path: '/admin/audit-logs', label: 'Audit logs' },
 ];
 
 export default function AdminLayout() {

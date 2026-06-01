@@ -20,4 +20,11 @@ describe('estimateCheckout', () => {
     expect(estimate.tax).toBe(0);
     expect(estimate.total).toBe(SHIPPING_OPTIONS.STANDARD.price);
   });
+
+  it('sets shipping to zero for free shipping coupons', () => {
+    const estimate = estimateCheckout(100, 0, 'EXPRESS', true);
+
+    expect(estimate.shipping).toBe(0);
+    expect(estimate.total).toBe(108);
+  });
 });

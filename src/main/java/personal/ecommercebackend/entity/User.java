@@ -45,6 +45,10 @@ public class User {
     @Builder.Default
     private boolean blocked = false;
 
+    @Column(nullable = false)
+    @Builder.Default
+    private boolean twoFactorEnabled = false;
+
     @Column(length = 2000)
     private String customerNotes;
 

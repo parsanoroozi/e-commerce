@@ -10,5 +10,6 @@ public record UserResponse(
         String mobileNumber,
         Role role,
         boolean blocked,
+        boolean twoFactorEnabled,
         String customerSegment
 ) {}

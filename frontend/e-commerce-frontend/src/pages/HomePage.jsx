@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Card,
   FormControl,
   Grid,
@@ -14,6 +15,7 @@ import {
 import { useEffect, useState } from 'react';
 import { categoriesApi } from '../api/categories';
 import { productsApi } from '../api/products';
+import { storefrontApi } from '../api/storefront';
 import PageContainer from '../components/layout/PageContainer';
 import ProductCard from '../components/ProductCard';
 import { ProductGridSkeleton } from '../components/Skeleton';
@@ -31,6 +33,8 @@ function useDebounce(value, delay = 400) {
 export default function HomePage() {
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
+  const [featured, setFeatured] = useState([]);
+  const [settings, setSettings] = useState(null);
   const [categoryId, setCategoryId] = useState('');
   const [search, setSearch] = useState('');
   const [sort, setSort] = useState('name,asc');
@@ -41,6 +45,8 @@ export default function HomePage() {
 
   useEffect(() => {
     categoriesApi.list().then(setCategories).catch(() => {});
+    productsApi.featured().then(setFeatured).catch(() => {});
+    storefrontApi.settings().then(setSettings).catch(() => {});
   }, []);
 
   useEffect(() => {
@@ -75,21 +81,41 @@ export default function HomePage() {
           mb: 3,
           p: { xs: 2, md: 4 },
           background: (t) =>
-            t.palette.mode === 'dark'
-              ? `linear-gradient(135deg, ${t.palette.secondary.dark}55, ${t.palette.primary.main}24)`
-              : `linear-gradient(135deg, ${t.palette.secondary.light}55, ${t.palette.primary.light}2f)`,
+            settings?.homepageBannerImageUrl
+              ? `linear-gradient(90deg, ${t.palette.background.paper}f2, ${t.palette.background.paper}99), url(${settings.homepageBannerImageUrl}) center/cover`
+              : t.palette.mode === 'dark'
+                ? `linear-gradient(135deg, ${t.palette.secondary.dark}55, ${t.palette.primary.main}24)`
+                : `linear-gradient(135deg, ${t.palette.secondary.light}55, ${t.palette.primary.light}2f)`,
         }}
       >
         <Typography variant="overline" color="secondary.main" fontWeight={600}>
-          New season collection
+          {settings?.brandName || 'ShopVerse'}
         </Typography>
         <Typography variant="h3" component="h1" sx={{ mt: 0.5, mb: 1 }}>
-          Discover products you&apos;ll love
+          {settings?.homepageBannerTitle || 'Discover products you\'ll love'}
         </Typography>
         <Typography color="text.secondary" maxWidth={520}>
-          Curated quality with fast checkout and secure payments.
+          {settings?.homepageBannerSubtitle || 'Curated quality with fast checkout and secure payments.'}
         </Typography>
+        {settings?.homepageBannerCtaText && (
+          <Button variant="contained" href={settings.homepageBannerCtaUrl || '#featured'} sx={{ mt: 2 }}>
+            {settings.homepageBannerCtaText}
+          </Button>
+        )}
       </Card>
+
+      {featured.length > 0 && (
+        <Box id="featured" sx={{ mb: 3 }}>
+          <Typography variant="h5" gutterBottom>Featured products</Typography>
+          <Grid container spacing={2}>
+            {featured.map((p) => (
+              <Grid key={p.id} size={{ xs: 12, sm: 6, md: 3 }}>
+                <ProductCard product={p} />
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
+      )}
 
       <Card sx={{ mb: 3, p: { xs: 2, sm: 2.5 } }}>
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>

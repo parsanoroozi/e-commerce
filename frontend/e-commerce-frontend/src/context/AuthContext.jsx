@@ -4,6 +4,7 @@ import { clearApiCache, emitApiChange } from '../api/client';
 
 const AuthContext = createContext(null);
 const LAST_LOGGED_OUT_USER_KEY = 'shopverse:last-logged-out-user-id';
+const ADMIN_ROLES = ['ADMIN', 'CATALOG_MANAGER', 'ORDER_MANAGER', 'FULFILLMENT_STAFF', 'SUPPORT_STAFF'];
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
@@ -24,8 +25,12 @@ export function AuthProvider({ children }) {
     loadUser();
   }, [loadUser]);
 
-  const login = useCallback(async (credentials) => {
-    const { user: loggedIn } = await authApi.login(credentials);
+  const login = useCallback(async (credentials, twoFactor = false) => {
+    const response = twoFactor ? await authApi.verifyTwoFactor(credentials) : await authApi.login(credentials);
+    if (response.requiresTwoFactor) {
+      return response;
+    }
+    const { user: loggedIn } = response;
     clearApiCache();
     emitApiChange({ method: 'POST', path: '/api/auth/login', resources: ['auth', 'cart', 'wishlist', 'notifications', 'orders'] });
     setUser(loggedIn);
@@ -42,6 +47,12 @@ export function AuthProvider({ children }) {
 
   const updateProfile = useCallback(async (data) => {
     const updated = await authApi.updateProfile(data);
+    setUser(updated);
+    return updated;
+  }, []);
+
+  const updateTwoFactor = useCallback(async (enabled) => {
+    const updated = await authApi.updateTwoFactor(enabled);
     setUser(updated);
     return updated;
   }, []);
@@ -65,14 +76,15 @@ export function AuthProvider({ children }) {
       user,
       loading,
       isAuthenticated: !!user,
-      isAdmin: user?.role === 'ADMIN',
+      isAdmin: ADMIN_ROLES.includes(user?.role),
       login,
       register,
       updateProfile,
+      updateTwoFactor,
       logout,
       lastLoggedOutUserKey: LAST_LOGGED_OUT_USER_KEY,
     }),
-    [user, loading, login, register, updateProfile, logout],
+    [user, loading, login, register, updateProfile, updateTwoFactor, logout],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

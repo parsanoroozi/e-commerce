@@ -11,10 +11,19 @@ export const productsApi = {
     return apiRequest(`/api/products?${params}`, options);
   },
   get: (id, options = {}) => apiRequest(`/api/products/${id}`, options),
+  featured: (options = {}) => apiRequest('/api/products/featured?size=8', options),
   create: (data) =>
     apiRequest('/api/products', { method: 'POST', body: JSON.stringify(data) }),
   update: (id, data) =>
     apiRequest(`/api/products/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
   remove: (id) => apiRequest(`/api/products/${id}`, { method: 'DELETE' }),
   related: (id, options = {}) => apiRequest(`/api/products/${id}/related?size=4`, options),
+  addImage: (id, data) =>
+    apiRequest(`/api/products/${id}/images`, { method: 'POST', body: JSON.stringify(data) }),
+  updateImage: (id, imageId, data) =>
+    apiRequest(`/api/products/${id}/images/${imageId}`, { method: 'PUT', body: JSON.stringify(data) }),
+  reorderImages: (id, images) =>
+    apiRequest(`/api/products/${id}/images/order`, { method: 'PUT', body: JSON.stringify({ images }) }),
+  deleteImage: (id, imageId) =>
+    apiRequest(`/api/products/${id}/images/${imageId}`, { method: 'DELETE' }),
 };

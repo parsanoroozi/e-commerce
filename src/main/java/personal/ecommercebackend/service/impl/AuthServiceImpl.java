@@ -14,6 +14,7 @@ import personal.ecommercebackend.dto.request.*;
 import personal.ecommercebackend.dto.response.AuthResponse;
 import personal.ecommercebackend.dto.response.UserResponse;
 import personal.ecommercebackend.entity.Cart;
+import personal.ecommercebackend.entity.AdminTwoFactorChallenge;
 import personal.ecommercebackend.entity.EmailVerificationCode;
 import personal.ecommercebackend.entity.Role;
 import personal.ecommercebackend.entity.User;
@@ -21,6 +22,7 @@ import personal.ecommercebackend.exception.ApiException;
 import personal.ecommercebackend.mapper.EntityMapper;
 import personal.ecommercebackend.entity.PasswordResetToken;
 import personal.ecommercebackend.repository.EmailVerificationCodeRepository;
+import personal.ecommercebackend.repository.AdminTwoFactorChallengeRepository;
 import personal.ecommercebackend.repository.PasswordResetTokenRepository;
 import personal.ecommercebackend.repository.UserRepository;
 import personal.ecommercebackend.security.JwtService;
@@ -45,13 +47,18 @@ public class AuthServiceImpl implements AuthService {
     private final UserRepository userRepository;
     private final EmailVerificationCodeRepository emailVerificationCodeRepository;
     private final PasswordResetTokenRepository passwordResetTokenRepository;
+    private final AdminTwoFactorChallengeRepository twoFactorChallengeRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
     private final EmailService emailService;
+    private final SessionService sessionService;
 
     @Value("${app.frontend.url:http://localhost:5173}")
     private String frontendUrl;
+
+    @Value("${app.jwt.expiration-ms}")
+    private long jwtExpirationMs;
 
     @Transactional
     public void sendEmailVerification(EmailVerificationRequest request) {
@@ -76,7 +83,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Transactional
-    public AuthResponse register(RegisterRequest request) {
+    public AuthResponse register(RegisterRequest request, String userAgent, String ipAddress) {
         String email = normalizeEmail(request.email());
         if (userRepository.existsByEmail(email)) {
             throw new ApiException(HttpStatus.CONFLICT, "Email already registered");
@@ -96,13 +103,12 @@ public class AuthServiceImpl implements AuthService {
         user.setCart(cart);
 
         user = userRepository.save(user);
-        UserPrincipal principal = new UserPrincipal(user);
-        String token = jwtService.generateToken(principal);
+        String token = issueToken(user, userAgent, ipAddress);
         log.info("User registered userId={} email={}", user.getId(), user.getEmail());
-        return new AuthResponse(token, EntityMapper.toUserResponse(user));
+        return new AuthResponse(token, EntityMapper.toUserResponse(user), false, null);
     }
 
-    public AuthResponse login(LoginRequest request) {
+    public AuthResponse login(LoginRequest request, String userAgent, String ipAddress) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         normalizeEmail(request.email()),
@@ -111,10 +117,56 @@ public class AuthServiceImpl implements AuthService {
         User user = userRepository.findByEmail(normalizeEmail(request.email()))
                 .orElseThrow(() -> new ApiException(HttpStatus.UNAUTHORIZED, "Invalid credentials"));
 
-        UserPrincipal principal = new UserPrincipal(user);
-        String token = jwtService.generateToken(principal);
+        if (requiresTwoFactor(user)) {
+            String challengeId = createTwoFactorChallenge(user, userAgent, ipAddress);
+            log.info("Admin 2FA required userId={} email={}", user.getId(), user.getEmail());
+            return new AuthResponse(null, null, true, challengeId);
+        }
+
+        String token = issueToken(user, userAgent, ipAddress);
         log.info("User logged in userId={} email={}", user.getId(), user.getEmail());
-        return new AuthResponse(token, EntityMapper.toUserResponse(user));
+        return new AuthResponse(token, EntityMapper.toUserResponse(user), false, null);
+    }
+
+    @Transactional
+    public AuthResponse verifyTwoFactor(TwoFactorLoginRequest request, String userAgent, String ipAddress) {
+        AdminTwoFactorChallenge challenge = twoFactorChallengeRepository.findByChallengeId(request.challengeId())
+                .orElseThrow(() -> new ApiException(HttpStatus.BAD_REQUEST, "Invalid two-factor challenge"));
+        if (challenge.isUsed() || challenge.getExpiresAt().isBefore(Instant.now())) {
+            throw new ApiException(HttpStatus.BAD_REQUEST, "Two-factor code expired");
+        }
+        if (!challenge.getCodeHash().equals(hashToken(request.code()))) {
+            throw new ApiException(HttpStatus.BAD_REQUEST, "Invalid two-factor code");
+        }
+        challenge.setUsed(true);
+        twoFactorChallengeRepository.save(challenge);
+        User user = challenge.getUser();
+        String token = issueToken(user, userAgent, ipAddress);
+        log.info("Admin 2FA completed userId={} email={}", user.getId(), user.getEmail());
+        return new AuthResponse(token, EntityMapper.toUserResponse(user), false, null);
+    }
+
+    public void logout(String token) {
+        sessionService.revokeToken(extractSessionId(token));
+    }
+
+    public java.util.List<personal.ecommercebackend.dto.response.SessionResponse> sessions(String currentToken) {
+        return sessionService.listMine(extractSessionId(currentToken));
+    }
+
+    public void revokeSession(Long sessionId) {
+        sessionService.revokeMine(sessionId);
+    }
+
+    @Transactional
+    public UserResponse updateTwoFactor(TwoFactorSettingsRequest request) {
+        User user = userRepository.findById(SecurityUtils.currentUserId())
+                .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, "User not found"));
+        if (!isStaff(user)) {
+            throw new ApiException(HttpStatus.FORBIDDEN, "Two-factor authentication is only available for staff accounts");
+        }
+        user.setTwoFactorEnabled(request.enabled());
+        return EntityMapper.toUserResponse(userRepository.save(user));
     }
 
     @Transactional(readOnly = true)
@@ -209,5 +261,48 @@ public class AuthServiceImpl implements AuthService {
 
     private String normalizeOptional(String value) {
         return value == null || value.isBlank() ? null : value.trim();
+    }
+
+    private String issueToken(User user, String userAgent, String ipAddress) {
+        String sessionId = sessionService.create(
+                user,
+                userAgent,
+                ipAddress,
+                Instant.now().plusMillis(jwtExpirationMs));
+        return jwtService.generateToken(new UserPrincipal(user), sessionId);
+    }
+
+    private boolean requiresTwoFactor(User user) {
+        return isStaff(user) && user.isTwoFactorEnabled();
+    }
+
+    private boolean isStaff(User user) {
+        return user.getRole() != Role.CUSTOMER;
+    }
+
+    private String createTwoFactorChallenge(User user, String userAgent, String ipAddress) {
+        String code = String.valueOf(ThreadLocalRandom.current().nextInt(100000, 1000000));
+        String challengeId = UUID.randomUUID().toString();
+        twoFactorChallengeRepository.save(AdminTwoFactorChallenge.builder()
+                .challengeId(challengeId)
+                .user(user)
+                .codeHash(hashToken(code))
+                .expiresAt(Instant.now().plusSeconds(600))
+                .userAgent(normalizeOptional(userAgent))
+                .ipAddress(normalizeOptional(ipAddress))
+                .build());
+        emailService.sendAdminTwoFactorCode(user, code);
+        return challengeId;
+    }
+
+    private String extractSessionId(String token) {
+        if (token == null || token.isBlank()) {
+            return null;
+        }
+        try {
+            return jwtService.extractSessionId(token);
+        } catch (RuntimeException e) {
+            return null;
+        }
     }
 }

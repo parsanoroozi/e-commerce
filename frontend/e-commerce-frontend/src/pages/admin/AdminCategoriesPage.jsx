@@ -22,6 +22,7 @@ export default function AdminCategoriesPage() {
   const [categories, setCategories] = useState([]);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
+  const [displayOrder, setDisplayOrder] = useState('0');
   const [editingId, setEditingId] = useState(null);
   const [error, setError] = useState('');
   const confirm = useConfirm();
@@ -36,11 +37,12 @@ export default function AdminCategoriesPage() {
     e.preventDefault();
     setError('');
     try {
-      const data = { name, description };
+      const data = { name, description, displayOrder: Number(displayOrder || 0) };
       if (editingId) await categoriesApi.update(editingId, data);
       else await categoriesApi.create(data);
       setName('');
       setDescription('');
+      setDisplayOrder('0');
       setEditingId(null);
       await load();
     } catch (err) {
@@ -52,6 +54,7 @@ export default function AdminCategoriesPage() {
     setEditingId(c.id);
     setName(c.name);
     setDescription(c.description || '');
+    setDisplayOrder(String(c.displayOrder ?? 0));
   };
 
   const remove = async (id) => {
@@ -80,11 +83,12 @@ export default function AdminCategoriesPage() {
             <Stack direction="row" spacing={1} alignItems="center">
               <Button type="submit" variant="contained">{editingId ? 'Update' : 'Create'}</Button>
               {editingId && (
-                <Button type="button" variant="outlined" onClick={() => { setEditingId(null); setName(''); setDescription(''); }}>
+                <Button type="button" variant="outlined" onClick={() => { setEditingId(null); setName(''); setDescription(''); setDisplayOrder('0'); }}>
                   Cancel
                 </Button>
               )}
             </Stack>
+            <TextField label="Order" type="number" value={displayOrder} onChange={(e) => setDisplayOrder(e.target.value)} sx={{ width: 120 }} />
           </Stack>
         </CardContent>
       </Card>
@@ -93,6 +97,7 @@ export default function AdminCategoriesPage() {
           <TableHead>
             <TableRow>
               <TableCell>Name</TableCell>
+              <TableCell>Order</TableCell>
               <TableCell>Description</TableCell>
               <TableCell align="right">Actions</TableCell>
             </TableRow>
@@ -101,6 +106,7 @@ export default function AdminCategoriesPage() {
             {categories.map((c) => (
               <TableRow key={c.id}>
                 <TableCell>{c.name}</TableCell>
+                <TableCell>{c.displayOrder}</TableCell>
                 <TableCell>{c.description}</TableCell>
                 <TableCell align="right">
                   <Button size="small" onClick={() => startEdit(c)}>Edit</Button>

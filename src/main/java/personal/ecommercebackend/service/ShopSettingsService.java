@@ -17,4 +17,6 @@ public interface ShopSettingsService {
     AdminSettingsResponse getSettings();
 
     AdminSettingsResponse updateLowStockThreshold(UpdateLowStockThresholdRequest request);
+
+    AdminSettingsResponse updateSettings(ShopSettingsRequest request);
 }

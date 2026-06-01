@@ -20,6 +20,8 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const [form, setForm] = useState({ email: '', password: '' });
+  const [challengeId, setChallengeId] = useState('');
+  const [twoFactorCode, setTwoFactorCode] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -28,10 +30,16 @@ export default function LoginPage() {
     setLoading(true);
     setError('');
     try {
-      const user = await login(form);
+      const result = await login(form);
+      if (result?.requiresTwoFactor) {
+        setChallengeId(result.twoFactorChallengeId);
+        setError('');
+        return;
+      }
+      const user = result;
       const lastLoggedOutUserId = localStorage.getItem(lastLoggedOutUserKey);
       const sameAccount = !lastLoggedOutUserId || String(user.id) === lastLoggedOutUserId;
-      const roleHome = user.role === 'ADMIN' ? '/admin/dashboard' : '/';
+      const roleHome = user.role !== 'CUSTOMER' ? '/admin/dashboard' : '/';
       const previousPath = resolvePreviousPath(location.state?.from);
       navigate(sameAccount && previousPath ? previousPath : roleHome, { replace: true });
     } catch (err) {
@@ -50,7 +58,7 @@ export default function LoginPage() {
               Login
             </Typography>
             <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-              Demo admin: admin@shop.com / admin12345
+              Demo admin: admin@shop.com / admin1234567
             </Typography>
             {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
             <Box component="form" onSubmit={handleSubmit}>
@@ -60,6 +68,7 @@ export default function LoginPage() {
                   type="email"
                   required
                   fullWidth
+                  disabled={Boolean(challengeId)}
                   value={form.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
                 />
@@ -67,14 +76,45 @@ export default function LoginPage() {
                   label="Password"
                   required
                   fullWidth
+                  disabled={Boolean(challengeId)}
                   value={form.password}
                   onChange={(e) => setForm({ ...form, password: e.target.value })}
                 />
+                {challengeId && (
+                  <TextField
+                    label="Admin verification code"
+                    required
+                    fullWidth
+                    value={twoFactorCode}
+                    onChange={(e) => setTwoFactorCode(e.target.value)}
+                    helperText="Check the admin account email for the 6-digit code."
+                  />
+                )}
                 <Typography variant="body2">
                   <Link component={RouterLink} to="/forgot-password">Forgot password?</Link>
                 </Typography>
-                <Button type="submit" variant="contained" size="large" disabled={loading} fullWidth>
-                  {loading ? 'Signing in...' : 'Login'}
+                <Button
+                  type="submit"
+                  variant="contained"
+                  size="large"
+                  disabled={loading}
+                  fullWidth
+                  onClick={async (e) => {
+                    if (!challengeId) return;
+                    e.preventDefault();
+                    setLoading(true);
+                    setError('');
+                    try {
+                      const user = await login({ challengeId, code: twoFactorCode }, true);
+                      navigate(user.role === 'CUSTOMER' ? '/' : '/admin/dashboard', { replace: true });
+                    } catch (err) {
+                      setError(err.message);
+                    } finally {
+                      setLoading(false);
+                    }
+                  }}
+                >
+                  {loading ? 'Signing in...' : challengeId ? 'Verify code' : 'Login'}
                 </Button>
                 <Typography variant="body2" textAlign="center">
                   No account? <Link component={RouterLink} to="/register">Register</Link>

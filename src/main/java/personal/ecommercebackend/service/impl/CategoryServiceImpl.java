@@ -24,7 +24,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Transactional(readOnly = true)
     public List<CategoryResponse> findAll() {
-        return categoryRepository.findAll().stream()
+        return categoryRepository.findAllByOrderByDisplayOrderAscNameAsc().stream()
                 .map(EntityMapper::toCategoryResponse)
                 .toList();
     }
@@ -42,6 +42,7 @@ public class CategoryServiceImpl implements CategoryService {
         Category category = Category.builder()
                 .name(request.name().trim())
                 .description(request.description())
+                .displayOrder(request.displayOrder() == null ? 0 : request.displayOrder())
                 .build();
         return EntityMapper.toCategoryResponse(categoryRepository.save(category));
     }
@@ -56,6 +57,7 @@ public class CategoryServiceImpl implements CategoryService {
                 });
         category.setName(request.name().trim());
         category.setDescription(request.description());
+        category.setDisplayOrder(request.displayOrder() == null ? 0 : request.displayOrder());
         return EntityMapper.toCategoryResponse(categoryRepository.save(category));
     }
 

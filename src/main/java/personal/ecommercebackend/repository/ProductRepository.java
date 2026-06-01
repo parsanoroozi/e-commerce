@@ -9,38 +9,74 @@ import org.springframework.data.repository.query.Param;
 import personal.ecommercebackend.entity.Product;
 
 import jakarta.persistence.LockModeType;
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-    Page<Product> findByActiveTrue(Pageable pageable);
-
-    Page<Product> findByActiveTrueAndCategoryId(Long categoryId, Pageable pageable);
-
     @Query("""
             SELECT p FROM Product p
             WHERE p.active = true
-              AND (LOWER(p.name) LIKE LOWER(CONCAT('%', :search, '%'))
-                OR LOWER(p.description) LIKE LOWER(CONCAT('%', :search, '%')))
+              AND (p.visibleFrom IS NULL OR p.visibleFrom <= :now)
+              AND (p.visibleUntil IS NULL OR p.visibleUntil >= :now)
             """)
-    Page<Product> findActiveBySearch(@Param("search") String search, Pageable pageable);
+    Page<Product> findVisible(@Param("now") Instant now, Pageable pageable);
 
     @Query("""
             SELECT p FROM Product p
             WHERE p.active = true
               AND p.category.id = :categoryId
+              AND (p.visibleFrom IS NULL OR p.visibleFrom <= :now)
+              AND (p.visibleUntil IS NULL OR p.visibleUntil >= :now)
+            """)
+    Page<Product> findVisibleByCategory(@Param("categoryId") Long categoryId, @Param("now") Instant now, Pageable pageable);
+
+    @Query("""
+            SELECT p FROM Product p
+            WHERE p.active = true
+              AND (p.visibleFrom IS NULL OR p.visibleFrom <= :now)
+              AND (p.visibleUntil IS NULL OR p.visibleUntil >= :now)
               AND (LOWER(p.name) LIKE LOWER(CONCAT('%', :search, '%'))
                 OR LOWER(p.description) LIKE LOWER(CONCAT('%', :search, '%')))
             """)
-    Page<Product> findActiveByCategoryAndSearch(
+    Page<Product> findVisibleBySearch(@Param("search") String search, @Param("now") Instant now, Pageable pageable);
+
+    @Query("""
+            SELECT p FROM Product p
+            WHERE p.active = true
+              AND p.category.id = :categoryId
+              AND (p.visibleFrom IS NULL OR p.visibleFrom <= :now)
+              AND (p.visibleUntil IS NULL OR p.visibleUntil >= :now)
+              AND (LOWER(p.name) LIKE LOWER(CONCAT('%', :search, '%'))
+                OR LOWER(p.description) LIKE LOWER(CONCAT('%', :search, '%')))
+            """)
+    Page<Product> findVisibleByCategoryAndSearch(
             @Param("categoryId") Long categoryId,
             @Param("search") String search,
+            @Param("now") Instant now,
             Pageable pageable);
 
     Page<Product> findAllByOrderByNameAsc(Pageable pageable);
 
-    Page<Product> findByActiveTrueAndCategoryIdAndIdNot(Long categoryId, Long id, Pageable pageable);
+    @Query("""
+            SELECT p FROM Product p
+            WHERE p.active = true
+              AND p.category.id = :categoryId
+              AND p.id <> :id
+              AND (p.visibleFrom IS NULL OR p.visibleFrom <= :now)
+              AND (p.visibleUntil IS NULL OR p.visibleUntil >= :now)
+            """)
+    Page<Product> findVisibleRelated(@Param("categoryId") Long categoryId, @Param("id") Long id, @Param("now") Instant now, Pageable pageable);
+
+    @Query("""
+            SELECT p FROM Product p
+            WHERE p.active = true
+              AND p.featured = true
+              AND (p.visibleFrom IS NULL OR p.visibleFrom <= :now)
+              AND (p.visibleUntil IS NULL OR p.visibleUntil >= :now)
+            """)
+    List<Product> findFeatured(@Param("now") Instant now, Pageable pageable);
 
     List<Product> findByActiveTrueAndStockQuantityLessThanEqualOrderByStockQuantityAsc(
             int stockQuantity, Pageable pageable);
@@ -50,4 +86,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("SELECT p FROM Product p WHERE p.id = :id")
     Optional<Product> findByIdForUpdate(@Param("id") Long id);
+
+    Optional<Product> findBySlugIgnoreCase(String slug);
+
+    boolean existsBySlugIgnoreCase(String slug);
 }

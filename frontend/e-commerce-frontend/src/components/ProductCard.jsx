@@ -4,6 +4,10 @@ import StarRating from './StarRating';
 import {resolveImageUrl} from '../utils/imageUrl';
 
 export default function ProductCard({product, onRemove}) {
+    const image = product.imageDetails?.find((entry) => entry.primaryImage) || product.imageDetails?.[0];
+    const imageUrl = image?.url || product.imageUrl;
+    const altText = image?.altText || product.name;
+
     return (
         <Card sx={{height: '100%', display: 'flex', flexDirection: 'column'}}>
             <CardMedia
@@ -13,8 +17,8 @@ export default function ProductCard({product, onRemove}) {
             >
                 <Box
                     component="img"
-                    src={resolveImageUrl(product.imageUrl)}
-                    alt={product.name}
+                    src={resolveImageUrl(imageUrl)}
+                    alt={altText}
                     loading="lazy"
                     sx={{width: '100%', height: {xs: 160, sm: 180}, objectFit: 'cover'}}
                 />

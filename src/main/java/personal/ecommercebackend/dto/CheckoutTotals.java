@@ -8,5 +8,6 @@ public record CheckoutTotals(
         BigDecimal shipping,
         BigDecimal tax,
         BigDecimal total,
-        String couponCode
+        String couponCode,
+        boolean freeShipping
 ) {}

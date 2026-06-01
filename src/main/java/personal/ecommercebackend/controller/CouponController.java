@@ -27,13 +27,13 @@ public class CouponController {
     }
 
     @GetMapping("/admin/coupons")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('MANAGE_CATALOG')")
     public List<CouponResponse> list() {
         return couponService.listAll();
     }
 
     @PostMapping("/admin/coupons")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('MANAGE_CATALOG')")
     public CouponResponse create(@Valid @RequestBody CouponRequest request) {
         CouponResponse c = couponService.create(request);
         auditService.log("CREATE", "COUPON", String.valueOf(c.id()), c.code());
@@ -41,13 +41,15 @@ public class CouponController {
     }
 
     @PutMapping("/admin/coupons/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('MANAGE_CATALOG')")
     public CouponResponse update(@PathVariable Long id, @Valid @RequestBody CouponRequest request) {
-        return couponService.update(id, request);
+        CouponResponse c = couponService.update(id, request);
+        auditService.log("UPDATE", "COUPON", String.valueOf(c.id()), c.code());
+        return c;
     }
 
     @DeleteMapping("/admin/coupons/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('MANAGE_CATALOG')")
     public void delete(@PathVariable Long id) {
         couponService.delete(id);
         auditService.log("DELETE", "COUPON", String.valueOf(id), null);

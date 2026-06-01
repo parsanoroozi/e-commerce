@@ -9,7 +9,9 @@ import {
   FormControlLabel,
   Grid,
   Link,
+  MenuItem,
   Pagination,
+  Select,
   Stack,
   Table,
   TableBody,
@@ -35,7 +37,8 @@ export default function AdminUsersPage() {
   const [pageData, setPageData] = useState({ page: 0, totalPages: 0 });
   const [error, setError] = useState('');
   const [selected, setSelected] = useState(null);
-  const [form, setForm] = useState({ blocked: false, customerSegment: '', customerNotes: '' });
+  const [form, setForm] = useState({ blocked: false, customerSegment: '', customerNotes: '', role: 'CUSTOMER' });
+  const roles = ['CUSTOMER', 'ADMIN', 'CATALOG_MANAGER', 'ORDER_MANAGER', 'FULFILLMENT_STAFF', 'SUPPORT_STAFF'];
 
   const load = useCallback(() => {
     setError('');
@@ -72,6 +75,7 @@ export default function AdminUsersPage() {
         blocked: detail.customer.blocked,
         customerSegment: detail.customer.customerSegment || '',
         customerNotes: detail.customerNotes || '',
+        role: detail.customer.role || 'CUSTOMER',
       });
     } catch (err) {
       showError(err.message);
@@ -85,6 +89,7 @@ export default function AdminUsersPage() {
         blocked: form.blocked,
         customerSegment: form.customerSegment,
         customerNotes: form.customerNotes,
+        role: form.role,
       });
       setSelected(detail);
       showSuccess('Customer updated');
@@ -193,6 +198,14 @@ export default function AdminUsersPage() {
                     control={<Checkbox checked={form.blocked} disabled={selected.customer.id === user?.id} onChange={(e) => setForm({ ...form, blocked: e.target.checked })} />}
                     label="Disable / block account"
                   />
+                  <Select
+                    size="small"
+                    value={form.role}
+                    disabled={selected.customer.id === user?.id}
+                    onChange={(e) => setForm({ ...form, role: e.target.value })}
+                  >
+                    {roles.map((role) => <MenuItem key={role} value={role}>{role}</MenuItem>)}
+                  </Select>
                   <TextField
                     label="Customer segment"
                     size="small"

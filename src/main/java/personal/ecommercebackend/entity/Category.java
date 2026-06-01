@@ -25,6 +25,10 @@ public class Category {
     @Column(length = 500)
     private String description;
 
+    @Column(nullable = false)
+    @Builder.Default
+    private int displayOrder = 0;
+
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     @Builder.Default
     private List<Product> products = new ArrayList<>();

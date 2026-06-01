@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import personal.ecommercebackend.entity.User;
 
 import java.util.Collection;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -23,7 +24,7 @@ public class UserPrincipal implements UserDetails {
         this.email = user.getEmail();
         this.password = user.getPassword();
         this.blocked = user.isBlocked();
-        this.authorities = List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole().name()));
+        this.authorities = authoritiesFor(user);
     }
 
     @Override
@@ -49,5 +50,35 @@ public class UserPrincipal implements UserDetails {
     @Override
     public boolean isEnabled() {
         return !blocked;
+    }
+
+    private Collection<? extends GrantedAuthority> authoritiesFor(User user) {
+        List<GrantedAuthority> granted = new ArrayList<>();
+        granted.add(new SimpleGrantedAuthority("ROLE_" + user.getRole().name()));
+        switch (user.getRole()) {
+            case ADMIN -> granted.addAll(List.of(
+                    new SimpleGrantedAuthority("ADMIN_ACCESS"),
+                    new SimpleGrantedAuthority("MANAGE_CATALOG"),
+                    new SimpleGrantedAuthority("MANAGE_ORDERS"),
+                    new SimpleGrantedAuthority("MANAGE_USERS"),
+                    new SimpleGrantedAuthority("MANAGE_SETTINGS"),
+                    new SimpleGrantedAuthority("VIEW_AUDIT")));
+            case CATALOG_MANAGER -> granted.addAll(List.of(
+                    new SimpleGrantedAuthority("ADMIN_ACCESS"),
+                    new SimpleGrantedAuthority("MANAGE_CATALOG")));
+            case ORDER_MANAGER -> granted.addAll(List.of(
+                    new SimpleGrantedAuthority("ADMIN_ACCESS"),
+                    new SimpleGrantedAuthority("MANAGE_ORDERS")));
+            case FULFILLMENT_STAFF -> granted.addAll(List.of(
+                    new SimpleGrantedAuthority("ADMIN_ACCESS"),
+                    new SimpleGrantedAuthority("MANAGE_ORDERS")));
+            case SUPPORT_STAFF -> granted.addAll(List.of(
+                    new SimpleGrantedAuthority("ADMIN_ACCESS"),
+                    new SimpleGrantedAuthority("MANAGE_USERS"),
+                    new SimpleGrantedAuthority("MANAGE_ORDERS")));
+            default -> {
+            }
+        }
+        return granted;
     }
 }

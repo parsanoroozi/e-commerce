@@ -12,8 +12,13 @@ import com.stripe.model.PaymentIntent;
 
 public interface AuthService {
     void sendEmailVerification(EmailVerificationRequest request);
-    AuthResponse register(RegisterRequest request);
-    AuthResponse login(LoginRequest request);
+    AuthResponse register(RegisterRequest request, String userAgent, String ipAddress);
+    AuthResponse login(LoginRequest request, String userAgent, String ipAddress);
+    AuthResponse verifyTwoFactor(TwoFactorLoginRequest request, String userAgent, String ipAddress);
+    void logout(String token);
+    List<SessionResponse> sessions(String currentToken);
+    void revokeSession(Long sessionId);
+    UserResponse updateTwoFactor(TwoFactorSettingsRequest request);
     UserResponse me();
     UserResponse updateProfile(ProfileUpdateRequest request);
     void changePassword(ChangePasswordRequest request);

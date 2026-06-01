@@ -21,7 +21,7 @@ const emptyAddress = {
 };
 
 export default function ProfilePage() {
-  const { user, updateProfile } = useAuth();
+  const { user, updateProfile, updateTwoFactor: saveTwoFactor, logout } = useAuth();
   const confirm = useConfirm();
   const [profile, setProfile] = useState({
     firstName: user?.firstName || '',
@@ -35,6 +35,8 @@ export default function ProfilePage() {
   const [addressForm, setAddressForm] = useState(emptyAddress);
   const [editingAddressId, setEditingAddressId] = useState(null);
   const [addressError, setAddressError] = useState('');
+  const [sessions, setSessions] = useState([]);
+  const isStaff = user?.role && user.role !== 'CUSTOMER';
 
   useEffect(() => {
     setProfile({
@@ -53,6 +55,13 @@ export default function ProfilePage() {
   useEffect(() => {
     loadAddresses();
   }, [loadAddresses]);
+
+  const loadSessions = useCallback(() =>
+    authApi.sessions().then(setSessions).catch(() => {}), []);
+
+  useEffect(() => {
+    loadSessions();
+  }, [loadSessions]);
 
   const saveProfile = async (e) => {
     e.preventDefault();
@@ -124,6 +133,29 @@ export default function ProfilePage() {
     }
   };
 
+  const updateTwoFactor = async (enabled) => {
+    try {
+      await saveTwoFactor(enabled);
+      showSuccess(enabled ? 'Two-factor authentication enabled' : 'Two-factor authentication disabled');
+    } catch (err) {
+      showError(err.message);
+    }
+  };
+
+  const revokeSession = async (session) => {
+    try {
+      await authApi.revokeSession(session.id);
+      showSuccess('Session revoked');
+      if (session.current) {
+        await logout();
+      } else {
+        await loadSessions();
+      }
+    } catch (err) {
+      showError(err.message);
+    }
+  };
+
   return (
     <PageContainer>
       <Typography variant="h4" gutterBottom>My profile</Typography>
@@ -150,6 +182,36 @@ export default function ProfilePage() {
                 <PasswordField label="Current password" fullWidth value={passwords.currentPassword} onChange={(e) => setPasswords({ ...passwords, currentPassword: e.target.value })} />
                 <PasswordField label="New password" fullWidth inputProps={{ minLength: 8 }} value={passwords.newPassword} onChange={(e) => setPasswords({ ...passwords, newPassword: e.target.value })} />
                 <Button type="submit" variant="outlined" sx={{ alignSelf: 'flex-start' }}>Update password</Button>
+              </Stack>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid size={12}>
+          <Card>
+            <CardContent>
+              <Typography variant="h6" gutterBottom>Security</Typography>
+              {isStaff && (
+                <FormControlLabel
+                  control={<Checkbox checked={Boolean(user?.twoFactorEnabled)} onChange={(e) => updateTwoFactor(e.target.checked)} />}
+                  label="Require email two-factor code for admin sign-in"
+                />
+              )}
+              <Typography variant="subtitle1" fontWeight={700} sx={{ mt: 2 }}>Active sessions</Typography>
+              <Stack spacing={1.5} sx={{ mt: 1 }}>
+                {sessions.map((session) => (
+                  <Card key={session.id} variant="outlined">
+                    <CardContent sx={{ display: 'flex', justifyContent: 'space-between', gap: 2, flexDirection: { xs: 'column', md: 'row' } }}>
+                      <Box>
+                        <Typography fontWeight={700}>{session.current ? 'Current session' : 'Session'} {session.revoked ? '(revoked)' : ''}</Typography>
+                        <Typography variant="body2" color="text.secondary">{session.userAgent || 'Unknown device'}</Typography>
+                        <Typography variant="caption" color="text.secondary">
+                          {session.ipAddress || 'Unknown IP'} | Last seen {new Date(session.lastSeenAt).toLocaleString()}
+                        </Typography>
+                      </Box>
+                      {!session.revoked && <Button color="error" onClick={() => revokeSession(session)}>Revoke</Button>}
+                    </CardContent>
+                  </Card>
+                ))}
               </Stack>
             </CardContent>
           </Card>

@@ -16,4 +16,5 @@ public interface EmailService {
     CompletableFuture<Boolean> sendOrderShipped(Order order, User user);
     CompletableFuture<Boolean> sendPasswordReset(User user, String resetLink);
     CompletableFuture<Boolean> sendEmailVerificationCode(String email, String code);
+    CompletableFuture<Boolean> sendAdminTwoFactorCode(User user, String code);
 }

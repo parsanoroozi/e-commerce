@@ -11,7 +11,7 @@ import personal.ecommercebackend.service.ImageUploadService;
 @RestController
 @RequestMapping("/api/admin/images")
 @RequiredArgsConstructor
-@PreAuthorize("hasRole('ADMIN')")
+@PreAuthorize("hasAuthority('MANAGE_CATALOG')")
 public class ImageUploadController {
 
     private final ImageUploadService imageUploadService;

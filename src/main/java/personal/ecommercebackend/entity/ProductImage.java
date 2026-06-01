@@ -23,7 +23,14 @@ public class ProductImage {
     @Column(nullable = false)
     private String url;
 
+    @Column(length = 180)
+    private String altText;
+
     @Column(nullable = false)
     @Builder.Default
     private int sortOrder = 0;
+
+    @Column(nullable = false)
+    @Builder.Default
+    private boolean primaryImage = false;
 }

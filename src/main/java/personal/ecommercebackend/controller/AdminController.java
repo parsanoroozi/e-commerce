@@ -13,6 +13,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 import personal.ecommercebackend.dto.request.UpdateLowStockThresholdRequest;
+import personal.ecommercebackend.dto.request.ShopSettingsRequest;
 import personal.ecommercebackend.dto.request.CustomerManagementRequest;
 import personal.ecommercebackend.dto.request.InventoryAdjustmentRequest;
 import personal.ecommercebackend.dto.response.AdminDashboardResponse;
@@ -32,7 +33,7 @@ import personal.ecommercebackend.service.ShopSettingsService;
 
 @RestController
 @RequestMapping("/api/admin")
-@PreAuthorize("hasRole('ADMIN')")
+@PreAuthorize("hasAuthority('ADMIN_ACCESS')")
 @RequiredArgsConstructor
 public class AdminController {
 
@@ -54,17 +55,20 @@ public class AdminController {
     }
 
     @GetMapping("/users")
+    @PreAuthorize("hasAuthority('MANAGE_USERS')")
     public PageResponse<CustomerSummaryResponse> users(
             @PageableDefault(size = 20, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
         return adminUserService.list(pageable);
     }
 
     @GetMapping("/users/{id}")
+    @PreAuthorize("hasAuthority('MANAGE_USERS')")
     public CustomerDetailResponse user(@PathVariable Long id) {
         return adminUserService.detail(id);
     }
 
     @PatchMapping("/users/{id}")
+    @PreAuthorize("hasAuthority('MANAGE_USERS')")
     public CustomerDetailResponse updateUser(
             @PathVariable Long id,
             @Valid @RequestBody CustomerManagementRequest request) {
@@ -74,6 +78,7 @@ public class AdminController {
     }
 
     @PostMapping("/users/{id}/password-reset")
+    @PreAuthorize("hasAuthority('MANAGE_USERS')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void sendUserPasswordReset(@PathVariable Long id) {
         adminUserService.sendPasswordReset(id);
@@ -81,6 +86,7 @@ public class AdminController {
     }
 
     @DeleteMapping("/users/{id}")
+    @PreAuthorize("hasAuthority('MANAGE_USERS')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteUser(@PathVariable Long id) {
         adminUserService.delete(id);
@@ -88,17 +94,26 @@ public class AdminController {
     }
 
     @PatchMapping("/settings/low-stock-threshold")
+    @PreAuthorize("hasAuthority('MANAGE_SETTINGS')")
     public AdminSettingsResponse updateLowStockThreshold(@Valid @RequestBody UpdateLowStockThresholdRequest request) {
         return shopSettingsService.updateLowStockThreshold(request);
     }
 
+    @PutMapping("/settings")
+    @PreAuthorize("hasAuthority('MANAGE_SETTINGS')")
+    public AdminSettingsResponse updateSettings(@Valid @RequestBody ShopSettingsRequest request) {
+        return shopSettingsService.updateSettings(request);
+    }
+
     @GetMapping("/audit-logs")
+    @PreAuthorize("hasAuthority('VIEW_AUDIT')")
     public PageResponse<AuditLogResponse> auditLogs(
             @PageableDefault(size = 20, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
         return auditService.list(pageable);
     }
 
     @PostMapping("/inventory/adjustments")
+    @PreAuthorize("hasAuthority('MANAGE_CATALOG')")
     @ResponseStatus(HttpStatus.CREATED)
     public InventoryAdjustmentResponse adjustInventory(@Valid @RequestBody InventoryAdjustmentRequest request) {
         InventoryAdjustmentResponse response = inventoryService.adjust(request);
@@ -107,12 +122,14 @@ public class AdminController {
     }
 
     @GetMapping("/inventory/adjustments")
+    @PreAuthorize("hasAnyAuthority('MANAGE_CATALOG','VIEW_AUDIT')")
     public PageResponse<InventoryAdjustmentResponse> inventoryHistory(
             @PageableDefault(size = 20, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
         return inventoryService.history(pageable);
     }
 
     @GetMapping("/orders/export")
+    @PreAuthorize("hasAuthority('MANAGE_ORDERS')")
     public ResponseEntity<String> exportOrders() {
         PageResponse<OrderResponse> orders = orderService.allOrders(PageRequest.of(0, 1000));
         StringBuilder csv = new StringBuilder("id,status,total,email,createdAt\n");

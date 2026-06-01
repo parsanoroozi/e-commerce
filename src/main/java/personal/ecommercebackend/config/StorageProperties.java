@@ -6,5 +6,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public record StorageProperties(
         String type,
         String uploadDir,
-        long maxFileSizeBytes
+        long maxFileSizeBytes,
+        String cloudinaryCloudName,
+        String cloudinaryApiKey,
+        String cloudinaryApiSecret,
+        String cloudinaryFolder
 ) {}

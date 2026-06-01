@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+import personal.ecommercebackend.service.SessionService;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -24,6 +25,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
     private final CustomUserDetailsService userDetailsService;
+    private final SessionService sessionService;
 
     @Value("${app.auth.cookie.name:SHOPVERSE_AUTH}")
     private String authCookieName;
@@ -44,7 +46,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+                String sessionId = jwtService.extractSessionId(token);
                 if (jwtService.isTokenValid(token, userDetails)
+                        && sessionService.touchIfValid(sessionId)
                         && userDetails.isEnabled()
                         && userDetails.isAccountNonLocked()) {
                     var authToken = new UsernamePasswordAuthenticationToken(

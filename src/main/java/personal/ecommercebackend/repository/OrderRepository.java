@@ -34,6 +34,15 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 
     List<Order> findByStatusAndCreatedAtBefore(OrderStatus status, Instant createdBefore);
 
+    long countByCouponCodeIgnoreCase(String couponCode);
+
+    long countByCouponCodeIgnoreCaseAndUserId(String couponCode, Long userId);
+
+    @Query("SELECT COUNT(DISTINCT o.user.id) FROM Order o WHERE LOWER(o.couponCode) = LOWER(:couponCode)")
+    long countDistinctUsersByCouponCode(@Param("couponCode") String couponCode);
+
+    List<Order> findByCouponCodeIgnoreCase(String couponCode);
+
     @EntityGraph(attributePaths = {"items", "items.product", "user"})
     Optional<Order> findWithDetailsById(Long id);
 

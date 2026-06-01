@@ -72,8 +72,9 @@ export default function ProductDetailPage() {
         setProduct(prod);
         setRelated(relatedResult.status === 'fulfilled' ? relatedResult.value : []);
         setReviews(reviewsResult.status === 'fulfilled' ? reviewsResult.value : []);
-        const imgs = prod.images?.length ? prod.images : prod.imageUrl ? [prod.imageUrl] : [];
-        setActiveImage(imgs[0] || '');
+        const primary = prod.imageDetails?.find((image) => image.primaryImage)?.url;
+        const imgs = prod.imageDetails?.length ? prod.imageDetails.map((image) => image.url) : prod.images?.length ? prod.images : prod.imageUrl ? [prod.imageUrl] : [];
+        setActiveImage(primary || imgs[0] || '');
         const firstAvailableVariant = prod.variants?.find((v) => v.active && v.stockQuantity > 0);
         setVariantId(firstAvailableVariant ? String(firstAvailableVariant.id) : '');
         setQuantity(1);
@@ -96,11 +97,13 @@ export default function ProductDetailPage() {
       .catch(() => {});
   }, [id, isAuthenticated]);
 
-  const gallery = product?.images?.length
-    ? product.images
-    : product?.imageUrl
-      ? [product.imageUrl]
-      : [];
+  const gallery = product?.imageDetails?.length
+    ? product.imageDetails
+    : (product?.images?.length
+      ? product.images.map((url) => ({ url, altText: product.name }))
+      : product?.imageUrl
+        ? [{ url: product.imageUrl, altText: product.name }]
+        : []);
   const activeVariants = product?.variants?.filter((v) => v.active) || [];
   const selectedVariant = activeVariants.find((v) => String(v.id) === String(variantId));
   const availableStock = selectedVariant ? selectedVariant.stockQuantity : product?.stockQuantity || 0;
@@ -191,22 +194,22 @@ export default function ProductDetailPage() {
           />
           {gallery.length > 1 && (
             <Stack direction="row" spacing={1} sx={{ mt: 1, flexWrap: 'wrap' }}>
-              {gallery.map((url) => (
+              {gallery.map((image) => (
                 <Box
-                  key={url}
+                  key={image.id || image.url}
                   component="button"
-                  onClick={() => setActiveImage(url)}
+                  onClick={() => setActiveImage(image.url)}
                   sx={{
                     p: 0,
                     border: 2,
-                    borderColor: activeImage === url ? 'primary.main' : 'divider',
+                    borderColor: activeImage === image.url ? 'primary.main' : 'divider',
                     borderRadius: 2,
                     overflow: 'hidden',
                     cursor: 'pointer',
                     bgcolor: 'transparent',
                   }}
                 >
-                  <Box component="img" src={resolveImageUrl(url)} alt="" sx={{ width: 72, height: 72, objectFit: 'cover', display: 'block' }} />
+                  <Box component="img" src={resolveImageUrl(image.url)} alt={image.altText || product.name} sx={{ width: 72, height: 72, objectFit: 'cover', display: 'block' }} />
                 </Box>
               ))}
             </Stack>

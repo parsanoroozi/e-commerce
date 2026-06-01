@@ -45,6 +45,15 @@ public class Product {
     @Column(length = 100)
     private String sku;
 
+    @Column(unique = true, length = 220)
+    private String slug;
+
+    @Column(length = 180)
+    private String metaTitle;
+
+    @Column(length = 320)
+    private String metaDescription;
+
     @Column(nullable = false)
     private Integer stockQuantity;
 
@@ -57,6 +66,14 @@ public class Product {
     @Column(nullable = false)
     @Builder.Default
     private boolean active = true;
+
+    @Column(nullable = false)
+    @Builder.Default
+    private boolean featured = false;
+
+    private Instant visibleFrom;
+
+    private Instant visibleUntil;
 
     @CreationTimestamp
     @Column(nullable = false, updatable = false)

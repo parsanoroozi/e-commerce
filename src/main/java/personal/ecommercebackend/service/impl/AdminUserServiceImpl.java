@@ -84,6 +84,12 @@ public class AdminUserServiceImpl implements AdminUserService {
         if (request.customerSegment() != null) {
             user.setCustomerSegment(normalizeOptional(request.customerSegment()));
         }
+        if (request.role() != null) {
+            if (id.equals(SecurityUtils.currentUserId()) && request.role() != Role.ADMIN) {
+                throw new ApiException(HttpStatus.BAD_REQUEST, "You cannot remove your own super admin role");
+            }
+            user.setRole(request.role());
+        }
         userRepository.save(user);
         return detail(id);
     }
@@ -172,7 +178,7 @@ public class AdminUserServiceImpl implements AdminUserService {
         if (user.isBlocked()) {
             segments.add("Blocked");
         }
-        if (user.getRole() == Role.ADMIN) {
+        if (user.getRole() != Role.CUSTOMER) {
             segments.add("Staff");
         }
         if (orders.isEmpty()) {

@@ -35,6 +35,7 @@ import { cartApi } from '../api/cart';
 import { couponsApi } from '../api/coupons';
 import { ordersApi } from '../api/orders';
 import { shippingAddressesApi } from '../api/shippingAddresses';
+import { storefrontApi } from '../api/storefront';
 import DevPaymentForm from '../components/DevPaymentForm';
 import LocationPicker from '../components/LocationPicker';
 import PricingSummary from '../components/PricingSummary';
@@ -67,10 +68,12 @@ export default function CheckoutPage() {
   const [form, setForm] = useState(emptyForm);
   const [couponCode, setCouponCode] = useState('');
   const [appliedDiscount, setAppliedDiscount] = useState(0);
+  const [appliedFreeShipping, setAppliedFreeShipping] = useState(false);
   const [couponMessage, setCouponMessage] = useState('');
   const [shippingMethod, setShippingMethod] = useState('STANDARD');
   const [checkout, setCheckout] = useState(null);
   const [orderBreakdown, setOrderBreakdown] = useState(null);
+  const [storeSettings, setStoreSettings] = useState(null);
   const [stripePromise, setStripePromise] = useState(null);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -81,10 +84,12 @@ export default function CheckoutPage() {
     Promise.all([
       cartApi.get({ signal: controller.signal }),
       shippingAddressesApi.listAll({ signal: controller.signal }),
+      storefrontApi.settings(),
     ])
-      .then(([cartData, addresses]) => {
+      .then(([cartData, addresses, settings]) => {
         setCart(cartData);
         setSavedAddresses(addresses);
+        setStoreSettings(settings);
         if (addresses.length > 0) {
           const defaultAddr = addresses.find((a) => a.isDefault) || addresses[0];
           setSelectedAddressId(defaultAddr.id);
@@ -101,8 +106,8 @@ export default function CheckoutPage() {
 
   const estimate = useMemo(() => {
     if (!cart) return null;
-    return estimateCheckout(cart.totalAmount, appliedDiscount, shippingMethod);
-  }, [cart, appliedDiscount, shippingMethod]);
+    return estimateCheckout(cart.totalAmount, appliedDiscount, shippingMethod, appliedFreeShipping, storeSettings || {});
+  }, [cart, appliedDiscount, shippingMethod, appliedFreeShipping, storeSettings]);
 
   const buildCheckoutPayload = () => {
     const base =
@@ -130,15 +135,18 @@ export default function CheckoutPage() {
       const res = await couponsApi.validate(couponCode.trim(), cart.totalAmount);
       if (res.valid) {
         setAppliedDiscount(res.discountAmount);
+        setAppliedFreeShipping(Boolean(res.freeShipping));
         setCouponMessage(res.message);
         showSuccess('Coupon applied');
       } else {
         setAppliedDiscount(0);
+        setAppliedFreeShipping(false);
         setCouponMessage(res.message);
         showError(res.message);
       }
     } catch (err) {
       setAppliedDiscount(0);
+      setAppliedFreeShipping(false);
       showError(err.message);
     }
   };
@@ -286,14 +294,19 @@ export default function CheckoutPage() {
 
                 <Typography variant="subtitle1" fontWeight={600} sx={{ mt: 2 }}>Shipping method</Typography>
                 <RadioGroup value={shippingMethod} onChange={(e) => setShippingMethod(e.target.value)} sx={{ mb: 2 }}>
-                  {Object.entries(SHIPPING_OPTIONS).map(([key, opt]) => (
-                    <FormControlLabel
-                      key={key}
-                      value={key}
-                      control={<Radio />}
-                      label={`${opt.label} — $${opt.price.toFixed(2)}`}
-                    />
-                  ))}
+                  {Object.entries(SHIPPING_OPTIONS).map(([key, opt]) => {
+                    const price = key === 'EXPRESS'
+                      ? Number(storeSettings?.expressShippingCost ?? opt.price)
+                      : Number(storeSettings?.standardShippingCost ?? opt.price);
+                    return (
+                      <FormControlLabel
+                        key={key}
+                        value={key}
+                        control={<Radio />}
+                        label={`${opt.label} - $${price.toFixed(2)}`}
+                      />
+                    );
+                  })}
                 </RadioGroup>
 
                 <Typography variant="subtitle1" fontWeight={600}>Coupon</Typography>
@@ -394,7 +407,7 @@ export default function CheckoutPage() {
                 shipping={summary.shippingCost ?? summary.shipping}
                 tax={summary.taxAmount ?? summary.tax}
                 total={summary.totalAmount ?? summary.total}
-                couponCode={summary.couponCode || (appliedDiscount > 0 ? couponCode : null)}
+                couponCode={summary.couponCode || (appliedDiscount > 0 || appliedFreeShipping ? couponCode : null)}
                 shippingMethod={summary.shippingMethod || shippingMethod}
               />
             )}

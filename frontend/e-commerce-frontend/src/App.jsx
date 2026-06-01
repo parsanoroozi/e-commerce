@@ -23,11 +23,13 @@ const RegisterPage = lazy(() => import('./pages/RegisterPage'));
 const ResetPasswordPage = lazy(() => import('./pages/ResetPasswordPage'));
 const WishlistPage = lazy(() => import('./pages/WishlistPage'));
 const AdminLayout = lazy(() => import('./pages/admin/AdminLayout'));
+const AdminAuditLogsPage = lazy(() => import('./pages/admin/AdminAuditLogsPage'));
 const AdminCategoriesPage = lazy(() => import('./pages/admin/AdminCategoriesPage'));
 const AdminCouponsPage = lazy(() => import('./pages/admin/AdminCouponsPage'));
 const AdminDashboardPage = lazy(() => import('./pages/admin/AdminDashboardPage'));
 const AdminOrdersPage = lazy(() => import('./pages/admin/AdminOrdersPage'));
 const AdminProductsPage = lazy(() => import('./pages/admin/AdminProductsPage'));
+const AdminSettingsPage = lazy(() => import('./pages/admin/AdminSettingsPage'));
 const AdminUsersPage = lazy(() => import('./pages/admin/AdminUsersPage'));
 
 function RouteFallback() {
@@ -66,6 +68,8 @@ function App() {
                     <Route path="orders" element={<AdminOrdersPage />} />
                     <Route path="users" element={<AdminUsersPage />} />
                     <Route path="coupons" element={<AdminCouponsPage />} />
+                    <Route path="settings" element={<AdminSettingsPage />} />
+                    <Route path="audit-logs" element={<AdminAuditLogsPage />} />
                   </Route>
                   <Route path="*" element={<Navigate to="/" replace />} />
                 </Routes>

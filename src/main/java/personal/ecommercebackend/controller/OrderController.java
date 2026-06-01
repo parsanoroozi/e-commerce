@@ -16,6 +16,7 @@ import personal.ecommercebackend.dto.response.OrderResponse;
 import personal.ecommercebackend.dto.response.PageResponse;
 import personal.ecommercebackend.dto.response.PaymentConfigResponse;
 import personal.ecommercebackend.service.OrderService;
+import personal.ecommercebackend.service.AuditService;
 
 @RestController
 @RequestMapping("/api/orders")
@@ -23,6 +24,7 @@ import personal.ecommercebackend.service.OrderService;
 public class OrderController {
 
     private final OrderService orderService;
+    private final AuditService auditService;
 
     @GetMapping("/payment-config")
     public PaymentConfigResponse paymentConfig() {
@@ -57,26 +59,30 @@ public class OrderController {
     }
 
     @GetMapping("/admin/all")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('MANAGE_ORDERS')")
     public PageResponse<OrderResponse> allOrders(
             @PageableDefault(size = 10, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
         return orderService.allOrders(pageable);
     }
 
     @PatchMapping("/{id}/status")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('MANAGE_ORDERS')")
     public OrderResponse updateStatus(
             @PathVariable Long id,
             @Valid @RequestBody OrderStatusUpdateRequest request) {
-        return orderService.updateStatus(id, request);
+        OrderResponse order = orderService.updateStatus(id, request);
+        auditService.log("UPDATE_STATUS", "ORDER", String.valueOf(id), order.status().name());
+        return order;
     }
 
     @PostMapping("/{id}/refunds")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('MANAGE_ORDERS')")
     @ResponseStatus(HttpStatus.CREATED)
     public OrderResponse refund(
             @PathVariable Long id,
             @Valid @RequestBody RefundRequest request) {
-        return orderService.refundOrder(id, request);
+        OrderResponse order = orderService.refundOrder(id, request);
+        auditService.log("REFUND", "ORDER", String.valueOf(id), request.amount().toPlainString());
+        return order;
     }
 }

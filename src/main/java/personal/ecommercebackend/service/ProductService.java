@@ -13,11 +13,16 @@ import com.stripe.model.PaymentIntent;
 public interface ProductService {
     PageResponse<ProductResponse> findAllForAdmin(Pageable pageable);
     PageResponse<ProductResponse> search(Long categoryId, String search, Pageable pageable);
+    List<ProductResponse> featured(Pageable pageable);
     ProductResponse findById(Long id);
     List<ProductResponse> findRelated(Long id, Pageable pageable);
     ProductResponse create(ProductRequest request);
     ProductResponse update(Long id, ProductRequest request);
     void delete(Long id);
+    ProductResponse addImage(Long productId, ProductImageRequest request);
+    ProductResponse updateImage(Long productId, Long imageId, ProductImageUpdateRequest request);
+    ProductResponse reorderImages(Long productId, ProductImageOrderRequest request);
+    ProductResponse deleteImage(Long productId, Long imageId);
 
     Product getProduct(Long id);
     ProductVariant getVariant(Long productId, Long variantId);

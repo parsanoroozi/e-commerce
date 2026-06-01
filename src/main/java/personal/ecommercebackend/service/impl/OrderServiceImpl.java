@@ -109,7 +109,7 @@ public class OrderServiceImpl implements OrderService {
             subtotal = subtotal.add(product.getPrice().multiply(BigDecimal.valueOf(cartItem.getQuantity())));
         }
 
-        var totals = checkoutPricingService.calculate(subtotal, request.couponCode(), shippingMethod);
+        var totals = checkoutPricingService.calculate(subtotal, request.couponCode(), shippingMethod, userId, cart.getItems());
 
         Order order = Order.builder()
                 .user(user)

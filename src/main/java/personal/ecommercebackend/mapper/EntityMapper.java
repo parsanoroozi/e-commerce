@@ -19,12 +19,17 @@ public final class EntityMapper {
                 user.getMobileNumber(),
                 user.getRole(),
                 user.isBlocked(),
+                user.isTwoFactorEnabled(),
                 user.getCustomerSegment()
         );
     }
 
     public static CategoryResponse toCategoryResponse(Category category) {
-        return new CategoryResponse(category.getId(), category.getName(), category.getDescription());
+        return new CategoryResponse(
+                category.getId(),
+                category.getName(),
+                category.getDescription(),
+                category.getDisplayOrder());
     }
 
     public static ProductResponse toProductResponse(Product product) {
@@ -32,18 +37,25 @@ public final class EntityMapper {
     }
 
     public static ProductResponse toProductResponse(Product product, Double avgRating, Long reviewCount) {
-        List<String> images = new ArrayList<>();
-        if (product.getImageUrl() != null && !product.getImageUrl().isBlank()) {
-            images.add(product.getImageUrl());
+        List<ProductImageResponse> imageDetails = product.getImages() == null
+                ? List.of()
+                : product.getImages().stream()
+                .map(EntityMapper::toProductImageResponse)
+                .toList();
+        List<String> images = new ArrayList<>(imageDetails.stream()
+                .map(ProductImageResponse::url)
+                .toList());
+        String primaryImage = imageDetails.stream()
+                .filter(ProductImageResponse::primaryImage)
+                .findFirst()
+                .map(ProductImageResponse::url)
+                .orElse(product.getImageUrl());
+        if (primaryImage == null && !images.isEmpty()) {
+            primaryImage = images.get(0);
         }
-        if (product.getImages() != null) {
-            product.getImages().forEach(img -> {
-                if (!images.contains(img.getUrl())) {
-                    images.add(img.getUrl());
-                }
-            });
+        if (product.getImageUrl() != null && !product.getImageUrl().isBlank() && !images.contains(product.getImageUrl())) {
+            images.add(0, product.getImageUrl());
         }
-        String primaryImage = images.isEmpty() ? product.getImageUrl() : images.get(0);
         List<ProductVariantResponse> variants = product.getVariants() == null
                 ? List.of()
                 : product.getVariants().stream()
@@ -62,16 +74,32 @@ public final class EntityMapper {
                 product.getDescription(),
                 product.getPrice(),
                 product.getSku(),
+                product.getSlug(),
+                product.getMetaTitle(),
+                product.getMetaDescription(),
                 stockQuantity,
                 primaryImage,
                 images,
+                imageDetails,
                 variants,
                 product.getCategory().getId(),
                 product.getCategory().getName(),
                 product.isActive(),
+                product.isFeatured(),
+                product.getVisibleFrom(),
+                product.getVisibleUntil(),
                 avgRating,
                 reviewCount
         );
+    }
+
+    public static ProductImageResponse toProductImageResponse(ProductImage image) {
+        return new ProductImageResponse(
+                image.getId(),
+                image.getUrl(),
+                image.getAltText(),
+                image.getSortOrder(),
+                image.isPrimaryImage());
     }
 
     public static ProductVariantResponse toProductVariantResponse(ProductVariant variant) {
@@ -224,6 +252,10 @@ public final class EntityMapper {
     }
 
     public static CouponResponse toCouponResponse(Coupon coupon) {
+        return toCouponResponse(coupon, 0, 0, BigDecimal.ZERO);
+    }
+
+    public static CouponResponse toCouponResponse(Coupon coupon, long usageCount, long uniqueCustomerCount, BigDecimal revenueAttributed) {
         return new CouponResponse(
                 coupon.getId(),
                 coupon.getCode(),
@@ -231,6 +263,14 @@ public final class EntityMapper {
                 coupon.getDiscountAmount(),
                 coupon.getMinOrderAmount(),
                 coupon.getExpiresAt(),
+                coupon.getUsageLimit(),
+                coupon.getPerUserUsageLimit(),
+                coupon.isFreeShipping(),
+                coupon.getProductIds(),
+                coupon.getCategoryIds(),
+                usageCount,
+                uniqueCustomerCount,
+                revenueAttributed,
                 coupon.isActive()
         );
     }

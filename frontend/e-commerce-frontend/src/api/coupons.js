@@ -9,5 +9,7 @@ export const couponsApi = {
   adminList: () => apiRequest('/api/admin/coupons'),
   create: (data) =>
     apiRequest('/api/admin/coupons', { method: 'POST', body: JSON.stringify(data) }),
+  update: (id, data) =>
+    apiRequest(`/api/admin/coupons/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
   remove: (id) => apiRequest(`/api/admin/coupons/${id}`, { method: 'DELETE' }),
 };

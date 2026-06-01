@@ -35,10 +35,17 @@ const emptyProduct = {
   description: '',
   price: '',
   sku: '',
+  slug: '',
+  metaTitle: '',
+  metaDescription: '',
   stockQuantity: '',
   imageUrl: '',
   categoryId: '',
   active: true,
+  featured: false,
+  visibleFrom: '',
+  visibleUntil: '',
+  imageDetails: [],
   variants: [],
 };
 
@@ -91,10 +98,16 @@ export default function AdminProductsPage() {
     description: form.description,
     price: Number(form.price),
     sku: form.sku || null,
+    slug: form.slug || null,
+    metaTitle: form.metaTitle || null,
+    metaDescription: form.metaDescription || null,
     stockQuantity: Number(form.stockQuantity || 0),
     imageUrl: form.imageUrl || null,
     categoryId: Number(form.categoryId),
     active: form.active,
+    featured: form.featured,
+    visibleFrom: form.visibleFrom ? new Date(form.visibleFrom).toISOString() : null,
+    visibleUntil: form.visibleUntil ? new Date(form.visibleUntil).toISOString() : null,
     variants: form.variants.map((variant) => ({
       ...variant,
       stockQuantity: Number(variant.stockQuantity || 0),
@@ -128,12 +141,28 @@ export default function AdminProductsPage() {
       description: p.description || '',
       price: String(p.price),
       sku: p.sku || '',
+      slug: p.slug || '',
+      metaTitle: p.metaTitle || '',
+      metaDescription: p.metaDescription || '',
       stockQuantity: String(p.stockQuantity),
       imageUrl: p.imageUrl || '',
       categoryId: String(p.categoryId),
       active: p.active,
+      featured: Boolean(p.featured),
+      visibleFrom: p.visibleFrom ? p.visibleFrom.slice(0, 16) : '',
+      visibleUntil: p.visibleUntil ? p.visibleUntil.slice(0, 16) : '',
+      imageDetails: (p.imageDetails || []).map((image) => ({ ...image })),
       variants: (p.variants || []).map((variant) => ({ ...variant })),
     });
+  };
+
+  const refreshEditedProduct = (updated) => {
+    setProducts((current) => current.map((product) => (product.id === updated.id ? updated : product)));
+    setForm((current) => ({
+      ...current,
+      imageUrl: updated.imageUrl || '',
+      imageDetails: (updated.imageDetails || []).map((image) => ({ ...image })),
+    }));
   };
 
   const updateVariant = (index, patch) => {
@@ -167,13 +196,80 @@ export default function AdminProductsPage() {
     setError('');
     try {
       const { url } = await uploadsApi.uploadProductImage(file);
-      setForm((f) => ({ ...f, imageUrl: url }));
+      if (editingId) {
+        const updated = await productsApi.addImage(editingId, {
+          url,
+          altText: form.name,
+          sortOrder: form.imageDetails.length,
+          primaryImage: form.imageDetails.length === 0,
+        });
+        refreshEditedProduct(updated);
+      } else {
+        setForm((f) => ({ ...f, imageUrl: url }));
+      }
       setMessage('Image uploaded');
     } catch (err) {
       setError(err.message);
     } finally {
       setUploading(false);
       e.target.value = '';
+    }
+  };
+
+  const updateImageAlt = async (image, altText) => {
+    if (!editingId) return;
+    try {
+      const updated = await productsApi.updateImage(editingId, image.id, { altText });
+      refreshEditedProduct(updated);
+      setMessage('Image alt text updated');
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  const setPrimaryImage = async (image) => {
+    if (!editingId) return;
+    try {
+      const updated = await productsApi.updateImage(editingId, image.id, { primaryImage: true });
+      refreshEditedProduct(updated);
+      setMessage('Main product image replaced');
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  const moveImage = async (image, direction) => {
+    if (!editingId) return;
+    const images = [...form.imageDetails].sort((a, b) => a.sortOrder - b.sortOrder);
+    const index = images.findIndex((entry) => entry.id === image.id);
+    const target = index + direction;
+    if (target < 0 || target >= images.length) return;
+    [images[index], images[target]] = [images[target], images[index]];
+    try {
+      const updated = await productsApi.reorderImages(editingId, images.map((entry, sortOrder) => ({
+        id: entry.id,
+        sortOrder,
+      })));
+      refreshEditedProduct(updated);
+      setMessage('Images reordered');
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  const deleteImage = async (image) => {
+    if (!editingId) return;
+    if (!(await confirm({
+      title: 'Delete image?',
+      description: 'This removes the image from the product and deletes the uploaded file when it is locally stored.',
+      confirmText: 'Delete',
+    }))) return;
+    try {
+      const updated = await productsApi.deleteImage(editingId, image.id);
+      refreshEditedProduct(updated);
+      setMessage('Image deleted');
+    } catch (err) {
+      setError(err.message);
     }
   };
 
@@ -228,6 +324,15 @@ export default function AdminProductsPage() {
             <Grid size={{ xs: 12, sm: 4 }}>
               <TextField label="SKU (optional)" fullWidth value={form.sku} onChange={(e) => setForm({ ...form, sku: e.target.value })} />
             </Grid>
+            <Grid size={{ xs: 12, sm: 4 }}>
+              <TextField label="Slug" helperText="Used for SEO and clean product URLs." fullWidth value={form.slug} onChange={(e) => setForm({ ...form, slug: e.target.value })} />
+            </Grid>
+            <Grid size={{ xs: 12, sm: 4 }}>
+              <FormControlLabel
+                control={<Checkbox checked={form.featured} onChange={(e) => setForm({ ...form, featured: e.target.checked })} />}
+                label="Featured product"
+              />
+            </Grid>
             <Grid size={{ xs: 12, sm: 8 }}>
               <FormControl fullWidth size="small">
                 <InputLabel>Category</InputLabel>
@@ -240,19 +345,80 @@ export default function AdminProductsPage() {
             </Grid>
             <Grid size={12}>
               <Stack spacing={1}>
-                <Typography variant="subtitle2">Product image</Typography>
+                <Typography variant="subtitle2">Product images</Typography>
                 <Button variant="outlined" component="label" disabled={uploading}>
-                  {uploading ? 'Uploading...' : 'Upload image'}
+                  {uploading ? 'Uploading...' : editingId ? 'Upload product image' : 'Upload main image'}
                   <input type="file" hidden accept="image/jpeg,image/png,image/webp" onChange={handleImageUpload} />
                 </Button>
                 {form.imageUrl && (
                   <Box component="img" src={resolveImageUrl(form.imageUrl)} alt="Preview" sx={{ width: 120, height: 90, objectFit: 'cover', borderRadius: 2 }} />
                 )}
-                <TextField label="Or paste image URL" fullWidth size="small" value={form.imageUrl} onChange={(e) => setForm({ ...form, imageUrl: e.target.value })} />
+                <TextField label="Main image URL" fullWidth size="small" value={form.imageUrl} onChange={(e) => setForm({ ...form, imageUrl: e.target.value })} />
+                {editingId && (
+                  <Stack spacing={1}>
+                    {form.imageDetails.length === 0 && (
+                      <Typography variant="body2" color="text.secondary">No gallery images yet.</Typography>
+                    )}
+                    {[...form.imageDetails].sort((a, b) => a.sortOrder - b.sortOrder).map((image) => (
+                      <Card key={image.id} variant="outlined" sx={{ p: 1.5 }}>
+                        <Grid container spacing={1.5} alignItems="center">
+                          <Grid size={{ xs: 12, sm: 2 }}>
+                            <Box component="img" src={resolveImageUrl(image.url)} alt={image.altText || form.name} sx={{ width: 96, height: 72, objectFit: 'cover', borderRadius: 1 }} />
+                          </Grid>
+                          <Grid size={{ xs: 12, sm: 4 }}>
+                            <TextField
+                              label="Alt text"
+                              fullWidth
+                              size="small"
+                              defaultValue={image.altText || ''}
+                              onBlur={(e) => updateImageAlt(image, e.target.value)}
+                            />
+                          </Grid>
+                          <Grid size={{ xs: 12, sm: 6 }}>
+                            <Stack direction="row" spacing={1} flexWrap="wrap">
+                              <Button size="small" onClick={() => moveImage(image, -1)}>Up</Button>
+                              <Button size="small" onClick={() => moveImage(image, 1)}>Down</Button>
+                              <Button size="small" variant={image.primaryImage ? 'contained' : 'outlined'} onClick={() => setPrimaryImage(image)}>
+                                {image.primaryImage ? 'Main image' : 'Make main'}
+                              </Button>
+                              <Button size="small" color="error" onClick={() => deleteImage(image)}>Delete</Button>
+                            </Stack>
+                          </Grid>
+                        </Grid>
+                      </Card>
+                    ))}
+                  </Stack>
+                )}
               </Stack>
             </Grid>
             <Grid size={12}>
               <TextField label="Description" fullWidth multiline rows={3} value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} />
+            </Grid>
+            <Grid size={{ xs: 12, sm: 6 }}>
+              <TextField label="Meta title" fullWidth value={form.metaTitle} onChange={(e) => setForm({ ...form, metaTitle: e.target.value })} />
+            </Grid>
+            <Grid size={{ xs: 12, sm: 6 }}>
+              <TextField label="Meta description" fullWidth value={form.metaDescription} onChange={(e) => setForm({ ...form, metaDescription: e.target.value })} />
+            </Grid>
+            <Grid size={{ xs: 12, sm: 6 }}>
+              <TextField
+                label="Visible from"
+                type="datetime-local"
+                fullWidth
+                InputLabelProps={{ shrink: true }}
+                value={form.visibleFrom}
+                onChange={(e) => setForm({ ...form, visibleFrom: e.target.value })}
+              />
+            </Grid>
+            <Grid size={{ xs: 12, sm: 6 }}>
+              <TextField
+                label="Visible until"
+                type="datetime-local"
+                fullWidth
+                InputLabelProps={{ shrink: true }}
+                value={form.visibleUntil}
+                onChange={(e) => setForm({ ...form, visibleUntil: e.target.value })}
+              />
             </Grid>
             <Grid size={12}>
               <Stack direction="row" justifyContent="space-between" alignItems="center">
@@ -345,6 +511,8 @@ export default function AdminProductsPage() {
               <TableCell>Price</TableCell>
               <TableCell>Stock</TableCell>
               <TableCell>Variants</TableCell>
+              <TableCell>Featured</TableCell>
+              <TableCell sx={{ display: { xs: 'none', lg: 'table-cell' } }}>Visibility</TableCell>
               <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' } }}>Active</TableCell>
               <TableCell align="right">Actions</TableCell>
             </TableRow>
@@ -358,6 +526,11 @@ export default function AdminProductsPage() {
                 <TableCell>${Number(p.price).toFixed(2)}</TableCell>
                 <TableCell>{p.stockQuantity}</TableCell>
                 <TableCell>{p.variants?.length || 0}</TableCell>
+                <TableCell>{p.featured ? 'Yes' : 'No'}</TableCell>
+                <TableCell sx={{ display: { xs: 'none', lg: 'table-cell' } }}>
+                  {p.visibleFrom ? `From ${new Date(p.visibleFrom).toLocaleDateString()}` : 'Now'}
+                  {p.visibleUntil ? ` to ${new Date(p.visibleUntil).toLocaleDateString()}` : ''}
+                </TableCell>
                 <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' } }}>{p.active ? 'Yes' : 'No'}</TableCell>
                 <TableCell align="right">
                   <Button size="small" onClick={() => startEdit(p)}>Edit</Button>

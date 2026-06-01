@@ -35,7 +35,7 @@ public final class SecurityUtils {
     public static boolean isAdmin() {
         return optionalCurrentUser()
                 .map(u -> u.getAuthorities().stream()
-                        .anyMatch(a -> a.getAuthority().equals("ROLE_" + Role.ADMIN.name())))
+                        .anyMatch(a -> a.getAuthority().equals("ADMIN_ACCESS")))
                 .orElse(false);
     }
 }
