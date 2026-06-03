@@ -51,6 +51,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/maps/**").permitAll()
                         .requestMatchers("/api/webhooks/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/uploads/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/storefront/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/products/**", "/api/categories/**").permitAll()
                         .requestMatchers("/api/admin/**").hasAuthority("ADMIN_ACCESS")
                         .anyRequest().authenticated())

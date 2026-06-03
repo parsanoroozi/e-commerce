@@ -2,8 +2,6 @@ import {
   Alert,
   Box,
   Button,
-  Card,
-  CardContent,
   Link,
   Stack,
   TextField,
@@ -11,7 +9,7 @@ import {
 } from '@mui/material';
 import { useState } from 'react';
 import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
-import PageContainer from '../components/layout/PageContainer';
+import AuthShell from '../components/common/AuthShell';
 import PasswordField from '../components/PasswordField';
 import { useAuth } from '../context/AuthContext';
 
@@ -50,13 +48,7 @@ export default function LoginPage() {
   };
 
   return (
-    <PageContainer maxWidth="sm">
-      <Box sx={{ display: 'flex', justifyContent: 'center', py: { xs: 2, md: 4 } }}>
-        <Card sx={{ width: '100%', maxWidth: 420 }}>
-          <CardContent sx={{ p: { xs: 2.5, sm: 3 } }}>
-            <Typography variant="h4" component="h1" gutterBottom>
-              Login
-            </Typography>
+    <AuthShell title="Welcome back" subtitle="Member access">
             <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
               Demo admin: admin@shop.com / admin1234567
             </Typography>
@@ -116,15 +108,12 @@ export default function LoginPage() {
                 >
                   {loading ? 'Signing in...' : challengeId ? 'Verify code' : 'Login'}
                 </Button>
-                <Typography variant="body2" textAlign="center">
+                <Typography variant="body2" sx={{ textAlign: 'center' }}>
                   No account? <Link component={RouterLink} to="/register">Register</Link>
                 </Typography>
               </Stack>
             </Box>
-          </CardContent>
-        </Card>
-      </Box>
-    </PageContainer>
+    </AuthShell>
   );
 }
 

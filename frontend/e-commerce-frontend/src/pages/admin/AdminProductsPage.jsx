@@ -1,4 +1,7 @@
 import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
   Alert,
   Box,
   Button,
@@ -26,6 +29,7 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SearchIcon from '@mui/icons-material/Search';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { adminApi } from '../../api/admin';
@@ -356,9 +360,16 @@ export default function AdminProductsPage() {
       {message && <Alert severity="success" sx={{ mb: 2 }}>{message}</Alert>}
       {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
 
-      <Card sx={{ mb: 3 }}>
-        <CardContent>
-          <Typography variant="h6" gutterBottom>{editingId ? 'Edit product' : 'Add product'}</Typography>
+      <Accordion defaultExpanded sx={{ mb: 2 }}>
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+          <Box>
+            <Typography variant="h6">{editingId ? 'Edit product' : 'Add product'}</Typography>
+            <Typography variant="caption" color="text.secondary">
+              Basic information, images, inventory, variants, and publishing.
+            </Typography>
+          </Box>
+        </AccordionSummary>
+        <AccordionDetails>
           <Grid container spacing={2}>
             <Grid size={12}>
               <Typography variant="subtitle1" fontWeight={700}>Basic info</Typography>
@@ -581,12 +592,19 @@ export default function AdminProductsPage() {
               </Button>
             )}
           </Stack>
-        </CardContent>
-      </Card>
+        </AccordionDetails>
+      </Accordion>
 
-      <Card component="form" onSubmit={adjustInventory} sx={{ mb: 3 }}>
-        <CardContent>
-          <Typography variant="h6" gutterBottom>Manual stock adjustment</Typography>
+      <Accordion component="form" onSubmit={adjustInventory} sx={{ mb: 2 }}>
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+          <Box>
+            <Typography variant="h6">Manual stock adjustment</Typography>
+            <Typography variant="caption" color="text.secondary">
+              Add or remove stock without opening a product editor.
+            </Typography>
+          </Box>
+        </AccordionSummary>
+        <AccordionDetails>
           <Grid container spacing={2}>
             <Grid size={{ xs: 12, sm: 3 }}>
               <FormControl fullWidth size="small">
@@ -617,10 +635,20 @@ export default function AdminProductsPage() {
               <Button type="submit" variant="contained">Apply adjustment</Button>
             </Grid>
           </Grid>
-        </CardContent>
-      </Card>
+        </AccordionDetails>
+      </Accordion>
 
-      <Card sx={{ mb: 2 }}>
+      <Accordion defaultExpanded sx={{ mb: 2 }}>
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+          <Box>
+            <Typography variant="h6">Product list</Typography>
+            <Typography variant="caption" color="text.secondary">
+              Search, filter, edit, and deactivate catalog items.
+            </Typography>
+          </Box>
+        </AccordionSummary>
+        <AccordionDetails sx={{ pt: 0 }}>
+      <Card sx={{ mb: 2, bgcolor: 'background.paper' }}>
         <CardContent>
           <Typography variant="h6" gutterBottom>Product table</Typography>
           <Grid container spacing={2}>
@@ -773,10 +801,19 @@ export default function AdminProductsPage() {
           />
         </Stack>
       )}
+        </AccordionDetails>
+      </Accordion>
 
-      <Card>
-        <CardContent>
-          <Typography variant="h6" gutterBottom>Recent stock adjustments</Typography>
+      <Accordion sx={{ mb: 2 }}>
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+          <Box>
+            <Typography variant="h6">Recent stock adjustments</Typography>
+            <Typography variant="caption" color="text.secondary">
+              Audit trail for the newest inventory changes.
+            </Typography>
+          </Box>
+        </AccordionSummary>
+        <AccordionDetails>
           <Stack spacing={1}>
             {history.length === 0 && <Typography color="text.secondary">No adjustments yet.</Typography>}
             {history.map((entry) => (
@@ -790,8 +827,8 @@ export default function AdminProductsPage() {
               </Box>
             ))}
           </Stack>
-        </CardContent>
-      </Card>
+        </AccordionDetails>
+      </Accordion>
     </Box>
   );
 }

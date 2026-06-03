@@ -20,7 +20,7 @@ if "%SPRING_JPA_HIBERNATE_DDL_AUTO%"=="" set "SPRING_JPA_HIBERNATE_DDL_AUTO=upda
 if "%PAYMENT_DEV_MODE%"=="" set "PAYMENT_DEV_MODE=true"
 if "%MAIL_ENABLED%"=="" set "MAIL_ENABLED=false"
 if "%AUTH_COOKIE_SECURE%"=="" set "AUTH_COOKIE_SECURE=false"
-if "%APP_SEED_ENABLED%"=="" set "APP_SEED_ENABLED=false"
+if "%APP_SEED_ENABLED%"=="" set "APP_SEED_ENABLED=true"
 
 echo Starting ShopVerse backend on http://localhost:8080
 echo Swagger: http://localhost:8080/swagger-ui/index.html

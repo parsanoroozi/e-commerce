@@ -1,118 +1,95 @@
-import { createTheme, alpha } from '@mui/material/styles';
+import { alpha, createTheme } from '@mui/material/styles';
 
-export function createAppTheme(mode = 'dark') {
+export function createAppTheme(mode = 'light') {
   const isDark = mode === 'dark';
-
-  const primary = isDark
-    ? { main: '#ff4d00', light: '#ff8a3d', dark: '#c73500', contrastText: '#fff7ed' }
-    : { main: '#f03a00', light: '#ff6933', dark: '#b82a00', contrastText: '#fff7ed' };
-
-  const secondary = isDark
-    ? { main: '#00e0ff', light: '#75f0ff', dark: '#0096b8', contrastText: '#06121f' }
-    : { main: '#004cff', light: '#2f78ff', dark: '#0030a3', contrastText: '#eef7ff' };
-
-  const brand = {
-    ink: isDark ? '#f8fbff' : '#101426',
-    muted: isDark ? '#b9c7d9' : '#445166',
-    canvas: isDark ? '#07111f' : '#edf3ff',
-    surface: isDark ? '#0e1a2d' : '#f1e9ff',
-    surfaceAlt: isDark ? '#142742' : '#dbe8ff',
-    line: isDark ? alpha('#75f0ff', 0.24) : alpha('#004cff', 0.2),
-    accent: isDark ? '#7cff00' : '#008c3a',
-    appBar: isDark ? '#0a1728' : '#e5eeff',
-  };
+  const orange = '#ff7a00';
+  const orangeSoft = isDark ? '#3a2615' : '#fff3e5';
+  const orangeLight = '#ffae5c';
+  const background = isDark ? '#171615' : '#e7dccc';
+  const paper = isDark ? '#22211f' : '#ffffff';
+  const panel = isDark ? '#2a2926' : '#f8f8f8';
+  const ink = isDark ? '#f7f3ee' : '#171717';
+  const muted = isDark ? '#b8b0a7' : '#777777';
+  const line = isDark ? '#393633' : '#eeeeee';
+  const tableHead = isDark ? '#282623' : '#fafafa';
+  const tableHover = isDark ? '#2f2922' : '#fff8f0';
 
   return createTheme({
     palette: {
-      mode: isDark ? 'dark' : 'light',
-      primary,
-      secondary,
-      background: isDark
-        ? { default: brand.canvas, paper: brand.surface }
-        : { default: brand.canvas, paper: brand.surface },
-      text: isDark
-        ? { primary: brand.ink, secondary: brand.muted }
-        : { primary: brand.ink, secondary: brand.muted },
-      divider: brand.line,
-      success: { main: brand.accent },
-      error: { main: isDark ? '#ff2d55' : '#d6002f' },
-      warning: { main: isDark ? '#ffd000' : '#c87800' },
-      info: { main: secondary.main },
+      mode,
+      primary: {
+        main: orange,
+        light: orangeLight,
+        dark: '#d86400',
+        contrastText: '#ffffff',
+      },
+      secondary: {
+        main: '#ffad60',
+        light: '#ffd4a4',
+        dark: '#e98223',
+        contrastText: isDark ? '#171717' : '#171717',
+      },
+      background: {
+        default: background,
+        paper,
+      },
+      text: {
+        primary: ink,
+        secondary: muted,
+      },
+      divider: line,
+      success: { main: '#20bf7a', light: isDark ? '#173828' : '#dff8ed', dark: '#138a58' },
+      error: { main: '#ff4b68', light: isDark ? '#44202a' : '#ffe4ea', dark: '#c91236' },
+      warning: { main: orange, light: orangeSoft, dark: '#c95f00' },
+      info: { main: muted, light: isDark ? '#302f2d' : '#f2f2f2', dark: '#414141' },
       action: {
-        hover: isDark ? alpha(secondary.main, 0.14) : alpha(secondary.main, 0.1),
-        selected: isDark ? alpha(primary.main, 0.22) : alpha(primary.main, 0.16),
-        focus: isDark ? alpha(secondary.main, 0.24) : alpha(secondary.main, 0.18),
+        hover: alpha(orange, isDark ? 0.12 : 0.08),
+        selected: alpha(orange, isDark ? 0.2 : 0.14),
+        focus: alpha(orange, isDark ? 0.24 : 0.18),
+        disabledBackground: isDark ? '#302f2d' : '#eeeeee',
+        disabled: isDark ? '#766f68' : '#a5a5a5',
       },
     },
     typography: {
-      fontFamily: '"DM Sans", system-ui, sans-serif',
-      h1: { fontFamily: '"Instrument Serif", Georgia, serif', fontWeight: 500, letterSpacing: 0 },
-      h2: { fontFamily: '"Instrument Serif", Georgia, serif', fontWeight: 500, letterSpacing: 0 },
-      h3: { fontFamily: '"Instrument Serif", Georgia, serif', fontWeight: 500, letterSpacing: 0 },
-      h4: { fontFamily: '"Instrument Serif", Georgia, serif', fontWeight: 500, letterSpacing: 0 },
+      fontFamily: '"Inter", "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+      h1: { fontWeight: 800, letterSpacing: 0 },
+      h2: { fontWeight: 800, letterSpacing: 0 },
+      h3: { fontWeight: 800, letterSpacing: 0 },
+      h4: { fontWeight: 800, letterSpacing: 0 },
+      h5: { fontWeight: 800, letterSpacing: 0 },
+      h6: { fontWeight: 800, letterSpacing: 0 },
+      subtitle1: { fontWeight: 700 },
       button: { fontWeight: 700, letterSpacing: 0 },
     },
-    shape: { borderRadius: 8 },
-    shadows: isDark
-      ? createTheme({ palette: { mode: 'dark' } }).shadows
-      : createTheme({ palette: { mode: 'light' } }).shadows,
+    shape: { borderRadius: 14 },
+    shadows: [
+      'none',
+      isDark ? '0 10px 30px rgba(0,0,0,0.24)' : '0 10px 30px rgba(24, 24, 24, 0.04)',
+      isDark ? '0 12px 38px rgba(0,0,0,0.28)' : '0 12px 38px rgba(24, 24, 24, 0.06)',
+      isDark ? '0 18px 50px rgba(0,0,0,0.32)' : '0 18px 50px rgba(24, 24, 24, 0.08)',
+      ...Array(21).fill(isDark ? '0 18px 50px rgba(0,0,0,0.36)' : '0 18px 50px rgba(24, 24, 24, 0.10)'),
+    ],
     components: {
       MuiCssBaseline: {
         styleOverrides: {
           body: {
-            backgroundColor: brand.canvas,
-            backgroundImage: isDark
-              ? `linear-gradient(135deg, ${alpha(secondary.dark, 0.28)} 0%, transparent 34%),
-                 linear-gradient(180deg, ${alpha(primary.main, 0.12)} 0%, transparent 360px)`
-              : `linear-gradient(135deg, ${alpha(secondary.light, 0.28)} 0%, transparent 36%),
-                 linear-gradient(180deg, ${alpha(primary.light, 0.16)} 0%, transparent 360px)`,
             minHeight: '100vh',
-          },
-          '::selection': {
-            backgroundColor: primary.main,
-            color: primary.contrastText,
+            background,
+            color: ink,
           },
           a: { textDecoration: 'none' },
+          '::selection': {
+            backgroundColor: orange,
+            color: '#ffffff',
+          },
         },
       },
       MuiPaper: {
         defaultProps: { elevation: 0 },
         styleOverrides: {
           root: {
-            backgroundColor: brand.surface,
-            backgroundImage: isDark
-              ? `linear-gradient(180deg, ${alpha(secondary.main, 0.08)}, ${alpha(primary.main, 0.04)})`
-              : `linear-gradient(180deg, ${alpha('#ffffff', 0.32)}, ${alpha(secondary.light, 0.16)})`,
-            borderColor: brand.line,
-          },
-        },
-      },
-      MuiButton: {
-        defaultProps: { disableElevation: true },
-        styleOverrides: {
-          root: {
-            textTransform: 'none',
-            fontWeight: 700,
-            borderRadius: 8,
-            border: '1px solid transparent',
-          },
-          containedPrimary: {
-            boxShadow: `0 0 0 2px ${alpha(primary.main, 0.35)}`,
-            backgroundColor: primary.main,
-            color: primary.contrastText,
-            '&:hover': {
-              backgroundColor: primary.dark,
-            },
-          },
-          containedSecondary: {
-            backgroundColor: secondary.main,
-            color: secondary.contrastText,
-            '&:hover': {
-              backgroundColor: secondary.dark,
-            },
-          },
-          outlined: {
-            borderWidth: 2,
+            backgroundImage: 'none',
+            borderColor: line,
           },
         },
       },
@@ -120,12 +97,39 @@ export function createAppTheme(mode = 'dark') {
         defaultProps: { elevation: 0 },
         styleOverrides: {
           root: {
-            border: '2px solid',
-            borderColor: brand.line,
-            backgroundColor: brand.surface,
-            backgroundImage: isDark
-              ? `linear-gradient(180deg, ${alpha(secondary.main, 0.08)} 0%, transparent 100%)`
-              : `linear-gradient(180deg, ${alpha('#ffffff', 0.5)} 0%, ${alpha(primary.light, 0.06)} 100%)`,
+            backgroundColor: panel,
+            backgroundImage: 'none',
+            border: 0,
+            boxShadow: 'none',
+          },
+        },
+      },
+      MuiButton: {
+        defaultProps: { disableElevation: true },
+        styleOverrides: {
+          root: {
+            minHeight: 42,
+            borderRadius: 10,
+            textTransform: 'none',
+            transition: 'background-color 160ms ease, color 160ms ease, transform 160ms ease',
+            '&:hover': {
+              transform: 'translateY(-1px)',
+            },
+          },
+          containedPrimary: {
+            backgroundColor: orange,
+            color: '#ffffff',
+            '&:hover': {
+              backgroundColor: '#eb7100',
+            },
+          },
+          outlined: {
+            borderColor: line,
+            color: ink,
+            '&:hover': {
+              borderColor: orange,
+              backgroundColor: orangeSoft,
+            },
           },
         },
       },
@@ -133,31 +137,31 @@ export function createAppTheme(mode = 'dark') {
         defaultProps: { color: 'transparent' },
         styleOverrides: {
           root: {
-            borderBottom: '2px solid',
-            borderColor: isDark ? alpha(primary.main, 0.7) : alpha(primary.main, 0.42),
-            backdropFilter: 'blur(12px)',
-            backgroundColor: alpha(brand.appBar, 0.94),
+            backgroundColor: alpha(paper, isDark ? 0.9 : 0.92),
+            backgroundImage: 'none',
+            borderBottom: `1px solid ${line}`,
+            boxShadow: 'none',
+            backdropFilter: 'blur(14px)',
           },
         },
       },
       MuiDrawer: {
         styleOverrides: {
           paper: {
-            backgroundColor: brand.surface,
-            backgroundImage: isDark
-              ? `linear-gradient(180deg, ${alpha(secondary.main, 0.12)}, transparent 42%)`
-              : `linear-gradient(180deg, ${alpha(secondary.light, 0.26)}, ${alpha(primary.light, 0.08)})`,
-            borderRight: `2px solid ${brand.line}`,
+            backgroundColor: paper,
+            backgroundImage: 'none',
+            borderRight: `1px solid ${line}`,
           },
         },
       },
       MuiChip: {
         styleOverrides: {
           root: {
+            height: 28,
+            borderRadius: 8,
             fontWeight: 700,
-            borderRadius: 6,
-            borderColor: brand.line,
-            backgroundColor: isDark ? alpha(secondary.main, 0.12) : alpha(secondary.light, 0.18),
+            backgroundColor: orangeSoft,
+            color: isDark ? '#ffd0a0' : orange,
           },
         },
       },
@@ -166,17 +170,18 @@ export function createAppTheme(mode = 'dark') {
         styleOverrides: {
           root: {
             '& .MuiOutlinedInput-root': {
-              borderRadius: 8,
+              minHeight: 44,
+              borderRadius: 12,
+              backgroundColor: paper,
               '& fieldset': {
-                borderColor: brand.line,
-                borderWidth: 2,
+                borderColor: line,
+                borderWidth: 1,
               },
-              backgroundColor: isDark ? alpha(brand.surfaceAlt, 0.72) : alpha('#ffffff', 0.68),
               '&:hover fieldset': {
-                borderColor: secondary.main,
+                borderColor: isDark ? '#57524c' : '#dddddd',
               },
               '&.Mui-focused fieldset': {
-                borderColor: primary.main,
+                borderColor: orange,
               },
             },
           },
@@ -185,40 +190,55 @@ export function createAppTheme(mode = 'dark') {
       MuiSelect: {
         styleOverrides: {
           outlined: {
-            backgroundColor: isDark ? alpha(brand.surfaceAlt, 0.72) : alpha(brand.surfaceAlt, 0.72),
+            minHeight: 42,
+            borderRadius: 10,
+            backgroundColor: paper,
           },
         },
       },
       MuiMenu: {
         styleOverrides: {
           paper: {
-            border: `2px solid ${brand.line}`,
-            backgroundColor: brand.surface,
+            border: `1px solid ${line}`,
+            borderRadius: 14,
+            backgroundColor: paper,
+            boxShadow: isDark ? '0 18px 48px rgba(0,0,0,0.38)' : '0 18px 48px rgba(24, 24, 24, 0.10)',
           },
         },
       },
       MuiMenuItem: {
         styleOverrides: {
           root: {
-            '&.Mui-selected': {
-              backgroundColor: isDark ? alpha(primary.main, 0.22) : alpha(primary.main, 0.16),
+            borderRadius: 8,
+            margin: '2px 6px',
+            '&.Mui-selected, &.Mui-selected:hover, &:hover': {
+              backgroundColor: orangeSoft,
             },
-            '&.Mui-selected:hover, &:hover': {
-              backgroundColor: isDark ? alpha(secondary.main, 0.18) : alpha(secondary.main, 0.12),
-            },
+          },
+        },
+      },
+      MuiAccordion: {
+        defaultProps: { elevation: 0 },
+        styleOverrides: {
+          root: {
+            backgroundColor: panel,
+            backgroundImage: 'none',
+            border: 0,
+            boxShadow: 'none',
+            '&::before': { display: 'none' },
           },
         },
       },
       MuiTableCell: {
         styleOverrides: {
           head: {
-            color: secondary.contrastText,
-            backgroundColor: isDark ? alpha(secondary.main, 0.22) : secondary.main,
+            color: muted,
+            backgroundColor: tableHead,
             fontWeight: 800,
-            borderBottom: `2px solid ${brand.line}`,
+            borderBottom: `1px solid ${line}`,
           },
           body: {
-            borderBottom: `1px solid ${brand.line}`,
+            borderBottom: `1px solid ${line}`,
           },
         },
       },
@@ -226,7 +246,7 @@ export function createAppTheme(mode = 'dark') {
         styleOverrides: {
           root: {
             '&:hover': {
-              backgroundColor: isDark ? alpha(secondary.main, 0.08) : alpha(secondary.light, 0.18),
+              backgroundColor: tableHover,
             },
           },
         },
@@ -234,12 +254,13 @@ export function createAppTheme(mode = 'dark') {
       MuiToggleButton: {
         styleOverrides: {
           root: {
-            borderColor: brand.line,
+            borderColor: line,
+            borderRadius: 10,
             '&.Mui-selected': {
-              color: primary.contrastText,
-              backgroundColor: primary.main,
+              color: '#ffffff',
+              backgroundColor: orange,
               '&:hover': {
-                backgroundColor: primary.dark,
+                backgroundColor: '#eb7100',
               },
             },
           },
@@ -248,12 +269,12 @@ export function createAppTheme(mode = 'dark') {
       MuiPaginationItem: {
         styleOverrides: {
           root: {
-            borderColor: brand.line,
+            borderRadius: 9,
             '&.Mui-selected': {
-              color: primary.contrastText,
-              backgroundColor: primary.main,
+              color: '#ffffff',
+              backgroundColor: orange,
               '&:hover': {
-                backgroundColor: primary.dark,
+                backgroundColor: '#eb7100',
               },
             },
           },
@@ -262,9 +283,11 @@ export function createAppTheme(mode = 'dark') {
       MuiIconButton: {
         styleOverrides: {
           root: {
+            borderRadius: 10,
+            color: muted,
             '&:hover': {
-              color: secondary.main,
-              backgroundColor: isDark ? alpha(secondary.main, 0.14) : alpha(secondary.main, 0.1),
+              color: orange,
+              backgroundColor: orangeSoft,
             },
           },
         },
@@ -272,10 +295,10 @@ export function createAppTheme(mode = 'dark') {
       MuiLink: {
         styleOverrides: {
           root: {
-            color: secondary.main,
+            color: orange,
             fontWeight: 700,
             '&:hover': {
-              color: primary.main,
+              color: orangeLight,
             },
           },
         },

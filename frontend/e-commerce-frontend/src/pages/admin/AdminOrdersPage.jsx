@@ -1,9 +1,10 @@
 import {
   Alert,
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
   Box,
   Button,
-  Card,
-  CardContent,
   Chip,
   FormControl,
   InputAdornment,
@@ -12,17 +13,10 @@ import {
   Pagination,
   Select,
   Stack,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
   TextField,
   Typography,
-  useMediaQuery,
-  useTheme,
 } from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SearchIcon from '@mui/icons-material/Search';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
@@ -34,9 +28,20 @@ import { showError, showSuccess } from '../../utils/toast';
 const STATUSES = ['AWAITING_PAYMENT', 'PENDING', 'CONFIRMED', 'PACKED', 'SHIPPED', 'DELIVERED', 'CANCELLED', 'REFUNDED'];
 const FULFILLMENT_STATUSES = ['CONFIRMED', 'PACKED', 'SHIPPED', 'DELIVERED', 'CANCELLED', 'REFUNDED'];
 
+function statusProgress(status) {
+  return {
+    AWAITING_PAYMENT: 10,
+    PENDING: 22,
+    CONFIRMED: 42,
+    PACKED: 58,
+    SHIPPED: 78,
+    DELIVERED: 100,
+    CANCELLED: 100,
+    REFUNDED: 100,
+  }[status] || 20;
+}
+
 export default function AdminOrdersPage() {
-  const theme = useTheme();
-  const isSmall = useMediaQuery(theme.breakpoints.down('md'));
   const [orders, setOrders] = useState([]);
   const [page, setPage] = useState(0);
   const [pageData, setPageData] = useState({ page: 0, totalPages: 0 });
@@ -165,6 +170,11 @@ export default function AdminOrdersPage() {
     return acc;
   }, {}), [orders]);
 
+  const paidTotal = useMemo(() => orders.reduce((sum, order) => sum + Number(order.totalAmount || 0), 0), [orders]);
+  const actionableCount = useMemo(() => orders.filter((order) => (
+    ['PENDING', 'CONFIRMED', 'PACKED', 'SHIPPED'].includes(order.status)
+  )).length, [orders]);
+
   const renderOrderControls = (order, compact = false) => (
     <Stack spacing={1} sx={{ minWidth: compact ? 0 : { xs: 240, md: 360 } }}>
       <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
@@ -282,142 +292,113 @@ export default function AdminOrdersPage() {
 
   return (
     <Box>
-      <Typography variant="h5" gutterBottom>All orders</Typography>
       {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
-      <Stack direction={{ xs: 'column', md: 'row' }} spacing={2} sx={{ mb: 2 }} alignItems={{ md: 'center' }}>
-        <TextField
-          size="small"
-          placeholder="Search order, customer, or email"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          sx={{ minWidth: { md: 320 } }}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon fontSize="small" />
-              </InputAdornment>
-            ),
-          }}
-        />
-        <FormControl size="small" sx={{ minWidth: 180 }}>
-          <Select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
-            <MenuItem value="ALL">All statuses</MenuItem>
-            {STATUSES.map((s) => (
-              <MenuItem key={s} value={s}>{s}</MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </Stack>
-      <Stack direction="row" spacing={1} sx={{ mb: 2, flexWrap: 'wrap', gap: 1 }}>
-        <Chip
-          label={`All ${orders.length}`}
-          color={statusFilter === 'ALL' ? 'primary' : 'default'}
-          onClick={() => setStatusFilter('ALL')}
-        />
-        {STATUSES.map((status) => (
-          <Chip
-            key={status}
-            label={`${status} ${statusCounts[status] || 0}`}
-            color={statusFilter === status ? 'primary' : 'default'}
-            variant={statusFilter === status ? 'filled' : 'outlined'}
-            onClick={() => setStatusFilter(status)}
-          />
+      <Stack direction={{ xs: 'column', md: 'row' }} spacing={2} sx={{ mb: 2 }}>
+        {[
+          { label: 'Orders in page', value: orders.length },
+          { label: 'Needs action', value: actionableCount },
+          { label: 'Visible revenue', value: `$${paidTotal.toFixed(2)}` },
+        ].map((item) => (
+          <Box key={item.label} sx={{ flex: 1, p: 2, bgcolor: 'background.paper', border: '1px solid', borderColor: 'divider' }}>
+            <Typography variant="caption" color="text.secondary" fontWeight={900}>{item.label}</Typography>
+            <Typography variant="h4" sx={{ mt: 0.5 }}>{item.value}</Typography>
+          </Box>
         ))}
       </Stack>
-      {isSmall ? (
-        <Stack spacing={1.5}>
-          {filteredOrders.map((order) => (
-            <Card key={order.id} variant="outlined">
-              <CardContent>
-                <Stack spacing={1.5}>
-                  <Stack direction="row" justifyContent="space-between" alignItems="flex-start" spacing={1}>
-                    <Box>
-                      <Link component={RouterLink} to={`/admin/orders/${order.id}`} fontWeight={800}>Order #{order.id}</Link>
-                      <Typography variant="body2" color="text.secondary">
-                        {order.customer ? `${order.customer.firstName} ${order.customer.lastName}` : '-'}
-                      </Typography>
-                      <Typography variant="caption" color="text.secondary">
-                        {new Date(order.createdAt).toLocaleString()}
-                      </Typography>
-                    </Box>
-                    <Stack alignItems="flex-end" spacing={0.5}>
-                      <Typography fontWeight={800}>${Number(order.totalAmount).toFixed(2)}</Typography>
-                      <Chip label={order.status} size="small" />
-                    </Stack>
-                  </Stack>
-                  {(order.shippingCarrier || order.trackingNumber) && (
-                    <Typography variant="caption" color="text.secondary">
-                      {[order.shippingCarrier, order.trackingNumber].filter(Boolean).join(' - ')}
-                    </Typography>
-                  )}
-                  {renderOrderControls(order, true)}
-                </Stack>
-              </CardContent>
-            </Card>
-          ))}
-          {filteredOrders.length === 0 && (
-            <Card variant="outlined">
-              <CardContent>
-                <Typography color="text.secondary" sx={{ textAlign: 'center' }}>
-                  No orders match the current filters.
-                </Typography>
-              </CardContent>
-            </Card>
-          )}
-        </Stack>
-      ) : (
-        <TableContainer sx={{ overflowX: 'auto' }}>
-          <Table size="small">
-            <TableHead>
-              <TableRow>
-                <TableCell>ID</TableCell>
-                <TableCell>Customer</TableCell>
-                <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' } }}>Date</TableCell>
-                <TableCell>Total</TableCell>
-                <TableCell>Status</TableCell>
-                <TableCell>Actions</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {filteredOrders.map((order) => (
-                <TableRow key={order.id}>
-                  <TableCell>
-                    <Link component={RouterLink} to={`/admin/orders/${order.id}`}>#{order.id}</Link>
-                  </TableCell>
-                  <TableCell>
-                    {order.customer ? `${order.customer.firstName} ${order.customer.lastName}` : '-'}
-                  </TableCell>
-                  <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' } }}>
-                    {new Date(order.createdAt).toLocaleString()}
-                  </TableCell>
-                  <TableCell>${Number(order.totalAmount).toFixed(2)}</TableCell>
-                  <TableCell>
-                    <Stack spacing={0.5}>
-                      <Chip label={order.status} size="small" />
-                      {order.shippingCarrier && (
-                        <Typography variant="caption" color="text.secondary">{order.shippingCarrier}</Typography>
-                      )}
-                      {order.trackingNumber && (
-                        <Typography variant="caption" color="text.secondary">{order.trackingNumber}</Typography>
-                      )}
-                    </Stack>
-                  </TableCell>
-                  <TableCell>{renderOrderControls(order)}</TableCell>
-                </TableRow>
+
+      <Box sx={{ p: 2, mb: 2, bgcolor: 'background.paper', border: '1px solid', borderColor: 'divider' }}>
+        <Stack direction={{ xs: 'column', md: 'row' }} spacing={2} alignItems={{ md: 'center' }}>
+          <TextField
+            size="small"
+            placeholder="Search order, customer, or email"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            sx={{ minWidth: { md: 320 }, flex: 1 }}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon fontSize="small" />
+                </InputAdornment>
+              ),
+            }}
+          />
+          <FormControl size="small" sx={{ minWidth: 180 }}>
+            <Select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
+              <MenuItem value="ALL">All statuses</MenuItem>
+              {STATUSES.map((s) => (
+                <MenuItem key={s} value={s}>{s}</MenuItem>
               ))}
-              {filteredOrders.length === 0 && (
-                <TableRow>
-                  <TableCell colSpan={6}>
-                    <Typography color="text.secondary" sx={{ py: 3, textAlign: 'center' }}>
-                      No orders match the current filters.
-                    </Typography>
-                  </TableCell>
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      )}
+            </Select>
+          </FormControl>
+        </Stack>
+        <Stack direction="row" spacing={1} sx={{ mt: 1.5, flexWrap: 'wrap', gap: 1 }}>
+          <Chip
+            label={`All ${orders.length}`}
+            color={statusFilter === 'ALL' ? 'primary' : 'default'}
+            onClick={() => setStatusFilter('ALL')}
+          />
+          {STATUSES.map((status) => (
+            <Chip
+              key={status}
+              label={`${status.replaceAll('_', ' ')} ${statusCounts[status] || 0}`}
+              color={statusFilter === status ? 'primary' : 'default'}
+              variant={statusFilter === status ? 'filled' : 'outlined'}
+              onClick={() => setStatusFilter(status)}
+            />
+          ))}
+        </Stack>
+      </Box>
+
+      <Stack spacing={1.25}>
+        {filteredOrders.map((order) => (
+          <Accordion key={order.id}>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Stack
+                direction={{ xs: 'column', md: 'row' }}
+                spacing={{ xs: 1, md: 2 }}
+                alignItems={{ xs: 'flex-start', md: 'center' }}
+                sx={{ width: '100%', pr: 1 }}
+              >
+                <Box sx={{ minWidth: { md: 180 } }}>
+                  <Link component={RouterLink} to={`/admin/orders/${order.id}`} fontWeight={900}>
+                    Order #{order.id}
+                  </Link>
+                  <Typography variant="caption" color="text.secondary" display="block">
+                    {new Date(order.createdAt).toLocaleString()}
+                  </Typography>
+                </Box>
+                <Box sx={{ flex: 1, minWidth: 0 }}>
+                  <Typography variant="body2" fontWeight={800} noWrap>
+                    {order.customer ? `${order.customer.firstName} ${order.customer.lastName}` : 'Guest customer'}
+                  </Typography>
+                  <Typography variant="caption" color="text.secondary" noWrap display="block">
+                    {[order.customer?.email, order.shippingCarrier, order.trackingNumber].filter(Boolean).join(' / ') || 'No shipment data yet'}
+                  </Typography>
+                </Box>
+                <Stack direction="row" spacing={1} alignItems="center" flexWrap="wrap" useFlexGap>
+                  <Chip label={order.status.replaceAll('_', ' ')} size="small" />
+                  <Typography variant="h6" sx={{ minWidth: 100, textAlign: { md: 'right' } }}>
+                    ${Number(order.totalAmount).toFixed(2)}
+                  </Typography>
+                </Stack>
+                <Box sx={{ width: { xs: '100%', md: 170 }, height: 8, bgcolor: 'action.hover', overflow: 'hidden' }}>
+                  <Box sx={{ height: '100%', width: `${statusProgress(order.status)}%`, bgcolor: 'primary.main' }} />
+                </Box>
+              </Stack>
+            </AccordionSummary>
+            <AccordionDetails sx={{ pt: 0 }}>
+              <Box sx={{ borderTop: '1px solid', borderColor: 'divider', pt: 2 }}>
+                {renderOrderControls(order, true)}
+              </Box>
+            </AccordionDetails>
+          </Accordion>
+        ))}
+        {filteredOrders.length === 0 && (
+          <Box sx={{ p: 4, bgcolor: 'background.paper', textAlign: 'center', border: '1px solid', borderColor: 'divider' }}>
+            <Typography color="text.secondary">No orders match the current filters.</Typography>
+          </Box>
+        )}
+      </Stack>
       {pageData.totalPages > 1 && (
         <Stack alignItems="center" sx={{ mt: 3 }}>
           <Pagination

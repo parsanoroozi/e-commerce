@@ -6,6 +6,7 @@ import personal.ecommercebackend.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +20,7 @@ import personal.ecommercebackend.dto.response.ProductResponse;
 import personal.ecommercebackend.entity.Category;
 import personal.ecommercebackend.entity.Product;
 import personal.ecommercebackend.entity.ProductImage;
+import personal.ecommercebackend.entity.ProductReview;
 import personal.ecommercebackend.entity.ProductVariant;
 import personal.ecommercebackend.exception.ApiException;
 import personal.ecommercebackend.mapper.EntityMapper;
@@ -34,6 +36,7 @@ import java.util.Objects;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.text.Normalizer;
+import java.util.ArrayList;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -62,16 +65,48 @@ public class ProductServiceImpl implements ProductService {
     public PageResponse<ProductResponse> search(Long categoryId, String search, BigDecimal minPrice, BigDecimal maxPrice,
                                                 Boolean inStock, Integer minRating, Pageable pageable) {
         String normalizedSearch = (search == null || search.isBlank()) ? null : search.trim();
-        Page<Product> page = productRepository.searchVisible(
-                categoryId,
-                normalizedSearch,
-                minPrice,
-                maxPrice,
-                inStock,
-                minRating,
-                Instant.now(),
-                pageable);
+        Page<Product> page = productRepository.findAll(visibleProductSpec(
+                categoryId, normalizedSearch, minPrice, maxPrice, inStock, minRating, Instant.now()), pageable);
         return toProductPageResponse(page);
+    }
+
+    private Specification<Product> visibleProductSpec(Long categoryId, String search, BigDecimal minPrice,
+                                                      BigDecimal maxPrice, Boolean inStock, Integer minRating,
+                                                      Instant now) {
+        return (root, query, cb) -> {
+            List<jakarta.persistence.criteria.Predicate> predicates = new ArrayList<>();
+            predicates.add(cb.isTrue(root.get("active")));
+            predicates.add(cb.or(cb.isNull(root.get("visibleFrom")), cb.lessThanOrEqualTo(root.get("visibleFrom"), now)));
+            predicates.add(cb.or(cb.isNull(root.get("visibleUntil")), cb.greaterThanOrEqualTo(root.get("visibleUntil"), now)));
+
+            if (categoryId != null) {
+                predicates.add(cb.equal(root.get("category").get("id"), categoryId));
+            }
+            if (search != null) {
+                String pattern = "%" + search.toLowerCase() + "%";
+                predicates.add(cb.or(
+                        cb.like(cb.lower(root.get("name")), pattern),
+                        cb.like(cb.lower(root.get("description")), pattern)
+                ));
+            }
+            if (minPrice != null) {
+                predicates.add(cb.greaterThanOrEqualTo(root.get("price"), minPrice));
+            }
+            if (maxPrice != null) {
+                predicates.add(cb.lessThanOrEqualTo(root.get("price"), maxPrice));
+            }
+            if (Boolean.TRUE.equals(inStock)) {
+                predicates.add(cb.greaterThan(root.get("stockQuantity"), 0));
+            }
+            if (minRating != null) {
+                var ratingSubquery = query.subquery(Double.class);
+                var reviewRoot = ratingSubquery.from(ProductReview.class);
+                ratingSubquery.select(cb.coalesce(cb.avg(reviewRoot.get("rating")), 0D));
+                ratingSubquery.where(cb.equal(reviewRoot.get("product"), root));
+                predicates.add(cb.greaterThanOrEqualTo(ratingSubquery, minRating.doubleValue()));
+            }
+            return cb.and(predicates.toArray(jakarta.persistence.criteria.Predicate[]::new));
+        };
     }
 
     private ProductResponse toProductResponseWithReviews(Product product) {
@@ -107,19 +142,6 @@ public class ProductServiceImpl implements ProductService {
                 page.getTotalElements(),
                 page.getTotalPages(),
                 page.isLast());
-    }
-
-    private Page<Product> resolveSearchPage(Long categoryId, String search, Pageable pageable) {
-        if (search == null && categoryId == null) {
-            return productRepository.findVisible(Instant.now(), pageable);
-        }
-        if (search == null) {
-            return productRepository.findVisibleByCategory(categoryId, Instant.now(), pageable);
-        }
-        if (categoryId == null) {
-            return productRepository.findVisibleBySearch(search, Instant.now(), pageable);
-        }
-        return productRepository.findVisibleByCategoryAndSearch(categoryId, search, Instant.now(), pageable);
     }
 
     @Transactional(readOnly = true)

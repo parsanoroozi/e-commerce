@@ -38,7 +38,6 @@ import { storefrontApi } from '../../api/storefront';
 import { wishlistApi } from '../../api/wishlist';
 import { useAuth } from '../../context/AuthContext';
 import { subscribeToAppActions } from '../../utils/appEvents';
-import { resolveImageUrl } from '../../utils/imageUrl';
 import EmptyState from '../common/EmptyState';
 import ThemeToggle from '../common/ThemeToggle';
 
@@ -73,7 +72,6 @@ export default function AppNavbar() {
   const [storeSettings, setStoreSettings] = useState(null);
   const notificationClearStartedAt = useRef(0);
   const brandName = storeSettings?.brandName || 'ShopVerse';
-  const logoUrl = storeSettings?.logoUrl ? resolveImageUrl(storeSettings.logoUrl) : null;
 
   const refreshCounts = useCallback(async () => {
     if (!isAuthenticated) {
@@ -337,9 +335,29 @@ export default function AppNavbar() {
 
   const drawer = (
     <Box sx={{ width: 280, pt: 1 }} role="navigation">
-      <Typography variant="h6" sx={{ px: 2, py: 1.5, fontFamily: '"Instrument Serif", serif' }}>
-        {brandName}
-      </Typography>
+      <Stack direction="row" spacing={1.25} alignItems="center" sx={{ px: 2, py: 1.5 }}>
+        <Box
+          sx={{
+            width: 32,
+            height: 32,
+            display: 'grid',
+            gridTemplateColumns: 'repeat(2, 1fr)',
+            gap: '3px',
+            p: '5px',
+            borderRadius: 1.25,
+            bgcolor: 'primary.main',
+            '& span': { bgcolor: 'primary.contrastText', borderRadius: 0.5 },
+          }}
+        >
+          <span />
+          <span />
+          <span />
+          <span />
+        </Box>
+        <Typography variant="h6" fontWeight={900}>
+          {brandName}
+        </Typography>
+      </Stack>
       <Divider sx={{ mb: 1 }} />
       <List>{visibleItems.map((item) => navLink(item, () => setDrawerOpen(false)))}</List>
       <Divider sx={{ my: 1 }} />
@@ -367,10 +385,21 @@ export default function AppNavbar() {
     </Box>
   );
 
+  if (location.pathname.startsWith('/admin')) {
+    return null;
+  }
+
   return (
     <>
       <AppBar position="sticky" color="default" enableColorOnDark elevation={0}>
-        <Toolbar sx={{ gap: 1, flexWrap: { xs: 'wrap', md: 'nowrap' }, minHeight: { xs: 56, sm: 64 } }}>
+        <Toolbar
+          sx={{
+            gap: 1,
+            flexWrap: { xs: 'wrap', md: 'nowrap' },
+            minHeight: { xs: 64, sm: 74 },
+            px: { xs: 2, md: 4 },
+          }}
+        >
           {isMobile && (
             <IconButton edge="start" onClick={() => setDrawerOpen(true)} aria-label="Open menu">
               <MenuIcon />
@@ -384,22 +413,30 @@ export default function AppNavbar() {
             sx={{
               display: 'inline-flex',
               alignItems: 'center',
-              gap: 1,
-              fontFamily: '"Instrument Serif", serif',
+              gap: 1.2,
+              fontSize: { xs: 22, md: 24 },
+              fontWeight: 900,
               color: 'text.primary',
               textDecoration: 'none',
               flexGrow: { xs: 1, md: 0 },
               mr: { md: 3 },
             }}
           >
-            {logoUrl && (
-              <Box
-                component="img"
-                src={logoUrl}
-                alt={`${brandName} logo`}
-                sx={{ width: 30, height: 30, objectFit: 'contain', borderRadius: 1 }}
-              />
-            )}
+            <Box
+              sx={{
+                width: 28,
+                height: 28,
+                display: 'grid',
+                gridTemplateColumns: 'repeat(2, 1fr)',
+                gap: '3px',
+                '& span': { bgcolor: 'primary.main', borderRadius: '4px' },
+              }}
+            >
+              <Box component="span" />
+              <Box component="span" />
+              <Box component="span" />
+              <Box component="span" />
+            </Box>
             {brandName}
           </Typography>
 
@@ -414,6 +451,7 @@ export default function AppNavbar() {
                     component={RouterLink}
                     to={item.to}
                     color={active ? 'primary' : 'inherit'}
+                    variant={active ? 'outlined' : 'text'}
                     startIcon={
                       count > 0 && item.to === '/cart' ? (
                         <Badge badgeContent={count} color="primary">
@@ -427,6 +465,10 @@ export default function AppNavbar() {
                         item.icon
                       )
                     }
+                    sx={{
+                      borderColor: active ? 'primary.main' : 'transparent',
+                      bgcolor: active ? 'rgba(216,180,93,0.08)' : 'transparent',
+                    }}
                   >
                     {item.label}
                   </Button>
@@ -584,9 +626,9 @@ export default function AppNavbar() {
                   )}
                 </Menu>
                 {!isMobile && (
-                  <Button component={RouterLink} to="/profile" color="inherit" size="small">
-                    Hi, {user?.firstName}
-                  </Button>
+                <Button component={RouterLink} to="/profile" color="inherit" size="small" variant="outlined">
+                  Hi, {user?.firstName}
+                </Button>
                 )}
                 {!isMobile && (
                   <Button color="inherit" size="small" onClick={logout}>Logout</Button>
@@ -595,7 +637,7 @@ export default function AppNavbar() {
             )}
             {!isAuthenticated && !isMobile && (
               <>
-                <Button component={RouterLink} to="/login" color="inherit">Login</Button>
+                <Button component={RouterLink} to="/login" color="inherit" variant="outlined">Login</Button>
                 <Button component={RouterLink} to="/register" variant="contained">Register</Button>
               </>
             )}

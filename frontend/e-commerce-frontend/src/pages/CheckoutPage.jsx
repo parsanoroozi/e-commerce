@@ -31,6 +31,7 @@ import {
 import { useEffect, useMemo, useState } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import PageContainer from '../components/layout/PageContainer';
+import LuxuryPageHeader from '../components/common/LuxuryPageHeader';
 import { useColorMode } from '../context/ColorModeContext';
 import { cartApi } from '../api/cart';
 import { couponsApi } from '../api/coupons';
@@ -368,8 +369,13 @@ export default function CheckoutPage() {
   }
 
   return (
-    <PageContainer>
-      <Typography variant="h4" gutterBottom>Checkout</Typography>
+    <PageContainer maxWidth="xl">
+      <LuxuryPageHeader
+        eyebrow="Checkout salon"
+        title="Checkout"
+        subtitle="A guided, resumable checkout with shipping, coupons, totals, and payment kept in clear stages."
+        chips={[step === 'shipping' ? 'Shipping' : 'Payment', `${cart.totalItems} items`]}
+      />
       <Stepper activeStep={activeStep} sx={{ mb: 3, display: { xs: 'none', sm: 'flex' } }}>
         {steps.map((label) => (
           <Step key={label}>

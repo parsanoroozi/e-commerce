@@ -1,8 +1,8 @@
-import { Alert, Box, Button, Card, CardContent, Stack, TextField, Typography } from '@mui/material';
+import { Alert, Box, Button, Stack, TextField } from '@mui/material';
 import { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { authApi } from '../api/auth';
-import PageContainer from '../components/layout/PageContainer';
+import AuthShell from '../components/common/AuthShell';
 import { showError, showSuccess } from '../utils/toast';
 
 export default function ForgotPasswordPage() {
@@ -21,11 +21,7 @@ export default function ForgotPasswordPage() {
   };
 
   return (
-    <PageContainer maxWidth="sm">
-      <Box sx={{ display: 'flex', justifyContent: 'center', py: 4 }}>
-        <Card sx={{ width: '100%', maxWidth: 420 }}>
-          <CardContent>
-            <Typography variant="h4" gutterBottom>Forgot password</Typography>
+    <AuthShell title="Recover access" subtitle="Account concierge">
             {sent ? (
               <Alert severity="info">Check your email or backend console for the reset link.</Alert>
             ) : (
@@ -37,9 +33,6 @@ export default function ForgotPasswordPage() {
               </Box>
             )}
             <Button component={RouterLink} to="/login" sx={{ mt: 2 }}>Back to login</Button>
-          </CardContent>
-        </Card>
-      </Box>
-    </PageContainer>
+    </AuthShell>
   );
 }

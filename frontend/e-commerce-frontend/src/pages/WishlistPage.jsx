@@ -1,9 +1,10 @@
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
-import { Grid, Pagination, Stack, Typography } from '@mui/material';
+import { Grid, Pagination, Stack } from '@mui/material';
 import { useCallback, useEffect, useState } from 'react';
 import { subscribeToApiChanges } from '../api/client';
 import { wishlistApi } from '../api/wishlist';
 import EmptyState from '../components/common/EmptyState';
+import LuxuryPageHeader from '../components/common/LuxuryPageHeader';
 import PageContainer from '../components/layout/PageContainer';
 import ProductCard from '../components/ProductCard';
 import { ProductGridSkeleton } from '../components/Skeleton';
@@ -51,8 +52,13 @@ export default function WishlistPage() {
   };
 
   return (
-    <PageContainer>
-      <Typography variant="h4" gutterBottom>Wishlist</Typography>
+    <PageContainer maxWidth="xl">
+      <LuxuryPageHeader
+        eyebrow="Saved edit"
+        title="Wishlist"
+        subtitle="A calm room for pieces you are considering, comparing, or saving for later."
+        chips={[`${items.length} saved`]}
+      />
       {loading ? (
         <ProductGridSkeleton />
       ) : error ? (
@@ -72,7 +78,7 @@ export default function WishlistPage() {
           actionTo="/"
         />
       ) : (
-        <Grid container spacing={2}>
+        <Grid container spacing={2.5}>
           {items.map((p) => (
             <Grid key={p.id} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
               <ProductCard product={p} onRemove={remove} />

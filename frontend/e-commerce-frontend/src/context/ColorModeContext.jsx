@@ -2,10 +2,10 @@ import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import { createAppTheme } from '../theme/muiTheme';
 
-const STORAGE_KEY = 'shopverse-color-mode';
+const STORAGE_KEY = 'shopverse-color-mode-v2';
 
 const ColorModeContext = createContext({
-  mode: 'dark',
+  mode: 'light',
   toggleColorMode: () => {},
 });
 
@@ -16,9 +16,9 @@ export function useColorMode() {
 export function AppThemeProvider({ children }) {
   const [mode, setMode] = useState(() => {
     try {
-      return localStorage.getItem(STORAGE_KEY) || 'dark';
+      return localStorage.getItem(STORAGE_KEY) || 'light';
     } catch {
-      return 'dark';
+      return 'light';
     }
   });
 

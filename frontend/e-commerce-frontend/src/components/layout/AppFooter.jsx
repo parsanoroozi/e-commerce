@@ -19,38 +19,55 @@ export default function AppFooter() {
       component="footer"
       sx={{
         mt: 'auto',
-        py: 4,
+        py: { xs: 5, md: 7 },
         borderTop: 1,
         borderColor: 'divider',
+        position: 'relative',
+        overflow: 'hidden',
         bgcolor: 'background.paper',
-        backgroundImage: (t) =>
-          t.palette.mode === 'dark'
-            ? `linear-gradient(90deg, ${t.palette.primary.main}18, ${t.palette.secondary.main}14)`
-            : `linear-gradient(90deg, ${t.palette.primary.light}1f, ${t.palette.secondary.light}26)`,
       }}
     >
-      <Container maxWidth="lg">
+      <Container maxWidth="xl" sx={{ position: 'relative', zIndex: 1 }}>
         <Stack
           direction={{ xs: 'column', sm: 'row' }}
-          spacing={3}
-          justifyContent="space-between"
+          spacing={4}
+          sx={{ justifyContent: 'space-between' }}
         >
           <Box>
-            <Stack direction="row" spacing={1} alignItems="center" sx={{ mb: 0.5 }}>
-              {logoUrl && (
+            <Stack direction="row" spacing={1} sx={{ mb: 0.5, alignItems: 'center' }}>
+              {logoUrl ? (
                 <Box
                   component="img"
                   src={logoUrl}
                   alt={`${brandName} logo`}
-                  sx={{ width: 34, height: 34, objectFit: 'contain', borderRadius: 1 }}
+                  sx={{ width: 42, height: 42, objectFit: 'contain', borderRadius: 1 }}
                 />
+              ) : (
+                <Box
+                  sx={{
+                    width: 42,
+                    height: 42,
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(2, 1fr)',
+                    gap: '4px',
+                    p: '7px',
+                    bgcolor: 'primary.main',
+                    borderRadius: 1.5,
+                    '& span': { bgcolor: 'primary.contrastText', borderRadius: 0.5 },
+                  }}
+                >
+                  <span />
+                  <span />
+                  <span />
+                  <span />
+                </Box>
               )}
-              <Typography variant="h6" sx={{ fontFamily: '"Instrument Serif", serif' }}>
+              <Typography variant="h5" fontWeight={900}>
                 {brandName}
               </Typography>
             </Stack>
-            <Typography variant="body2" color="text.secondary">
-              Quality products, seamless checkout.
+            <Typography variant="body2" color="text.secondary" sx={{ maxWidth: 360, lineHeight: 1.8 }}>
+              Clean shopping, clear checkout, and useful account tools in one polished storefront.
             </Typography>
             {settings?.contactEmail && (
               <Link href={`mailto:${settings.contactEmail}`} color="text.secondary" sx={{ display: 'inline-block', mt: 1 }}>
@@ -84,7 +101,7 @@ export default function AppFooter() {
             </Stack>
           </Stack>
         </Stack>
-        <Typography variant="caption" color="text.secondary" display="block" textAlign="center" sx={{ mt: 3 }}>
+        <Typography variant="caption" color="text.secondary" display="block" sx={{ mt: 3, textAlign: 'center' }}>
           (c) {new Date().getFullYear()} {brandName}
         </Typography>
       </Container>

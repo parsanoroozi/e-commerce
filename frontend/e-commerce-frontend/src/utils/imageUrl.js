@@ -1,5 +1,5 @@
 export function resolveImageUrl(url) {
-  if (!url) return 'https://placehold.co/400x300?text=No+Image';
+  if (!url) return '/luxury-assets/products/wireless-headphones.png';
   if (url.startsWith('http://') || url.startsWith('https://')) return url;
   return url;
 }

@@ -1,6 +1,9 @@
-/* Global helpers — main styling via MUI theme */
 html {
   scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
 }
 
 #root {
@@ -11,4 +14,89 @@ html {
   display: grid;
   min-height: 40vh;
   place-items: center;
+}
+
+.luxury-shell {
+  position: relative;
+  isolation: isolate;
+}
+
+.luxury-reveal,
+.luxury-scroll-card,
+.luxury-product-card {
+  animation: cleanReveal 360ms ease both;
+}
+
+.luxury-product-card {
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.luxury-product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 34px rgba(24, 24, 24, 0.08);
+}
+
+.hero-float,
+.luxury-hero-image {
+  animation: none;
+}
+
+.hero-orbit {
+  display: none;
+}
+
+.luxury-marquee {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.luxury-marquee-track {
+  display: inline-flex;
+  min-width: max-content;
+  animation: cleanMarquee 28s linear infinite;
+}
+
+.price-range-rail {
+  position: relative;
+}
+
+.price-range-rail::before {
+  content: '';
+  position: absolute;
+  inset: 50% 10px auto;
+  height: 1px;
+  transform: translateY(-50%);
+  background: linear-gradient(90deg, transparent, rgba(255, 122, 0, 0.4), transparent);
+  pointer-events: none;
+}
+
+@keyframes cleanReveal {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cleanMarquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
+  }
 }

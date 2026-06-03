@@ -21,9 +21,12 @@ export default function PasswordField({ inputProps, slotProps, ...props }) {
     <TextField
       {...props}
       type={visible ? 'text' : 'password'}
-      inputProps={inputProps}
       slotProps={{
         ...slotProps,
+        htmlInput: {
+          ...(slotProps?.htmlInput || {}),
+          ...(inputProps || {}),
+        },
         input: {
           ...(slotProps?.input || {}),
           endAdornment: adornment,

@@ -13,8 +13,6 @@ import personal.ecommercebackend.repository.*;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -41,7 +39,6 @@ public class DataSeeder implements CommandLineRunner {
     private final NotificationRepository notificationRepository;
     private final PasswordEncoder passwordEncoder;
     private final JdbcTemplate jdbcTemplate;
-    private final StorageProperties storageProperties;
 
     @Value("${app.seed.admin-email:admin@shop.com}")
     private String adminEmail;
@@ -82,21 +79,19 @@ public class DataSeeder implements CommandLineRunner {
                 .orElseGet(() -> ShopSetting.builder().id(ShopSetting.SINGLETON_ID).build());
         settings.setLowStockThreshold(8);
         settings.setBrandName("ShopVerse Demo");
-        settings.setLogoUrl("/uploads/seed-products/shopverse-logo.svg");
+        settings.setLogoUrl("/luxury-assets/atelier-hero.png");
         settings.setContactEmail("support@shopverse.demo");
         settings.setContactPhone("+1 (555) 018-2040");
         settings.setContactAddress("120 Market Street, San Francisco, CA 94105");
         settings.setHomepageBannerTitle("A complete commerce demo");
         settings.setHomepageBannerSubtitle("Browse variants, gallery images, coupons, checkout recovery, tracking, invoices, refunds, and analytics.");
-        settings.setHomepageBannerImageUrl("/uploads/seed-products/hero-demo.svg");
+        settings.setHomepageBannerImageUrl("/luxury-assets/atelier-hero.png");
         settings.setHomepageBannerCtaText("Explore catalog");
         settings.setHomepageBannerCtaUrl("/");
         settings.setTaxRate(new BigDecimal("0.0825"));
         settings.setStandardShippingCost(new BigDecimal("6.95"));
         settings.setExpressShippingCost(new BigDecimal("16.95"));
         shopSettingRepository.save(settings);
-        writeSeedImage("shopverse-logo.svg", "#0f172a", "#ff5a1f", "SV");
-        writeSeedImage("hero-demo.svg", "#1e293b", "#38bdf8", "ShopVerse");
     }
 
     private void seedCoupons() {
@@ -247,12 +242,12 @@ public class DataSeeder implements CommandLineRunner {
         product.setCategory(category);
         product.setActive(true);
         product.setFeatured(featured);
-        String main = writeSeedImage(slug + "-main.svg", color, "#ffffff", name);
+        String main = productImagePath(slug);
         product.setImageUrl(main);
         product.getImages().clear();
         product.getImages().add(image(product, main, name + " main image", 0, true));
-        product.getImages().add(image(product, writeSeedImage(slug + "-detail.svg", "#0f172a", color, name + " detail"), name + " detail image", 1, false));
-        product.getImages().add(image(product, writeSeedImage(slug + "-lifestyle.svg", "#f8fafc", color, name + " lifestyle"), name + " lifestyle image", 2, false));
+        product.getImages().add(image(product, main, name + " studio detail", 1, false));
+        product.getImages().add(image(product, main, name + " editorial lifestyle", 2, false));
         product.getVariants().clear();
         for (ProductVariant variant : variants) {
             variant.setProduct(product);
@@ -400,31 +395,8 @@ public class DataSeeder implements CommandLineRunner {
                 .targetUrl(target).read(!unread).build());
     }
 
-    private String writeSeedImage(String fileName, String background, String accent, String label) {
-        try {
-            Path directory = Path.of(storageProperties.uploadDir(), "seed-products").toAbsolutePath().normalize();
-            Files.createDirectories(directory);
-            Path file = directory.resolve(fileName);
-            String safeLabel = label.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
-            String svg = """
-                    <svg xmlns="http://www.w3.org/2000/svg" width="900" height="700" viewBox="0 0 900 700">
-                      <rect width="900" height="700" rx="36" fill="%s"/>
-                      <circle cx="710" cy="150" r="96" fill="%s" opacity=".85"/>
-                      <rect x="96" y="420" width="708" height="86" rx="24" fill="%s" opacity=".18"/>
-                      <text x="96" y="330" font-family="Arial, Helvetica, sans-serif" font-size="58" font-weight="800" fill="%s">%s</text>
-                      <text x="100" y="382" font-family="Arial, Helvetica, sans-serif" font-size="24" fill="%s" opacity=".82">Local demo upload asset</text>
-                    </svg>
-                    """.formatted(background, accent, accent, readableText(background), safeLabel, readableText(background));
-            Files.writeString(file, svg);
-            return "/uploads/seed-products/" + fileName;
-        } catch (Exception ex) {
-            log.warn("Could not write seed image {}: {}", fileName, ex.getMessage());
-            return "";
-        }
-    }
-
-    private String readableText(String background) {
-        return "#f8fafc".equalsIgnoreCase(background) ? "#0f172a" : "#ffffff";
+    private String productImagePath(String slug) {
+        return "/luxury-assets/products/" + slug + ".png";
     }
 
     private record DemoCatalog(Product headphones, Product watch, Product stand, Product shirt, Product jacket,

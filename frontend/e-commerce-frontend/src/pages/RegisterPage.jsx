@@ -2,17 +2,18 @@ import {
   Alert,
   Box,
   Button,
-  Card,
-  CardContent,
   Link,
   Stack,
+  Step,
+  StepLabel,
+  Stepper,
   TextField,
   Typography,
 } from '@mui/material';
 import { useState } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { authApi } from '../api/auth';
-import PageContainer from '../components/layout/PageContainer';
+import AuthShell from '../components/common/AuthShell';
 import PasswordField from '../components/PasswordField';
 import { useAuth } from '../context/AuthContext';
 
@@ -77,13 +78,15 @@ export default function RegisterPage() {
   };
 
   return (
-    <PageContainer maxWidth="sm">
-      <Box sx={{ display: 'flex', justifyContent: 'center', py: { xs: 2, md: 4 } }}>
-        <Card sx={{ width: '100%', maxWidth: 420 }}>
-          <CardContent sx={{ p: { xs: 2.5, sm: 3 } }}>
-            <Typography variant="h4" component="h1" gutterBottom>
-              Create account
-            </Typography>
+    <AuthShell title="Create account" subtitle="Private onboarding">
+            <Stepper activeStep={step === 'details' ? 0 : 1} sx={{ mb: 2 }}>
+              <Step>
+                <StepLabel>Details</StepLabel>
+              </Step>
+              <Step>
+                <StepLabel>Verify</StepLabel>
+              </Step>
+            </Stepper>
             {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
             {message && <Alert severity="success" sx={{ mb: 2 }}>{message}</Alert>}
 
@@ -107,7 +110,7 @@ export default function RegisterPage() {
                   <Button type="submit" variant="contained" size="large" disabled={sendingCode || !emailValid} fullWidth>
                     {sendingCode ? 'Sending code...' : 'Continue'}
                   </Button>
-                  <Typography variant="body2" textAlign="center">
+                  <Typography variant="body2" sx={{ textAlign: 'center' }}>
                     Already have an account? <Link component={RouterLink} to="/login">Login</Link>
                   </Typography>
                 </Stack>
@@ -141,9 +144,6 @@ export default function RegisterPage() {
                 </Stack>
               </Box>
             )}
-          </CardContent>
-        </Card>
-      </Box>
-    </PageContainer>
+    </AuthShell>
   );
 }

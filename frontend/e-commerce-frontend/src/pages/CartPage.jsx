@@ -12,10 +12,12 @@ import {
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import ShieldOutlinedIcon from '@mui/icons-material/ShieldOutlined';
 import { useCallback, useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { subscribeToApiChanges } from '../api/client';
 import { cartApi } from '../api/cart';
+import LuxuryPageHeader from '../components/common/LuxuryPageHeader';
 import PageContainer from '../components/layout/PageContainer';
 import { resolveImageUrl } from '../utils/imageUrl';
 
@@ -88,10 +90,13 @@ export default function CartPage() {
   }
 
   return (
-    <PageContainer>
-      <Typography variant="h4" component="h1" gutterBottom>
-        Your cart
-      </Typography>
+    <PageContainer maxWidth="xl">
+      <LuxuryPageHeader
+        eyebrow="Bag review"
+        title="Your cart"
+        subtitle="Review quantities, remove distractions, and move into checkout with a clean order summary."
+        chips={cart?.items?.length ? [`${cart.totalItems} items`, 'Secure checkout'] : ['Empty bag']}
+      />
       {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
       {!cart?.items?.length ? (
         <Card sx={{ p: 4, textAlign: 'center' }}>
@@ -105,7 +110,15 @@ export default function CartPage() {
           <Grid size={{ xs: 12, md: 8 }}>
             <Stack spacing={2}>
               {cart.items.map((item) => (
-                <Card key={item.id || `${item.productId}-${item.variantId || 'base'}`} sx={{ p: { xs: 1.5, sm: 2 } }}>
+                <Card
+                  key={item.id || `${item.productId}-${item.variantId || 'base'}`}
+                  className="luxury-scroll-card"
+                  sx={{
+                    p: { xs: 1.5, sm: 2 },
+                    transition: 'transform 240ms ease, border-color 240ms ease',
+                    '&:hover': { transform: 'translateX(6px)', borderColor: 'primary.main' },
+                  }}
+                >
                   <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} alignItems={{ sm: 'center' }}>
                     <Box
                       component="img"
@@ -149,7 +162,10 @@ export default function CartPage() {
           </Grid>
           <Grid size={{ xs: 12, md: 4 }}>
             <Card sx={{ p: 2.5, position: { md: 'sticky' }, top: { md: 88 } }}>
-              <Typography variant="h6" gutterBottom>Summary</Typography>
+              <Stack direction="row" spacing={1} alignItems="center" sx={{ mb: 1 }}>
+                <ShieldOutlinedIcon color="primary" />
+                <Typography variant="h6">Summary</Typography>
+              </Stack>
               <Typography color="text.secondary">{cart.totalItems} items</Typography>
               <Typography variant="h5" color="primary" sx={{ my: 2 }}>
                 ${Number(cart.totalAmount).toFixed(2)}

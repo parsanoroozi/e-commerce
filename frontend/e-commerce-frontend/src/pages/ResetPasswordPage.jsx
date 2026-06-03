@@ -1,8 +1,8 @@
-import { Box, Button, Card, CardContent, Link, Stack, Typography } from '@mui/material';
+import { Box, Button, Link, Stack } from '@mui/material';
 import { useState } from 'react';
 import { Link as RouterLink, useNavigate, useSearchParams } from 'react-router-dom';
 import { authApi } from '../api/auth';
-import PageContainer from '../components/layout/PageContainer';
+import AuthShell from '../components/common/AuthShell';
 import PasswordField from '../components/PasswordField';
 import { showError, showSuccess } from '../utils/toast';
 
@@ -28,11 +28,7 @@ export default function ResetPasswordPage() {
   };
 
   return (
-    <PageContainer maxWidth="sm">
-      <Box sx={{ display: 'flex', justifyContent: 'center', py: 4 }}>
-        <Card sx={{ width: '100%', maxWidth: 420 }}>
-          <CardContent>
-            <Typography variant="h4" gutterBottom>Set new password</Typography>
+    <AuthShell title="Set new password" subtitle="Secure reset">
             <Box component="form" onSubmit={handleSubmit}>
               <Stack spacing={2}>
                 <PasswordField label="New password" required fullWidth inputProps={{ minLength: 8 }} value={password} onChange={(e) => setPassword(e.target.value)} />
@@ -40,9 +36,6 @@ export default function ResetPasswordPage() {
                 <Link component={RouterLink} to="/login">Login</Link>
               </Stack>
             </Box>
-          </CardContent>
-        </Card>
-      </Box>
-    </PageContainer>
+    </AuthShell>
   );
 }

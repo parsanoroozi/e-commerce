@@ -25,6 +25,7 @@ import PageContainer from '../components/layout/PageContainer';
 import ProductCard from '../components/ProductCard';
 import StarRating from '../components/StarRating';
 import { ProductGridSkeleton } from '../components/Skeleton';
+import LuxuryPageHeader from '../components/common/LuxuryPageHeader';
 import { useAuth } from '../context/AuthContext';
 import { resolveImageUrl } from '../utils/imageUrl';
 import { showError, showSuccess } from '../utils/toast';
@@ -177,19 +178,28 @@ export default function ProductDetailPage() {
   if (!product) return null;
 
   return (
-    <PageContainer>
+    <PageContainer maxWidth="xl">
       <Button component={RouterLink} to="/" startIcon={<ArrowBackIcon />} sx={{ mb: 2 }}>
         Back to shop
       </Button>
+      <LuxuryPageHeader
+        eyebrow="Product salon"
+        title={product.name}
+        subtitle={product.categoryName ? `From the ${product.categoryName} collection.` : 'A closer inspection of the selected piece.'}
+        chips={[availableStock > 0 ? `${availableStock} in stock` : 'Sold out', product.reviewCount > 0 ? `${product.reviewCount} reviews` : 'Awaiting reviews']}
+      />
 
       <Grid container spacing={3}>
         <Grid size={{ xs: 12, md: 6 }}>
-          <Box
-            component="img"
-            src={resolveImageUrl(activeImage || product.imageUrl)}
-            alt={product.name}
-            sx={{ width: '100%', borderRadius: 3, maxHeight: 440, objectFit: 'cover' }}
-          />
+          <Card className="luxury-scroll-card" sx={{ p: 1.5, overflow: 'hidden' }}>
+            <Box
+              component="img"
+              className="luxury-hero-image"
+              src={resolveImageUrl(activeImage || product.imageUrl)}
+              alt={product.name}
+              sx={{ width: '100%', height: { xs: 360, md: 560 }, objectFit: 'cover', display: 'block' }}
+            />
+          </Card>
           {gallery.length > 1 && (
             <Stack direction="row" spacing={1} sx={{ mt: 1, flexWrap: 'wrap' }}>
               {gallery.map((image) => (
@@ -201,10 +211,12 @@ export default function ProductDetailPage() {
                     p: 0,
                     border: 2,
                     borderColor: activeImage === image.url ? 'primary.main' : 'divider',
-                    borderRadius: 2,
+                    borderRadius: 0,
                     overflow: 'hidden',
                     cursor: 'pointer',
                     bgcolor: 'transparent',
+                    transition: 'transform 200ms ease',
+                    '&:hover': { transform: 'translateY(-4px)' },
                   }}
                 >
                   <Box component="img" src={resolveImageUrl(image.url)} alt={image.altText || product.name} sx={{ width: 72, height: 72, objectFit: 'cover', display: 'block' }} />
@@ -214,8 +226,8 @@ export default function ProductDetailPage() {
           )}
         </Grid>
         <Grid size={{ xs: 12, md: 6 }}>
+          <Card className="luxury-scroll-card" sx={{ p: { xs: 2.5, md: 3.5 } }}>
           <Typography variant="overline" color="text.secondary">{product.categoryName}</Typography>
-          <Typography variant="h4" component="h1">{product.name}</Typography>
           {product.reviewCount > 0 && (
             <Box sx={{ my: 1 }}>
               <StarRating value={product.averageRating} count={product.reviewCount} />
@@ -276,6 +288,7 @@ export default function ProductDetailPage() {
               {inWishlist ? 'In wishlist' : 'Add to wishlist'}
             </Button>
           </Stack>
+          </Card>
         </Grid>
       </Grid>
 
@@ -333,7 +346,7 @@ export default function ProductDetailPage() {
       {related.length > 0 && (
         <Box sx={{ mt: 4 }}>
           <Typography variant="h5" gutterBottom>You may also like</Typography>
-          <Grid container spacing={2}>
+          <Grid container spacing={2.5}>
             {related.map((p) => (
               <Grid key={p.id} size={{ xs: 12, sm: 6, md: 3 }}>
                 <ProductCard product={p} />
