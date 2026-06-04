@@ -32,10 +32,12 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SearchIcon from '@mui/icons-material/Search';
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { adminApi } from '../../api/admin';
 import { categoriesApi } from '../../api/categories';
 import { productsApi } from '../../api/products';
 import { uploadsApi } from '../../api/uploads';
+import { MobileEmptyCard, TableEmptyRow } from '../../components/admin/AdminFeedback';
 import { useConfirm } from '../../context/ConfirmDialogContext';
 import { resolveImageUrl } from '../../utils/imageUrl';
 
@@ -43,6 +45,7 @@ const emptyProduct = {
   name: '',
   description: '',
   price: '',
+  taxRate: '',
   sku: '',
   slug: '',
   metaTitle: '',
@@ -58,10 +61,19 @@ const emptyProduct = {
   variants: [],
 };
 
+const hideEmptyDateTimePlaceholder = (value) => ({
+  '& input::-webkit-datetime-edit': {
+    color: value ? 'inherit' : 'transparent',
+  },
+  '& input:focus::-webkit-datetime-edit': {
+    color: 'inherit',
+  },
+});
+
 const emptyAdjustment = { productId: '', variantId: '', quantityDelta: '', reason: '' };
 
 function emptyVariant() {
-  return { id: null, sku: '', size: '', color: '', material: '', stockQuantity: 0, active: true };
+  return { id: null, sku: '', attributes: {}, stockQuantity: 0, active: true };
 }
 
 export default function AdminProductsPage() {
@@ -83,6 +95,12 @@ export default function AdminProductsPage() {
   const [productStatusFilter, setProductStatusFilter] = useState('ALL');
   const [categoryFilter, setCategoryFilter] = useState('ALL');
   const confirm = useConfirm();
+  const [searchParams] = useSearchParams();
+
+  useEffect(() => {
+    const nextSearch = searchParams.get('search') || '';
+    if (nextSearch) setProductSearch(nextSearch);
+  }, [searchParams]);
 
   const load = useCallback(async () => {
     const [prodData, catData, historyData] = await Promise.all([
@@ -107,6 +125,8 @@ export default function AdminProductsPage() {
 
   const selectedAdjustmentProduct = products.find((p) => String(p.id) === String(adjustment.productId));
   const selectedAdjustmentVariants = selectedAdjustmentProduct?.variants?.filter((v) => v.active) || [];
+  const selectedCategory = categories.find((category) => String(category.id) === String(form.categoryId));
+  const variantAttributes = useMemo(() => categoryVariantAttributes(categories, selectedCategory), [categories, selectedCategory]);
 
   const validateForm = () => {
     const nextErrors = {};
@@ -120,6 +140,9 @@ export default function AdminProductsPage() {
       if (Number(variant.stockQuantity) < 0) {
         nextErrors[`variant-${index}-stock`] = 'Stock cannot be negative.';
       }
+      if (variantAttributes.length && !Object.values(variant.attributes || {}).some((value) => String(value || '').trim())) {
+        nextErrors[`variant-${index}-attributes`] = 'Fill at least one category variant attribute.';
+      }
     });
     setFieldErrors(nextErrors);
     return Object.keys(nextErrors).length === 0;
@@ -129,6 +152,7 @@ export default function AdminProductsPage() {
     name: form.name,
     description: form.description,
     price: Number(form.price),
+    taxRate: form.taxRate === '' ? null : Number(form.taxRate),
     sku: form.sku || null,
     slug: form.slug || null,
     metaTitle: form.metaTitle || null,
@@ -142,6 +166,7 @@ export default function AdminProductsPage() {
     visibleUntil: form.visibleUntil ? new Date(form.visibleUntil).toISOString() : null,
     variants: form.variants.map((variant) => ({
       ...variant,
+      attributes: cleanAttributes(variant.attributes || {}),
       stockQuantity: Number(variant.stockQuantity || 0),
     })),
   });
@@ -192,6 +217,7 @@ export default function AdminProductsPage() {
       name: p.name,
       description: p.description || '',
       price: String(p.price),
+      taxRate: p.taxRate == null ? '' : String(p.taxRate),
       sku: p.sku || '',
       slug: p.slug || '',
       metaTitle: p.metaTitle || '',
@@ -204,7 +230,7 @@ export default function AdminProductsPage() {
       visibleFrom: p.visibleFrom ? p.visibleFrom.slice(0, 16) : '',
       visibleUntil: p.visibleUntil ? p.visibleUntil.slice(0, 16) : '',
       imageDetails: (p.imageDetails || []).map((image) => ({ ...image })),
-      variants: (p.variants || []).map((variant) => ({ ...variant })),
+      variants: (p.variants || []).map((variant) => ({ ...variant, attributes: variant.attributes || {} })),
     });
   };
 
@@ -406,9 +432,9 @@ export default function AdminProductsPage() {
             <Grid size={{ xs: 12, sm: 8 }}>
               <FormControl fullWidth size="small" error={Boolean(fieldErrors.categoryId)}>
                 <InputLabel>Category</InputLabel>
-                <Select required value={form.categoryId} label="Category" onChange={(e) => setForm({ ...form, categoryId: e.target.value })}>
+                <Select required value={form.categoryId} label="Category" onChange={(e) => setForm({ ...form, categoryId: e.target.value, variants: [] })}>
                   {categories.map((c) => (
-                    <MenuItem key={c.id} value={String(c.id)}>{c.name}</MenuItem>
+                    <MenuItem key={c.id} value={String(c.id)}>{categoryLabel(c)}</MenuItem>
                   ))}
                 </Select>
                 {fieldErrors.categoryId && (
@@ -432,6 +458,17 @@ export default function AdminProductsPage() {
                 error={Boolean(fieldErrors.price)}
                 helperText={fieldErrors.price}
                 onChange={(e) => setForm({ ...form, price: e.target.value })}
+              />
+            </Grid>
+            <Grid size={{ xs: 12, sm: 3 }}>
+              <TextField
+                label="Product tax rate"
+                fullWidth
+                type="number"
+                inputProps={{ step: 0.0001, min: 0 }}
+                helperText="Overrides destination and category tax."
+                value={form.taxRate}
+                onChange={(e) => setForm({ ...form, taxRate: e.target.value })}
               />
             </Grid>
             <Grid size={12} sx={{ borderTop: '1px solid', borderColor: 'divider', pt: 2 }}>
@@ -516,12 +553,31 @@ export default function AdminProductsPage() {
                 </Button>
               </Stack>
               <Stack spacing={1.5} sx={{ mt: 1 }}>
+                {variantAttributes.length === 0 && (
+                  <Typography variant="body2" color="text.secondary">
+                    Add variant attributes to this category first, then set product-specific values here.
+                  </Typography>
+                )}
                 {form.variants.map((variant, index) => (
                   <Card key={variant.id || index} variant="outlined" sx={{ p: 1.5 }}>
                     <Grid container spacing={1.5}>
-                      <Grid size={{ xs: 12, sm: 2 }}><TextField label="Size" fullWidth size="small" value={variant.size || ''} onChange={(e) => updateVariant(index, { size: e.target.value })} /></Grid>
-                      <Grid size={{ xs: 12, sm: 2 }}><TextField label="Color" fullWidth size="small" value={variant.color || ''} onChange={(e) => updateVariant(index, { color: e.target.value })} /></Grid>
-                      <Grid size={{ xs: 12, sm: 2 }}><TextField label="Material" fullWidth size="small" value={variant.material || ''} onChange={(e) => updateVariant(index, { material: e.target.value })} /></Grid>
+                      {variantAttributes.map((attribute) => (
+                        <Grid key={attribute} size={{ xs: 12, sm: 2 }}>
+                          <TextField
+                            label={attribute}
+                            fullWidth
+                            size="small"
+                            value={variant.attributes?.[attribute] || ''}
+                            error={Boolean(fieldErrors[`variant-${index}-attributes`])}
+                            onChange={(e) => updateVariant(index, {
+                              attributes: {
+                                ...(variant.attributes || {}),
+                                [attribute]: e.target.value,
+                              },
+                            })}
+                          />
+                        </Grid>
+                      ))}
                       <Grid size={{ xs: 12, sm: 2 }}><TextField label="SKU" fullWidth size="small" value={variant.sku || ''} onChange={(e) => updateVariant(index, { sku: e.target.value })} /></Grid>
                       <Grid size={{ xs: 12, sm: 2 }}>
                         <TextField
@@ -532,7 +588,7 @@ export default function AdminProductsPage() {
                           inputProps={{ min: 0 }}
                           value={variant.stockQuantity ?? 0}
                           error={Boolean(fieldErrors[`variant-${index}-stock`])}
-                          helperText={fieldErrors[`variant-${index}-stock`]}
+                          helperText={fieldErrors[`variant-${index}-stock`] || fieldErrors[`variant-${index}-attributes`]}
                           onChange={(e) => updateVariant(index, { stockQuantity: e.target.value })}
                         />
                       </Grid>
@@ -550,38 +606,7 @@ export default function AdminProductsPage() {
             <Grid size={12} sx={{ borderTop: '1px solid', borderColor: 'divider', pt: 2 }}>
               <Typography variant="subtitle1" fontWeight={700}>Publishing</Typography>
             </Grid>
-            <Grid size={{ xs: 12, sm: 6 }}>
-              <TextField label="Meta title" fullWidth value={form.metaTitle} onChange={(e) => setForm({ ...form, metaTitle: e.target.value })} />
-            </Grid>
-            <Grid size={{ xs: 12, sm: 6 }}>
-              <TextField label="Meta description" fullWidth value={form.metaDescription} onChange={(e) => setForm({ ...form, metaDescription: e.target.value })} />
-            </Grid>
-            <Grid size={{ xs: 12, sm: 6 }}>
-              <TextField
-                label="Visible from"
-                type="datetime-local"
-                fullWidth
-                InputLabelProps={{ shrink: true }}
-                value={form.visibleFrom}
-                onChange={(e) => setForm({ ...form, visibleFrom: e.target.value })}
-              />
-            </Grid>
-            <Grid size={{ xs: 12, sm: 6 }}>
-              <TextField
-                label="Visible until"
-                type="datetime-local"
-                fullWidth
-                InputLabelProps={{ shrink: true }}
-                value={form.visibleUntil}
-                onChange={(e) => setForm({ ...form, visibleUntil: e.target.value })}
-              />
-            </Grid>
-            <Grid size={12}>
-              <FormControlLabel
-                control={<Checkbox checked={form.active} onChange={(e) => setForm({ ...form, active: e.target.checked })} />}
-                label="Published"
-              />
-            </Grid>
+            <PublishingFields form={form} setForm={setForm} />
           </Grid>
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1} sx={{ mt: 2 }}>
             <Button type="button" variant="outlined" onClick={() => saveProduct(false)} sx={{ minHeight: 44 }}>Save draft</Button>
@@ -685,7 +710,7 @@ export default function AdminProductsPage() {
                 <Select label="Category" value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)}>
                   <MenuItem value="ALL">All categories</MenuItem>
                   {categories.map((category) => (
-                    <MenuItem key={category.id} value={String(category.id)}>{category.name}</MenuItem>
+                    <MenuItem key={category.id} value={String(category.id)}>{categoryLabel(category)}</MenuItem>
                   ))}
                 </Select>
               </FormControl>
@@ -697,47 +722,10 @@ export default function AdminProductsPage() {
       {isSmall ? (
         <Stack spacing={1.5} sx={{ mb: 3 }}>
           {filteredProducts.map((p) => (
-            <Card key={p.id} variant="outlined">
-              <CardContent>
-                <Stack direction="row" spacing={1.5} alignItems="flex-start">
-                  {p.imageUrl && (
-                    <Box
-                      component="img"
-                      src={resolveImageUrl(p.imageUrl)}
-                      alt={p.name}
-                      sx={{ width: 72, height: 72, borderRadius: 1, objectFit: 'cover', flexShrink: 0 }}
-                    />
-                  )}
-                  <Box sx={{ minWidth: 0, flex: 1 }}>
-                    <Typography fontWeight={800}>{p.name}</Typography>
-                    <Typography variant="caption" color="text.secondary" display="block">
-                      {p.sku || 'No SKU'} - {p.categoryName || 'Uncategorized'}
-                    </Typography>
-                    <Stack direction="row" spacing={0.75} flexWrap="wrap" useFlexGap sx={{ mt: 1 }}>
-                      <Chip size="small" label={`$${Number(p.price).toFixed(2)}`} />
-                      <Chip size="small" label={`${p.stockQuantity} in stock`} color={Number(p.stockQuantity) <= 5 ? 'warning' : 'default'} />
-                      <Chip size="small" label={p.active ? 'Published' : 'Draft'} color={p.active ? 'success' : 'default'} />
-                      {p.featured && <Chip size="small" label="Featured" color="primary" variant="outlined" />}
-                    </Stack>
-                  </Box>
-                </Stack>
-                <Stack direction="row" spacing={1} sx={{ mt: 2 }}>
-                  <Button fullWidth variant="contained" sx={{ minHeight: 44 }} onClick={() => startEdit(p)}>Edit</Button>
-                  <Button fullWidth variant="outlined" color="warning" sx={{ minHeight: 44 }} onClick={() => deactivate(p.id)}>
-                    Deactivate
-                  </Button>
-                </Stack>
-              </CardContent>
-            </Card>
+            <ProductMobileCard key={p.id} product={p} onEdit={startEdit} onDeactivate={deactivate} />
           ))}
           {filteredProducts.length === 0 && (
-            <Card variant="outlined">
-              <CardContent>
-                <Typography color="text.secondary" sx={{ textAlign: 'center' }}>
-                  No products match the current filters.
-                </Typography>
-              </CardContent>
-            </Card>
+            <MobileEmptyCard message="No products match the current filters." />
           )}
         </Stack>
       ) : (
@@ -779,13 +767,7 @@ export default function AdminProductsPage() {
                 </TableRow>
               ))}
               {filteredProducts.length === 0 && (
-                <TableRow>
-                  <TableCell colSpan={10}>
-                    <Typography color="text.secondary" sx={{ py: 3, textAlign: 'center' }}>
-                      No products match the current filters.
-                    </Typography>
-                  </TableCell>
-                </TableRow>
+                <TableEmptyRow colSpan={10} message="No products match the current filters." />
               )}
             </TableBody>
           </Table>
@@ -830,5 +812,107 @@ export default function AdminProductsPage() {
         </AccordionDetails>
       </Accordion>
     </Box>
+  );
+}
+
+function categoryVariantAttributes(categories, category) {
+  const values = [];
+  let cursor = category;
+  while (cursor) {
+    (cursor.variantOptions || []).forEach((option) => {
+      if (option.name && !values.includes(option.name)) {
+        values.push(option.name);
+      }
+    });
+    cursor = categories.find((candidate) => candidate.id === cursor.parentId);
+  }
+  return values;
+}
+
+function cleanAttributes(attributes) {
+  return Object.fromEntries(Object.entries(attributes)
+    .map(([key, value]) => [key, String(value || '').trim()])
+    .filter(([key, value]) => key && value));
+}
+
+function categoryLabel(category) {
+  return category.parentId ? `${category.parentName || 'Parent'} / ${category.name}` : category.name;
+}
+
+function PublishingFields({ form, setForm }) {
+  return (
+    <>
+      <Grid size={{ xs: 12, sm: 6 }}>
+        <TextField label="Meta title" fullWidth value={form.metaTitle} onChange={(e) => setForm({ ...form, metaTitle: e.target.value })} />
+      </Grid>
+      <Grid size={{ xs: 12, sm: 6 }}>
+        <TextField label="Meta description" fullWidth value={form.metaDescription} onChange={(e) => setForm({ ...form, metaDescription: e.target.value })} />
+      </Grid>
+      <Grid size={{ xs: 12, sm: 6 }}>
+        <TextField
+          label="Visible from"
+          type="datetime-local"
+          fullWidth
+          InputLabelProps={{ shrink: true }}
+          sx={hideEmptyDateTimePlaceholder(form.visibleFrom)}
+          value={form.visibleFrom}
+          onChange={(e) => setForm({ ...form, visibleFrom: e.target.value })}
+        />
+      </Grid>
+      <Grid size={{ xs: 12, sm: 6 }}>
+        <TextField
+          label="Visible until"
+          type="datetime-local"
+          fullWidth
+          InputLabelProps={{ shrink: true }}
+          sx={hideEmptyDateTimePlaceholder(form.visibleUntil)}
+          value={form.visibleUntil}
+          onChange={(e) => setForm({ ...form, visibleUntil: e.target.value })}
+        />
+      </Grid>
+      <Grid size={12}>
+        <FormControlLabel
+          control={<Checkbox checked={form.active} onChange={(e) => setForm({ ...form, active: e.target.checked })} />}
+          label="Published"
+        />
+      </Grid>
+    </>
+  );
+}
+
+function ProductMobileCard({ product, onDeactivate, onEdit }) {
+  return (
+    <Card variant="outlined">
+      <CardContent>
+        <Stack direction="row" spacing={1.5} alignItems="flex-start">
+          {product.imageUrl && (
+            <Box
+              component="img"
+              src={resolveImageUrl(product.imageUrl)}
+              alt={product.name}
+              sx={{ width: 72, height: 72, borderRadius: 1, objectFit: 'cover', flexShrink: 0 }}
+            />
+          )}
+          <Box sx={{ minWidth: 0, flex: 1 }}>
+            <Typography fontWeight={800}>{product.name}</Typography>
+            <Typography variant="caption" color="text.secondary" display="block">
+              {product.sku || 'No SKU'} - {product.categoryName || 'Uncategorized'}
+            </Typography>
+            <Stack direction="row" spacing={0.75} flexWrap="wrap" useFlexGap sx={{ mt: 1 }}>
+              <Chip size="small" label={`$${Number(product.price).toFixed(2)}`} />
+              <Chip size="small" label={`${product.stockQuantity} in stock`} color={Number(product.stockQuantity) <= 5 ? 'warning' : 'default'} />
+              <Chip size="small" label={product.active ? 'Published' : 'Draft'} color={product.active ? 'success' : 'default'} />
+              {product.featured && <Chip size="small" label="Featured" color="primary" variant="outlined" />}
+            </Stack>
+          </Box>
+        </Stack>
+        <Stack direction="row" spacing={1} sx={{ mt: 2 }}>
+          <Button fullWidth variant="contained" sx={{ minHeight: 44 }} onClick={() => onEdit(product)}>Edit</Button>
+          <Button fullWidth variant="outlined" color="warning" sx={{ minHeight: 44 }} onClick={() => onDeactivate(product.id)}>
+            Deactivate
+          </Button>
+        </Stack>
+      </CardContent>
+    </Card>
   );
 }

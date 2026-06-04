@@ -297,18 +297,20 @@ export default function ProductDetailPage() {
         {isAuthenticated && (
           <Box component="form" onSubmit={submitReview} sx={{ mb: 3, maxWidth: 480 }}>
             <Stack spacing={2}>
-              <FormControl size="small" fullWidth>
-                <InputLabel>Rating</InputLabel>
-                <Select
+              <Box>
+                <Typography variant="body2" fontWeight={800} sx={{ mb: 0.75 }}>
+                  Rating
+                </Typography>
+                <StarRating
+                  name="review-rating"
                   value={reviewForm.rating}
-                  label="Rating"
-                  onChange={(e) => setReviewForm({ ...reviewForm, rating: Number(e.target.value) })}
-                >
-                  {[5, 4, 3, 2, 1].map((n) => (
-                    <MenuItem key={n} value={n}>{n} stars</MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
+                  readOnly={false}
+                  precision={1}
+                  size="large"
+                  label={`${reviewForm.rating} of 5`}
+                  onChange={(rating) => setReviewForm({ ...reviewForm, rating: Math.max(1, rating) })}
+                />
+              </Box>
               <TextField
                 label="Comment"
                 multiline

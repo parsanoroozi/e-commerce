@@ -49,11 +49,9 @@ public class AdminDashboardServiceImpl implements AdminDashboardService {
     private final OrderRepository orderRepository;
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
-    private final ShopSettingsService shopSettingsService;
 
     @Transactional(readOnly = true)
     public AdminDashboardResponse getDashboard() {
-        int threshold = shopSettingsService.getLowStockThreshold();
         List<Order> all = orderRepository.findAllWithItemsAndRefunds();
         List<User> users = userRepository.findAll();
         Instant startOfDay = LocalDate.now().atStartOfDay().toInstant(ZoneOffset.UTC);
@@ -74,9 +72,9 @@ public class AdminDashboardServiceImpl implements AdminDashboardService {
                 ? BigDecimal.ZERO
                 : revenueTotal.divide(BigDecimal.valueOf(paidOrders.size()), 2, RoundingMode.HALF_UP);
 
-        List<Product> lowStock = productRepository
-                .findByActiveTrueAndStockQuantityLessThanEqualOrderByStockQuantityAsc(
-                        threshold, PageRequest.of(0, 5));
+        List<Product> lowStock = lowStockProducts().stream()
+                .limit(5)
+                .toList();
 
         List<OrderResponse> recent = orderRepository
                 .findAllByOrderByCreatedAtDesc(PageRequest.of(0, 5))
@@ -90,8 +88,7 @@ public class AdminDashboardServiceImpl implements AdminDashboardService {
         return new AdminDashboardResponse(
                 all.size(),
                 pending,
-                productRepository.countByActiveTrueAndStockQuantityLessThanEqual(threshold),
-                threshold,
+                lowStockProducts().size(),
                 revenueToday,
                 revenueTotal,
                 averageOrderValue,
@@ -99,7 +96,7 @@ public class AdminDashboardServiceImpl implements AdminDashboardService {
                 revenueByWeek(paidOrders),
                 revenueByMonth(paidOrders),
                 bestSellingProducts(paidOrders),
-                lowStockHighDemandProducts(paidOrders, threshold),
+                lowStockHighDemandProducts(paidOrders),
                 newCustomersByDay(users),
                 conversionFunnel(all),
                 lowStockResponses,
@@ -184,9 +181,8 @@ public class AdminDashboardServiceImpl implements AdminDashboardService {
                 .toList();
     }
 
-    private List<ProductAnalyticsResponse> lowStockHighDemandProducts(List<Order> orders, int threshold) {
-        Set<Long> lowStockIds = productRepository
-                .findByActiveTrueAndStockQuantityLessThanEqualOrderByStockQuantityAsc(threshold, PageRequest.of(0, 100))
+    private List<ProductAnalyticsResponse> lowStockHighDemandProducts(List<Order> orders) {
+        Set<Long> lowStockIds = lowStockProducts()
                 .stream()
                 .map(Product::getId)
                 .collect(Collectors.toSet());
@@ -196,6 +192,18 @@ public class AdminDashboardServiceImpl implements AdminDashboardService {
                 .limit(5)
                 .map(ProductAccumulator::toResponse)
                 .toList();
+    }
+
+    private List<Product> lowStockProducts() {
+        return productRepository.findAll().stream()
+                .filter(Product::isActive)
+                .filter(product -> product.getStockQuantity() <= thresholdFor(product))
+                .sorted(Comparator.comparingInt(Product::getStockQuantity))
+                .toList();
+    }
+
+    private int thresholdFor(Product product) {
+        return product.getCategory().getLowStockThreshold();
     }
 
     private Map<Long, ProductAccumulator> productAnalytics(List<Order> orders) {

@@ -5,6 +5,7 @@ import personal.ecommercebackend.entity.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public final class EntityMapper {
 
@@ -29,7 +30,16 @@ public final class EntityMapper {
                 category.getId(),
                 category.getName(),
                 category.getDescription(),
-                category.getDisplayOrder());
+                category.getDisplayOrder(),
+                category.getParent() == null ? null : category.getParent().getId(),
+                category.getParent() == null ? null : category.getParent().getName(),
+                category.getLowStockThreshold(),
+                category.getTaxRate(),
+                category.getVariantOptions() == null ? List.of() : category.getVariantOptions().stream()
+                        .map(option -> new CategoryVariantOptionResponse(
+                                option.getName(),
+                                option.getDisplayOrder()))
+                        .toList());
     }
 
     public static ProductResponse toProductResponse(Product product) {
@@ -73,6 +83,7 @@ public final class EntityMapper {
                 product.getName(),
                 product.getDescription(),
                 product.getPrice(),
+                product.getTaxRate(),
                 product.getSku(),
                 product.getSlug(),
                 product.getMetaTitle(),
@@ -84,6 +95,7 @@ public final class EntityMapper {
                 variants,
                 product.getCategory().getId(),
                 product.getCategory().getName(),
+                product.getCategory().getLowStockThreshold(),
                 product.isActive(),
                 product.isFeatured(),
                 product.getVisibleFrom(),
@@ -106,9 +118,7 @@ public final class EntityMapper {
         return new ProductVariantResponse(
                 variant.getId(),
                 variant.getSku(),
-                variant.getSize(),
-                variant.getColor(),
-                variant.getMaterial(),
+                variant.getAttributes(),
                 variant.getStockQuantity(),
                 variant.isActive(),
                 variant.displayName()
@@ -267,8 +277,8 @@ public final class EntityMapper {
                 coupon.getUsageLimit(),
                 coupon.getPerUserUsageLimit(),
                 coupon.isFreeShipping(),
-                coupon.getProductIds(),
-                coupon.getCategoryIds(),
+                coupon.getProductIds() == null ? Set.of() : Set.copyOf(coupon.getProductIds()),
+                coupon.getCategoryIds() == null ? Set.of() : Set.copyOf(coupon.getCategoryIds()),
                 usageCount,
                 uniqueCustomerCount,
                 revenueAttributed,

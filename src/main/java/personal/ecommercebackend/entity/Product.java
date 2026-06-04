@@ -42,6 +42,9 @@ public class Product {
     @Column(nullable = false, precision = 12, scale = 2)
     private BigDecimal price;
 
+    @Column(precision = 5, scale = 4)
+    private BigDecimal taxRate;
+
     @Column(length = 100)
     private String sku;
 

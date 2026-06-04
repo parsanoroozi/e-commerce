@@ -6,6 +6,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @Entity
 @Table(name = "product_variants", indexes = {
@@ -45,6 +47,13 @@ public class ProductVariant {
     @Column(length = 100)
     private String material;
 
+    @ElementCollection
+    @CollectionTable(name = "product_variant_attributes", joinColumns = @JoinColumn(name = "variant_id"))
+    @MapKeyColumn(name = "attribute_name", length = 80)
+    @Column(name = "attribute_value", nullable = false, length = 255)
+    @Builder.Default
+    private Map<String, String> attributes = new LinkedHashMap<>();
+
     @Column(nullable = false)
     private Integer stockQuantity;
 
@@ -60,6 +69,15 @@ public class ProductVariant {
     private Instant updatedAt;
 
     public String displayName() {
+        if (attributes != null && !attributes.isEmpty()) {
+            String joined = String.join(" / ", attributes.values().stream()
+                    .filter(value -> value != null && !value.isBlank())
+                    .map(String::trim)
+                    .toList());
+            if (!joined.isBlank()) {
+                return joined;
+            }
+        }
         StringBuilder builder = new StringBuilder();
         append(builder, size);
         append(builder, color);

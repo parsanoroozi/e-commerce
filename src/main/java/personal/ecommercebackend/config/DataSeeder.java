@@ -17,7 +17,9 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Component
@@ -77,7 +79,6 @@ public class DataSeeder implements CommandLineRunner {
     private void seedShopSettings() {
         ShopSetting settings = shopSettingRepository.findById(ShopSetting.SINGLETON_ID)
                 .orElseGet(() -> ShopSetting.builder().id(ShopSetting.SINGLETON_ID).build());
-        settings.setLowStockThreshold(8);
         settings.setBrandName("ShopVerse Demo");
         settings.setLogoUrl("/luxury-assets/atelier-hero.png");
         settings.setContactEmail("support@shopverse.demo");
@@ -194,38 +195,55 @@ public class DataSeeder implements CommandLineRunner {
     }
 
     private DemoCatalog seedCatalog() {
-        Category electronics = category("Electronics", "Gadgets and devices");
-        Category clothing = category("Clothing", "Apparel and accessories");
-        Category home = category("Home", "Home and kitchen essentials");
+        Category digitalGoods = category("Digital Goods", "Technology products with device-specific specs", null, 20,
+                "Color", "Weight", "Battery");
+        Category electronics = category("Electronics", "Gadgets and devices", digitalGoods, 20,
+                "Material");
+        Category clothing = category("Clothing", "Apparel and accessories", null, 100,
+                "Size", "Color", "Material");
+        Category home = category("Home", "Home and kitchen essentials", null, 50,
+                "Size", "Color", "Material");
 
         Product headphones = product("Wireless Headphones", "wireless-headphones", "Noise-cancelling over-ear headphones with 30h battery.", "129.99", 6, electronics, true, "#2563eb",
-                variant("WH-BLK", null, "Black", "Aluminum", 4),
-                variant("WH-CRM", null, "Cream", "Aluminum", 2));
+                variant("WH-BLK", 4, "Color", "Black", "Weight", "0.6 lb", "Battery", "30h", "Material", "Aluminum"),
+                variant("WH-CRM", 2, "Color", "Cream", "Weight", "0.6 lb", "Battery", "30h", "Material", "Aluminum"));
         Product watch = product("Smart Watch", "smart-watch", "Fitness tracking, heart rate monitor, and notifications.", "199.99", 14, electronics, true, "#7c3aed");
         Product stand = product("Laptop Stand", "laptop-stand", "Ergonomic aluminum stand for better posture.", "49.99", 4, electronics, false, "#0891b2");
         Product shirt = product("Classic T-Shirt", "classic-t-shirt", "100% cotton crew neck tee in multiple colors.", "24.99", 62, clothing, false, "#16a34a",
-                variant("TEE-S-BLK", "S", "Black", "Cotton", 12),
-                variant("TEE-M-BLK", "M", "Black", "Cotton", 20),
-                variant("TEE-L-WHT", "L", "White", "Cotton", 30));
+                variant("TEE-S-BLK", 12, "Size", "S", "Color", "Black", "Material", "Cotton"),
+                variant("TEE-M-BLK", 20, "Size", "M", "Color", "Black", "Material", "Cotton"),
+                variant("TEE-L-WHT", 30, "Size", "L", "Color", "White", "Material", "Cotton"));
         Product jacket = product("Denim Jacket", "denim-jacket", "Medium-wash denim jacket with modern fit.", "79.99", 7, clothing, true, "#1d4ed8",
-                variant("DJ-M", "M", "Indigo", "Denim", 3),
-                variant("DJ-L", "L", "Indigo", "Denim", 4));
+                variant("DJ-M", 3, "Size", "M", "Color", "Indigo", "Material", "Denim"),
+                variant("DJ-L", 4, "Size", "L", "Color", "Indigo", "Material", "Denim"));
         Product shoes = product("Running Shoes", "running-shoes", "Lightweight running shoes with cushioned sole.", "89.99", 5, clothing, true, "#f97316",
-                variant("RUN-9", "9", "Orange", "Mesh", 2),
-                variant("RUN-10", "10", "Orange", "Mesh", 3));
+                variant("RUN-9", 2, "Size", "9", "Color", "Orange", "Material", "Mesh"),
+                variant("RUN-10", 3, "Size", "10", "Color", "Orange", "Material", "Mesh"));
         Product mugs = product("Ceramic Mug Set", "ceramic-mug-set", "Set of 4 handcrafted ceramic mugs.", "34.99", 22, home, false, "#be123c");
         Product lamp = product("Desk Lamp", "desk-lamp", "LED desk lamp with adjustable brightness.", "39.99", 3, home, false, "#ca8a04");
         Product blanket = product("Throw Blanket", "throw-blanket", "Soft fleece throw blanket for cozy evenings.", "29.99", 8, home, true, "#9333ea",
-                variant("BLK-GRY", "Queen", "Gray", "Fleece", 5),
-                variant("BLK-SAG", "Queen", "Sage", "Fleece", 3));
+                variant("BLK-GRY", 5, "Size", "Queen", "Color", "Gray", "Material", "Fleece"),
+                variant("BLK-SAG", 3, "Size", "Queen", "Color", "Sage", "Material", "Fleece"));
         return new DemoCatalog(headphones, watch, stand, shirt, jacket, shoes, mugs, lamp, blanket);
     }
 
-    private Category category(String name, String description) {
-        return categoryRepository.findAll().stream()
-                .filter(category -> category.getName().equalsIgnoreCase(name))
+    private Category category(String name, String description, Category parent, int lowStockThreshold, String... variantAttributes) {
+        Category catalogCategory = categoryRepository.findAll().stream()
+                .filter(existing -> existing.getName().equalsIgnoreCase(name))
                 .findFirst()
-                .orElseGet(() -> categoryRepository.save(Category.builder().name(name).description(description).build()));
+                .orElseGet(Category::new);
+        catalogCategory.setName(name);
+        catalogCategory.setDescription(description);
+        catalogCategory.setParent(parent);
+        catalogCategory.setLowStockThreshold(lowStockThreshold);
+        catalogCategory.getVariantOptions().clear();
+        for (int i = 0; i < variantAttributes.length; i++) {
+            catalogCategory.getVariantOptions().add(CategoryVariantOption.builder()
+                    .name(variantAttributes[i])
+                    .displayOrder(i)
+                    .build());
+        }
+        return categoryRepository.save(catalogCategory);
     }
 
     private Product product(String name, String slug, String description, String price, int stock, Category category,
@@ -260,8 +278,20 @@ public class DataSeeder implements CommandLineRunner {
         return ProductImage.builder().product(product).url(url).altText(alt).sortOrder(order).primaryImage(primary).build();
     }
 
-    private ProductVariant variant(String sku, String size, String color, String material, int stock) {
-        return ProductVariant.builder().sku(sku).size(size).color(color).material(material).stockQuantity(stock).active(true).build();
+    private ProductVariant variant(String sku, int stock, String... attributePairs) {
+        if (attributePairs.length % 2 != 0) {
+            throw new IllegalArgumentException("Variant attributes must be key/value pairs");
+        }
+        Map<String, String> attributes = new LinkedHashMap<>();
+        for (int i = 0; i < attributePairs.length; i += 2) {
+            attributes.put(attributePairs[i], attributePairs[i + 1]);
+        }
+        return ProductVariant.builder()
+                .sku(sku)
+                .attributes(attributes)
+                .stockQuantity(stock)
+                .active(true)
+                .build();
     }
 
     private User customer(String email, String firstName, String lastName, String segment, String notes) {

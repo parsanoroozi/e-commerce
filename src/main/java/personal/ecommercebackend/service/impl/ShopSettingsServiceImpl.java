@@ -5,11 +5,15 @@ import personal.ecommercebackend.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import personal.ecommercebackend.dto.request.UpdateLowStockThresholdRequest;
 import personal.ecommercebackend.dto.request.ShopSettingsRequest;
 import personal.ecommercebackend.dto.response.AdminSettingsResponse;
 import personal.ecommercebackend.entity.ShopSetting;
 import personal.ecommercebackend.repository.ShopSettingRepository;
+
+import java.math.BigDecimal;
+import java.util.LinkedHashMap;
+import java.util.Locale;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -20,34 +24,14 @@ public class ShopSettingsServiceImpl implements ShopSettingsService {
 
     @Override
     @Transactional(readOnly = true)
-    public int getLowStockThreshold() {
-        return load().getLowStockThreshold();
-    }
-
-    @Override
-    @Transactional(readOnly = true)
     public AdminSettingsResponse getSettings() {
         return toResponse(load());
     }
 
     @Override
     @Transactional
-    public AdminSettingsResponse updateLowStockThreshold(UpdateLowStockThresholdRequest request) {
-        ShopSetting settings = load();
-        settings.setLowStockThreshold(request.lowStockThreshold());
-        shopSettingRepository.save(settings);
-        auditService.log("UPDATE_LOW_STOCK_THRESHOLD", "ShopSetting", "1",
-                "Threshold set to " + request.lowStockThreshold());
-        return toResponse(settings);
-    }
-
-    @Override
-    @Transactional
     public AdminSettingsResponse updateSettings(ShopSettingsRequest request) {
         ShopSetting settings = load();
-        if (request.lowStockThreshold() != null) {
-            settings.setLowStockThreshold(request.lowStockThreshold());
-        }
         settings.setBrandName(defaultIfBlank(request.brandName(), settings.getBrandName()));
         settings.setLogoUrl(normalizeOptional(request.logoUrl()));
         settings.setContactEmail(normalizeOptional(request.contactEmail()));
@@ -67,6 +51,12 @@ public class ShopSettingsServiceImpl implements ShopSettingsService {
         if (request.expressShippingCost() != null) {
             settings.setExpressShippingCost(request.expressShippingCost());
         }
+        replaceMap(settings.getStateTaxRates(), request.stateTaxRates());
+        replaceMap(settings.getCountryTaxRates(), request.countryTaxRates());
+        replaceMap(settings.getStandardShippingStateCosts(), request.standardShippingStateCosts());
+        replaceMap(settings.getExpressShippingStateCosts(), request.expressShippingStateCosts());
+        replaceMap(settings.getStandardShippingCountryCosts(), request.standardShippingCountryCosts());
+        replaceMap(settings.getExpressShippingCountryCosts(), request.expressShippingCountryCosts());
         shopSettingRepository.save(settings);
         auditService.log("UPDATE", "ShopSetting", "1", "Storefront settings updated");
         return toResponse(settings);
@@ -76,13 +66,11 @@ public class ShopSettingsServiceImpl implements ShopSettingsService {
         return shopSettingRepository.findById(ShopSetting.SINGLETON_ID)
                 .orElseGet(() -> shopSettingRepository.save(ShopSetting.builder()
                         .id(ShopSetting.SINGLETON_ID)
-                        .lowStockThreshold(10)
                         .build()));
     }
 
     private AdminSettingsResponse toResponse(ShopSetting settings) {
         return new AdminSettingsResponse(
-                settings.getLowStockThreshold(),
                 settings.getBrandName(),
                 settings.getLogoUrl(),
                 settings.getContactEmail(),
@@ -95,7 +83,33 @@ public class ShopSettingsServiceImpl implements ShopSettingsService {
                 settings.getHomepageBannerCtaUrl(),
                 settings.getTaxRate(),
                 settings.getStandardShippingCost(),
-                settings.getExpressShippingCost());
+                settings.getExpressShippingCost(),
+                copyMap(settings.getStateTaxRates()),
+                copyMap(settings.getCountryTaxRates()),
+                copyMap(settings.getStandardShippingStateCosts()),
+                copyMap(settings.getExpressShippingStateCosts()),
+                copyMap(settings.getStandardShippingCountryCosts()),
+                copyMap(settings.getExpressShippingCountryCosts()));
+    }
+
+    private void replaceMap(Map<String, BigDecimal> target, Map<String, BigDecimal> source) {
+        if (source == null) {
+            return;
+        }
+        target.clear();
+        source.forEach((key, value) -> {
+            if (key != null && !key.isBlank() && value != null) {
+                target.put(normalizeLocationKey(key), value);
+            }
+        });
+    }
+
+    private Map<String, BigDecimal> copyMap(Map<String, BigDecimal> source) {
+        return source == null ? Map.of() : new LinkedHashMap<>(source);
+    }
+
+    private String normalizeLocationKey(String value) {
+        return value.trim().toUpperCase(Locale.ROOT);
     }
 
     private String normalizeOptional(String value) {

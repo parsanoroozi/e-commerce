@@ -23,6 +23,15 @@ const ORDER_STATUSES = ['ALL', 'AWAITING_PAYMENT', 'PENDING', 'CONFIRMED', 'PACK
 const CUSTOMER_STATUSES = ['ALL', 'ACTIVE', 'BLOCKED'];
 const PRODUCT_STATUSES = ['ALL', 'ACTIVE', 'INACTIVE', 'LOW_STOCK'];
 
+const hideEmptyDateTimePlaceholder = (value) => ({
+  '& input::-webkit-datetime-edit': {
+    color: value ? 'inherit' : 'transparent',
+  },
+  '& input:focus::-webkit-datetime-edit': {
+    color: 'inherit',
+  },
+});
+
 function ReportCard({ title, description, filters, statusOptions, onFilterChange, onDownload, busy }) {
   return (
     <Card variant="outlined">
@@ -40,6 +49,7 @@ function ReportCard({ title, description, filters, statusOptions, onFilterChange
                 size="small"
                 fullWidth
                 InputLabelProps={{ shrink: true }}
+                sx={hideEmptyDateTimePlaceholder(filters.from)}
                 value={filters.from}
                 onChange={(e) => onFilterChange({ ...filters, from: e.target.value })}
               />
@@ -51,6 +61,7 @@ function ReportCard({ title, description, filters, statusOptions, onFilterChange
                 size="small"
                 fullWidth
                 InputLabelProps={{ shrink: true }}
+                sx={hideEmptyDateTimePlaceholder(filters.to)}
                 value={filters.to}
                 onChange={(e) => onFilterChange({ ...filters, to: e.target.value })}
               />

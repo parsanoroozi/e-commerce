@@ -186,12 +186,16 @@ export default function CheckoutPage() {
       });
   }, [checkout?.orderId, checkout?.clientSecret, checkout?.devMode]);
 
+  const selectedAddress = savedAddresses.find((a) => a.id === selectedAddressId);
+
   const estimate = useMemo(() => {
     if (!cart) return null;
-    return estimateCheckout(cart.totalAmount, appliedDiscount, shippingMethod, appliedFreeShipping, storeSettings || {});
-  }, [cart, appliedDiscount, shippingMethod, appliedFreeShipping, storeSettings]);
+    const destination = selectedAddress
+      ? { state: selectedAddress.shippingState, country: selectedAddress.shippingCountry }
+      : { state: form.shippingState, country: form.shippingCountry };
+    return estimateCheckout(cart.totalAmount, appliedDiscount, shippingMethod, appliedFreeShipping, storeSettings || {}, destination);
+  }, [cart, appliedDiscount, shippingMethod, appliedFreeShipping, storeSettings, selectedAddress, form.shippingState, form.shippingCountry]);
 
-  const selectedAddress = savedAddresses.find((a) => a.id === selectedAddressId);
   const summary = orderBreakdown || estimate;
   const activeStep = step === 'shipping' ? 1 : step === 'payment' ? 2 : 3;
 

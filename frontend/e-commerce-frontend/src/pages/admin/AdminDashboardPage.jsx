@@ -15,7 +15,6 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  TextField,
   Typography,
 } from '@mui/material';
 import AutoGraphOutlinedIcon from '@mui/icons-material/AutoGraphOutlined';
@@ -273,37 +272,47 @@ function DonutChart({ items, valueKey = 'count', labelKey = 'label', colors = ['
   const background = total > 0 ? `conic-gradient(${stops.join(', ')})` : 'conic-gradient(#f0f0f0, #f0f0f0)';
 
   return (
-    <Grid container spacing={2} alignItems="center">
-      <Grid size={{ xs: 12, sm: 5 }}>
-        <Box
-          sx={{
-            width: 168,
-            height: 168,
-            mx: 'auto',
+    <Stack spacing={2}>
+      <Box
+        sx={{
+          width: 178,
+          height: 178,
+          mx: 'auto',
+          borderRadius: '50%',
+          background,
+          boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.7)',
+          position: 'relative',
+          flex: '0 0 auto',
+          display: 'grid',
+          placeItems: 'center',
+          '&::after': {
+            content: '""',
+            position: 'absolute',
+            inset: 42,
             borderRadius: '50%',
-            background,
-            display: 'grid',
-            placeItems: 'center',
-            boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.7)',
-          }}
-        >
-          <Box sx={{ width: 96, height: 96, borderRadius: '50%', bgcolor: 'background.paper', display: 'grid', placeItems: 'center' }}>
-            <Box textAlign="center">
-              <Typography variant="h5">{formatNumber(total)}</Typography>
-              <Typography variant="caption" color="text.secondary">total</Typography>
-            </Box>
-          </Box>
+            bgcolor: 'background.paper',
+            boxShadow: '0 0 0 1px rgba(255,255,255,0.7)',
+          },
+        }}
+      >
+        <Box sx={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
+          <Typography variant="h5" sx={{ lineHeight: 1 }}>
+            {formatNumber(total)}
+          </Typography>
+          <Typography variant="caption" color="text.secondary">
+            total
+          </Typography>
         </Box>
-      </Grid>
-      <Grid size={{ xs: 12, sm: 7 }}>
+      </Box>
+      <Box sx={{ p: 1.5, border: '1px solid', borderColor: 'divider', bgcolor: 'background.paper' }}>
         <Stack spacing={1}>
           {values.map((item, index) => (
             <Stack key={`${item[labelKey]}-${index}`} direction="row" justifyContent="space-between" spacing={1}>
               <Stack direction="row" spacing={1} alignItems="center" sx={{ minWidth: 0 }}>
-                <Box sx={{ width: 10, height: 10, borderRadius: 1, bgcolor: colors[index % colors.length] }} />
+                <Box sx={{ width: 10, height: 10, borderRadius: 1, bgcolor: colors[index % colors.length], flex: '0 0 auto' }} />
                 <Typography variant="body2" noWrap>{item[labelKey]}</Typography>
               </Stack>
-              <Typography variant="body2" fontWeight={800}>
+              <Typography variant="body2" fontWeight={800} sx={{ whiteSpace: 'nowrap' }}>
                 {formatNumber(item[valueKey])}
                 {total > 0 && (
                   <Typography component="span" variant="caption" color="text.secondary" sx={{ ml: 0.75 }}>
@@ -314,8 +323,8 @@ function DonutChart({ items, valueKey = 'count', labelKey = 'label', colors = ['
             </Stack>
           ))}
         </Stack>
-      </Grid>
-    </Grid>
+      </Box>
+    </Stack>
   );
 }
 
@@ -380,13 +389,14 @@ function ProductLeaderboard({ data, emptyText = 'No product sales yet.', showSto
   );
 }
 
-function StockRiskGrid({ items, threshold, onRestock }) {
+function StockRiskGrid({ items, onRestock }) {
   const values = items || [];
   if (values.length === 0) return <Typography color="text.secondary">No low stock products.</Typography>;
   return (
     <Grid container spacing={1.5}>
       {values.map((product) => {
         const stock = Number(product.stockQuantity || 0);
+        const threshold = Number(product.categoryLowStockThreshold || 1);
         const fill = Math.min((stock / Math.max(threshold, 1)) * 100, 100);
         return (
           <Grid key={product.id} size={{ xs: 12, sm: 6 }}>
@@ -395,7 +405,7 @@ function StockRiskGrid({ items, threshold, onRestock }) {
                 <Box sx={{ minWidth: 0 }}>
                   <Typography variant="body2" fontWeight={900} noWrap>{product.name}</Typography>
                   <Typography variant="caption" color={stock <= 3 ? 'error.main' : 'text.secondary'}>
-                    {stock} left
+                    {stock} left / threshold {threshold}
                   </Typography>
                 </Box>
                 <Button size="small" variant="outlined" onClick={() => onRestock(product)}>+10</Button>
@@ -434,35 +444,19 @@ function RecentOrderFlow({ orders }) {
 
 export default function AdminDashboardPage() {
   const [data, setData] = useState(null);
-  const [threshold, setThreshold] = useState('10');
-  const [saving, setSaving] = useState(false);
   const [revenueRange, setRevenueRange] = useState('day');
 
   const load = () => adminApi.dashboard().then((d) => {
     setData(d);
-    setThreshold(String(d.lowStockThreshold ?? 10));
   });
 
   useEffect(() => {
     load().catch((err) => showError(err.message));
   }, []);
 
-  const saveThreshold = async () => {
-    setSaving(true);
-    try {
-      const updated = await adminApi.updateLowStockThreshold(Number(threshold));
-      setThreshold(String(updated.lowStockThreshold));
-      showSuccess('Low stock threshold updated');
-      await load();
-    } catch (err) {
-      showError(err.message);
-    } finally {
-      setSaving(false);
-    }
-  };
-
   const quickRestock = async (product) => {
-    const variant = product.variants?.find((v) => v.active && v.stockQuantity <= data.lowStockThreshold);
+    const threshold = Number(product.categoryLowStockThreshold || 0);
+    const variant = product.variants?.find((v) => v.active && v.stockQuantity <= threshold);
     try {
       await adminApi.adjustInventory({
         productId: product.id,
@@ -517,7 +511,7 @@ export default function AdminDashboardPage() {
           <MetricCard icon={<AutoGraphOutlinedIcon />} label="Average order" value={shortMoney(data.averageOrderValue)} helper="AOV from paid orders" series={revenueSeries} seriesKey="revenue" color="primary.light" />
         </Grid>
         <Grid size={{ xs: 12, sm: 6, xl: 2 }}>
-          <MetricCard icon={<WarningAmberOutlinedIcon />} label="Low stock" value={formatNumber(data.lowStockProducts)} helper={`At or below ${data.lowStockThreshold}`} color="warning.main" />
+          <MetricCard icon={<WarningAmberOutlinedIcon />} label="Low stock" value={formatNumber(data.lowStockProducts)} helper="Using category thresholds" color="warning.main" />
         </Grid>
         <Grid size={{ xs: 12, sm: 6, xl: 2 }}>
           <MetricCard icon={<Inventory2OutlinedIcon />} label="Top sellers" value={formatNumber((data.bestSellingProducts || []).reduce((sum, item) => sum + Number(item.unitsSold || 0), 0))} helper="Units sold in report" color="primary.main" />
@@ -564,25 +558,9 @@ export default function AdminDashboardPage() {
         <Grid size={{ xs: 12, lg: 5 }}>
           <ChartCard
             title="Low-stock risk"
-            subtitle={`${actionableOrders} recent orders need attention. Change the alert threshold here.`}
-            action={(
-              <Stack direction="row" spacing={1} alignItems="center">
-                <TextField
-                  label="Threshold"
-                  type="number"
-                  size="small"
-                  inputProps={{ min: 1, max: 10000 }}
-                  value={threshold}
-                  onChange={(e) => setThreshold(e.target.value)}
-                  sx={{ width: 118 }}
-                />
-                <Button variant="contained" onClick={saveThreshold} disabled={saving}>
-                  {saving ? 'Saving...' : 'Save'}
-                </Button>
-              </Stack>
-            )}
+            subtitle={`${actionableOrders} recent orders need attention. Alert thresholds are managed per category.`}
           >
-            <StockRiskGrid items={data.lowStockItems || []} threshold={data.lowStockThreshold} onRestock={quickRestock} />
+            <StockRiskGrid items={data.lowStockItems || []} onRestock={quickRestock} />
           </ChartCard>
         </Grid>
         <Grid size={{ xs: 12, lg: 3 }}>

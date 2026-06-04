@@ -31,8 +31,10 @@ import personal.ecommercebackend.security.SecurityUtils;
 import personal.ecommercebackend.storage.FileStorageService;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.text.Normalizer;
@@ -285,6 +287,7 @@ public class ProductServiceImpl implements ProductService {
         product.setName(request.name().trim());
         product.setDescription(request.description());
         product.setPrice(request.price());
+        product.setTaxRate(request.taxRate());
         product.setSku(normalizeOptional(request.sku()));
         product.setSlug(resolveSlug(product, request.slug(), request.name()));
         product.setMetaTitle(normalizeOptional(request.metaTitle()));
@@ -302,7 +305,7 @@ public class ProductServiceImpl implements ProductService {
         }
         product.setVisibleFrom(request.visibleFrom());
         product.setVisibleUntil(request.visibleUntil());
-        syncVariants(product, request.variants());
+        syncVariants(product, request.variants(), category);
         syncAggregateStock(product);
         return product;
     }
@@ -336,10 +339,11 @@ public class ProductServiceImpl implements ProductService {
                 && (product.getVisibleUntil() == null || !product.getVisibleUntil().isBefore(now));
     }
 
-    private void syncVariants(Product product, List<ProductVariantRequest> requests) {
+    private void syncVariants(Product product, List<ProductVariantRequest> requests, Category category) {
         if (requests == null) {
             return;
         }
+        CategoryVariantRules rules = CategoryVariantRules.from(category);
         product.getVariants().stream()
                 .filter(existing -> requests.stream()
                         .map(ProductVariantRequest::id)
@@ -364,9 +368,14 @@ public class ProductServiceImpl implements ProductService {
             }
             variant.setProduct(product);
             variant.setSku(normalizeOptional(request.sku()));
-            variant.setSize(normalizeOptional(request.size()));
-            variant.setColor(normalizeOptional(request.color()));
-            variant.setMaterial(normalizeOptional(request.material()));
+            variant.setSize(null);
+            variant.setColor(null);
+            variant.setMaterial(null);
+            if (variant.getAttributes() == null) {
+                variant.setAttributes(new java.util.LinkedHashMap<>());
+            }
+            variant.getAttributes().clear();
+            variant.getAttributes().putAll(rules.validate(request.attributes()));
             variant.setStockQuantity(request.stockQuantity() == null ? 0 : request.stockQuantity());
             variant.setActive(request.active() == null || request.active());
         }
@@ -385,6 +394,51 @@ public class ProductServiceImpl implements ProductService {
 
     private String normalizeOptional(String value) {
         return value == null || value.isBlank() ? null : value.trim();
+    }
+
+    private record CategoryVariantRules(Map<String, String> allowedNames) {
+
+        private static CategoryVariantRules from(Category category) {
+            Map<String, String> names = new java.util.LinkedHashMap<>();
+            Category cursor = category;
+            while (cursor != null) {
+                if (cursor.getVariantOptions() != null) {
+                    cursor.getVariantOptions().forEach(option ->
+                            names.putIfAbsent(normalize(option.getName()), option.getName()));
+                }
+                cursor = cursor.getParent();
+            }
+            return new CategoryVariantRules(names);
+        }
+
+        private Map<String, String> validate(Map<String, String> attributes) {
+            Map<String, String> normalized = new java.util.LinkedHashMap<>();
+            if (attributes == null || attributes.isEmpty()) {
+                return normalized;
+            }
+            for (Map.Entry<String, String> entry : attributes.entrySet()) {
+                String key = entry.getKey() == null ? "" : entry.getKey().trim();
+                String value = entry.getValue() == null ? null : entry.getValue().trim();
+                if (key.isBlank() || value == null || value.isBlank()) {
+                    continue;
+                }
+                String normalizedKey = normalize(key);
+                if (!allowedNames.isEmpty() && !allowedNames.containsKey(normalizedKey)) {
+                    throw new ApiException(HttpStatus.BAD_REQUEST,
+                            "Variant attribute '" + key + "' is not defined for this category");
+                }
+                normalized.put(allowedNames.getOrDefault(normalizedKey, key), value);
+            }
+            if (normalized.isEmpty() && !allowedNames.isEmpty()) {
+                throw new ApiException(HttpStatus.BAD_REQUEST,
+                        "Provide at least one variant attribute value for this category");
+            }
+            return normalized;
+        }
+
+        private static String normalize(String value) {
+            return value == null ? "" : value.trim().toLowerCase(Locale.ROOT);
+        }
     }
 
     private ProductImage imageForProduct(Long productId, Long imageId) {

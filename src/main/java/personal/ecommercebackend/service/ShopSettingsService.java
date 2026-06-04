@@ -12,11 +12,7 @@ import com.stripe.model.PaymentIntent;
 
 public interface ShopSettingsService {
 
-    int getLowStockThreshold();
-
     AdminSettingsResponse getSettings();
-
-    AdminSettingsResponse updateLowStockThreshold(UpdateLowStockThresholdRequest request);
 
     AdminSettingsResponse updateSettings(ShopSettingsRequest request);
 }

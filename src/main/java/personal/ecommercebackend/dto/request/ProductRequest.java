@@ -11,6 +11,7 @@ public record ProductRequest(
         @NotBlank @Size(max = 200) String name,
         @Size(max = 2000) String description,
         @NotNull @DecimalMin("0.01") BigDecimal price,
+        @DecimalMin("0.0000") BigDecimal taxRate,
         @Size(max = 100) String sku,
         @Size(max = 220) String slug,
         @Size(max = 180) String metaTitle,

@@ -11,7 +11,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import personal.ecommercebackend.dto.request.UpdateLowStockThresholdRequest;
 import personal.ecommercebackend.dto.request.ShopSettingsRequest;
 import personal.ecommercebackend.dto.request.CustomerManagementRequest;
 import personal.ecommercebackend.dto.request.InventoryAdjustmentRequest;
@@ -91,12 +90,6 @@ public class AdminController {
     public void deleteUser(@PathVariable Long id) {
         adminUserService.delete(id);
         auditService.log("DELETE", "USER", String.valueOf(id), null);
-    }
-
-    @PatchMapping("/settings/low-stock-threshold")
-    @PreAuthorize("hasAuthority('MANAGE_SETTINGS')")
-    public AdminSettingsResponse updateLowStockThreshold(@Valid @RequestBody UpdateLowStockThresholdRequest request) {
-        return shopSettingsService.updateLowStockThreshold(request);
     }
 
     @PutMapping("/settings")

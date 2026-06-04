@@ -4,6 +4,7 @@ import {
   Card,
   CardContent,
   Checkbox,
+  Chip,
   FormControl,
   FormControlLabel,
   Grid,
@@ -19,9 +20,12 @@ import {
   TableRow,
   TextField,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { couponsApi } from '../../api/coupons';
+import { MobileEmptyCard, TableEmptyRow } from '../../components/admin/AdminFeedback';
 import { useConfirm } from '../../context/ConfirmDialogContext';
 import { showError, showSuccess } from '../../utils/toast';
 
@@ -50,7 +54,18 @@ const parseIds = (value) =>
 
 const toLocalDateTime = (value) => (value ? value.slice(0, 16) : '');
 
+const hideEmptyDateTimePlaceholder = (value) => ({
+  '& input::-webkit-datetime-edit': {
+    color: value ? 'inherit' : 'transparent',
+  },
+  '& input:focus::-webkit-datetime-edit': {
+    color: 'inherit',
+  },
+});
+
 export default function AdminCouponsPage() {
+  const theme = useTheme();
+  const isSmall = useMediaQuery(theme.breakpoints.down('md'));
   const [coupons, setCoupons] = useState([]);
   const [form, setForm] = useState(empty);
   const confirm = useConfirm();
@@ -193,6 +208,7 @@ export default function AdminCouponsPage() {
                 type="datetime-local"
                 fullWidth
                 InputLabelProps={{ shrink: true }}
+                sx={hideEmptyDateTimePlaceholder(form.expiresAt)}
                 value={form.expiresAt}
                 onChange={(e) => setForm({ ...form, expiresAt: e.target.value })}
               />
@@ -223,47 +239,90 @@ export default function AdminCouponsPage() {
         </CardContent>
       </Card>
 
-      <TableContainer component={Card}>
-        <Table size="small">
-          <TableHead>
-            <TableRow>
-              <TableCell>Code</TableCell>
-              <TableCell>Discount</TableCell>
-              <TableCell>Limits</TableCell>
-              <TableCell>Targeting</TableCell>
-              <TableCell>Expires</TableCell>
-              <TableCell>Performance</TableCell>
-              <TableCell>Active</TableCell>
-              <TableCell align="right" />
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {coupons.map((coupon) => (
-              <TableRow key={coupon.id}>
-                <TableCell><strong>{coupon.code}</strong></TableCell>
-                <TableCell>{formatDiscount(coupon)}</TableCell>
-                <TableCell>
-                  {coupon.usageLimit ? `${coupon.usageCount || 0}/${coupon.usageLimit} total` : `${coupon.usageCount || 0} used`}
-                  <br />
-                  {coupon.perUserUsageLimit ? `${coupon.perUserUsageLimit} per customer` : 'No per-user cap'}
-                </TableCell>
-                <TableCell>{formatTargeting(coupon)}</TableCell>
-                <TableCell>{formatExpiry(coupon.expiresAt)}</TableCell>
-                <TableCell>
-                  {coupon.uniqueCustomerCount || 0} customers
-                  <br />
-                  ${Number(coupon.revenueAttributed || 0).toFixed(2)} revenue
-                </TableCell>
-                <TableCell>{coupon.active ? 'Yes' : 'No'}</TableCell>
-                <TableCell align="right">
-                  <Button size="small" onClick={() => edit(coupon)}>Edit</Button>
-                  <Button size="small" color="error" onClick={() => remove(coupon.id)}>Delete</Button>
-                </TableCell>
+      {isSmall ? (
+        <Stack spacing={1.5}>
+          {coupons.map((coupon) => (
+            <Card key={coupon.id} variant="outlined">
+              <CardContent>
+                <Stack spacing={1.25}>
+                  <Stack direction="row" justifyContent="space-between" spacing={1} alignItems="flex-start">
+                    <Box>
+                      <Typography fontWeight={900}>{coupon.code}</Typography>
+                      <Typography variant="body2" color="text.secondary">{formatDiscount(coupon)}</Typography>
+                    </Box>
+                    <Chip size="small" color={coupon.active ? 'success' : 'default'} label={coupon.active ? 'Active' : 'Inactive'} />
+                  </Stack>
+                  <Box>
+                    <Typography variant="caption" color="text.secondary">Limits</Typography>
+                    <Typography variant="body2">
+                      {coupon.usageLimit ? `${coupon.usageCount || 0}/${coupon.usageLimit} total` : `${coupon.usageCount || 0} used`}
+                      {' / '}
+                      {coupon.perUserUsageLimit ? `${coupon.perUserUsageLimit} per customer` : 'No per-user cap'}
+                    </Typography>
+                  </Box>
+                  <Box>
+                    <Typography variant="caption" color="text.secondary">Targeting</Typography>
+                    <Typography variant="body2">{formatTargeting(coupon)}</Typography>
+                  </Box>
+                  <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+                    <Chip size="small" label={formatExpiry(coupon.expiresAt)} />
+                    <Chip size="small" label={`${coupon.uniqueCustomerCount || 0} customers`} />
+                    <Chip size="small" label={`$${Number(coupon.revenueAttributed || 0).toFixed(2)} revenue`} />
+                  </Stack>
+                  <Stack direction="row" spacing={1}>
+                    <Button fullWidth variant="contained" sx={{ minHeight: 44 }} onClick={() => edit(coupon)}>Edit</Button>
+                    <Button fullWidth variant="outlined" color="error" sx={{ minHeight: 44 }} onClick={() => remove(coupon.id)}>Delete</Button>
+                  </Stack>
+                </Stack>
+              </CardContent>
+            </Card>
+          ))}
+          {coupons.length === 0 && <MobileEmptyCard message="No coupons found." />}
+        </Stack>
+      ) : (
+        <TableContainer component={Card}>
+          <Table size="small">
+            <TableHead>
+              <TableRow>
+                <TableCell>Code</TableCell>
+                <TableCell>Discount</TableCell>
+                <TableCell>Limits</TableCell>
+                <TableCell>Targeting</TableCell>
+                <TableCell>Expires</TableCell>
+                <TableCell>Performance</TableCell>
+                <TableCell>Active</TableCell>
+                <TableCell align="right" />
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+            <TableBody>
+              {coupons.map((coupon) => (
+                <TableRow key={coupon.id}>
+                  <TableCell><strong>{coupon.code}</strong></TableCell>
+                  <TableCell>{formatDiscount(coupon)}</TableCell>
+                  <TableCell>
+                    {coupon.usageLimit ? `${coupon.usageCount || 0}/${coupon.usageLimit} total` : `${coupon.usageCount || 0} used`}
+                    <br />
+                    {coupon.perUserUsageLimit ? `${coupon.perUserUsageLimit} per customer` : 'No per-user cap'}
+                  </TableCell>
+                  <TableCell>{formatTargeting(coupon)}</TableCell>
+                  <TableCell>{formatExpiry(coupon.expiresAt)}</TableCell>
+                  <TableCell>
+                    {coupon.uniqueCustomerCount || 0} customers
+                    <br />
+                    ${Number(coupon.revenueAttributed || 0).toFixed(2)} revenue
+                  </TableCell>
+                  <TableCell>{coupon.active ? 'Yes' : 'No'}</TableCell>
+                  <TableCell align="right">
+                    <Button size="small" onClick={() => edit(coupon)}>Edit</Button>
+                    <Button size="small" color="error" onClick={() => remove(coupon.id)}>Delete</Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+              {coupons.length === 0 && <TableEmptyRow colSpan={8} message="No coupons found." />}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
     </Box>
   );
 }

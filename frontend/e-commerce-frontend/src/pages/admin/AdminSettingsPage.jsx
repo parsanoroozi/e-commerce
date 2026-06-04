@@ -14,7 +14,6 @@ import { adminApi } from '../../api/admin';
 import { showError, showSuccess } from '../../utils/toast';
 
 const empty = {
-  lowStockThreshold: 10,
   brandName: '',
   logoUrl: '',
   contactEmail: '',
@@ -28,6 +27,12 @@ const empty = {
   taxRate: '0.08',
   standardShippingCost: '5.99',
   expressShippingCost: '14.99',
+  stateTaxRates: '',
+  countryTaxRates: '',
+  standardShippingStateCosts: '',
+  expressShippingStateCosts: '',
+  standardShippingCountryCosts: '',
+  expressShippingCountryCosts: '',
 };
 
 export default function AdminSettingsPage() {
@@ -38,7 +43,6 @@ export default function AdminSettingsPage() {
   useEffect(() => {
     adminApi.settings()
       .then((data) => setForm({
-        lowStockThreshold: data.lowStockThreshold ?? 10,
         brandName: data.brandName || '',
         logoUrl: data.logoUrl || '',
         contactEmail: data.contactEmail || '',
@@ -52,6 +56,12 @@ export default function AdminSettingsPage() {
         taxRate: String(data.taxRate ?? '0.08'),
         standardShippingCost: String(data.standardShippingCost ?? '5.99'),
         expressShippingCost: String(data.expressShippingCost ?? '14.99'),
+        stateTaxRates: formatRateMap(data.stateTaxRates),
+        countryTaxRates: formatRateMap(data.countryTaxRates),
+        standardShippingStateCosts: formatRateMap(data.standardShippingStateCosts),
+        expressShippingStateCosts: formatRateMap(data.expressShippingStateCosts),
+        standardShippingCountryCosts: formatRateMap(data.standardShippingCountryCosts),
+        expressShippingCountryCosts: formatRateMap(data.expressShippingCountryCosts),
       }))
       .catch((err) => setError(err.message));
   }, []);
@@ -63,18 +73,28 @@ export default function AdminSettingsPage() {
     try {
       const payload = {
         ...form,
-        lowStockThreshold: Number(form.lowStockThreshold),
         taxRate: Number(form.taxRate || 0),
         standardShippingCost: Number(form.standardShippingCost || 0),
         expressShippingCost: Number(form.expressShippingCost || 0),
+        stateTaxRates: parseRateMap(form.stateTaxRates),
+        countryTaxRates: parseRateMap(form.countryTaxRates),
+        standardShippingStateCosts: parseRateMap(form.standardShippingStateCosts),
+        expressShippingStateCosts: parseRateMap(form.expressShippingStateCosts),
+        standardShippingCountryCosts: parseRateMap(form.standardShippingCountryCosts),
+        expressShippingCountryCosts: parseRateMap(form.expressShippingCountryCosts),
       };
       const updated = await adminApi.updateSettings(payload);
       setForm((current) => ({
         ...current,
-        lowStockThreshold: updated.lowStockThreshold,
         taxRate: String(updated.taxRate),
         standardShippingCost: String(updated.standardShippingCost),
         expressShippingCost: String(updated.expressShippingCost),
+        stateTaxRates: formatRateMap(updated.stateTaxRates),
+        countryTaxRates: formatRateMap(updated.countryTaxRates),
+        standardShippingStateCosts: formatRateMap(updated.standardShippingStateCosts),
+        expressShippingStateCosts: formatRateMap(updated.expressShippingStateCosts),
+        standardShippingCountryCosts: formatRateMap(updated.standardShippingCountryCosts),
+        expressShippingCountryCosts: formatRateMap(updated.expressShippingCountryCosts),
       }));
       showSuccess('Store settings saved');
     } catch (err) {
@@ -113,7 +133,7 @@ export default function AdminSettingsPage() {
               </Stack>
             </Grid>
             <Grid size={{ xs: 12 }}>
-              <Typography variant="h6" gutterBottom>Tax, shipping, and inventory</Typography>
+              <Typography variant="h6" gutterBottom>Tax and shipping</Typography>
               <Grid container spacing={2}>
                 <Grid size={{ xs: 12, sm: 3 }}>
                   <TextField label="Tax rate" type="number" inputProps={{ step: 0.0001, min: 0 }} fullWidth value={form.taxRate} onChange={(e) => setForm({ ...form, taxRate: e.target.value })} />
@@ -124,8 +144,23 @@ export default function AdminSettingsPage() {
                 <Grid size={{ xs: 12, sm: 3 }}>
                   <TextField label="Express shipping" type="number" inputProps={{ step: 0.01, min: 0 }} fullWidth value={form.expressShippingCost} onChange={(e) => setForm({ ...form, expressShippingCost: e.target.value })} />
                 </Grid>
-                <Grid size={{ xs: 12, sm: 3 }}>
-                  <TextField label="Low stock threshold" type="number" inputProps={{ min: 1 }} fullWidth value={form.lowStockThreshold} onChange={(e) => setForm({ ...form, lowStockThreshold: e.target.value })} />
+                <Grid size={{ xs: 12, md: 6 }}>
+                  <TextField label="State tax rates" helperText="One per line, example: CA=0.0925" fullWidth multiline rows={4} value={form.stateTaxRates} onChange={(e) => setForm({ ...form, stateTaxRates: e.target.value })} />
+                </Grid>
+                <Grid size={{ xs: 12, md: 6 }}>
+                  <TextField label="Country tax rates" helperText="One per line, example: US=0.08" fullWidth multiline rows={4} value={form.countryTaxRates} onChange={(e) => setForm({ ...form, countryTaxRates: e.target.value })} />
+                </Grid>
+                <Grid size={{ xs: 12, md: 6 }}>
+                  <TextField label="Standard shipping by state" helperText="One per line, example: CA=7.99" fullWidth multiline rows={4} value={form.standardShippingStateCosts} onChange={(e) => setForm({ ...form, standardShippingStateCosts: e.target.value })} />
+                </Grid>
+                <Grid size={{ xs: 12, md: 6 }}>
+                  <TextField label="Express shipping by state" helperText="One per line, example: CA=17.99" fullWidth multiline rows={4} value={form.expressShippingStateCosts} onChange={(e) => setForm({ ...form, expressShippingStateCosts: e.target.value })} />
+                </Grid>
+                <Grid size={{ xs: 12, md: 6 }}>
+                  <TextField label="Standard shipping by country" helperText="One per line, example: CA=11.99" fullWidth multiline rows={4} value={form.standardShippingCountryCosts} onChange={(e) => setForm({ ...form, standardShippingCountryCosts: e.target.value })} />
+                </Grid>
+                <Grid size={{ xs: 12, md: 6 }}>
+                  <TextField label="Express shipping by country" helperText="One per line, example: CA=24.99" fullWidth multiline rows={4} value={form.expressShippingCountryCosts} onChange={(e) => setForm({ ...form, expressShippingCountryCosts: e.target.value })} />
                 </Grid>
               </Grid>
             </Grid>
@@ -137,4 +172,22 @@ export default function AdminSettingsPage() {
       </Card>
     </Box>
   );
+}
+
+function formatRateMap(value = {}) {
+  return Object.entries(value || {})
+    .map(([key, amount]) => `${key}=${amount}`)
+    .join('\n');
+}
+
+function parseRateMap(text = '') {
+  return text.split('\n').reduce((acc, line) => {
+    const trimmed = line.trim();
+    if (!trimmed) return acc;
+    const [key, rawValue] = trimmed.split('=');
+    if (key?.trim() && rawValue?.trim()) {
+      acc[key.trim()] = Number(rawValue.trim());
+    }
+    return acc;
+  }, {});
 }

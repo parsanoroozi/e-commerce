@@ -29,6 +29,7 @@ import { storefrontApi } from '../api/storefront';
 import EmptyState from '../components/common/EmptyState';
 import PageContainer from '../components/layout/PageContainer';
 import ProductCard from '../components/ProductCard';
+import StarRating from '../components/StarRating';
 import { ProductGridSkeleton } from '../components/Skeleton';
 import { resolveImageUrl } from '../utils/imageUrl';
 import { showError } from '../utils/toast';
@@ -114,6 +115,29 @@ export default function HomePage() {
       });
     return () => controller.abort();
   }, [categoryId, debouncedSearch, inStock, minRating, page, priceRange, reloadKey, sort]);
+
+  const updatePriceBound = (index, rawValue) => {
+    const numeric = Math.min(PRICE_LIMIT, Math.max(0, Number(rawValue) || 0));
+    setPriceRange((current) => {
+      const next = [...current];
+      next[index] = numeric;
+      if (next[0] > next[1]) {
+        next[index === 0 ? 1 : 0] = numeric;
+      }
+      return next;
+    });
+    setPage(0);
+  };
+
+  const clearFilters = () => {
+    setSearch('');
+    setPriceRange([0, PRICE_LIMIT]);
+    setInStock(false);
+    setMinRating('');
+    setCategoryId('');
+    setPage(0);
+    navigate('/');
+  };
 
   return (
     <PageContainer maxWidth="xl" sx={{ pt: { xs: 3, md: 5 } }}>
@@ -396,184 +420,215 @@ export default function HomePage() {
         </Box>
       )}
 
-      <Card
-        id="collection"
-        className="luxury-reveal"
-        sx={{
-          mb: 3,
-          p: { xs: 2, sm: 2.5 },
-          position: 'sticky',
-          top: { xs: 64, md: 80 },
-          zIndex: 5,
-          bgcolor: 'background.paper',
-        }}
-      >
-        <Stack direction="row" alignItems="center" spacing={1} sx={{ mb: 2 }}>
-          <TuneOutlinedIcon color="primary" />
-          <Typography variant="subtitle1" fontWeight={900}>Collection controls</Typography>
-        </Stack>
-        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} flexWrap="wrap" useFlexGap>
-          <TextField
-            fullWidth
-            size="small"
-            placeholder="Search the collection..."
-            value={search}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchOutlinedIcon fontSize="small" />
-                </InputAdornment>
-              ),
-            }}
-            onChange={(e) => {
-              setSearch(e.target.value);
-              setPage(0);
-            }}
-          />
-          <FormControl size="small" sx={{ minWidth: { sm: 180 }, width: { xs: '100%', sm: 'auto' } }}>
-            <InputLabel>Category</InputLabel>
-            <Select value={categoryId} label="Category" onChange={(e) => {
-              const next = e.target.value;
-              setCategoryId(next);
-              setPage(0);
-              navigate(next ? `/categories/${next}` : '/');
-            }}>
-              <MenuItem value="">All categories</MenuItem>
-              {categories.map((c) => (
-                <MenuItem key={c.id} value={String(c.id)}>{c.name}</MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <Box
-            className="price-range-rail"
+      <Grid id="collection" container spacing={3} alignItems="flex-start">
+        <Grid size={{ xs: 12, md: 4, lg: 3 }}>
+          <Card
+            className="luxury-reveal"
             sx={{
-              width: { xs: '100%', sm: 260 },
-              px: 1.5,
-              py: 0.75,
-              border: '1px solid',
-              borderColor: 'divider',
+              p: { xs: 2, sm: 2.5 },
+              position: { md: 'sticky' },
+              top: { md: 92 },
               bgcolor: 'background.paper',
             }}
           >
-            <Stack direction="row" justifyContent="space-between" sx={{ mb: 0.5 }}>
-              <Typography variant="caption" color="text.secondary" fontWeight={900}>Price range</Typography>
-              <Typography variant="caption" color="primary.main" fontWeight={900}>
-                ${priceRange[0]} - ${priceRange[1]}
-              </Typography>
+            <Stack direction="row" alignItems="center" spacing={1} sx={{ mb: 2 }}>
+              <TuneOutlinedIcon color="primary" />
+              <Typography variant="subtitle1" fontWeight={900}>Filters</Typography>
             </Stack>
-            <Slider
-              value={priceRange}
-              min={0}
-              max={PRICE_LIMIT}
-              step={25}
-              valueLabelDisplay="auto"
-              onChange={(_, value) => {
-                setPriceRange(value);
-                setPage(0);
-              }}
-              sx={{
-                color: 'primary.main',
-                '& .MuiSlider-thumb': {
-                  width: 18,
-                  height: 18,
-                  border: '2px solid',
-                  borderColor: 'background.paper',
-                  boxShadow: '0 8px 20px rgba(255,122,0,0.28)',
-                },
-                '& .MuiSlider-track': {
-                  backgroundImage: 'linear-gradient(90deg, #ffd8b0, #ffad60, #ff7a00)',
-                  border: 0,
-                },
-              }}
-            />
-          </Box>
-          <FormControl size="small" sx={{ minWidth: { sm: 150 }, width: { xs: '100%', sm: 'auto' } }}>
-            <InputLabel>Stock</InputLabel>
-            <Select value={inStock ? 'IN_STOCK' : 'ALL'} label="Stock" onChange={(e) => {
-              setInStock(e.target.value === 'IN_STOCK');
-              setPage(0);
-            }}>
-              <MenuItem value="ALL">All stock</MenuItem>
-              <MenuItem value="IN_STOCK">In stock</MenuItem>
-            </Select>
-          </FormControl>
-          <FormControl size="small" sx={{ minWidth: { sm: 150 }, width: { xs: '100%', sm: 'auto' } }}>
-            <InputLabel>Rating</InputLabel>
-            <Select value={minRating} label="Rating" onChange={(e) => {
-              setMinRating(e.target.value);
-              setPage(0);
-            }}>
-              <MenuItem value="">Any rating</MenuItem>
-              {[4, 3, 2, 1].map((rating) => (
-                <MenuItem key={rating} value={rating}>{rating}+ stars</MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <FormControl size="small" sx={{ minWidth: { sm: 200 }, width: { xs: '100%', sm: 'auto' } }}>
-            <InputLabel>Sort</InputLabel>
-            <Select value={sort} label="Sort" onChange={(e) => {
-              setSort(e.target.value);
-              setPage(0);
-            }}>
-              <MenuItem value="name,asc">Name A-Z</MenuItem>
-              <MenuItem value="price,asc">Price: Low to high</MenuItem>
-              <MenuItem value="price,desc">Price: High to low</MenuItem>
-              <MenuItem value="createdAt,desc">Newest</MenuItem>
-            </Select>
-          </FormControl>
-        </Stack>
-      </Card>
-
-      {loading ? (
-        <ProductGridSkeleton />
-      ) : productsError ? (
-        <EmptyState
-          severity="error"
-          icon={<Inventory2OutlinedIcon />}
-          title="Products could not load"
-          message={productsError}
-          onRetry={() => setReloadKey((value) => value + 1)}
-        />
-      ) : products.length === 0 ? (
-        <EmptyState
-          icon={<Inventory2OutlinedIcon />}
-          title="No products found"
-          message="Try clearing filters, widening your price range, or checking another category."
-          actionLabel="Clear filters"
-          onAction={() => {
-            setSearch('');
-            setPriceRange([0, PRICE_LIMIT]);
-            setInStock(false);
-            setMinRating('');
-            setCategoryId('');
-            setPage(0);
-            navigate('/');
-          }}
-        />
-      ) : (
-        <>
-          <Grid container spacing={2.5}>
-            {products.map((p) => (
-              <Grid key={p.id} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-                <ProductCard product={p} />
-              </Grid>
-            ))}
-          </Grid>
-          {totalPages > 1 && (
-            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
-              <Pagination
-                count={totalPages}
-                page={page + 1}
-                onChange={(_, p) => setPage(p - 1)}
-                color="primary"
-                size="medium"
-                siblingCount={0}
-                boundaryCount={1}
+            <Stack spacing={2.25}>
+              <TextField
+                fullWidth
+                size="small"
+                placeholder="Search the collection..."
+                value={search}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <SearchOutlinedIcon fontSize="small" />
+                    </InputAdornment>
+                  ),
+                }}
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                  setPage(0);
+                }}
               />
-            </Box>
+              <FormControl size="small" fullWidth>
+                <InputLabel>Category</InputLabel>
+                <Select value={categoryId} label="Category" onChange={(e) => {
+                  const next = e.target.value;
+                  setCategoryId(next);
+                  setPage(0);
+                  navigate(next ? `/categories/${next}` : '/');
+                }}>
+                  <MenuItem value="">All categories</MenuItem>
+                  {categories.map((c) => (
+                    <MenuItem key={c.id} value={String(c.id)}>{c.name}</MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              <Box
+                className="price-range-rail"
+                sx={{
+                  px: 2,
+                  py: 1.75,
+                  border: '1px solid',
+                  borderColor: 'divider',
+                  bgcolor: 'background.paper',
+                }}
+              >
+                <Stack direction="row" justifyContent="space-between" sx={{ mb: 1.5 }}>
+                  <Typography variant="body2" color="text.secondary" fontWeight={900}>Price range</Typography>
+                  <Typography variant="body2" color="primary.main" fontWeight={900}>
+                    ${priceRange[0]} - ${priceRange[1]}
+                  </Typography>
+                </Stack>
+                <Stack direction="row" spacing={1.25} sx={{ mb: 2 }}>
+                  <TextField
+                    label="Min"
+                    type="number"
+                    size="small"
+                    fullWidth
+                    value={priceRange[0]}
+                    inputProps={{ min: 0, max: PRICE_LIMIT, step: 25 }}
+                    onChange={(e) => updatePriceBound(0, e.target.value)}
+                  />
+                  <TextField
+                    label="Max"
+                    type="number"
+                    size="small"
+                    fullWidth
+                    value={priceRange[1]}
+                    inputProps={{ min: 0, max: PRICE_LIMIT, step: 25 }}
+                    onChange={(e) => updatePriceBound(1, e.target.value)}
+                  />
+                </Stack>
+                <Slider
+                  value={priceRange}
+                  min={0}
+                  max={PRICE_LIMIT}
+                  step={25}
+                  valueLabelDisplay="auto"
+                  onChange={(_, value) => {
+                    setPriceRange(value);
+                    setPage(0);
+                  }}
+                  sx={{
+                    color: 'primary.main',
+                    height: 8,
+                    py: 2,
+                    '& .MuiSlider-thumb': {
+                      width: 26,
+                      height: 26,
+                      border: '3px solid',
+                      borderColor: 'background.paper',
+                      boxShadow: '0 8px 20px rgba(255,122,0,0.28)',
+                    },
+                    '& .MuiSlider-track': {
+                      backgroundImage: 'linear-gradient(90deg, #ffd8b0, #ffad60, #ff7a00)',
+                      border: 0,
+                    },
+                    '& .MuiSlider-rail': {
+                      opacity: 0.34,
+                    },
+                  }}
+                />
+              </Box>
+              <FormControl size="small" fullWidth>
+                <InputLabel>Stock</InputLabel>
+                <Select value={inStock ? 'IN_STOCK' : 'ALL'} label="Stock" onChange={(e) => {
+                  setInStock(e.target.value === 'IN_STOCK');
+                  setPage(0);
+                }}>
+                  <MenuItem value="ALL">All stock</MenuItem>
+                  <MenuItem value="IN_STOCK">In stock</MenuItem>
+                </Select>
+              </FormControl>
+              <Box>
+                <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 0.75 }}>
+                  <Typography variant="body2" color="text.secondary" fontWeight={900}>Minimum rating</Typography>
+                  {minRating && (
+                    <Button size="small" onClick={() => { setMinRating(''); setPage(0); }}>
+                      Any
+                    </Button>
+                  )}
+                </Stack>
+                <StarRating
+                  name="minimum-rating"
+                  value={Number(minRating) || 0}
+                  readOnly={false}
+                  precision={1}
+                  size="large"
+                  label={minRating ? `${minRating}+` : 'Any rating'}
+                  onChange={(rating) => {
+                    setMinRating(rating ? String(rating) : '');
+                    setPage(0);
+                  }}
+                />
+              </Box>
+              <FormControl size="small" fullWidth>
+                <InputLabel>Sort</InputLabel>
+                <Select value={sort} label="Sort" onChange={(e) => {
+                  setSort(e.target.value);
+                  setPage(0);
+                }}>
+                  <MenuItem value="name,asc">Name A-Z</MenuItem>
+                  <MenuItem value="price,asc">Price: Low to high</MenuItem>
+                  <MenuItem value="price,desc">Price: High to low</MenuItem>
+                  <MenuItem value="createdAt,desc">Newest</MenuItem>
+                </Select>
+              </FormControl>
+              <Button variant="outlined" onClick={clearFilters}>
+                Clear filters
+              </Button>
+            </Stack>
+          </Card>
+        </Grid>
+        <Grid size={{ xs: 12, md: 8, lg: 9 }}>
+          {loading ? (
+            <ProductGridSkeleton />
+          ) : productsError ? (
+            <EmptyState
+              severity="error"
+              icon={<Inventory2OutlinedIcon />}
+              title="Products could not load"
+              message={productsError}
+              onRetry={() => setReloadKey((value) => value + 1)}
+            />
+          ) : products.length === 0 ? (
+            <EmptyState
+              icon={<Inventory2OutlinedIcon />}
+              title="No products found"
+              message="Try clearing filters, widening your price range, or checking another category."
+              actionLabel="Clear filters"
+              onAction={clearFilters}
+            />
+          ) : (
+            <>
+              <Grid container spacing={2.5}>
+                {products.map((p) => (
+                  <Grid key={p.id} size={{ xs: 12, sm: 6, xl: 4 }}>
+                    <ProductCard product={p} />
+                  </Grid>
+                ))}
+              </Grid>
+              {totalPages > 1 && (
+                <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
+                  <Pagination
+                    count={totalPages}
+                    page={page + 1}
+                    onChange={(_, p) => setPage(p - 1)}
+                    color="primary"
+                    size="medium"
+                    siblingCount={0}
+                    boundaryCount={1}
+                  />
+                </Box>
+              )}
+            </>
           )}
-        </>
-      )}
+        </Grid>
+      </Grid>
     </PageContainer>
   );
 }

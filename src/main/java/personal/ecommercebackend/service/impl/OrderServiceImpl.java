@@ -109,7 +109,8 @@ public class OrderServiceImpl implements OrderService {
             subtotal = subtotal.add(product.getPrice().multiply(BigDecimal.valueOf(cartItem.getQuantity())));
         }
 
-        var totals = checkoutPricingService.calculate(subtotal, request.couponCode(), shippingMethod, userId, cart.getItems());
+        var totals = checkoutPricingService.calculate(subtotal, request.couponCode(), shippingMethod, userId, cart.getItems(),
+                shipping.state(), shipping.country());
 
         Order order = Order.builder()
                 .user(user)
@@ -178,7 +179,8 @@ public class OrderServiceImpl implements OrderService {
         BigDecimal subtotal = order.getItems().stream()
                 .map(item -> item.getUnitPrice().multiply(BigDecimal.valueOf(item.getQuantity())))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
-        var totals = checkoutPricingService.calculate(subtotal, request.couponCode(), shippingMethod);
+        var totals = checkoutPricingService.calculateForOrderItems(subtotal, request.couponCode(), shippingMethod, order.getUser().getId(),
+                order.getItems(), shipping.state(), shipping.country());
 
         order.setSubtotalAmount(totals.subtotal());
         order.setDiscountAmount(totals.discount());
